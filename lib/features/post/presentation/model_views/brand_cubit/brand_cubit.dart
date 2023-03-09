@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -29,5 +30,13 @@ class BrandCubit extends Cubit<BrandState> {
 
   String? get getBrandName {
     return _brandName;
+  }
+
+  // text field part
+
+  final _brandController = TextEditingController();
+
+  TextEditingController get getBrandController {
+    return _brandController;
   }
 }

@@ -14,7 +14,8 @@ class RegisterCubit extends Cubit<RegisterState> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
 
@@ -33,10 +34,10 @@ class RegisterCubit extends Cubit<RegisterState> {
     )
         .then((value) {
       userCreate(
-          name: name,
-          uId:value.user!.uid,
-          email: email,);
-
+        name: name,
+        uId: value.user!.uid,
+        email: email,
+      );
     }).catchError((error) {
       emit(RegisterFailure(errMessage: error.toString()));
     });
@@ -51,10 +52,10 @@ class RegisterCubit extends Cubit<RegisterState> {
     FirebaseFirestore.instance
         .collection('users')
         .doc(uId)
-        .set(model.toMap()).then((value) {
-          print(passwordController.text);
-          emit(CreateUserSuccess());
-    }).catchError((error){
+        .set(model.toMap())
+        .then((value) {
+      emit(CreateUserSuccess());
+    }).catchError((error) {
       debugPrint(error.toString());
       emit(CreateUserError(error.toString()));
     });
