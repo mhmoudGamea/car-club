@@ -30,7 +30,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   hexcolor:
   smooth_page_indicator:
   bloc:
@@ -48,13 +47,9 @@ dependencies:
   flutter_facebook_auth: ^3.5.0
   sign_in_with_apple: ^3.0.0
   crypto: ^3.0.1
-
-  firebase_storage: ^11.0.10
+  firebase_storage: ^11.0.15
   firebase_app_check: ^0.1.1+8
   cloud_firestore: ^4.4.2
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter_svg: ^2.0.0+1
   font_awesome_flutter: ^10.4.0
@@ -64,7 +59,7 @@ dependencies:
   image_picker: ^0.8.6+4
   flutter_bloc: ^8.1.2
   meta: ^1.8.0
-  galleryimage: ^1.2.0
+  galleryimage: ^1.0.2
   intl: ^0.17.0
 
 dev_dependencies:

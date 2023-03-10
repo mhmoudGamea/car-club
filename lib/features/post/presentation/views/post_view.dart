@@ -1,4 +1,5 @@
 import 'package:car_club/features/post/presentation/model_views/interior_color_cubit/interior_color_cubit.dart';
+import 'package:car_club/features/post/presentation/model_views/upload_image_cubit/upload_image_cubit.dart';
 import 'package:car_club/features/post/presentation/model_views/vehicle_type_cubit/vehicle_type_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +27,7 @@ class PostView extends StatelessWidget {
         BlocProvider(create: (context) => ExteriorColorCubit()),
         BlocProvider(create: (context) => InteriorColorCubit()),
         BlocProvider(create: (context) => VehicleTypeCubit()),
+        BlocProvider(create: (context) => UploadImageCubit()),
       ],
       child: Scaffold(
         backgroundColor: Colors.white,
