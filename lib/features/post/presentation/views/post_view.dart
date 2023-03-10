@@ -38,7 +38,7 @@ class PostView extends StatelessWidget {
           color: Colors.black,
           elevation: 1,
         ),
-        body: const PostViewBody(),
+        body: PostViewBody(),
       ),
     );
   }

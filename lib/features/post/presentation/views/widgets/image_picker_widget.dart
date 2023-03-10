@@ -75,15 +75,17 @@ class ImagePickerWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     if (uploadImage.getUploadedUrls!.isNotEmpty)
-                      Container(
-                        decoration: BoxDecoration(
-                          color: greyColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: GalleryImage(
-                          imageUrls: uploadImage.getUploadedUrls!,
-                          // numOfShowImages:
-                          //     uploadImage.getUploadedUrls!.length <= 3 ? 0 : 3,
+                      BlocBuilder<UploadImageCubit, UploadImageState>(
+                        builder:(context, state) =>  Container(
+                          decoration: BoxDecoration(
+                            color: greyColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: GalleryImage(
+                            imageUrls: uploadImage.getUploadedUrls!,
+                            numOfShowImages:
+                                uploadImage.getUploadedUrls!.length <= 3 ? 0 : 3,
+                          ),
                         ),
                       ),
                     if (uploadImage.getPickedImage != null)

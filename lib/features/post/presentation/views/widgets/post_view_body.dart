@@ -1,5 +1,4 @@
 import 'package:car_club/core/widgets/custom_neumorphic_button.dart';
-import 'package:car_club/core/widgets/progress.dart';
 import 'package:car_club/features/post/presentation/model_views/brand_cubit/brand_cubit.dart';
 import 'package:car_club/features/post/presentation/model_views/exterior_color_cubit/exterior_color_cubit.dart';
 import 'package:car_club/features/post/presentation/model_views/fuel_cubit/fuel_cubit.dart';
@@ -312,20 +311,18 @@ class _PostViewBodyState extends State<PostViewBody> {
                   if (uploadImageData.getUploadedUrls!.isNotEmpty)
                     BlocBuilder<UploadImageCubit, UploadImageState>(
                       builder: (context, state) {
-                        return Container(
-                          margin: const EdgeInsets.only(top: 10),
-                          decoration: BoxDecoration(
-                            color: greyColor,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: GalleryImage(
-                            imageUrls: uploadImageData.getUploadedUrls!,
-                            numOfShowImages:
-                                uploadImageData.getUploadedUrls!.length <= 3
-                                    ? 0
-                                    : 3,
-                          ),
-                        );
+                          return Container(
+                            margin: const EdgeInsets.only(top: 10),
+                            decoration: BoxDecoration(
+                              color: greyColor,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: GalleryImage(
+                              imageUrls: uploadImageData.getUploadedUrls!,
+                              numOfShowImages:
+                              uploadImageData.getUploadedUrls!.length <= 3 ? 0 : 3,
+                            ),
+                          );
                       },
                     ),
                 ],
