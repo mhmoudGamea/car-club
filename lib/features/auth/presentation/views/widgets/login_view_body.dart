@@ -40,6 +40,7 @@ class LoginViewBody extends StatelessWidget {
                       height: 73,
                     ),
                     DefaultTextField(
+                      type: TextInputType.emailAddress,
                       hintText: 'Email or username',
                       onChanged: (value) {},
                       controller: LoginCubit.get(context).emailController,
@@ -50,11 +51,12 @@ class LoginViewBody extends StatelessWidget {
                     BlocBuilder<LoginCubit,LoginStates>(
                       builder:(context, state) =>  DefaultTextField(
                         hintText: 'password',
+                        type: TextInputType.visiblePassword,
                         onChanged: (value) {},
                         obscureText: LoginCubit.get(context).visibility,
                         suffix: InkWell(
                           child: Icon(
-                              LoginCubit.get(context).visibility ? Icons.visibility : Icons.visibility_off
+                            LoginCubit.get(context).visibility ? Icons.visibility : Icons.visibility_off,
                           ),
                           onTap: () => LoginCubit.get(context).changePasswordVisibility(),
 
@@ -69,19 +71,23 @@ class LoginViewBody extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 30.0),
                       child: Row(
                         children: [
-                          Container(
-                            width: 16,
-                            height: 16,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.cyanAccent)),
-                            child: Checkbox(
-                              activeColor: secondaryLoginColor,
-                              value: LoginCubit.get(context).remember,
-                              onChanged: (value) {
-                                debugPrint(value.toString());
-                                LoginCubit.get(context).rememberMe(value!);
-                              },
-                              checkColor: secondaryLoginColor,
+                          BlocBuilder<LoginCubit,LoginStates>(
+                            builder:(context,state)=> Container(
+                              width: 16,
+                              height: 16,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(3),
+                                border: Border.all(color: Colors.cyanAccent)
+                              ),
+                                child: Checkbox(
+                                activeColor: secondaryLoginColor,
+                                value: LoginCubit.get(context).remember,
+                                onChanged: (value) {
+                                  debugPrint(value.toString());
+                                  LoginCubit.get(context).rememberMe(value!);
+                                },
+                                checkColor: secondaryLoginColor,
+                              ),
                             ),
                           ),
                           const SizedBox(

@@ -5,7 +5,8 @@ class InitialState extends LoginStates {}
 class LoadingEmailAndPasswordSigningState extends LoginStates{}
 class SuccessEmailAndPasswordSigningState extends LoginStates{
   late final dynamic uid;
-  SuccessEmailAndPasswordSigningState(this.uid);
+  late final dynamic email;
+  SuccessEmailAndPasswordSigningState(this.uid,this.email);
 }
 class ErrorEmailAndPasswordSigningState extends LoginStates{
   late final dynamic error;
@@ -15,7 +16,8 @@ class ErrorEmailAndPasswordSigningState extends LoginStates{
 class LoadingGoogleSigningState extends LoginStates{}
 class SuccessGoogleSigningState extends LoginStates{
   late final dynamic uid;
-  SuccessGoogleSigningState(this.uid);
+  late final dynamic email;
+  SuccessGoogleSigningState(this.uid,this.email);
 }
 class ErrorGoogleSigningState extends LoginStates{
   late final dynamic error;
@@ -25,7 +27,8 @@ class ErrorGoogleSigningState extends LoginStates{
 class LoadingFacebookSigningState extends LoginStates{}
 class SuccessFacebookSigningState extends LoginStates{
   late final dynamic uid;
-  SuccessFacebookSigningState(this.uid);
+  late final dynamic email;
+  SuccessFacebookSigningState(this.uid,this.email);
 
 }
 class ErrorFacebookSigningState extends LoginStates{
@@ -36,7 +39,8 @@ class ErrorFacebookSigningState extends LoginStates{
 class LoadingAppleSigningState extends LoginStates{}
 class SuccessAppleSigningState extends LoginStates{
   late final dynamic uid;
-  SuccessAppleSigningState(this.uid);
+  late final dynamic email;
+  SuccessAppleSigningState(this.uid,this.email);
 
 }
 class ErrorAppleSigningState extends LoginStates{

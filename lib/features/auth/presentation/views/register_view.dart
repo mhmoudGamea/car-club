@@ -17,24 +17,49 @@ class RegisterScreen extends StatelessWidget {
       create: (context) => RegisterCubit(),
       child: BlocConsumer<RegisterCubit, RegisterState>(
         listener: (context, state) {
-          if (state is SuccessEmailAndPasswordRegisterState) {
+          if (state is CreateUserSuccess) {
             CacheHelper.saveData('uId', state.uid);
+            uId = CacheHelper.getData('uId');
+            debugPrint("uId : $uId");
+            CacheHelper.saveData('email', state.email);
+            email = CacheHelper.getData('email');
+            debugPrint("email : $email");
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const HomeView()),
+                    (route) => false);
+            defaultFlutterToast(message: 'register Success', state: ToastState.SUCCESS);
+          }else if (state is SuccessEmailAndPasswordRegisterState) {
+            CacheHelper.saveData('uId', state.uid);
+            uId = CacheHelper.getData('uId');
+            debugPrint("uId : $uId");
+            CacheHelper.saveData('email', state.email);
+            email = CacheHelper.getData('email');
+            debugPrint("email : $email");
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const HomeView()),
                 (route) => false);
-            defaultFlutterToast(
-                message: 'register Success', state: ToastState.SUCCESS);
+            defaultFlutterToast(message: 'register Success', state: ToastState.SUCCESS);
           } else if (state is SuccessGoogleRegisterState) {
             CacheHelper.saveData('uId', state.uid);
+            uId = CacheHelper.getData('uId');
+            debugPrint("uId : $uId");
+            CacheHelper.saveData('email', state.email);
+            email = CacheHelper.getData('email');
+            debugPrint("email : $email");
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const HomeView()),
                 (route) => false);
-            defaultFlutterToast(
-                message: 'register Success', state: ToastState.SUCCESS);
+            defaultFlutterToast(message: 'register Success', state: ToastState.SUCCESS);
           } else if (state is SuccessFacebookRegisterState) {
             CacheHelper.saveData('uId', state.uid);
+            uId = CacheHelper.getData('uId');
+            debugPrint("uId : $uId");
+            CacheHelper.saveData('email', state.email);
+            email = CacheHelper.getData('email');
+            debugPrint("email : $email");
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const HomeView()),
@@ -43,6 +68,11 @@ class RegisterScreen extends StatelessWidget {
                 message: 'register Success', state: ToastState.SUCCESS);
           } else if (state is SuccessAppleRegisterState) {
             CacheHelper.saveData('uId', state.uid);
+            uId = CacheHelper.getData('uId');
+            debugPrint("uId : $uId");
+            CacheHelper.saveData('email', state.email);
+            email = CacheHelper.getData('email');
+            debugPrint("email : $email");
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const HomeView()),

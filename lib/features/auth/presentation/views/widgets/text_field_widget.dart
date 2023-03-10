@@ -5,7 +5,6 @@ import '../../../../../core/constants.dart';
 
 class DefaultTextField extends StatelessWidget {
   DefaultTextField({
-
     super.key,
     this.hintText,
     this.obscureText = false,
@@ -13,21 +12,22 @@ class DefaultTextField extends StatelessWidget {
     this.suffix,
     this.controller,
     this.validate,
+    this.type
   });
   Function(String)? onChanged;
   bool? obscureText;
   String? hintText;
-  Widget? suffix;
+  Widget? suffix ;
+  TextInputType? type;
   Function(String)? validate;
   TextEditingController? controller;
-
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
         child: Center(
           child: TextFormField(
+            keyboardType: type,
             controller: controller,
             cursorColor: Colors.white,
             obscureText: obscureText!,
@@ -40,6 +40,7 @@ class DefaultTextField extends StatelessWidget {
               }
               return null;
             },
+
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),
                 borderSide: const BorderSide(
@@ -49,6 +50,7 @@ class DefaultTextField extends StatelessWidget {
               filled: true,
               fillColor: const Color(0xff64636A),
               suffixIcon:suffix ,
+
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
               hintText: hintText,
               contentPadding:  const EdgeInsets.only(top: 16,bottom: 16,left: 23),
