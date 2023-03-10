@@ -15,8 +15,7 @@ class LoginCubit extends Cubit<LoginStates> {
   static LoginCubit get(context) => BlocProvider.of(context);
 
   bool remember = false;
-  Future<void> rememberMe(bool value)async
-  {
+  Future<void> rememberMe(bool value) async {
     remember = value;
     emit(SuccessRememberMeState());
   }
@@ -26,17 +25,14 @@ class LoginCubit extends Cubit<LoginStates> {
     await sendPasswordResetEmail(email).then((value) {
       defaultFlutterToast(message: 'Done', state: ToastState.SUCCESS);
       emit(SuccessResetPasswordState());
-    }).catchError((error){
+    }).catchError((error) {
       defaultFlutterToast(message: 'try again', state: ToastState.ERROR);
       emit(ErrorResetPasswordState());
     });
   }
 
-
-  void loginWithEmailAndPassword({
-    required String email,
-    required String password
-  }){
+  void loginWithEmailAndPassword(
+      {required String email, required String password}) {
     emit(LoadingEmailAndPasswordSigningState());
     signInWithEmailAndPassword(email: email, password: password).then((value) {
       debugPrint(value.user!.uid);
@@ -85,8 +81,7 @@ class LoginCubit extends Cubit<LoginStates> {
   }
 
   bool visibility = true;
-  void changePasswordVisibility()
-  {
+  void changePasswordVisibility() {
     visibility = !visibility;
     emit(ChangePasswordVisibility());
   }
