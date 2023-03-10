@@ -88,6 +88,7 @@ class ImagePickerWidget extends StatelessWidget {
                           ),
                         ),
                       ),
+
                     if (uploadImage.getPickedImage != null)
                       const SizedBox(height: 10),
                     if (uploadImage.getPickedImage != null)
