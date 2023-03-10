@@ -50,7 +50,8 @@ class RegisterViewBody extends StatelessWidget {
                 onChanged: (value) {},
                 obscureText: cubit.visibility,
                 suffix: InkWell(
-                  child: Icon(cubit.visibility
+                  child: Icon(
+                      cubit.visibility
                       ? Icons.visibility
                       : Icons.visibility_off),
                   onTap: () => cubit.changePasswordVisibility(),
@@ -66,9 +67,11 @@ class RegisterViewBody extends StatelessWidget {
                 controller: cubit.confirmPasswordController,
                 obscureText: cubit.visibility,
                 suffix: InkWell(
-                  child: Icon(cubit.visibility
+                  child: Icon(
+                      cubit.visibility
                       ? Icons.visibility
-                      : Icons.visibility_off),
+                      : Icons.visibility_off
+                  ),
                   onTap: () => cubit.changePasswordVisibility(),
 
                 ),

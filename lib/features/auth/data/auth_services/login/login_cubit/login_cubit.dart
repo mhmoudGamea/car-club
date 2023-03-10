@@ -40,7 +40,8 @@ class LoginCubit extends Cubit<LoginStates> {
     emit(LoadingEmailAndPasswordSigningState());
     signInWithEmailAndPassword(email: email, password: password).then((value) {
       debugPrint(value.user!.uid);
-      emit(SuccessEmailAndPasswordSigningState(value.user!.uid));
+      debugPrint(value.user!.email);
+      emit(SuccessEmailAndPasswordSigningState(value.user!.uid,value.user!.email));
     }).catchError((error) {
       debugPrint('error is :: ${error.toString()}');
       emit(ErrorEmailAndPasswordSigningState(error));
@@ -51,7 +52,8 @@ class LoginCubit extends Cubit<LoginStates> {
   //   emit(LoadingGoogleSigningState());
   //   signInWithGoogle().then((value) {
   //     debugPrint(value.user!.uid);
-  //     emit(SuccessGoogleSigningState(value.user!.uid));
+  // debugPrint(value.user!.email);
+  //     emit(SuccessGoogleSigningState(value.user!.uid,value.user!.email));
   //   }).catchError((error) {
   //     debugPrint('error is :: ${error.toString()}');
   //     emit(ErrorGoogleSigningState(error));
@@ -62,7 +64,8 @@ class LoginCubit extends Cubit<LoginStates> {
     emit(LoadingFacebookSigningState());
     signInWithFacebook().then((value) {
       debugPrint(value.user!.uid);
-      emit(SuccessFacebookSigningState(value.user!.uid));
+      debugPrint(value.user!.email);
+      emit(SuccessFacebookSigningState(value.user!.uid,value.user!.email));
     }).catchError((error) {
       debugPrint('error is :: ${error.toString()}');
       emit(ErrorFacebookSigningState(error));
@@ -73,7 +76,8 @@ class LoginCubit extends Cubit<LoginStates> {
     emit(LoadingAppleSigningState());
     signInWithApple().then((value) {
       debugPrint(value.user!.uid);
-      emit(SuccessAppleSigningState(value.user!.uid));
+      debugPrint(value.user!.email);
+      emit(SuccessAppleSigningState(value.user!.uid,value.user!.email));
     }).catchError((error) {
       debugPrint('error is :: ${error.toString()}');
       emit(ErrorAppleSigningState(error));

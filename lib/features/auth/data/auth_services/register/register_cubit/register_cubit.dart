@@ -52,22 +52,20 @@ class RegisterCubit extends Cubit<RegisterState> {
         .collection('users')
         .doc(uId)
         .set(model.toMap()).then((value) {
-          print(passwordController.text);
-          emit(CreateUserSuccess());
+          debugPrint(passwordController.text);
+          emit(CreateUserSuccess(uId,email));
     }).catchError((error){
       debugPrint(error.toString());
       emit(CreateUserError(error.toString()));
     });
   }
 
-  void loginWithEmailAndPassword(
-      {required String email, required String password}) {
+  void loginWithEmailAndPassword({required String email, required String password}) {
     emit(LoadingGoogleRegisterState());
     createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
       debugPrint(value.user!.uid);
-
-      emit(SuccessEmailAndPasswordRegisterState(value.user!.uid));
+      emit(SuccessEmailAndPasswordRegisterState(value.user!.uid,value.user!.email));
     }).catchError((error) {
       debugPrint('error is :: ${error.toString()}');
       emit(ErrorEmailAndPasswordRegisterState());
@@ -78,7 +76,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(LoadingFacebookRegisterState());
     signInWithFacebook().then((value) {
       debugPrint(value.user!.uid);
-      emit(SuccessFacebookRegisterState(value.user!.uid));
+      emit(SuccessFacebookRegisterState(value.user!.uid,value.user!.email));
     }).catchError((error) {
       debugPrint('error is :: ${error.toString()}');
       emit(ErrorFacebookRegisterState());
@@ -89,7 +87,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(LoadingAppleRegisterState());
     signInWithApple().then((value) {
       debugPrint(value.user!.uid);
-      emit(SuccessAppleRegisterState(value.user!.uid));
+      emit(SuccessAppleRegisterState(value.user!.uid,value.user!.email));
     }).catchError((error) {
       debugPrint('error is :: ${error.toString()}');
       emit(ErrorAppleRegisterState());

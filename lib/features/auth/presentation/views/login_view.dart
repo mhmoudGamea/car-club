@@ -19,6 +19,11 @@ class LoginScreen extends StatelessWidget {
         if (state is SuccessEmailAndPasswordSigningState)
         {
           CacheHelper.saveData('uId', state.uid);
+          uId = CacheHelper.getData('uId');
+          debugPrint("uId : $uId");
+          CacheHelper.saveData('email', state.email);
+          email = CacheHelper.getData('email');
+          debugPrint("email : $email");
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => const HomeView()),
@@ -31,6 +36,11 @@ class LoginScreen extends StatelessWidget {
         } else if (state is SuccessGoogleSigningState)
         {
           CacheHelper.saveData('uId', state.uid);
+          uId = CacheHelper.getData('uId');
+          debugPrint("uId : $uId");
+          CacheHelper.saveData('email', state.email);
+          email = CacheHelper.getData('email');
+          debugPrint("email : $email");
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => const HomeView()),
@@ -39,6 +49,11 @@ class LoginScreen extends StatelessWidget {
         } else if (state is SuccessFacebookSigningState)
         {
           CacheHelper.saveData('uId', state.uid);
+          uId = CacheHelper.getData('uId');
+          debugPrint("uId : $uId");
+          CacheHelper.saveData('email', state.email);
+          email = CacheHelper.getData('email');
+          debugPrint("email : $email");
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => const HomeView()),
@@ -47,6 +62,11 @@ class LoginScreen extends StatelessWidget {
         } else if (state is SuccessAppleSigningState)
         {
           CacheHelper.saveData('uId', state.uid);
+          uId = CacheHelper.getData('uId');
+          debugPrint("uId : $uId");
+          CacheHelper.saveData('email', state.email);
+          email = CacheHelper.getData('email');
+          debugPrint("email : $email");
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => const HomeView()),
