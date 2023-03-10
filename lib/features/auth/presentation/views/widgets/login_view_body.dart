@@ -40,6 +40,7 @@ class LoginViewBody extends StatelessWidget {
                       height: 73,
                     ),
                     DefaultTextField(
+                      type: TextInputType.emailAddress,
                       hintText: 'Email or username',
                       onChanged: (value) {},
                       controller: LoginCubit.get(context).emailController,
@@ -50,6 +51,7 @@ class LoginViewBody extends StatelessWidget {
                     BlocBuilder<LoginCubit,LoginStates>(
                       builder:(context, state) =>  DefaultTextField(
                         hintText: 'password',
+                        type: TextInputType.visiblePassword,
                         onChanged: (value) {},
                         obscureText: LoginCubit.get(context).visibility,
                         suffix: InkWell(

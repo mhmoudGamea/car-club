@@ -12,11 +12,13 @@ class DefaultTextField extends StatelessWidget {
     this.suffix,
     this.controller,
     this.validate,
+    this.type
   });
   Function(String)? onChanged;
   bool? obscureText;
   String? hintText;
   Widget? suffix ;
+  TextInputType? type;
   Function(String)? validate;
   TextEditingController? controller;
   @override
@@ -25,6 +27,7 @@ class DefaultTextField extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
         child: Center(
           child: TextFormField(
+            keyboardType: type,
             controller: controller,
             cursorColor: Colors.white,
             obscureText: obscureText!,

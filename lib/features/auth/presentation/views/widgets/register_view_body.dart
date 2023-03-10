@@ -29,6 +29,7 @@ class RegisterViewBody extends StatelessWidget {
           child: Column(
             children: [
               DefaultTextField(
+                type: TextInputType.name,
                 hintText: 'Name',
                 onChanged: (value) {},
                 controller: cubit.nameController,
@@ -39,6 +40,7 @@ class RegisterViewBody extends StatelessWidget {
               ),
               DefaultTextField(
                 hintText: 'E-mail',
+                type: TextInputType.emailAddress,
                 onChanged: (value) {},
                 controller: cubit.emailController,
               ),
@@ -47,6 +49,7 @@ class RegisterViewBody extends StatelessWidget {
               ),
               DefaultTextField(
                 hintText: 'password',
+                type: TextInputType.visiblePassword,
                 onChanged: (value) {},
                 obscureText: cubit.visibility,
                 suffix: InkWell(
@@ -63,6 +66,7 @@ class RegisterViewBody extends StatelessWidget {
               ),
               DefaultTextField(
                 hintText: 'Confirm Password',
+                type: TextInputType.visiblePassword,
                 onChanged: (value) {},
                 controller: cubit.confirmPasswordController,
                 obscureText: cubit.visibility,
