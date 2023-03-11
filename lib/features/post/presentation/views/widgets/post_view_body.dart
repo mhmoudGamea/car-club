@@ -1,5 +1,4 @@
 import 'package:car_club/core/widgets/custom_neumorphic_button.dart';
-import 'package:car_club/core/widgets/progress.dart';
 import 'package:car_club/features/post/presentation/model_views/brand_cubit/brand_cubit.dart';
 import 'package:car_club/features/post/presentation/model_views/exterior_color_cubit/exterior_color_cubit.dart';
 import 'package:car_club/features/post/presentation/model_views/fuel_cubit/fuel_cubit.dart';
@@ -19,10 +18,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:galleryimage/galleryimage.dart';
 
 import '../../../../../core/constants.dart';
 import '../../model_views/vehicle_type_cubit/vehicle_type_cubit.dart';
+import 'uploaded_image_builder.dart';
 import 'vehicle_type_widget.dart';
 
 class PostViewBody extends StatefulWidget {
@@ -34,14 +33,23 @@ class PostViewBody extends StatefulWidget {
 
 class _PostViewBodyState extends State<PostViewBody> {
   final _brandsController = TextEditingController();
+
   final _yearController = TextEditingController();
+
   final _priceController = TextEditingController();
+
   final _fuelController = TextEditingController();
+
   final _transmissionController = TextEditingController();
+
   final _mileagesController = TextEditingController();
+
   final _exteriorColorController = TextEditingController();
+
   final _interiorColorController = TextEditingController();
+
   final _vehicleTypeController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final brandData = BlocProvider.of<BrandCubit>(context);
@@ -309,25 +317,22 @@ class _PostViewBodyState extends State<PostViewBody> {
                     maxLines: 3,
                     maxLength: 150,
                   ),
-                  if (uploadImageData.getUploadedUrls!.isNotEmpty)
-                    BlocBuilder<UploadImageCubit, UploadImageState>(
-                      builder: (context, state) {
-                        return Container(
-                          margin: const EdgeInsets.only(top: 10),
-                          decoration: BoxDecoration(
-                            color: greyColor,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: GalleryImage(
-                            imageUrls: uploadImageData.getUploadedUrls!,
-                            numOfShowImages:
-                                uploadImageData.getUploadedUrls!.length <= 3
-                                    ? 0
-                                    : 3,
-                          ),
-                        );
-                      },
-                    ),
+                  // uploaded image section
+                  // if (uploadImageData.getUploadedUrls.isNotEmpty)
+                  //   BlocBuilder<UploadImageCubit, UploadImageState>(
+                  //     builder: (context, state) {
+                  //       return Container(
+                  //         margin: const EdgeInsets.only(top: 10),
+                  //         padding: const EdgeInsets.all(10),
+                  //         height: 120,
+                  //         decoration: BoxDecoration(
+                  //           color: greyColor,
+                  //           borderRadius: BorderRadius.circular(10),
+                  //         ),
+                  //         child: const UploadedImageBuilder(),
+                  //       );
+                  //     },
+                  //   ),
                 ],
               ),
             ),
@@ -339,11 +344,12 @@ class _PostViewBodyState extends State<PostViewBody> {
             textColor: Colors.white,
             onPress: () {
               showDialog(
-                  context: context,
-                  builder: (context) => BlocProvider<UploadImageCubit>.value(
-                        value: uploadImageData,
-                        child: const ImagePickerWidget(),
-                      ));
+                context: context,
+                builder: (context) => BlocProvider<UploadImageCubit>.value(
+                  value: uploadImageData,
+                  child: const ImagePickerWidget(),
+                ),
+              );
             },
           ),
           const SizedBox(height: 10),

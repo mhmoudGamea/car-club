@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:car_club/core/error/failure.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
@@ -23,8 +24,13 @@ class UploadImageCubit extends Cubit<UploadImageState> {
     emit(ImageSelectedDeleted());
   }
 
-  void pickMyImage() async {
+  Future<void> pickMyImage() async {
     final ImagePicker picker = ImagePicker();
+
+    if (_uploadedUrls.length >= 6) {
+      emit(MaxNumberOfUploadedImages());
+      throw MaxNumberOfImagesError('Sorry max number of images is 6');
+    }
 
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     _image = File(image!.path);
@@ -38,13 +44,20 @@ class UploadImageCubit extends Cubit<UploadImageState> {
 
   List<String> _uploadedUrls = [];
 
-  List<String>? get getUploadedUrls {
+  List<String> get getUploadedUrls {
     return _uploadedUrls;
+  }
+
+  void addNewUrl(String url) {
+    _uploadedUrls.add(url);
+    emit(ImageAddedToList());
   }
 
   Future<void> uploadImageToFireStorage() async {
     emit(UploadImageLoading());
+
     String imageName = 'images/${DateTime.now().microsecondsSinceEpoch}';
+
     String? downloadedUrl;
 
     // Create a storage reference from our app
@@ -59,15 +72,15 @@ class UploadImageCubit extends Cubit<UploadImageState> {
 
       deletePickedImage();
 
-      _uploadedUrls.add(downloadedUrl);
-
-      emit(ImageAddedToList());
+      if (_uploadedUrls.length < 6) {
+        addNewUrl(downloadedUrl);
+      }
     } on FirebaseException catch (e) {
       emit(UploadImageFailure());
-      print(e);
+      // print(e);
     } catch (e) {
       emit(UploadImageFailure());
-      print(e);
+      // print(e);
     }
   }
 }

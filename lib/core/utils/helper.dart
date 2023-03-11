@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'styles.dart';
 
@@ -31,5 +32,34 @@ class Helper {
       backgroundColor: backgroundColor,
       elevation: elevation ?? 0,
     );
+  }
+
+  static void showCustomToast(
+      {required BuildContext context,
+      required Color bgColor,
+      required IconData icon,
+      required String msg}) {
+    FToast fToast = FToast();
+    fToast.init(context);
+    Widget toast = Container(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10), color: bgColor),
+      child: Row(
+        children: [
+          Icon(icon, color: Colors.white),
+          const SizedBox(width: 5),
+          Text(
+            msg,
+            style: Styles.title14.copyWith(color: Colors.white),
+          ),
+        ],
+      ),
+    );
+    fToast.showToast(
+        child: toast,
+        toastDuration: const Duration(seconds: 2),
+        fadeDuration: const Duration(milliseconds: 500),
+        gravity: ToastGravity.BOTTOM);
   }
 }

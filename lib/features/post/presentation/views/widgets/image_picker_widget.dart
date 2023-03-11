@@ -1,10 +1,12 @@
 import 'package:car_club/core/constants.dart';
+import 'package:car_club/core/error/failure.dart';
 import 'package:car_club/core/widgets/progress.dart';
 import 'package:car_club/features/post/presentation/model_views/upload_image_cubit/upload_image_cubit.dart';
+import 'package:car_club/features/post/presentation/views/widgets/uploaded_image_builder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:galleryimage/galleryimage.dart';
 
 import '../../../../../core/utils/helper.dart';
 import '../../../../../core/utils/styles.dart';
@@ -14,7 +16,6 @@ class ImagePickerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //print('hellow');
     final uploadImage = BlocProvider.of<UploadImageCubit>(context);
     return BlocBuilder<UploadImageCubit, UploadImageState>(
       builder: (context, state) {
@@ -74,17 +75,43 @@ class ImagePickerWidget extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 10),
-                    if (uploadImage.getUploadedUrls!.isNotEmpty)
-                      Container(
-                        decoration: BoxDecoration(
-                          color: greyColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: GalleryImage(
-                          imageUrls: uploadImage.getUploadedUrls!,
-                          // numOfShowImages:
-                          //     uploadImage.getUploadedUrls!.length <= 3 ? 0 : 3,
-                        ),
+                    if (uploadImage.getUploadedUrls.isNotEmpty)
+                      BlocBuilder<UploadImageCubit, UploadImageState>(
+                        builder: (context, state) {
+                          return Container(
+                            margin: const EdgeInsets.only(top: 10),
+                            padding: const EdgeInsets.all(10),
+                            height: 97,
+                            decoration: BoxDecoration(
+                              color: greyColor,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: GridView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                                mainAxisSpacing: 5,
+                                crossAxisSpacing: 5,
+                              ),
+                              itemCount: uploadImage.getUploadedUrls.length,
+                              itemBuilder: (context, index) => Container(
+                                height: 50,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.network(
+                                    uploadImage.getUploadedUrls[index],
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     if (uploadImage.getPickedImage != null)
                       const SizedBox(height: 10),
@@ -93,6 +120,7 @@ class ImagePickerWidget extends StatelessWidget {
                         children: [
                           Expanded(
                             child: NeumorphicButton(
+                              // onPressed: uploadImage.uploadImageToFireStorage,
                               onPressed: uploadImage.uploadImageToFireStorage,
                               padding: const EdgeInsets.symmetric(vertical: 13),
                               style: const NeumorphicStyle(
@@ -138,10 +166,23 @@ class ImagePickerWidget extends StatelessWidget {
                       children: [
                         Expanded(
                           child: NeumorphicButton(
-                            onPressed: uploadImage.pickMyImage,
+                            onPressed: () async {
+                              try {
+                                await uploadImage.pickMyImage();
+                              } catch (error) {
+                                Helper.showCustomToast(
+                                    context: context,
+                                    bgColor: Colors.amber,
+                                    icon: FontAwesomeIcons.triangleExclamation,
+                                    msg: error.toString());
+                              }
+                            },
                             padding: const EdgeInsets.symmetric(vertical: 13),
-                            style: const NeumorphicStyle(
-                                color: Color(0xff0abde3), depth: 1),
+                            style: NeumorphicStyle(
+                                color: state is MaxNumberOfUploadedImages
+                                    ? const Color(0xff0abde3).withOpacity(0.3)
+                                    : const Color(0xff0abde3),
+                                depth: 1),
                             child: Text(
                               'Upload Image',
                               textAlign: TextAlign.center,
