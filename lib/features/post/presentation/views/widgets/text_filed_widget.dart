@@ -40,6 +40,12 @@ class TextFiledWidget extends StatelessWidget {
         ),
         prefixIcon: prefixIcon,
       ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Field is required';
+        }
+        return null;
+      },
     );
   }
 }

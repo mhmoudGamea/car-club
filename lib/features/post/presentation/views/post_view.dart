@@ -1,5 +1,8 @@
+import 'package:car_club/features/post/data/repos/post_repo_impl.dart';
 import 'package:car_club/features/post/presentation/model_views/interior_color_cubit/interior_color_cubit.dart';
+import 'package:car_club/features/post/presentation/model_views/number_of_owner_cubit/number_of_owners_cubit.dart';
 import 'package:car_club/features/post/presentation/model_views/upload_image_cubit/upload_image_cubit.dart';
+import 'package:car_club/features/post/presentation/model_views/user_form_cubit/user_form_cubit.dart';
 import 'package:car_club/features/post/presentation/model_views/vehicle_type_cubit/vehicle_type_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +23,7 @@ class PostView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => UserFormCubit(PostRepoImpl())),
         BlocProvider(create: (context) => BrandCubit()),
         BlocProvider(create: (context) => YearCubit()),
         BlocProvider(create: (context) => FuelCubit()),
@@ -27,6 +31,7 @@ class PostView extends StatelessWidget {
         BlocProvider(create: (context) => ExteriorColorCubit()),
         BlocProvider(create: (context) => InteriorColorCubit()),
         BlocProvider(create: (context) => VehicleTypeCubit()),
+        BlocProvider(create: (context) => NumberOfOwnersCubit()),
         BlocProvider(create: (context) => UploadImageCubit()),
       ],
       child: Scaffold(

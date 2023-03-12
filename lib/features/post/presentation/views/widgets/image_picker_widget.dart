@@ -161,7 +161,9 @@ class ImagePickerWidget extends StatelessWidget {
                                     : const Color(0xff0abde3),
                                 depth: 1),
                             child: Text(
-                              'Upload Image',
+                              uploadImage.getUploadedUrls.length <= 1
+                                  ? 'Upload image'
+                                  : 'Upload more images',
                               textAlign: TextAlign.center,
                               style:
                                   Styles.title14.copyWith(color: Colors.white),

@@ -47,8 +47,12 @@ class Helper {
           borderRadius: BorderRadius.circular(10), color: bgColor),
       child: Row(
         children: [
-          Icon(icon, color: Colors.white),
-          const SizedBox(width: 5),
+          Icon(
+            icon,
+            color: Colors.white,
+            size: 18,
+          ),
+          const SizedBox(width: 10),
           Text(
             msg,
             style: Styles.title14.copyWith(color: Colors.white),
