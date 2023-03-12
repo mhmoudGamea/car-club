@@ -6,11 +6,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../model_views/upload_image_cubit/upload_image_cubit.dart';
 
 class UploadedImageBuilder extends StatelessWidget {
-  const UploadedImageBuilder({Key? key}) : super(key: key);
+  final UploadImageCubit uploadImage;
+  const UploadedImageBuilder({Key? key, required this.uploadImage})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final uploadImage = BlocProvider.of<UploadImageCubit>(context);
+    //final uploadImage = BlocProvider.of<UploadImageCubit>(context);
     return BlocBuilder<UploadImageCubit, UploadImageState>(
       builder: (context, state) {
         return GridView.builder(

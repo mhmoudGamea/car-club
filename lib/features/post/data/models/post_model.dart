@@ -1,4 +1,5 @@
 class PostModel {
+  final String date;
   final String brand;
   final String manufacturingYear;
   final double price;
@@ -11,8 +12,10 @@ class PostModel {
   final String noOfOwners;
   final String description;
   final String address;
+  final List<String> images;
 
   const PostModel({
+    required this.date,
     required this.brand,
     required this.manufacturingYear,
     required this.price,
@@ -25,10 +28,12 @@ class PostModel {
     required this.noOfOwners,
     required this.description,
     required this.address,
+    required this.images,
   });
 
   factory PostModel.fromJson(Map<String, dynamic> json) {
     return PostModel(
+      date: json['date'],
       brand: json['brand'],
       manufacturingYear: json['manufacturingYear'],
       price: json['price'],
@@ -41,11 +46,13 @@ class PostModel {
       noOfOwners: json['noOfOwners'],
       description: json['description'],
       address: json['address'],
+      images: json['images'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      'date': date,
       'brand': brand,
       'manufacturingYear': manufacturingYear,
       'price': price,
@@ -58,6 +65,7 @@ class PostModel {
       'noOfOwners': noOfOwners,
       'description': description,
       'address': address,
+      'images': images,
     };
   }
 }

@@ -1,22 +1,22 @@
 import 'package:car_club/core/constants.dart';
-import 'package:car_club/core/error/failure.dart';
 import 'package:car_club/core/widgets/progress.dart';
 import 'package:car_club/features/post/presentation/model_views/upload_image_cubit/upload_image_cubit.dart';
 import 'package:car_club/features/post/presentation/views/widgets/uploaded_image_builder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../../core/utils/helper.dart';
 import '../../../../../core/utils/styles.dart';
 
 class ImagePickerWidget extends StatelessWidget {
-  const ImagePickerWidget({Key? key}) : super(key: key);
+  final UploadImageCubit uploadImage;
+  const ImagePickerWidget({Key? key, required this.uploadImage})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final uploadImage = BlocProvider.of<UploadImageCubit>(context);
+    //final uploadImage = BlocProvider.of<UploadImageCubit>(context);
     return BlocBuilder<UploadImageCubit, UploadImageState>(
       builder: (context, state) {
         //print(state);
@@ -86,7 +86,8 @@ class ImagePickerWidget extends StatelessWidget {
                               color: greyColor,
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: const UploadedImageBuilder(),
+                            child:
+                                UploadedImageBuilder(uploadImage: uploadImage),
                           );
                         },
                       ),
@@ -161,9 +162,9 @@ class ImagePickerWidget extends StatelessWidget {
                                     : const Color(0xff0abde3),
                                 depth: 1),
                             child: Text(
-                              uploadImage.getUploadedUrls.length <= 1
-                                  ? 'Upload image'
-                                  : 'Upload more images',
+                              uploadImage.getUploadedUrls.isNotEmpty
+                                  ? 'Upload more images'
+                                  : 'Upload image',
                               textAlign: TextAlign.center,
                               style:
                                   Styles.title14.copyWith(color: Colors.white),

@@ -21,6 +21,8 @@ class PostView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(DateTime.now().toIso8601String());
+    print(DateTime.now().toString());
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => UserFormCubit(PostRepoImpl())),

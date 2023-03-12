@@ -1,3 +1,4 @@
+import 'package:car_club/core/constants.dart';
 import 'package:car_club/core/utils/helper.dart';
 import 'package:car_club/features/post/data/models/post_model.dart';
 import 'package:flutter/material.dart';
@@ -77,9 +78,10 @@ class UserFormCubit extends Cubit<UserFormState> {
 
   late PostModel _postModel;
 
-  Future<void> addPost() async {
+  Future<void> addPost(List<String> images, BuildContext context) async {
     emit(PostLoading());
     _postModel = PostModel(
+      date: DateTime.now().toIso8601String(),
       brand: getBrand.text,
       manufacturingYear: getYear.text,
       price: double.parse(getPrice.text),
@@ -92,11 +94,19 @@ class UserFormCubit extends Cubit<UserFormState> {
       noOfOwners: getNoOfOwners.text,
       description: getDescription.text,
       address: getAddress.text,
+      images: images,
     );
     try {
       await postRepo.addNewPost(
           'yyTbyyKO9xREWQjg4aXIM2thJWp1', _postModel.toJson());
       emit(PostAddedSuccess());
+      // ignore: use_build_context_synchronously
+      Helper.showCustomToast(
+        context: context,
+        bgColor: mintGreen,
+        icon: FontAwesomeIcons.circleCheck,
+        msg: 'Post added successfully.',
+      );
     } catch (error) {
       emit(PostAddedFailure());
     }
@@ -108,7 +118,7 @@ class UserFormCubit extends Cubit<UserFormState> {
       required UploadImageCubit uploadedImages}) async {
     if (formKey.currentState!.validate()) {
       if (uploadedImages.getUploadedUrls.isNotEmpty) {
-        addPost();
+        addPost(uploadedImages.getUploadedUrls, context);
       } else {
         // snackbar if doesn't upload images
         Helper.showCustomToast(

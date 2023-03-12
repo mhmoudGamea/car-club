@@ -22,6 +22,8 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../../core/constants.dart';
+import '../../../../../core/utils/styles.dart';
+import '../../../../../core/widgets/progress.dart';
 import '../../model_views/vehicle_type_cubit/vehicle_type_cubit.dart';
 import 'number_of_owners_widget.dart';
 import 'uploaded_image_builder.dart';
@@ -50,362 +52,383 @@ class _PostViewBodyState extends State<PostViewBody> {
     final numberOfOwnerData = BlocProvider.of<NumberOfOwnersCubit>(context);
     final uploadImageData = BlocProvider.of<UploadImageCubit>(context);
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      // first main column
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              // second main column
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    // brand text field
-                    GestureDetector(
-                      onTap: () => showDialog(
-                        context: context,
-                        builder: (context) => BlocProvider.value(
-                            value: brandData, child: const BrandWidget()),
-                      ),
-                      child: BlocListener<BrandCubit, BrandState>(
-                        listener: (context, state) {
-                          if (state is BrandNameSelected) {
-                            userFormData.getBrand.text =
-                                brandData.getBrandName!;
-                          }
-                        },
-                        child: TextFiledWidget(
-                          isEnabled: false,
-                          controller: userFormData.getBrand,
-                          label: 'Car brand*',
-                          prefixIcon: const Icon(
-                            FontAwesomeIcons.car,
-                            size: 18,
-                            color: greyColor,
+    return BlocBuilder<UserFormCubit, UserFormState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          // first main column
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  // second main column
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        // brand text field
+                        GestureDetector(
+                          onTap: () => showDialog(
+                            context: context,
+                            builder: (context) => BlocProvider.value(
+                                value: brandData, child: const BrandWidget()),
+                          ),
+                          child: BlocListener<BrandCubit, BrandState>(
+                            listener: (context, state) {
+                              if (state is BrandNameSelected) {
+                                userFormData.getBrand.text =
+                                    brandData.getBrandName!;
+                              }
+                            },
+                            child: TextFiledWidget(
+                              isEnabled: false,
+                              controller: userFormData.getBrand,
+                              label: 'Car brand*',
+                              prefixIcon: const Icon(
+                                FontAwesomeIcons.car,
+                                size: 18,
+                                color: greyColor,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                    // year text field
-                    GestureDetector(
-                      onTap: () {
-                        yearData.calculateNumberOfYears();
-                        showDialog(
-                          context: context,
-                          builder: (context) => BlocProvider<YearCubit>.value(
-                            value: yearData,
-                            child: const YearWidget(),
+                        // year text field
+                        GestureDetector(
+                          onTap: () {
+                            yearData.calculateNumberOfYears();
+                            showDialog(
+                              context: context,
+                              builder: (context) =>
+                                  BlocProvider<YearCubit>.value(
+                                value: yearData,
+                                child: const YearWidget(),
+                              ),
+                            );
+                          },
+                          child: BlocListener<YearCubit, YearState>(
+                            listener: (context, state) {
+                              if (state is YearSelected) {
+                                userFormData.getYear.text =
+                                    yearData.getManufactureYear.toString();
+                              }
+                            },
+                            child: TextFiledWidget(
+                              isEnabled: false,
+                              controller: userFormData.getYear,
+                              label: 'Year*',
+                              type: TextInputType.number,
+                              prefixIcon: const Icon(
+                                FontAwesomeIcons.calendarDay,
+                                size: 18,
+                                color: babyBlue,
+                              ),
+                            ),
                           ),
-                        );
-                      },
-                      child: BlocListener<YearCubit, YearState>(
-                        listener: (context, state) {
-                          if (state is YearSelected) {
-                            userFormData.getYear.text =
-                                yearData.getManufactureYear.toString();
-                          }
-                        },
-                        child: TextFiledWidget(
-                          isEnabled: false,
-                          controller: userFormData.getYear,
-                          label: 'Year*',
+                        ),
+                        // price text field
+                        TextFiledWidget(
+                          controller: userFormData.getPrice,
+                          label: 'Price*',
                           type: TextInputType.number,
                           prefixIcon: const Icon(
-                            FontAwesomeIcons.calendarDay,
+                            FontAwesomeIcons.sackDollar,
                             size: 18,
-                            color: babyBlue,
+                            color: mintGreen,
                           ),
                         ),
-                      ),
-                    ),
-                    // price text field
-                    TextFiledWidget(
-                      controller: userFormData.getPrice,
-                      label: 'Price*',
-                      type: TextInputType.number,
-                      prefixIcon: const Icon(
-                        FontAwesomeIcons.sackDollar,
-                        size: 18,
-                        color: mintGreen,
-                      ),
-                    ),
-                    // fuel text field
-                    GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => BlocProvider<FuelCubit>.value(
-                            value: fuelData,
-                            child: const FuelWidget(),
-                          ),
-                        );
-                      },
-                      child: BlocListener<FuelCubit, FuelState>(
-                        listener: (context, state) {
-                          if (state is FuelSelected) {
-                            userFormData.getFuel.text = fuelData.getFuelType!;
-                          }
-                        },
-                        child: TextFiledWidget(
-                          isEnabled: false,
-                          controller: userFormData.getFuel,
-                          label: 'Fuel*',
-                          prefixIcon: const Icon(
-                            FontAwesomeIcons.gasPump,
-                            size: 18,
-                            color: Colors.red,
-                          ),
-                        ),
-                      ),
-                    ),
-                    // transmission text field
-                    GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) =>
-                              BlocProvider<TransmissionCubit>.value(
-                            value: transmissionData,
-                            child: const TransmissionWidget(),
-                          ),
-                        );
-                      },
-                      child: BlocListener<TransmissionCubit, TransmissionState>(
-                        listener: (context, state) {
-                          if (state is TransmissionSelected) {
-                            userFormData.getTransmission.text =
-                                transmissionData.getTransmissionType!;
-                          }
-                        },
-                        child: TextFiledWidget(
-                          isEnabled: false,
-                          controller: userFormData.getTransmission,
-                          label: 'Transmission*',
-                          prefixIcon: const Icon(
-                            FontAwesomeIcons.gears,
-                            size: 18,
-                            color: Colors.amber,
-                          ),
-                        ),
-                      ),
-                    ),
-                    // mileages text field
-                    TextFiledWidget(
-                      controller: userFormData.getMileage,
-                      label: 'Mileages*',
-                      type: TextInputType.number,
-                      prefixIcon: const Icon(
-                        FontAwesomeIcons.route,
-                        size: 18,
-                        color: Color(0xff4a69bd),
-                      ),
-                    ),
-                    // exterior color text field
-                    GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) =>
-                              BlocProvider<ExteriorColorCubit>.value(
-                            value: exteriorColorData,
-                            child: const ExteriorColorWidget(),
-                          ),
-                        );
-                      },
-                      child:
-                          BlocListener<ExteriorColorCubit, ExteriorColorState>(
-                        listener: (context, state) {
-                          if (state is ExteriorColorSelected) {
-                            userFormData.getExteriorColor.text =
-                                exteriorColorData.getExteriorColor!;
-                          }
-                        },
-                        child: TextFiledWidget(
-                          isEnabled: false,
-                          controller: userFormData.getExteriorColor,
-                          label: 'Exterior color*',
-                          prefixIcon: const Icon(
-                            FontAwesomeIcons.brush,
-                            size: 18,
-                            color: Color(0xffD980FA),
-                          ),
-                        ),
-                      ),
-                    ),
-                    // interior color text field
-                    GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) =>
-                              BlocProvider<InteriorColorCubit>.value(
-                            value: interiorColorData,
-                            child: const InteriorColorWidget(),
-                          ),
-                        );
-                      },
-                      child:
-                          BlocListener<InteriorColorCubit, InteriorColorState>(
-                        listener: (context, state) {
-                          if (state is InteriorColorSelected) {
-                            userFormData.getInteriorColor.text =
-                                interiorColorData.getInteriorColor!;
-                          }
-                        },
-                        child: TextFiledWidget(
-                          isEnabled: false,
-                          controller: userFormData.getInteriorColor,
-                          label: 'Interior color*',
-                          prefixIcon: const Icon(
-                            FontAwesomeIcons.brush,
-                            size: 18,
-                            color: Color(0xffC4E538),
-                          ),
-                        ),
-                      ),
-                    ),
-                    // vehicle type text field
-                    GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) =>
-                              BlocProvider<VehicleTypeCubit>.value(
-                            value: vehicleTypeData,
-                            child: const VehicleTypeWidget(),
-                          ),
-                        );
-                      },
-                      child: BlocListener<VehicleTypeCubit, VehicleTypeState>(
-                        listener: (context, state) {
-                          if (state is VehicleTypeSelected) {
-                            userFormData.getVehicleType.text =
-                                vehicleTypeData.getVehicleType!;
-                          }
-                        },
-                        child: TextFiledWidget(
-                          isEnabled: false,
-                          controller: userFormData.getVehicleType,
-                          label: 'Vehicle type*',
-                          prefixIcon: const Icon(
-                            FontAwesomeIcons.truck,
-                            size: 18,
-                            color: Color(0xffaaa69d),
-                          ),
-                        ),
-                      ),
-                    ),
-                    // number of owners text field
-                    GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) =>
-                              BlocProvider<NumberOfOwnersCubit>.value(
-                            value: numberOfOwnerData,
-                            child: const NumberOfOwnersWidget(),
-                          ),
-                        );
-                      },
-                      child: BlocListener<NumberOfOwnersCubit,
-                          NumberOfOwnersState>(
-                        listener: (context, state) {
-                          if (state is NumberOfOwnersSelected) {
-                            userFormData.getNoOfOwners.text =
-                                numberOfOwnerData.getNumber!;
-                          }
-                        },
-                        child: TextFiledWidget(
-                          isEnabled: false,
-                          controller: userFormData.getNoOfOwners,
-                          label: 'No. of owners*',
-                          prefixIcon: const Icon(
-                            FontAwesomeIcons.users,
-                            size: 18,
-                            color: Color(0xff7ed6df),
-                          ),
-                        ),
-                      ),
-                    ),
-                    // description text field
-                    TextFiledWidget(
-                      controller: userFormData.getDescription,
-                      label: 'Description*',
-                      prefixIcon: const Icon(
-                        FontAwesomeIcons.notesMedical,
-                        size: 18,
-                        color: Color(0xff009432),
-                      ),
-                      maxLines: 3,
-                      maxLength: 150,
-                    ),
-                    // address text field
-                    TextFiledWidget(
-                      controller: userFormData.getAddress,
-                      label: 'Address*',
-                      prefixIcon: const Icon(
-                        FontAwesomeIcons.locationDot,
-                        size: 18,
-                        color: Color(0xffd35400),
-                      ),
-                      maxLines: 1,
-                      maxLength: 100,
-                    ),
-                    // uploaded image section
-                    if (uploadImageData.getUploadedUrls.isNotEmpty)
-                      BlocBuilder<UploadImageCubit, UploadImageState>(
-                        builder: (context, state) {
-                          return Container(
-                            margin: const EdgeInsets.only(top: 10),
-                            padding: const EdgeInsets.all(10),
-                            height: 120,
-                            decoration: BoxDecoration(
-                              color: greyColor,
-                              borderRadius: BorderRadius.circular(10),
+                        // fuel text field
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) =>
+                                  BlocProvider<FuelCubit>.value(
+                                value: fuelData,
+                                child: const FuelWidget(),
+                              ),
+                            );
+                          },
+                          child: BlocListener<FuelCubit, FuelState>(
+                            listener: (context, state) {
+                              if (state is FuelSelected) {
+                                userFormData.getFuel.text =
+                                    fuelData.getFuelType!;
+                              }
+                            },
+                            child: TextFiledWidget(
+                              isEnabled: false,
+                              controller: userFormData.getFuel,
+                              label: 'Fuel*',
+                              prefixIcon: const Icon(
+                                FontAwesomeIcons.gasPump,
+                                size: 18,
+                                color: Colors.red,
+                              ),
                             ),
-                            child: const UploadedImageBuilder(),
-                          );
-                        },
-                      ),
+                          ),
+                        ),
+                        // transmission text field
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) =>
+                                  BlocProvider<TransmissionCubit>.value(
+                                value: transmissionData,
+                                child: const TransmissionWidget(),
+                              ),
+                            );
+                          },
+                          child: BlocListener<TransmissionCubit,
+                              TransmissionState>(
+                            listener: (context, state) {
+                              if (state is TransmissionSelected) {
+                                userFormData.getTransmission.text =
+                                    transmissionData.getTransmissionType!;
+                              }
+                            },
+                            child: TextFiledWidget(
+                              isEnabled: false,
+                              controller: userFormData.getTransmission,
+                              label: 'Transmission*',
+                              prefixIcon: const Icon(
+                                FontAwesomeIcons.gears,
+                                size: 18,
+                                color: Colors.amber,
+                              ),
+                            ),
+                          ),
+                        ),
+                        // mileages text field
+                        TextFiledWidget(
+                          controller: userFormData.getMileage,
+                          label: 'Mileages*',
+                          type: TextInputType.number,
+                          prefixIcon: const Icon(
+                            FontAwesomeIcons.route,
+                            size: 18,
+                            color: Color(0xff4a69bd),
+                          ),
+                        ),
+                        // exterior color text field
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) =>
+                                  BlocProvider<ExteriorColorCubit>.value(
+                                value: exteriorColorData,
+                                child: const ExteriorColorWidget(),
+                              ),
+                            );
+                          },
+                          child: BlocListener<ExteriorColorCubit,
+                              ExteriorColorState>(
+                            listener: (context, state) {
+                              if (state is ExteriorColorSelected) {
+                                userFormData.getExteriorColor.text =
+                                    exteriorColorData.getExteriorColor!;
+                              }
+                            },
+                            child: TextFiledWidget(
+                              isEnabled: false,
+                              controller: userFormData.getExteriorColor,
+                              label: 'Exterior color*',
+                              prefixIcon: const Icon(
+                                FontAwesomeIcons.brush,
+                                size: 18,
+                                color: Color(0xffD980FA),
+                              ),
+                            ),
+                          ),
+                        ),
+                        // interior color text field
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) =>
+                                  BlocProvider<InteriorColorCubit>.value(
+                                value: interiorColorData,
+                                child: const InteriorColorWidget(),
+                              ),
+                            );
+                          },
+                          child: BlocListener<InteriorColorCubit,
+                              InteriorColorState>(
+                            listener: (context, state) {
+                              if (state is InteriorColorSelected) {
+                                userFormData.getInteriorColor.text =
+                                    interiorColorData.getInteriorColor!;
+                              }
+                            },
+                            child: TextFiledWidget(
+                              isEnabled: false,
+                              controller: userFormData.getInteriorColor,
+                              label: 'Interior color*',
+                              prefixIcon: const Icon(
+                                FontAwesomeIcons.brush,
+                                size: 18,
+                                color: Color(0xffC4E538),
+                              ),
+                            ),
+                          ),
+                        ),
+                        // vehicle type text field
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) =>
+                                  BlocProvider<VehicleTypeCubit>.value(
+                                value: vehicleTypeData,
+                                child: const VehicleTypeWidget(),
+                              ),
+                            );
+                          },
+                          child:
+                              BlocListener<VehicleTypeCubit, VehicleTypeState>(
+                            listener: (context, state) {
+                              if (state is VehicleTypeSelected) {
+                                userFormData.getVehicleType.text =
+                                    vehicleTypeData.getVehicleType!;
+                              }
+                            },
+                            child: TextFiledWidget(
+                              isEnabled: false,
+                              controller: userFormData.getVehicleType,
+                              label: 'Vehicle type*',
+                              prefixIcon: const Icon(
+                                FontAwesomeIcons.truck,
+                                size: 18,
+                                color: Color(0xffaaa69d),
+                              ),
+                            ),
+                          ),
+                        ),
+                        // number of owners text field
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) =>
+                                  BlocProvider<NumberOfOwnersCubit>.value(
+                                value: numberOfOwnerData,
+                                child: const NumberOfOwnersWidget(),
+                              ),
+                            );
+                          },
+                          child: BlocListener<NumberOfOwnersCubit,
+                              NumberOfOwnersState>(
+                            listener: (context, state) {
+                              if (state is NumberOfOwnersSelected) {
+                                userFormData.getNoOfOwners.text =
+                                    numberOfOwnerData.getNumber!;
+                              }
+                            },
+                            child: TextFiledWidget(
+                              isEnabled: false,
+                              controller: userFormData.getNoOfOwners,
+                              label: 'No. of owners*',
+                              prefixIcon: const Icon(
+                                FontAwesomeIcons.users,
+                                size: 18,
+                                color: Color(0xff7ed6df),
+                              ),
+                            ),
+                          ),
+                        ),
+                        // description text field
+                        TextFiledWidget(
+                          controller: userFormData.getDescription,
+                          label: 'Description*',
+                          prefixIcon: const Icon(
+                            FontAwesomeIcons.notesMedical,
+                            size: 18,
+                            color: Color(0xff009432),
+                          ),
+                          maxLines: 3,
+                          maxLength: 150,
+                        ),
+                        // address text field
+                        TextFiledWidget(
+                          controller: userFormData.getAddress,
+                          label: 'Address*',
+                          prefixIcon: const Icon(
+                            FontAwesomeIcons.locationDot,
+                            size: 18,
+                            color: Color(0xffd35400),
+                          ),
+                          maxLines: 1,
+                          maxLength: 100,
+                        ),
+                        // uploaded image section
+                        if (uploadImageData.getUploadedUrls.isNotEmpty)
+                          BlocBuilder<UploadImageCubit, UploadImageState>(
+                            builder: (context, state) {
+                              return Container(
+                                margin: const EdgeInsets.only(top: 10),
+                                padding: const EdgeInsets.all(10),
+                                height: 120,
+                                decoration: BoxDecoration(
+                                  color: greyColor,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: UploadedImageBuilder(
+                                    uploadImage: uploadImageData),
+                              );
+                            },
+                          ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              CustomNeumorphicButton(
+                text: 'Upload Image',
+                backgroundColor: babyBlue,
+                textColor: Colors.white,
+                onPress: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => BlocProvider<UploadImageCubit>.value(
+                      value: uploadImageData,
+                      child: ImagePickerWidget(uploadImage: uploadImageData),
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 15),
+              NeumorphicButton(
+                // onPressed: save the whole form,
+                onPressed: () async {
+                  await userFormData.validate(
+                    formKey: _formKey,
+                    context: context,
+                    uploadedImages: uploadImageData,
+                  );
+                },
+                padding: const EdgeInsets.symmetric(vertical: 13),
+                style: const NeumorphicStyle(color: mintGreen, depth: 1),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (state is PostLoading) Progress.circleProgress(),
+                    Text(
+                      state is PostLoading ? '  Waiting...' : 'Save',
+                      textAlign: TextAlign.center,
+                      style: Styles.title15.copyWith(color: Colors.white),
+                    ),
                   ],
                 ),
               ),
-            ),
+            ],
           ),
-          const SizedBox(height: 10),
-          CustomNeumorphicButton(
-            text: 'Upload Image',
-            backgroundColor: babyBlue,
-            textColor: Colors.white,
-            onPress: () {
-              showDialog(
-                context: context,
-                builder: (context) => BlocProvider<UploadImageCubit>.value(
-                  value: uploadImageData,
-                  child: const ImagePickerWidget(),
-                ),
-              );
-            },
-          ),
-          const SizedBox(height: 15),
-          CustomNeumorphicButton(
-            text: 'Save',
-            backgroundColor: mintGreen,
-            textColor: Colors.white,
-            onPress: () async {
-              await userFormData.validate(
-                formKey: _formKey,
-                context: context,
-                uploadedImages: uploadImageData,
-              );
-            },
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
