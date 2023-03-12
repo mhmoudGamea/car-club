@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../core/constants.dart';
 import '../../../../../core/utils/assets.dart';
@@ -55,9 +56,10 @@ class SplashViewBody extends StatelessWidget {
                   color: secondaryLoginColor,
                   child: IconButton(
                     onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) {
-                        return const AuthenticationView();
-                      },));
+                      GoRouter.of(context).push(AuthenticationView.rn);
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      //   return const AuthenticationView();})
+                      // );
                     },
                     icon: const Icon(Icons.arrow_forward_ios_outlined),
                   ),

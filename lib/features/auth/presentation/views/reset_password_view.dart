@@ -7,6 +7,8 @@ import 'widgets/reset_password_body.dart';
 
 class ResetPasswordPage extends StatelessWidget {
   const ResetPasswordPage({super.key});
+  static const rn = '/ResetPasswordPage';
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginStates>(

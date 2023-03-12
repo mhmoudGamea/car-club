@@ -10,7 +10,9 @@ import '../../../../../core/utils/helper.dart';
 import '../../../../../core/utils/styles.dart';
 
 class ImagePickerWidget extends StatelessWidget {
-  const ImagePickerWidget({Key? key}) : super(key: key);
+  ImagePickerWidget({Key? key}) : super(key: key);
+
+  late List<String> list = [];
 
   @override
   Widget build(BuildContext context) {
@@ -75,20 +77,29 @@ class ImagePickerWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
 
-                    if (uploadImage.getUploadedUrls!.isNotEmpty)
-                      BlocBuilder<UploadImageCubit, UploadImageState>(
-                        builder:(context, state) =>  Container(
-
-                          decoration: BoxDecoration(
-                            color: greyColor,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: GalleryImage(
-                            imageUrls: uploadImage.getUploadedUrls!,
-                            numOfShowImages:
-                                uploadImage.getUploadedUrls!.length <= 3 ? 0 : 3,
-                          ),
-                        ),
+                    if (uploadImage.getUploadedUrls().isNotEmpty)
+                      BlocConsumer<UploadImageCubit, UploadImageState>(
+                        listener: (context, state) {
+                          if (state is ImageAddedToList) {
+                            list = state.list;
+                            print(list.toString());
+                          }
+                        },
+                        builder: (context, state) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              color: greyColor,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: GalleryImage(
+                              imageUrls: uploadImage.getUploadedUrls(),
+                              numOfShowImages:
+                                  uploadImage.getUploadedUrls().length <= 3
+                                      ? 0
+                                      : 3,
+                            ),
+                          );
+                        },
                       ),
 
                     if (uploadImage.getPickedImage != null)

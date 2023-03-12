@@ -1,5 +1,6 @@
 import 'package:car_club/core/cache_helper.dart';
 import 'package:car_club/core/utils/app_routes.dart';
+import 'package:car_club/features/home/presentation/views/home_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +19,7 @@ void main() async {
   if (remember == false || remember == null) {
     widget = const SplashView();
   } else {
-    widget = Container();
+    widget = const HomeView();
   }
   runApp(CarClub(widget));
 }
@@ -31,7 +32,6 @@ class CarClub extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: AppRoutes.getRouter,
       debugShowCheckedModeBanner: false,
-      //home: const TabsView(),
       darkTheme: darkTheme,
       themeMode: ThemeMode.dark,
     );

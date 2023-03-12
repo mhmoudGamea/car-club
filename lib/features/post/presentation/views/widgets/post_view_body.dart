@@ -24,23 +24,27 @@ import '../../../../../core/constants.dart';
 import '../../model_views/vehicle_type_cubit/vehicle_type_cubit.dart';
 import 'vehicle_type_widget.dart';
 
-class PostViewBody extends StatefulWidget {
-  const PostViewBody({Key? key}) : super(key: key);
+class PostViewBody extends StatelessWidget {
+   PostViewBody({Key? key}) : super(key: key);
 
-  @override
-  State<PostViewBody> createState() => _PostViewBodyState();
-}
-
-class _PostViewBodyState extends State<PostViewBody> {
   final _brandsController = TextEditingController();
+
   final _yearController = TextEditingController();
+
   final _priceController = TextEditingController();
+
   final _fuelController = TextEditingController();
+
   final _transmissionController = TextEditingController();
+
   final _mileagesController = TextEditingController();
+
   final _exteriorColorController = TextEditingController();
+
   final _interiorColorController = TextEditingController();
+
   final _vehicleTypeController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final brandData = BlocProvider.of<BrandCubit>(context);
@@ -308,21 +312,29 @@ class _PostViewBodyState extends State<PostViewBody> {
                     maxLines: 3,
                     maxLength: 150,
                   ),
-                  if (uploadImageData.getUploadedUrls!.isNotEmpty)
-                    BlocBuilder<UploadImageCubit, UploadImageState>(
+                  if (uploadImageData.getUploadedUrls().isNotEmpty)
+                    BlocConsumer<UploadImageCubit, UploadImageState>(
+                      listener: (context, state) {
+                        if(state is ImageAddedToList) {
+
+                        }
+                      },
                       builder: (context, state) {
-                          return Container(
+                        return Container(
                             margin: const EdgeInsets.only(top: 10),
                             decoration: BoxDecoration(
                               color: greyColor,
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: GalleryImage(
-                              imageUrls: uploadImageData.getUploadedUrls!,
+                              imageUrls: uploadImageData.getUploadedUrls(),
                               numOfShowImages:
-                              uploadImageData.getUploadedUrls!.length <= 3 ? 0 : 3,
+                              uploadImageData.getUploadedUrls().length <= 3
+                                  ? 0
+                                  : 3,
                             ),
                           );
+
                       },
                     ),
                 ],
@@ -339,7 +351,7 @@ class _PostViewBodyState extends State<PostViewBody> {
                   context: context,
                   builder: (context) => BlocProvider<UploadImageCubit>.value(
                         value: uploadImageData,
-                        child: const ImagePickerWidget(),
+                        child:  ImagePickerWidget(),
                       ));
             },
           ),

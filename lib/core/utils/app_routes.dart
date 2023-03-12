@@ -1,10 +1,15 @@
+import 'package:car_club/core/widgets/tabs_view.dart';
+import 'package:car_club/features/auth/presentation/views/reset_password_view.dart';
+import 'package:car_club/features/auth/presentation/views/splash_view.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/auth/presentation/views/auth_view.dart';
+import '../../features/auth/presentation/views/login_view.dart';
+import '../../features/auth/presentation/views/register_view.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/home/presentation/views/home_view_details.dart';
 import '../../features/post/presentation/views/post_view.dart';
 import '../../features/profile/presentation/views/profile_view.dart';
-import '../widgets/tabs_view.dart';
 
 abstract class AppRoutes {
   static GoRouter get getRouter {
@@ -15,11 +20,15 @@ abstract class AppRoutes {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const TabsView(),
+        builder: (context, state) => const SplashView(),
       ),
       GoRoute(
         path: HomeView.rn,
         builder: (context, state) => const HomeView(),
+      ),
+      GoRoute(
+        path: TabsView.rn,
+        builder: (context, state) => const TabsView(),
       ),
       GoRoute(
         path: ProfileView.rn,
@@ -32,7 +41,24 @@ abstract class AppRoutes {
       GoRoute(
         path: PostView.rn,
         builder: (context, state) => const PostView(),
+      ),
+      GoRoute(
+        path: LoginScreen.rn,
+        builder: (context, state) => const LoginScreen(),
+      ),
+      GoRoute(
+        path: RegisterScreen.rn,
+        builder: (context, state) => const RegisterScreen(),
+      ),
+      GoRoute(
+        path: AuthenticationView.rn,
+        builder: (context, state) => const AuthenticationView(),
+      ),
+      GoRoute(
+        path: ResetPasswordPage.rn,
+        builder: (context, state) => const ResetPasswordPage(),
       )
+
     ],
   );
 }

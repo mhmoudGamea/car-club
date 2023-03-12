@@ -1,9 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/cache_helper.dart';
-import '../../../home/presentation/views/home_view.dart';
+import '../../../../core/widgets/tabs_view.dart';
 
 import '../../data/auth_services/login/login_cubit/login_cubit.dart';
 import '../../data/auth_services/login/login_cubit/login_states.dart';
@@ -12,6 +13,7 @@ import 'widgets/flutter_toast.dart';
 
 class AuthenticationView extends StatelessWidget {
   const AuthenticationView({Key? key}) : super(key: key);
+  static const rn = '/AuthenticationView';
 
   @override
   Widget build(BuildContext context) {
@@ -22,26 +24,17 @@ class AuthenticationView extends StatelessWidget {
           if (state is SuccessGoogleSigningState)
           {
             CacheHelper.saveData('uId', state.uid);
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => const HomeView()),
-                    (route) => false);
+            GoRouter.of(context).push(TabsView.rn);
             defaultFlutterToast(message: 'login Success', state: ToastState.SUCCESS);
           } else if (state is SuccessFacebookSigningState)
           {
             CacheHelper.saveData('uId', state.uid);
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => const HomeView()),
-                    (route) => false);
+            GoRouter.of(context).push(TabsView.rn);
             defaultFlutterToast(message: 'login Success', state: ToastState.SUCCESS);
           } else if (state is SuccessAppleSigningState)
           {
             CacheHelper.saveData('uId', state.uid);
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => const HomeView()),
-                    (route) => false);
+            GoRouter.of(context).push(TabsView.rn);
             defaultFlutterToast(message: 'login Success', state: ToastState.SUCCESS);
           } else if (state is ErrorGoogleSigningState)
           {
