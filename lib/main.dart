@@ -28,6 +28,7 @@ class CarClub extends StatelessWidget {
   final Widget widget;
   @override
   Widget build(BuildContext context) {
+    print('Gamea: uid = $uId');
     return MaterialApp.router(
       routerConfig: AppRoutes.getRouter,
       debugShowCheckedModeBanner: false,

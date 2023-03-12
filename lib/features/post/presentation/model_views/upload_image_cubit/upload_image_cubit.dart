@@ -56,7 +56,8 @@ class UploadImageCubit extends Cubit<UploadImageState> {
   Future<void> uploadImageToFireStorage() async {
     emit(UploadImageLoading());
 
-    String imageName = 'images/${DateTime.now().microsecondsSinceEpoch}';
+    String imageName =
+        'images/yyTbyyKO9xREWQjg4aXIM2thJWp1/${DateTime.now().microsecondsSinceEpoch}';
 
     String? downloadedUrl;
 

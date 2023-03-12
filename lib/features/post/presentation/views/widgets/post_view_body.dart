@@ -318,21 +318,21 @@ class _PostViewBodyState extends State<PostViewBody> {
                     maxLength: 150,
                   ),
                   // uploaded image section
-                  // if (uploadImageData.getUploadedUrls.isNotEmpty)
-                  //   BlocBuilder<UploadImageCubit, UploadImageState>(
-                  //     builder: (context, state) {
-                  //       return Container(
-                  //         margin: const EdgeInsets.only(top: 10),
-                  //         padding: const EdgeInsets.all(10),
-                  //         height: 120,
-                  //         decoration: BoxDecoration(
-                  //           color: greyColor,
-                  //           borderRadius: BorderRadius.circular(10),
-                  //         ),
-                  //         child: const UploadedImageBuilder(),
-                  //       );
-                  //     },
-                  //   ),
+                  if (uploadImageData.getUploadedUrls.isNotEmpty)
+                    BlocBuilder<UploadImageCubit, UploadImageState>(
+                      builder: (context, state) {
+                        return Container(
+                          margin: const EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.all(10),
+                          height: 120,
+                          decoration: BoxDecoration(
+                            color: greyColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const UploadedImageBuilder(),
+                        );
+                      },
+                    ),
                 ],
               ),
             ),

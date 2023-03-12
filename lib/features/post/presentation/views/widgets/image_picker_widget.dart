@@ -86,30 +86,7 @@ class ImagePickerWidget extends StatelessWidget {
                               color: greyColor,
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: GridView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3,
-                                mainAxisSpacing: 5,
-                                crossAxisSpacing: 5,
-                              ),
-                              itemCount: uploadImage.getUploadedUrls.length,
-                              itemBuilder: (context, index) => Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.network(
-                                    uploadImage.getUploadedUrls[index],
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
+                            child: const UploadedImageBuilder(),
                           );
                         },
                       ),

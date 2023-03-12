@@ -1,5 +1,3 @@
-import 'dart:math';
-
 class MaxNumberOfImagesError implements Exception {
   final String errorMessage;
 

@@ -11,28 +11,32 @@ class UploadedImageBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final uploadImage = BlocProvider.of<UploadImageCubit>(context);
-    return GridView.builder(
-      physics: const BouncingScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisSpacing: 5,
-        crossAxisSpacing: 5,
-      ),
-      itemCount: uploadImage.getUploadedUrls.length,
-      itemBuilder: (context, index) => Container(
-        height: 50,
-        width: 50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Image.network(
-            uploadImage.getUploadedUrls[index],
-            fit: BoxFit.cover,
+    return BlocBuilder<UploadImageCubit, UploadImageState>(
+      builder: (context, state) {
+        return GridView.builder(
+          physics: const BouncingScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 5,
+            crossAxisSpacing: 5,
           ),
-        ),
-      ),
+          itemCount: uploadImage.getUploadedUrls.length,
+          itemBuilder: (context, index) => Container(
+            height: 50,
+            width: 50,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                uploadImage.getUploadedUrls[index],
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
