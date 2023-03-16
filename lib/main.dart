@@ -33,8 +33,8 @@ class CarClub extends StatelessWidget {
       routerConfig: AppRoutes.getRouter,
       debugShowCheckedModeBanner: false,
       //home: const TabsView(),
-      darkTheme: darkTheme,
-      themeMode: ThemeMode.dark,
+      darkTheme: lightTheme,
+      themeMode: ThemeMode.light,
     );
   }
 }

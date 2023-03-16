@@ -107,7 +107,8 @@ class ImagePickerWidget extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   if (state is UploadImageLoading)
-                                    Progress.circleProgress(),
+                                    Progress.circleProgress(
+                                        color: Colors.white),
                                   Text(
                                     state is UploadImageLoading
                                         ? '  Waiting...'
@@ -127,13 +128,20 @@ class ImagePickerWidget extends StatelessWidget {
                                 // uploadImage.delete();
                               },
                               padding: const EdgeInsets.symmetric(vertical: 13),
-                              style: const NeumorphicStyle(
-                                  color: Colors.red, depth: 1),
+                              style: NeumorphicStyle(
+                                color: Colors.white,
+                                depth: 0.5,
+                                border: NeumorphicBorder(
+                                  width: 1,
+                                  color: Colors.grey[200],
+                                ),
+                              ),
                               child: Text(
                                 'Cancel',
                                 textAlign: TextAlign.center,
-                                style: Styles.title14
-                                    .copyWith(color: Colors.white),
+                                style: Styles.title14.copyWith(
+                                  color: Colors.red,
+                                ),
                               ),
                             ),
                           ),

@@ -9,6 +9,7 @@ import '../../../data/auth_services/login/login_cubit/login_cubit.dart';
 import '../login_view.dart';
 import '../register_view.dart';
 import 'auth_button.dart';
+
 class AuthenticationViewBody extends StatelessWidget {
   const AuthenticationViewBody({
     super.key,
@@ -74,8 +75,7 @@ class AuthenticationViewBody extends StatelessWidget {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
                           return BlocProvider.value(
-                              value: loginCubit,
-                              child: const RegisterScreen());
+                              value: loginCubit, child: const RegisterScreen());
                         },
                       ));
                     },
@@ -89,19 +89,17 @@ class AuthenticationViewBody extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children:  [
+              children: [
                 TextButton(
-                  child:const Text('terms of use',style: TextStyle(color: Colors.white)),
-                  onPressed: () {
-
-                  },
+                  child: const Text('terms of use',
+                      style: TextStyle(color: Colors.white)),
+                  onPressed: () {},
                 ),
                 const SizedBox(width: 44),
                 TextButton(
-                  child:const Text('privacy policy',style: TextStyle(color: Colors.white)),
-                  onPressed: () {
-
-                  },
+                  child: const Text('privacy policy',
+                      style: TextStyle(color: Colors.white)),
+                  onPressed: () {},
                 ),
               ],
             )

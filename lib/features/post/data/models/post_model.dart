@@ -10,8 +10,10 @@ class PostModel {
   final String inColor;
   final String vehicleType;
   final String noOfOwners;
+  final String wheelSize;
   final String description;
   final String address;
+  final String phone;
   final List<String> images;
 
   const PostModel({
@@ -26,8 +28,10 @@ class PostModel {
     required this.inColor,
     required this.vehicleType,
     required this.noOfOwners,
+    required this.wheelSize,
     required this.description,
     required this.address,
+    required this.phone,
     required this.images,
   });
 
@@ -44,8 +48,10 @@ class PostModel {
       inColor: json['inColor'],
       vehicleType: json['vehicleType'],
       noOfOwners: json['noOfOwners'],
+      wheelSize: json['wheelSize'],
       description: json['description'],
       address: json['address'],
+      phone: json['phone'],
       images: json['images'],
     );
   }
@@ -63,8 +69,10 @@ class PostModel {
       'inColor': inColor,
       'vehicleType': vehicleType,
       'noOfOwners': noOfOwners,
+      'wheelSize': wheelSize,
       'description': description,
       'address': address,
+      'phone': phone,
       'images': images,
     };
   }

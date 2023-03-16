@@ -42,7 +42,7 @@ class UploadImageCubit extends Cubit<UploadImageState> {
   // second i save downloaded urls in this List
   // third i show these urls in galleryimage pacage
 
-  List<String> _uploadedUrls = [];
+  final List<String> _uploadedUrls = [];
 
   List<String> get getUploadedUrls {
     return _uploadedUrls;
@@ -76,9 +76,6 @@ class UploadImageCubit extends Cubit<UploadImageState> {
       if (_uploadedUrls.length < 6) {
         addNewUrl(downloadedUrl);
       }
-    } on FirebaseException catch (e) {
-      emit(UploadImageFailure());
-      // print(e);
     } catch (e) {
       emit(UploadImageFailure());
       // print(e);

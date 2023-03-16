@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 dynamic uId;
 dynamic email;
 dynamic remember;
@@ -10,13 +11,11 @@ const secondaryLoginColor = Color(0xff3EF1BD);
 ThemeData darkTheme = ThemeData(
   fontFamily: 'Lexend',
   scaffoldBackgroundColor: primaryDark,
-  // textTheme: const TextTheme(
-  //   bodyLarge: TextStyle(
-  //     fontWeight: FontWeight.w500,
-  //     fontSize: 16,
-  //     color: Color(0xffE2E2E2),
-  //   ),
-  // ),
+);
+
+ThemeData lightTheme = ThemeData(
+  fontFamily: 'Lexend',
+  scaffoldBackgroundColor: whiteColor,
 );
 
 const textButtonStyle = TextStyle(

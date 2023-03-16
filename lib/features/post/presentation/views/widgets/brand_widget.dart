@@ -1,13 +1,12 @@
+import 'package:car_club/features/post/presentation/views/widgets/model_List_item.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/constants.dart';
 import '../../../../../core/utils/helper.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../model_views/brand_cubit/brand_cubit.dart';
-import 'dialog_text_field_widget.dart';
 
 class BrandWidget extends StatelessWidget {
   const BrandWidget({Key? key}) : super(key: key);
@@ -51,9 +50,9 @@ class BrandWidget extends StatelessWidget {
                       onTap: () {
                         // print(_brandName[index]);
                         brandData.setBrandName = brandName[index];
-                        GoRouter.of(context).pop();
+                        //GoRouter.of(context).pop();
                       },
-                      child: SvgPicture.asset(
+                      child: Image.asset(
                         brandLogo[index],
                         width: 40,
                       ),
@@ -61,46 +60,43 @@ class BrandWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10),
-                FittedBox(
-                  child: Text(
-                    'or you can type the color',
-                    style: Styles.title13.copyWith(color: Colors.black),
+                if (brandData.getBrandName != null)
+                  BlocBuilder<BrandCubit, BrandState>(
+                    builder: (context, state) {
+                      return SizedBox(
+                        height: 150,
+                        child: ListView.separated(
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: brandData.getModelValues.length,
+                          itemBuilder: (context, index) => Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 1, color: greyColor),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Row(
+                              children: [
+                                Text(
+                                  brandData.getBrandName!,
+                                  style: Styles.title14
+                                      .copyWith(color: Colors.black),
+                                ),
+                                const SizedBox(width: 10),
+                                Text(
+                                  brandData.getModelValues[index],
+                                  style: Styles.title14
+                                      .copyWith(color: Colors.black),
+                                ),
+                              ],
+                            ),
+                          ),
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(height: 10),
+                        ),
+                      );
+                    },
                   ),
-                ),
-                DialogTextFieldWidget(
-                  cursorColor: greyColor,
-                  controller: brandData.getBrandController,
-                  label: 'Brand name',
-                  borderColor: greyColor,
-                  onPress: () {
-                    brandData.getBrandController.text = '';
-                  },
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    Expanded(
-                      child: NeumorphicButton(
-                        onPressed: () {
-                          // print(brandData.getBrandController.text);
-                          brandData.setBrandName =
-                              brandData.getBrandController.text;
-                          brandData.getBrandController.text = '';
-                          GoRouter.of(context).pop();
-                        },
-                        style: const NeumorphicStyle(
-                          color: greyColor,
-                          depth: 1,
-                        ),
-                        child: Text(
-                          'Done',
-                          style: Styles.title14.copyWith(color: Colors.white),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
               ],
             ),
           )

@@ -27,9 +27,10 @@ class RegisterScreen extends StatelessWidget {
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const HomeView()),
-                    (route) => false);
-            defaultFlutterToast(message: 'register Success', state: ToastState.SUCCESS);
-          }else if (state is SuccessEmailAndPasswordRegisterState) {
+                (route) => false);
+            defaultFlutterToast(
+                message: 'register Success', state: ToastState.success);
+          } else if (state is SuccessEmailAndPasswordRegisterState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
             debugPrint("uId : $uId");
@@ -40,7 +41,8 @@ class RegisterScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => const HomeView()),
                 (route) => false);
-            defaultFlutterToast(message: 'register Success', state: ToastState.SUCCESS);
+            defaultFlutterToast(
+                message: 'register Success', state: ToastState.success);
           } else if (state is SuccessGoogleRegisterState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
@@ -52,7 +54,8 @@ class RegisterScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => const HomeView()),
                 (route) => false);
-            defaultFlutterToast(message: 'register Success', state: ToastState.SUCCESS);
+            defaultFlutterToast(
+                message: 'register Success', state: ToastState.success);
           } else if (state is SuccessFacebookRegisterState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
@@ -65,7 +68,7 @@ class RegisterScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const HomeView()),
                 (route) => false);
             defaultFlutterToast(
-                message: 'register Success', state: ToastState.SUCCESS);
+                message: 'register Success', state: ToastState.success);
           } else if (state is SuccessAppleRegisterState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
@@ -78,19 +81,19 @@ class RegisterScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const HomeView()),
                 (route) => false);
             defaultFlutterToast(
-                message: 'register Success', state: ToastState.SUCCESS);
+                message: 'register Success', state: ToastState.success);
           } else if (state is ErrorEmailAndPasswordRegisterState) {
             defaultFlutterToast(
-                message: 'register error', state: ToastState.ERROR);
+                message: 'register error', state: ToastState.error);
           } else if (state is ErrorGoogleRegisterState) {
             defaultFlutterToast(
-                message: 'register error', state: ToastState.ERROR);
+                message: 'register error', state: ToastState.error);
           } else if (state is ErrorFacebookRegisterState) {
             defaultFlutterToast(
-                message: 'register error', state: ToastState.ERROR);
+                message: 'register error', state: ToastState.error);
           } else if (state is ErrorAppleRegisterState) {
             defaultFlutterToast(
-                message: 'register error', state: ToastState.ERROR);
+                message: 'register error', state: ToastState.error);
           }
         },
         builder: (context, state) {

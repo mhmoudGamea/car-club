@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,47 +16,45 @@ class AuthenticationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<LoginCubit>(
       create: (context) => LoginCubit(),
-      child: BlocListener<LoginCubit,LoginStates>(
+      child: BlocListener<LoginCubit, LoginStates>(
         listener: (context, state) {
-          if (state is SuccessGoogleSigningState)
-          {
+          if (state is SuccessGoogleSigningState) {
             CacheHelper.saveData('uId', state.uid);
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const HomeView()),
-                    (route) => false);
-            defaultFlutterToast(message: 'login Success', state: ToastState.SUCCESS);
-          } else if (state is SuccessFacebookSigningState)
-          {
+                (route) => false);
+            defaultFlutterToast(
+                message: 'login Success', state: ToastState.success);
+          } else if (state is SuccessFacebookSigningState) {
             CacheHelper.saveData('uId', state.uid);
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const HomeView()),
-                    (route) => false);
-            defaultFlutterToast(message: 'login Success', state: ToastState.SUCCESS);
-          } else if (state is SuccessAppleSigningState)
-          {
+                (route) => false);
+            defaultFlutterToast(
+                message: 'login Success', state: ToastState.success);
+          } else if (state is SuccessAppleSigningState) {
             CacheHelper.saveData('uId', state.uid);
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const HomeView()),
-                    (route) => false);
-            defaultFlutterToast(message: 'login Success', state: ToastState.SUCCESS);
-          } else if (state is ErrorGoogleSigningState)
-          {
-            defaultFlutterToast(message: 'login error', state: ToastState.ERROR);
-          } else if (state is ErrorFacebookSigningState)
-          {
-            defaultFlutterToast(message: 'login error', state: ToastState.ERROR);
-          } else if (state is ErrorAppleSigningState)
-          {
-            defaultFlutterToast(message: 'login error', state: ToastState.ERROR);
+                (route) => false);
+            defaultFlutterToast(
+                message: 'login Success', state: ToastState.success);
+          } else if (state is ErrorGoogleSigningState) {
+            defaultFlutterToast(
+                message: 'login error', state: ToastState.error);
+          } else if (state is ErrorFacebookSigningState) {
+            defaultFlutterToast(
+                message: 'login error', state: ToastState.error);
+          } else if (state is ErrorAppleSigningState) {
+            defaultFlutterToast(
+                message: 'login error', state: ToastState.error);
           }
-
         },
-        child:const AuthenticationViewBody(),
+        child: const AuthenticationViewBody(),
       ),
     );
   }
 }
-

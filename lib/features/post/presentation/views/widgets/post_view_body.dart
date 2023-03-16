@@ -1,4 +1,5 @@
 import 'package:car_club/core/widgets/custom_neumorphic_button.dart';
+import 'package:car_club/features/post/presentation/model_views/address_cubit/address_cubit.dart';
 import 'package:car_club/features/post/presentation/model_views/brand_cubit/brand_cubit.dart';
 import 'package:car_club/features/post/presentation/model_views/exterior_color_cubit/exterior_color_cubit.dart';
 import 'package:car_club/features/post/presentation/model_views/fuel_cubit/fuel_cubit.dart';
@@ -7,7 +8,9 @@ import 'package:car_club/features/post/presentation/model_views/number_of_owner_
 import 'package:car_club/features/post/presentation/model_views/transmission_cubit/transmission_cubit.dart';
 import 'package:car_club/features/post/presentation/model_views/upload_image_cubit/upload_image_cubit.dart';
 import 'package:car_club/features/post/presentation/model_views/user_form_cubit/user_form_cubit.dart';
+import 'package:car_club/features/post/presentation/model_views/wheel_size_cubit/wheel_size_cubit.dart';
 import 'package:car_club/features/post/presentation/model_views/year_cubit/year_cubit.dart';
+import 'package:car_club/features/post/presentation/views/widgets/address_widget.dart';
 import 'package:car_club/features/post/presentation/views/widgets/brand_widget.dart';
 import 'package:car_club/features/post/presentation/views/widgets/exterior_color_widget.dart';
 import 'package:car_club/features/post/presentation/views/widgets/fuel_widget.dart';
@@ -15,15 +18,14 @@ import 'package:car_club/features/post/presentation/views/widgets/image_picker_w
 import 'package:car_club/features/post/presentation/views/widgets/interior_color_widget.dart';
 import 'package:car_club/features/post/presentation/views/widgets/text_filed_widget.dart';
 import 'package:car_club/features/post/presentation/views/widgets/transmission_widget.dart';
+import 'package:car_club/features/post/presentation/views/widgets/wheel_size_widget.dart';
 import 'package:car_club/features/post/presentation/views/widgets/year_widget.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../../core/constants.dart';
 import '../../../../../core/utils/styles.dart';
-import '../../../../../core/widgets/progress.dart';
 import '../../model_views/vehicle_type_cubit/vehicle_type_cubit.dart';
 import 'number_of_owners_widget.dart';
 import 'uploaded_image_builder.dart';
@@ -50,6 +52,8 @@ class _PostViewBodyState extends State<PostViewBody> {
     final interiorColorData = BlocProvider.of<InteriorColorCubit>(context);
     final vehicleTypeData = BlocProvider.of<VehicleTypeCubit>(context);
     final numberOfOwnerData = BlocProvider.of<NumberOfOwnersCubit>(context);
+    final wheelSizeData = BlocProvider.of<WheelSizeCubit>(context);
+    final addressData = BlocProvider.of<AddressCubit>(context);
     final uploadImageData = BlocProvider.of<UploadImageCubit>(context);
 
     return BlocBuilder<UserFormCubit, UserFormState>(
@@ -340,6 +344,37 @@ class _PostViewBodyState extends State<PostViewBody> {
                             ),
                           ),
                         ),
+                        // wheel size text field
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) =>
+                                  BlocProvider<WheelSizeCubit>.value(
+                                value: wheelSizeData,
+                                child: const WheelSizeWidget(),
+                              ),
+                            );
+                          },
+                          child: BlocListener<WheelSizeCubit, WheelSizeState>(
+                            listener: (context, state) {
+                              if (state is WheelSizeSelected) {
+                                userFormData.getWheelSize.text =
+                                    wheelSizeData.getSize!;
+                              }
+                            },
+                            child: TextFiledWidget(
+                              isEnabled: false,
+                              controller: userFormData.getWheelSize,
+                              label: 'Wheels size*',
+                              prefixIcon: const Icon(
+                                FontAwesomeIcons.circle,
+                                size: 18,
+                                color: Colors.purple,
+                              ),
+                            ),
+                          ),
+                        ),
                         // description text field
                         TextFiledWidget(
                           controller: userFormData.getDescription,
@@ -351,18 +386,60 @@ class _PostViewBodyState extends State<PostViewBody> {
                           ),
                           maxLines: 3,
                           maxLength: 150,
+                          helper:
+                              'you can include features, or reason for sell.',
+                          validate: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Field is required';
+                            }
+                            if (value.length < 30) {
+                              return 'Need at least 30 character';
+                            }
+                            return null;
+                          },
                         ),
                         // address text field
-                        TextFiledWidget(
-                          controller: userFormData.getAddress,
-                          label: 'Address*',
-                          prefixIcon: const Icon(
-                            FontAwesomeIcons.locationDot,
-                            size: 18,
-                            color: Color(0xffd35400),
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) =>
+                                  BlocProvider<AddressCubit>.value(
+                                value: addressData,
+                                child: const AddressWidget(),
+                              ),
+                            );
+                          },
+                          child: BlocListener<AddressCubit, AddressState>(
+                            listener: (context, state) {
+                              if (state is MyLocationSuccess) {
+                                userFormData.getAddress.text =
+                                    addressData.getLocationModel!.address;
+                              }
+                            },
+                            child: TextFiledWidget(
+                              controller: userFormData.getAddress,
+                              label: 'Address*',
+                              isEnabled: false,
+                              prefixIcon: const Icon(
+                                FontAwesomeIcons.locationDot,
+                                size: 18,
+                                color: Color(0xffd35400),
+                              ),
+                              maxLines: 2,
+                            ),
                           ),
-                          maxLines: 1,
-                          maxLength: 100,
+                        ),
+                        // user phone text field
+                        TextFiledWidget(
+                          controller: userFormData.getUserPhone,
+                          label: 'Phone*',
+                          prefixIcon: const Icon(
+                            FontAwesomeIcons.phone,
+                            size: 18,
+                            color: Color(0xffcc8e35),
+                          ),
+                          type: TextInputType.number,
                         ),
                         // uploaded image section
                         if (uploadImageData.getUploadedUrls.isNotEmpty)
@@ -381,28 +458,66 @@ class _PostViewBodyState extends State<PostViewBody> {
                               );
                             },
                           ),
+                        // upload image button
+                        const SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CustomNeumorphicButton(
+                                text: 'Upload Image',
+                                backgroundColor: greyColor,
+                                textColor: whiteColor,
+                                onPress: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) =>
+                                        BlocProvider<UploadImageCubit>.value(
+                                      value: uploadImageData,
+                                      child: ImagePickerWidget(
+                                          uploadImage: uploadImageData),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
                 ),
               ),
               const SizedBox(height: 10),
-              CustomNeumorphicButton(
-                text: 'Upload Image',
-                backgroundColor: babyBlue,
-                textColor: Colors.white,
-                onPress: () {
-                  showDialog(
+              NeumorphicButton(
+                // onPressed: validate the form,
+                onPressed: () async {
+                  await userFormData.validate(
+                    formKey: _formKey,
                     context: context,
-                    builder: (context) => BlocProvider<UploadImageCubit>.value(
-                      value: uploadImageData,
-                      child: ImagePickerWidget(uploadImage: uploadImageData),
-                    ),
+                    uploadedImages: uploadImageData,
+                    userFormCubit: userFormData,
                   );
                 },
+                padding: const EdgeInsets.symmetric(vertical: 13),
+                style: const NeumorphicStyle(color: mintGreen, depth: 1),
+                child: Text(
+                  'Next',
+                  textAlign: TextAlign.center,
+                  style: Styles.title15.copyWith(color: Colors.white),
+                ),
               ),
-              const SizedBox(height: 15),
-              NeumorphicButton(
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+/*
+
+
+NeumorphicButton(
                 // onPressed: save the whole form,
                 onPressed: () async {
                   await userFormData.validate(
@@ -425,10 +540,4 @@ class _PostViewBodyState extends State<PostViewBody> {
                   ],
                 ),
               ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
+*/

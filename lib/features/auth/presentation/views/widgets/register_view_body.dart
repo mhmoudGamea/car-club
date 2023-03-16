@@ -33,7 +33,6 @@ class RegisterViewBody extends StatelessWidget {
                 hintText: 'Name',
                 onChanged: (value) {},
                 controller: cubit.nameController,
-
               ),
               const SizedBox(
                 height: 18,
@@ -53,8 +52,7 @@ class RegisterViewBody extends StatelessWidget {
                 onChanged: (value) {},
                 obscureText: cubit.visibility,
                 suffix: InkWell(
-                  child: Icon(
-                      cubit.visibility
+                  child: Icon(cubit.visibility
                       ? Icons.visibility
                       : Icons.visibility_off),
                   onTap: () => cubit.changePasswordVisibility(),
@@ -71,17 +69,11 @@ class RegisterViewBody extends StatelessWidget {
                 controller: cubit.confirmPasswordController,
                 obscureText: cubit.visibility,
                 suffix: InkWell(
-                  child: Icon(
-                      cubit.visibility
+                  child: Icon(cubit.visibility
                       ? Icons.visibility
-                      : Icons.visibility_off
-                  ),
+                      : Icons.visibility_off),
                   onTap: () => cubit.changePasswordVisibility(),
-
                 ),
-
-
-
               ),
               const SizedBox(
                 height: 18,
@@ -89,16 +81,20 @@ class RegisterViewBody extends StatelessWidget {
               defaultButton(
                   buttonName: 'Sign Up',
                   onTap: () {
-                    if(cubit.passwordController.text != cubit.confirmPasswordController.text)
-                    {
-                      return defaultFlutterToast(message: 'the confirm password not match the password', state: ToastState.ERROR);
+                    if (cubit.passwordController.text !=
+                        cubit.confirmPasswordController.text) {
+                      return defaultFlutterToast(
+                          message:
+                              'the confirm password not match the password',
+                          state: ToastState.error);
                     }
                     if (cubit.registerFormKey.currentState!.validate()) {
                       RegisterCubit.get(context).userRegister(
                           name: cubit.nameController.text,
                           email: cubit.emailController.text,
                           password: cubit.passwordController.text,
-                          confirmPassword: cubit.confirmPasswordController.text);
+                          confirmPassword:
+                              cubit.confirmPasswordController.text);
                     }
                   }),
               const SizedBox(height: 95),
@@ -118,10 +114,9 @@ class RegisterViewBody extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                                builder: (context) => BlocProvider.value(
-                                    value: loginCubit,
-                                    child: const LoginScreen())),
-
+                              builder: (context) => BlocProvider.value(
+                                  value: loginCubit,
+                                  child: const LoginScreen())),
                         );
                       },
                       child: const Text(

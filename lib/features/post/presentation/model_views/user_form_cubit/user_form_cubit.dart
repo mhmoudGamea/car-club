@@ -8,11 +8,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meta/meta.dart';
 
 import '../../../data/repos/post_repo.dart';
+import '../../views/widgets/confirmation_widget.dart';
 import '../upload_image_cubit/upload_image_cubit.dart';
 
 part 'user_form_state.dart';
 
 class UserFormCubit extends Cubit<UserFormState> {
+  // car data
   final PostRepo postRepo;
   UserFormCubit(this.postRepo) : super(UserFormInitial());
 
@@ -66,14 +68,26 @@ class UserFormCubit extends Cubit<UserFormState> {
     return _numberOfOwnerController;
   }
 
+  final _wheelSizeController = TextEditingController();
+  TextEditingController get getWheelSize {
+    return _wheelSizeController;
+  }
+
   final _descriptionController = TextEditingController();
   TextEditingController get getDescription {
     return _descriptionController;
   }
 
+  // user data
+
   final _addressController = TextEditingController();
   TextEditingController get getAddress {
     return _addressController;
+  }
+
+  final _phoneController = TextEditingController();
+  TextEditingController get getUserPhone {
+    return _phoneController;
   }
 
   late PostModel _postModel;
@@ -92,8 +106,10 @@ class UserFormCubit extends Cubit<UserFormState> {
       inColor: getInteriorColor.text,
       vehicleType: getVehicleType.text,
       noOfOwners: getNoOfOwners.text,
+      wheelSize: getWheelSize.text,
       description: getDescription.text,
       address: getAddress.text,
+      phone: getUserPhone.text,
       images: images,
     );
     try {
@@ -112,13 +128,31 @@ class UserFormCubit extends Cubit<UserFormState> {
     }
   }
 
+  void showConfirmationBox(BuildContext context,
+      UploadImageCubit uploadedImages, UserFormCubit userFormCubit) {
+    showDialog(
+      context: context,
+      builder: (context) => MultiBlocProvider(
+        providers: [
+          BlocProvider<UploadImageCubit>.value(
+            value: uploadedImages,
+          ),
+          BlocProvider<UserFormCubit>.value(value: userFormCubit)
+        ],
+        child: const ConfirmationWidget(),
+      ),
+    );
+  }
+
   Future<void> validate(
       {required GlobalKey<FormState> formKey,
       required BuildContext context,
-      required UploadImageCubit uploadedImages}) async {
+      required UploadImageCubit uploadedImages,
+      required UserFormCubit userFormCubit}) async {
     if (formKey.currentState!.validate()) {
       if (uploadedImages.getUploadedUrls.isNotEmpty) {
-        addPost(uploadedImages.getUploadedUrls, context);
+        // show confirmation box
+        showConfirmationBox(context, uploadedImages, userFormCubit);
       } else {
         // snackbar if doesn't upload images
         Helper.showCustomToast(

@@ -34,7 +34,6 @@ class NumberOfOwnersWidget extends StatelessWidget {
                 5,
                 (index) => NeumorphicButton(
                   onPressed: () {
-                    print(noOfOwnersData.getNoOfOwners[index]);
                     noOfOwnersData.setNumber =
                         noOfOwnersData.getNoOfOwners[index];
                     GoRouter.of(context).pop();

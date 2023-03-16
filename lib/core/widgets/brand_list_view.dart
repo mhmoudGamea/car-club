@@ -5,16 +5,39 @@ import 'brand_item.dart';
 
 class BrandListView extends StatelessWidget {
   BrandListView({Key? key}) : super(key: key);
+  // TODO: remove brand and add cont to class
   final List brands = [
-    bmwLogo,
-    landRoverLogo,
-    citroenLogo,
-    fordLogo,
-    miniLogo,
-    mitsubishiLogo,
-    skodaLogo,
-    subaruLogo,
-    teslaLogo,
+    audi,
+    bmw,
+    byd,
+    chery,
+    chevrolet,
+    citroen,
+    fiat,
+    ford,
+    haval,
+    honda,
+    hyundai,
+    jeep,
+    jetour,
+    kia,
+    lada,
+    mazda,
+    mercedes,
+    mg,
+    miniCooper,
+    mitsubishi,
+    nissan,
+    opel,
+    peugeot,
+    proton,
+    renault,
+    seat,
+    skoda,
+    subaru,
+    suzuki,
+    vw,
+    volvo,
   ];
 
   @override

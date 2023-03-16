@@ -6,3 +6,5 @@ abstract class BrandState {}
 class BrandInitial extends BrandState {}
 
 class BrandNameSelected extends BrandState {}
+
+class BrandModelsShow extends BrandState {}
