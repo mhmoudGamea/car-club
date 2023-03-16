@@ -23,10 +23,10 @@ class LoginCubit extends Cubit<LoginStates> {
   Future<void> resetPassword(String email) async {
     emit(LoadingResetPasswordState());
     await sendPasswordResetEmail(email).then((value) {
-      defaultFlutterToast(message: 'Done', state: ToastState.SUCCESS);
+      defaultFlutterToast(message: 'Done', state: ToastState.success);
       emit(SuccessResetPasswordState());
     }).catchError((error) {
-      defaultFlutterToast(message: 'try again', state: ToastState.ERROR);
+      defaultFlutterToast(message: 'try again', state: ToastState.error);
       emit(ErrorResetPasswordState());
     });
   }
@@ -37,7 +37,8 @@ class LoginCubit extends Cubit<LoginStates> {
     signInWithEmailAndPassword(email: email, password: password).then((value) {
       debugPrint(value.user!.uid);
       debugPrint(value.user!.email);
-      emit(SuccessEmailAndPasswordSigningState(value.user!.uid,value.user!.email));
+      emit(SuccessEmailAndPasswordSigningState(
+          value.user!.uid, value.user!.email));
     }).catchError((error) {
       debugPrint('error is :: ${error.toString()}');
       emit(ErrorEmailAndPasswordSigningState(error));
@@ -61,7 +62,7 @@ class LoginCubit extends Cubit<LoginStates> {
     signInWithFacebook().then((value) {
       debugPrint(value.user!.uid);
       debugPrint(value.user!.email);
-      emit(SuccessFacebookSigningState(value.user!.uid,value.user!.email));
+      emit(SuccessFacebookSigningState(value.user!.uid, value.user!.email));
     }).catchError((error) {
       debugPrint('error is :: ${error.toString()}');
       emit(ErrorFacebookSigningState(error));
@@ -73,7 +74,7 @@ class LoginCubit extends Cubit<LoginStates> {
     signInWithApple().then((value) {
       debugPrint(value.user!.uid);
       debugPrint(value.user!.email);
-      emit(SuccessAppleSigningState(value.user!.uid,value.user!.email));
+      emit(SuccessAppleSigningState(value.user!.uid, value.user!.email));
     }).catchError((error) {
       debugPrint('error is :: ${error.toString()}');
       emit(ErrorAppleSigningState(error));

@@ -1,9 +1,8 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:car_club/core/error/failure.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 
@@ -25,8 +24,13 @@ class UploadImageCubit extends Cubit<UploadImageState> {
     emit(ImageSelectedDeleted());
   }
 
-  void pickMyImage() async {
+  Future<void> pickMyImage() async {
     final ImagePicker picker = ImagePicker();
+
+    if (_uploadedUrls.length >= 6) {
+      emit(MaxNumberOfUploadedImages());
+      throw MaxNumberOfImagesError('Sorry max number of images is 6');
+    }
 
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     _image = File(image!.path);
@@ -38,18 +42,23 @@ class UploadImageCubit extends Cubit<UploadImageState> {
   // second i save downloaded urls in this List
   // third i show these urls in galleryimage pacage
 
-   List<String> _uploadedUrls = [];
+  final List<String> _uploadedUrls = [];
 
-  List<String> getUploadedUrls (){
-    // FirebaseFirestore.instance.collection('users')
-    // emit(GetListState());
-    debugPrint("mmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+  List<String> get getUploadedUrls {
     return _uploadedUrls;
+  }
+
+  void addNewUrl(String url) {
+    _uploadedUrls.add(url);
+    emit(ImageAddedToList());
   }
 
   Future<void> uploadImageToFireStorage() async {
     emit(UploadImageLoading());
-    String imageName = 'images/${DateTime.now().microsecondsSinceEpoch}';
+
+    String imageName =
+        'images/yyTbyyKO9xREWQjg4aXIM2thJWp1/${DateTime.now().microsecondsSinceEpoch}';
+
     String? downloadedUrl;
 
     // Create a storage reference from our app
@@ -61,17 +70,15 @@ class UploadImageCubit extends Cubit<UploadImageState> {
       emit(UploadImageSuccess());
 
       downloadedUrl = await storageRef.getDownloadURL();
+
       deletePickedImage();
 
-      _uploadedUrls.add(downloadedUrl);
-      debugPrint(_uploadedUrls.toString());
-      emit(ImageAddedToList(_uploadedUrls));
-    } on FirebaseException catch (e) {
-      emit(UploadImageFailure());
-      print(e);
+      if (_uploadedUrls.length < 6) {
+        addNewUrl(downloadedUrl);
+      }
     } catch (e) {
       emit(UploadImageFailure());
-      print(e);
+      // print(e);
     }
   }
 }

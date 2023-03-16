@@ -7,11 +7,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/cache_helper.dart';
+import '../../../home/presentation/views/home_view.dart';
 import '../../data/auth_services/register/register_cubit/register_cubit.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
-  static const rn = '/RegisterScreen';
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -55,9 +56,12 @@ class RegisterScreen extends StatelessWidget {
             CacheHelper.saveData('email', state.email);
             email = CacheHelper.getData('email');
             debugPrint("email : $email");
-            GoRouter.of(context).push(TabsView.rn);
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const HomeView()),
+                (route) => false);
             defaultFlutterToast(
-                message: 'register Success', state: ToastState.SUCCESS);
+                message: 'register Success', state: ToastState.success);
           } else if (state is SuccessAppleRegisterState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
@@ -65,22 +69,24 @@ class RegisterScreen extends StatelessWidget {
             CacheHelper.saveData('email', state.email);
             email = CacheHelper.getData('email');
             debugPrint("email : $email");
-            GoRouter.of(context).push(TabsView.rn);
-            debugPrint("navigation is done");
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const HomeView()),
+                (route) => false);
             defaultFlutterToast(
-                message: 'register Success', state: ToastState.SUCCESS);
+                message: 'register Success', state: ToastState.success);
           } else if (state is ErrorEmailAndPasswordRegisterState) {
             defaultFlutterToast(
-                message: 'register error', state: ToastState.ERROR);
+                message: 'register error', state: ToastState.error);
           } else if (state is ErrorGoogleRegisterState) {
             defaultFlutterToast(
-                message: 'register error', state: ToastState.ERROR);
+                message: 'register error', state: ToastState.error);
           } else if (state is ErrorFacebookRegisterState) {
             defaultFlutterToast(
-                message: 'register error', state: ToastState.ERROR);
+                message: 'register error', state: ToastState.error);
           } else if (state is ErrorAppleRegisterState) {
             defaultFlutterToast(
-                message: 'register error', state: ToastState.ERROR);
+                message: 'register error', state: ToastState.error);
           }
         },
         builder: (context, state) {

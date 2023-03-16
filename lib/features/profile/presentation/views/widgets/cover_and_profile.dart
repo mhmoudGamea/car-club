@@ -26,7 +26,7 @@ class CoverAndProfile extends StatelessWidget {
                     decoration:
                         BoxDecoration(borderRadius: BorderRadius.circular(5)),
                     child: Image.asset(
-                      cover,
+                      price,
                       fit: BoxFit.cover,
                       width: double.infinity,
                       height: 150,

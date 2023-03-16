@@ -13,7 +13,7 @@ import 'custom_app_bar.dart';
 import 'drawer_widget.dart';
 
 class TabsView extends StatefulWidget {
-  static const rn = '/TabsView';
+  static const rn = '/';
   const TabsView({Key? key}) : super(key: key);
 
   @override

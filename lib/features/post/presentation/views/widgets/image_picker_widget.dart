@@ -1,23 +1,22 @@
 import 'package:car_club/core/constants.dart';
 import 'package:car_club/core/widgets/progress.dart';
 import 'package:car_club/features/post/presentation/model_views/upload_image_cubit/upload_image_cubit.dart';
+import 'package:car_club/features/post/presentation/views/widgets/uploaded_image_builder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:galleryimage/galleryimage.dart';
 
 import '../../../../../core/utils/helper.dart';
 import '../../../../../core/utils/styles.dart';
 
 class ImagePickerWidget extends StatelessWidget {
-  ImagePickerWidget({Key? key}) : super(key: key);
-
-  late List<String> list = [];
+  final UploadImageCubit uploadImage;
+  const ImagePickerWidget({Key? key, required this.uploadImage})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    //print('hellow');
-    final uploadImage = BlocProvider.of<UploadImageCubit>(context);
+    //final uploadImage = BlocProvider.of<UploadImageCubit>(context);
     return BlocBuilder<UploadImageCubit, UploadImageState>(
       builder: (context, state) {
         //print(state);
@@ -76,32 +75,22 @@ class ImagePickerWidget extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 10),
-
-                    if (uploadImage.getUploadedUrls().isNotEmpty)
-                      BlocConsumer<UploadImageCubit, UploadImageState>(
-                        listener: (context, state) {
-                          if (state is ImageAddedToList) {
-                            list = state.list;
-                            print(list.toString());
-                          }
-                        },
+                    if (uploadImage.getUploadedUrls.isNotEmpty)
+                      BlocBuilder<UploadImageCubit, UploadImageState>(
                         builder: (context, state) {
                           return Container(
+                            margin: const EdgeInsets.only(top: 10),
+                            padding: const EdgeInsets.all(10),
+                            height: 97,
                             decoration: BoxDecoration(
                               color: greyColor,
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: GalleryImage(
-                              imageUrls: uploadImage.getUploadedUrls(),
-                              numOfShowImages:
-                                  uploadImage.getUploadedUrls().length <= 3
-                                      ? 0
-                                      : 3,
-                            ),
+                            child:
+                                UploadedImageBuilder(uploadImage: uploadImage),
                           );
                         },
                       ),
-
                     if (uploadImage.getPickedImage != null)
                       const SizedBox(height: 10),
                     if (uploadImage.getPickedImage != null)
@@ -109,6 +98,7 @@ class ImagePickerWidget extends StatelessWidget {
                         children: [
                           Expanded(
                             child: NeumorphicButton(
+                              // onPressed: uploadImage.uploadImageToFireStorage,
                               onPressed: uploadImage.uploadImageToFireStorage,
                               padding: const EdgeInsets.symmetric(vertical: 13),
                               style: const NeumorphicStyle(
@@ -117,7 +107,8 @@ class ImagePickerWidget extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   if (state is UploadImageLoading)
-                                    Progress.circleProgress(),
+                                    Progress.circleProgress(
+                                        color: Colors.white),
                                   Text(
                                     state is UploadImageLoading
                                         ? '  Waiting...'
@@ -137,13 +128,20 @@ class ImagePickerWidget extends StatelessWidget {
                                 // uploadImage.delete();
                               },
                               padding: const EdgeInsets.symmetric(vertical: 13),
-                              style: const NeumorphicStyle(
-                                  color: Colors.red, depth: 1),
+                              style: NeumorphicStyle(
+                                color: Colors.white,
+                                depth: 0.5,
+                                border: NeumorphicBorder(
+                                  width: 1,
+                                  color: Colors.grey[200],
+                                ),
+                              ),
                               child: Text(
                                 'Cancel',
                                 textAlign: TextAlign.center,
-                                style: Styles.title14
-                                    .copyWith(color: Colors.white),
+                                style: Styles.title14.copyWith(
+                                  color: Colors.red,
+                                ),
                               ),
                             ),
                           ),
@@ -154,12 +152,27 @@ class ImagePickerWidget extends StatelessWidget {
                       children: [
                         Expanded(
                           child: NeumorphicButton(
-                            onPressed: uploadImage.pickMyImage,
+                            onPressed: () async {
+                              try {
+                                await uploadImage.pickMyImage();
+                              } catch (error) {
+                                Helper.showCustomToast(
+                                    context: context,
+                                    bgColor: Colors.amber,
+                                    icon: FontAwesomeIcons.triangleExclamation,
+                                    msg: error.toString());
+                              }
+                            },
                             padding: const EdgeInsets.symmetric(vertical: 13),
-                            style: const NeumorphicStyle(
-                                color: Color(0xff0abde3), depth: 1),
+                            style: NeumorphicStyle(
+                                color: state is MaxNumberOfUploadedImages
+                                    ? const Color(0xff0abde3).withOpacity(0.3)
+                                    : const Color(0xff0abde3),
+                                depth: 1),
                             child: Text(
-                              'Upload Image',
+                              uploadImage.getUploadedUrls.isNotEmpty
+                                  ? 'Upload more images'
+                                  : 'Upload image',
                               textAlign: TextAlign.center,
                               style:
                                   Styles.title14.copyWith(color: Colors.white),

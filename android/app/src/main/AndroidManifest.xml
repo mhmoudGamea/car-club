@@ -4,6 +4,8 @@
         android:label="car_club"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyAGN6pRpRfs_PWaaqnjSV8o8tTBBEbh4Ec"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

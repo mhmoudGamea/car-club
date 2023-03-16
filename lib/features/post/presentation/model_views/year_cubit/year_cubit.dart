@@ -11,7 +11,7 @@ class YearCubit extends Cubit<YearState> {
 
   void calculateNumberOfYears() {
     var currentYear = int.parse(DateFormat.y().format(DateTime.now()));
-    for (var i = 1980; i <= currentYear; i++) {
+    for (var i = 2010; i <= currentYear; i++) {
       _manufacturingYears.add(i);
     }
   }

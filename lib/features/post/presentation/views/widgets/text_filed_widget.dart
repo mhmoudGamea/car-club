@@ -10,6 +10,8 @@ class TextFiledWidget extends StatelessWidget {
   final Widget? prefixIcon;
   final int? maxLines;
   final int? maxLength;
+  final String? helper;
+  final String? Function(String?)? validate;
   const TextFiledWidget({
     Key? key,
     this.isEnabled,
@@ -19,6 +21,8 @@ class TextFiledWidget extends StatelessWidget {
     this.prefixIcon,
     this.maxLines,
     this.maxLength,
+    this.helper,
+    this.validate,
   }) : super(key: key);
 
   @override
@@ -39,7 +43,16 @@ class TextFiledWidget extends StatelessWidget {
           borderSide: BorderSide(color: babyBlue, width: 2),
         ),
         prefixIcon: prefixIcon,
+        helperText: helper,
+        helperStyle: Styles.title13,
       ),
+      validator: validate ??
+          (value) {
+            if (value == null || value.isEmpty) {
+              return 'Field is required';
+            }
+            return null;
+          },
     );
   }
 }

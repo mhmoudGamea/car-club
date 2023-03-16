@@ -1,6 +1,5 @@
 import 'package:car_club/core/cache_helper.dart';
 import 'package:car_club/core/utils/app_routes.dart';
-import 'package:car_club/features/home/presentation/views/home_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +18,7 @@ void main() async {
   if (remember == false || remember == null) {
     widget = const SplashView();
   } else {
-    widget = const HomeView();
+    widget = Container();
   }
   runApp(CarClub(widget));
 }
@@ -29,6 +28,7 @@ class CarClub extends StatelessWidget {
   final Widget widget;
   @override
   Widget build(BuildContext context) {
+    // print('Gamea: uid = $uId');
     return MaterialApp.router(
       routerConfig: AppRoutes.getRouter,
       debugShowCheckedModeBanner: false,
