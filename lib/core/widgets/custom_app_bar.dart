@@ -19,7 +19,7 @@ class CustomAppBar extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
             decoration: BoxDecoration(
-              color: secondaryDark,
+              // color: secondaryDark,
               borderRadius: BorderRadius.circular(5),
             ),
             child: IconButton(
@@ -32,7 +32,7 @@ class CustomAppBar extends StatelessWidget {
                 menu,
                 width: 25,
                 colorFilter:
-                    const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                    const ColorFilter.mode(primaryDark, BlendMode.srcIn),
               ),
             ),
           ),

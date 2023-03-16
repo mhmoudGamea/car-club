@@ -9,6 +9,7 @@ import '../../../data/auth_services/login/login_cubit/login_cubit.dart';
 import '../login_view.dart';
 import '../register_view.dart';
 import 'auth_button.dart';
+
 class AuthenticationViewBody extends StatelessWidget {
   const AuthenticationViewBody({
     super.key,
@@ -34,6 +35,7 @@ class AuthenticationViewBody extends StatelessWidget {
                     image: AssetImage(logo),
                     width: 166,
                     height: 166,
+                    color: mintGreen,
                   ),
                   const SizedBox(
                     height: 83,
@@ -45,7 +47,7 @@ class AuthenticationViewBody extends StatelessWidget {
                       width: double.infinity,
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: greyColor,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: MaterialButton(
@@ -58,9 +60,11 @@ class AuthenticationViewBody extends StatelessWidget {
                             },
                           ));
                         },
-                        child: const Text(
+                        child: Text(
                           'Sign in',
-                          style: textButtonStyle,
+                          style: textButtonStyle.copyWith(
+                            color: Colors.black54,
+                          ),
                         ),
                       ),
                     ),
@@ -74,8 +78,7 @@ class AuthenticationViewBody extends StatelessWidget {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
                           return BlocProvider.value(
-                              value: loginCubit,
-                              child: const RegisterScreen());
+                              value: loginCubit, child: const RegisterScreen());
                         },
                       ));
                     },
@@ -89,19 +92,17 @@ class AuthenticationViewBody extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children:  [
+              children: [
                 TextButton(
-                  child:const Text('terms of use',style: TextStyle(color: Colors.white)),
-                  onPressed: () {
-
-                  },
+                  child: const Text('terms of use',
+                      style: TextStyle(color: textButtonColor)),
+                  onPressed: () {},
                 ),
                 const SizedBox(width: 44),
                 TextButton(
-                  child:const Text('privacy policy',style: TextStyle(color: Colors.white)),
-                  onPressed: () {
-
-                  },
+                  child: const Text('privacy policy',
+                      style: TextStyle(color: textButtonColor)),
+                  onPressed: () {},
                 ),
               ],
             )

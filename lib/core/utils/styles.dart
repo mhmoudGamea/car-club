@@ -1,3 +1,4 @@
+import 'package:car_club/core/constants.dart';
 import 'package:flutter/material.dart';
 
 abstract class Styles {
@@ -24,27 +25,27 @@ abstract class Styles {
   static const title16 = TextStyle(
     fontWeight: FontWeight.w600,
     fontSize: 16,
-    color: Colors.white,
+    color: textButtonColor,
   );
   static const titleSmall = TextStyle(
     fontSize: 15,
-    color: Colors.white,
+    color: textButtonColor,
   );
 ////////////
   static const titleLarge = TextStyle(
     fontWeight: FontWeight.w600,
     fontSize: 18,
-    color: Colors.white,
+    color: textButtonColor,
   );
 
   static const titleMedium = TextStyle(
     fontSize: 15,
-    color: Colors.white,
+    color: textButtonColor,
   );
 
   static const authCustomTitle = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 16,
-    color: Color(0xffE2E2E2),
+    color: textButtonColor,
   );
 }

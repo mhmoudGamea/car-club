@@ -1,4 +1,7 @@
+import 'package:car_club/core/constants.dart';
 import 'package:flutter/material.dart';
+
+import 'filter_button.dart';
 
 class TransmissionListView extends StatelessWidget {
   const TransmissionListView({Key? key}) : super(key: key);
@@ -7,30 +10,21 @@ class TransmissionListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text("Automatic"),
+      children: const [
+        FilterButton(
+          text: "Automatic",
+          backgroundColor: mintGreen,
+          textColor: whiteColor,
         ),
-        ElevatedButton(
-          onPressed: () {},
-          style: const ButtonStyle(
-            backgroundColor: MaterialStatePropertyAll(Colors.white),
-          ),
-          child: const Text(
-            "Tiptronic",
-            style: TextStyle(color: Color(0xff171820)),
-          ),
+        FilterButton(
+          text: "Tiptronic",
+          backgroundColor: whiteColor,
+          textColor: textButtonColor,
         ),
-        ElevatedButton(
-          onPressed: () {},
-          style: const ButtonStyle(
-            backgroundColor: MaterialStatePropertyAll(Colors.white),
-          ),
-          child: const Text(
-            "Manual",
-            style: TextStyle(color: Color(0xff171820)),
-          ),
+        FilterButton(
+          text: "Manual",
+          backgroundColor: whiteColor,
+          textColor: textButtonColor,
         ),
       ],
     );

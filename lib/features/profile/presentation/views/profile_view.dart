@@ -14,8 +14,8 @@ class ProfileView extends StatelessWidget {
       appBar: Helper.normalAppBar(
           context: context,
           title: 'Profile',
-          backgroundColor: primaryDark,
-          color: Colors.white),
+          backgroundColor: whiteColor,
+          color: textButtonColor),
       body: const SafeArea(
         child: ProfileViewBody(),
       ),

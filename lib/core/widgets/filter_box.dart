@@ -12,7 +12,7 @@ class FilterBox extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: secondaryDark,
+      // backgroundColor: secondaryDark,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       builder: (context) => const FilterView(),
@@ -33,7 +33,7 @@ class FilterBox extends StatelessWidget {
         onPressed: () => showFiltter(context),
         icon: SvgPicture.asset(
           filter,
-          colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+          colorFilter: const ColorFilter.mode(secondaryDark, BlendMode.srcIn),
           width: 27,
         ),
       ),

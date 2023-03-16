@@ -1,3 +1,4 @@
+import 'package:car_club/core/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/styles.dart';
@@ -21,7 +22,12 @@ class FilterAppBar extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {},
-          child: const Text("RESET"),
+          child: const Text(
+            "RESET",
+            style: TextStyle(
+              color: mintGreen,
+            ),
+          ),
         ),
       ],
     );

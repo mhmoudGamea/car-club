@@ -1,3 +1,4 @@
+import 'package:car_club/core/constants.dart';
 import 'package:flutter/material.dart';
 
 class PriceListView extends StatefulWidget {
@@ -17,6 +18,7 @@ class _PriceListViewState extends State<PriceListView> {
       min: 0,
       max: 100000,
       divisions: 20,
+      activeColor: mintGreen,
       labels: RangeLabels(
         _value.start.round().toString(),
         _value.end.round().toString(),

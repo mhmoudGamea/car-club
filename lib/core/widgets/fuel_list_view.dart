@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../constants.dart';
+import 'filter_button.dart';
+
 class FuelListView extends StatelessWidget {
   const FuelListView({Key? key}) : super(key: key);
 
@@ -7,30 +10,21 @@ class FuelListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        ElevatedButton(
-          onPressed: () {},
-          style: const ButtonStyle(
-            backgroundColor: MaterialStatePropertyAll(Colors.white),
-          ),
-          child: const Text(
-            "Petrol",
-            style: TextStyle(color: Color(0xff171820)),
-          ),
+      children: const [
+        FilterButton(
+          text: "Petrol",
+          backgroundColor: whiteColor,
+          textColor: textButtonColor,
         ),
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text("Diesel"),
+        FilterButton(
+          text: "Diesel",
+          backgroundColor: mintGreen,
+          textColor: whiteColor,
         ),
-        ElevatedButton(
-          onPressed: () {},
-          style: const ButtonStyle(
-            backgroundColor: MaterialStatePropertyAll(Colors.white),
-          ),
-          child: const Text(
-            "Hybrid",
-            style: TextStyle(color: Color(0xff171820)),
-          ),
+        FilterButton(
+          text: "Hybrid",
+          backgroundColor: whiteColor,
+          textColor: textButtonColor,
         ),
       ],
     );

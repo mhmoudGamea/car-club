@@ -7,10 +7,10 @@ Widget defaultButton({required String buttonName, required Function() onTap}) {
     padding: const EdgeInsets.symmetric(horizontal: 30.0),
     child: Container(
       height: 50,
-     width: double.infinity,
+      width: double.infinity,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       decoration: BoxDecoration(
-        color: secondaryLoginColor,
+        color: mintGreen,
         borderRadius: BorderRadius.circular(10),
       ),
       child: MaterialButton(

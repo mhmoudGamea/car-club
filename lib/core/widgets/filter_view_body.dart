@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../constants.dart';
 import '../utils/styles.dart';
 import 'brand_list_view.dart';
 import 'color_list_view.dart';
 import 'filter_app_bar.dart';
+import 'filter_button.dart';
 import 'fuel_list_view.dart';
 import 'price_list_view.dart';
 import 'transmission_list_view.dart';
@@ -53,12 +55,13 @@ class FilterViewBody extends StatelessWidget {
         const SizedBox(height: 15),
         const PriceListView(),
         const SizedBox(height: 15),
-        SizedBox(
+        const SizedBox(
           width: double.infinity,
           height: 50,
-          child: ElevatedButton(
-            onPressed: () {},
-            child: const Text("Filter"),
+          child: FilterButton(
+            text: "Filter",
+            backgroundColor: mintGreen,
+            textColor: whiteColor,
           ),
         ),
       ],

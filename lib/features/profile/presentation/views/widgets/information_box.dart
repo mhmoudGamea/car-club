@@ -14,7 +14,7 @@ class InformationBox extends StatelessWidget {
       margin: const EdgeInsets.only(top: 20, bottom: 20),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
       decoration: BoxDecoration(
-        color: secondaryDark,
+        color: greyColor,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Row(
@@ -22,30 +22,34 @@ class InformationBox extends StatelessWidget {
         children: [
           Column(
             children: [
-              Text('20', style: Styles.title13.copyWith(color: Colors.white)),
+              Text('20',
+                  style: Styles.title13.copyWith(color: textButtonColor)),
               Text('Posts',
-                  style: Styles.title14.copyWith(color: Colors.white)),
+                  style: Styles.title14.copyWith(color: textButtonColor)),
             ],
           ),
           Column(
             children: [
-              Text('100', style: Styles.title13.copyWith(color: Colors.white)),
+              Text('100',
+                  style: Styles.title13.copyWith(color: textButtonColor)),
               Text('Photo',
-                  style: Styles.title14.copyWith(color: Colors.white)),
+                  style: Styles.title14.copyWith(color: textButtonColor)),
             ],
           ),
           Column(
             children: [
-              Text('10k', style: Styles.title13.copyWith(color: Colors.white)),
+              Text('10k',
+                  style: Styles.title13.copyWith(color: textButtonColor)),
               Text('Followers',
-                  style: Styles.title14.copyWith(color: Colors.white)),
+                  style: Styles.title14.copyWith(color: textButtonColor)),
             ],
           ),
           Column(
             children: [
-              Text('50', style: Styles.title13.copyWith(color: Colors.white)),
+              Text('50',
+                  style: Styles.title13.copyWith(color: textButtonColor)),
               Text('Followings',
-                  style: Styles.title14.copyWith(color: Colors.white)),
+                  style: Styles.title14.copyWith(color: textButtonColor)),
             ],
           ),
         ],

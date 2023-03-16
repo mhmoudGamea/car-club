@@ -27,7 +27,7 @@ class SearchBox extends StatelessWidget {
               search,
               width: 50,
               colorFilter:
-                  const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                  const ColorFilter.mode(secondaryDark, BlendMode.srcIn),
             ),
           ),
         ),
@@ -39,10 +39,10 @@ class SearchBox extends StatelessWidget {
               topRight: Radius.circular(10),
               bottomRight: Radius.circular(10),
             ),
-            color: secondaryDark,
+            color: whiteColor,
           ),
           child: TextField(
-            cursorColor: Colors.white,
+            cursorColor: secondaryDark,
             decoration: InputDecoration(
               //fillColor: Color(0xff64636A),
               hintText: 'Find your suitable car',

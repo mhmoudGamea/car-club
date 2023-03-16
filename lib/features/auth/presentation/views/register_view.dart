@@ -26,8 +26,9 @@ class RegisterScreen extends StatelessWidget {
             email = CacheHelper.getData('email');
             debugPrint("email : $email");
             GoRouter.of(context).push(TabsView.rn);
-            defaultFlutterToast(message: 'register Success', state: ToastState.SUCCESS);
-          }else if (state is SuccessEmailAndPasswordRegisterState) {
+            defaultFlutterToast(
+                message: 'register Success', state: ToastState.SUCCESS);
+          } else if (state is SuccessEmailAndPasswordRegisterState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
             debugPrint("uId : $uId");
@@ -35,7 +36,8 @@ class RegisterScreen extends StatelessWidget {
             email = CacheHelper.getData('email');
             debugPrint("email : $email");
             GoRouter.of(context).push(TabsView.rn);
-            defaultFlutterToast(message: 'register Success', state: ToastState.SUCCESS);
+            defaultFlutterToast(
+                message: 'register Success', state: ToastState.SUCCESS);
           } else if (state is SuccessGoogleRegisterState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
@@ -44,7 +46,8 @@ class RegisterScreen extends StatelessWidget {
             email = CacheHelper.getData('email');
             debugPrint("email : $email");
             GoRouter.of(context).push(TabsView.rn);
-            defaultFlutterToast(message: 'register Success', state: ToastState.SUCCESS);
+            defaultFlutterToast(
+                message: 'register Success', state: ToastState.SUCCESS);
           } else if (state is SuccessFacebookRegisterState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
@@ -85,11 +88,13 @@ class RegisterScreen extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: const Text('Create Account'),
+              elevation: 2,
               titleTextStyle: const TextStyle(
-                  color: secondaryLoginColor,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
-              backgroundColor: primaryDark,
+                color: mintGreen,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+              backgroundColor: whiteColor,
             ),
             body: Center(child: RegisterViewBody(cubit: cubit)),
           );

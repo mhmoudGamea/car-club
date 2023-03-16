@@ -52,14 +52,14 @@ class _TabsViewState extends State<TabsView> {
       ),
       drawer: const DrawerWidget(),
       bottomNavigationBar: Container(
-        color: secondaryDark,
+        color: greyColor,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
           child: GNav(
             gap: 8,
-            color: Colors.white,
-            activeColor: Colors.white,
-            tabBackgroundColor: const Color(0xff3EF1BD),
+            color: Colors.black54,
+            activeColor: whiteColor,
+            tabBackgroundColor: mintGreen,
             padding: const EdgeInsets.all(13),
             onTabChange: (index) {
               setState(() {

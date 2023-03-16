@@ -21,21 +21,23 @@ class SplashViewBody extends StatelessWidget {
             image: AssetImage(logo),
             width: 166,
             height: 166,
+            color: mintGreen,
           ),
           const SizedBox(height: 202),
           const Text(
             'just drive comfortable and elegancy',
             style: Styles.authCustomTitle,
           ),
-          const SizedBox(height: 21,),
+          const SizedBox(
+            height: 21,
+          ),
           Container(
             clipBehavior: Clip.antiAliasWithSaveLayer,
             height: 55,
             width: 304,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: secondaryLoginColor)
-            ),
+                border: Border.all(color: mintGreen)),
             child: Row(
               children: [
                 const Expanded(
@@ -43,7 +45,7 @@ class SplashViewBody extends StatelessWidget {
                     child: Text(
                       'Have a Look!',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: textButtonColor,
                         fontSize: 30,
                         fontWeight: FontWeight.w400,
                       ),
@@ -55,7 +57,7 @@ class SplashViewBody extends StatelessWidget {
                   width: 35,
                   color: secondaryLoginColor,
                   child: IconButton(
-                    onPressed: (){
+                    onPressed: () {
                       GoRouter.of(context).push(AuthenticationView.rn);
                       // Navigator.push(context, MaterialPageRoute(builder: (context) {
                       //   return const AuthenticationView();})
