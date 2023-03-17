@@ -1,4 +1,3 @@
-import 'package:car_club/core/constants.dart';
 import 'package:flutter/material.dart';
 
 class DrawerWidget extends StatelessWidget {

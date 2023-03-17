@@ -15,6 +15,8 @@ class UploadImageLoading extends UploadImageState {}
 
 class UploadImageSuccess extends UploadImageState {}
 
+class GetListState extends UploadImageState {}
+
 class UploadImageFailure extends UploadImageState {}
 
 class MaxNumberOfUploadedImages extends UploadImageState {}

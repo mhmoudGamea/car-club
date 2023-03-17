@@ -1,15 +1,18 @@
 import 'package:car_club/core/cache_helper.dart';
 import 'package:car_club/core/constants.dart';
+import 'package:car_club/core/widgets/tabs_view.dart';
 import 'package:car_club/features/auth/presentation/views/widgets/flutter_toast.dart';
-import 'package:car_club/features/home/presentation/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../data/auth_services/login/login_cubit/login_cubit.dart';
 import '../../data/auth_services/login/login_cubit/login_states.dart';
+
 import 'widgets/login_view_body.dart';
 
 class LoginScreen extends StatelessWidget {
+  static const rn = '/LoginScreen';
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
@@ -23,10 +26,8 @@ class LoginScreen extends StatelessWidget {
             CacheHelper.saveData('email', state.email);
             email = CacheHelper.getData('email');
             debugPrint("email : $email");
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => const HomeView()),
-                (route) => false);
+            GoRouter.of(context).push(TabsView.rn);
+            debugPrint("navigation is done");
             defaultFlutterToast(
                 message: 'login Success', state: ToastState.success);
             if (LoginCubit.get(context).remember) {
@@ -40,10 +41,7 @@ class LoginScreen extends StatelessWidget {
             CacheHelper.saveData('email', state.email);
             email = CacheHelper.getData('email');
             debugPrint("email : $email");
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => const HomeView()),
-                (route) => false);
+            GoRouter.of(context).push(TabsView.rn);
             defaultFlutterToast(
                 message: 'login Success', state: ToastState.success);
           } else if (state is SuccessFacebookSigningState) {
@@ -53,10 +51,7 @@ class LoginScreen extends StatelessWidget {
             CacheHelper.saveData('email', state.email);
             email = CacheHelper.getData('email');
             debugPrint("email : $email");
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => const HomeView()),
-                (route) => false);
+            GoRouter.of(context).push(TabsView.rn);
             defaultFlutterToast(
                 message: 'login Success', state: ToastState.success);
           } else if (state is SuccessAppleSigningState) {
@@ -66,10 +61,7 @@ class LoginScreen extends StatelessWidget {
             CacheHelper.saveData('email', state.email);
             email = CacheHelper.getData('email');
             debugPrint("email : $email");
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => const HomeView()),
-                (route) => false);
+            GoRouter.of(context).push(TabsView.rn);
             defaultFlutterToast(
                 message: 'login Success', state: ToastState.success);
           } else if (state is ErrorEmailAndPasswordSigningState) {

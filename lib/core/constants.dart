@@ -37,11 +37,6 @@ ThemeData darkTheme = ThemeData(
   scaffoldBackgroundColor: primaryDark,
 );
 
-ThemeData lightTheme = ThemeData(
-  fontFamily: 'Lexend',
-  scaffoldBackgroundColor: whiteColor,
-);
-
 const textButtonStyle = TextStyle(
   color: whiteColor,
   fontSize: 18,
