@@ -1,7 +1,5 @@
-import 'package:car_club/features/post/presentation/views/widgets/model_List_item.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../../core/constants.dart';
 import '../../../../../core/utils/helper.dart';

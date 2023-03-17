@@ -37,6 +37,11 @@ abstract class Styles {
     fontSize: 18,
     color: textButtonColor,
   );
+  static const titleLargest = TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 40,
+
+  );
 
   static const titleMedium = TextStyle(
     fontSize: 15,

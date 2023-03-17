@@ -5,6 +5,7 @@ import 'brand_item.dart';
 
 class BrandListView extends StatelessWidget {
   BrandListView({Key? key}) : super(key: key);
+  // ignore: todo
   // TODO: remove brand and add cont to class
   final List brands = [
     audi,
