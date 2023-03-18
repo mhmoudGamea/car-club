@@ -10,13 +10,30 @@ import '../../features/home/presentation/views/home_view.dart';
 import '../../features/home/presentation/views/home_view_details.dart';
 import '../../features/post/presentation/views/post_view.dart';
 import '../../features/profile/presentation/views/profile_view.dart';
+import '../cache_helper.dart';
+import '../constants.dart';
 
-abstract class AppRoutes {
+class AppRoutes {
+  static late String path;
+
   static GoRouter get getRouter {
+    remember = CacheHelper.getData('remember');
+
+    if (remember == false || remember == null) {
+
+      path =  '/';
+
+    } else {
+
+      path = TabsView.rn;
+
+    }
+
     return _router;
   }
 
   static final _router = GoRouter(
+    initialLocation: path,
     routes: [
       GoRoute(
         path: '/',

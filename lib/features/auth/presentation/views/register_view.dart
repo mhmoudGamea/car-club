@@ -1,13 +1,14 @@
 import 'package:car_club/core/constants.dart';
 import 'package:car_club/core/widgets/tabs_view.dart';
 import 'package:car_club/features/auth/presentation/views/widgets/register_view_body.dart';
-import 'package:car_club/features/auth/presentation/views/widgets/flutter_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/cache_helper.dart';
+import '../../../../core/utils/helper.dart';
 import '../../data/auth_services/register/register_cubit/register_cubit.dart';
+import 'widgets/get_error_message.dart';
 
 class RegisterScreen extends StatelessWidget {
   static const rn = '/RegisterScreen';
@@ -26,9 +27,13 @@ class RegisterScreen extends StatelessWidget {
             CacheHelper.saveData('email', state.email);
             email = CacheHelper.getData('email');
             debugPrint("email : $email");
-            GoRouter.of(context).push(TabsView.rn);
-            defaultFlutterToast(
-                message: 'register Success', state: ToastState.success);
+            GoRouter.of(context).pushReplacement(TabsView.rn);
+            Helper.showCustomToast(
+                context: context,
+                icon: Icons.check_circle,
+                bgColor: Colors.greenAccent,
+                msg: 'register successful ,enjoy'
+            );
           } else if (state is SuccessEmailAndPasswordRegisterState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
@@ -36,9 +41,13 @@ class RegisterScreen extends StatelessWidget {
             CacheHelper.saveData('email', state.email);
             email = CacheHelper.getData('email');
             debugPrint("email : $email");
-            GoRouter.of(context).push(TabsView.rn);
-            defaultFlutterToast(
-                message: 'register Success', state: ToastState.success);
+            GoRouter.of(context).pushReplacement(TabsView.rn);
+            Helper.showCustomToast(
+                context: context,
+                icon: Icons.check_circle,
+                bgColor: Colors.greenAccent,
+                msg: 'register successful ,enjoy'
+            );
           } else if (state is SuccessGoogleRegisterState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
@@ -46,9 +55,13 @@ class RegisterScreen extends StatelessWidget {
             CacheHelper.saveData('email', state.email);
             email = CacheHelper.getData('email');
             debugPrint("email : $email");
-            GoRouter.of(context).push(TabsView.rn);
-            defaultFlutterToast(
-                message: 'register Success', state: ToastState.success);
+            GoRouter.of(context).pushReplacement(TabsView.rn);
+            Helper.showCustomToast(
+                context: context,
+                icon: Icons.check_circle,
+                bgColor: Colors.greenAccent,
+                msg: 'register successful ,enjoy'
+            );
           } else if (state is SuccessFacebookRegisterState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
@@ -56,9 +69,13 @@ class RegisterScreen extends StatelessWidget {
             CacheHelper.saveData('email', state.email);
             email = CacheHelper.getData('email');
             debugPrint("email : $email");
-            GoRouter.of(context).push(TabsView.rn);
-            defaultFlutterToast(
-                message: 'register Success', state: ToastState.success);
+            GoRouter.of(context).pushReplacement(TabsView.rn);
+            Helper.showCustomToast(
+                context: context,
+                icon: Icons.check_circle,
+                bgColor: Colors.greenAccent,
+                msg: 'register successful ,enjoy'
+            );
           } else if (state is SuccessAppleRegisterState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
@@ -66,21 +83,21 @@ class RegisterScreen extends StatelessWidget {
             CacheHelper.saveData('email', state.email);
             email = CacheHelper.getData('email');
             debugPrint("email : $email");
-            GoRouter.of(context).push(TabsView.rn);
-            defaultFlutterToast(
-                message: 'register Success', state: ToastState.success);
-          } else if (state is ErrorEmailAndPasswordRegisterState) {
-            defaultFlutterToast(
-                message: 'register error', state: ToastState.error);
-          } else if (state is ErrorGoogleRegisterState) {
-            defaultFlutterToast(
-                message: 'register error', state: ToastState.error);
-          } else if (state is ErrorFacebookRegisterState) {
-            defaultFlutterToast(
-                message: 'register error', state: ToastState.error);
-          } else if (state is ErrorAppleRegisterState) {
-            defaultFlutterToast(
-                message: 'register error', state: ToastState.error);
+            GoRouter.of(context).pushReplacement(TabsView.rn);
+            Helper.showCustomToast(
+                context: context,
+                icon: Icons.check_circle,
+                bgColor: Colors.greenAccent,
+                msg: 'register successful ,enjoy'
+            );
+          } else if (state is ErrorEmailAndPasswordRegisterState ||
+              state is ErrorGoogleRegisterState ||
+              state is ErrorFacebookRegisterState ||
+              state is ErrorAppleRegisterState
+          ) {
+
+            authErrorHandle(context: context, state: state);
+
           }
         },
         builder: (context, state) {

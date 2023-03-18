@@ -47,7 +47,7 @@ class ResetPasswordBody extends StatelessWidget {
                         onTap: () {
                           if(formKey.currentState!.validate())
                           {
-                            LoginCubit.get(context).resetPassword(LoginCubit.get(context).emailController.text);
+                            LoginCubit.get(context).resetPassword(LoginCubit.get(context).emailController.text,context);
                           }
                         }
                     ),

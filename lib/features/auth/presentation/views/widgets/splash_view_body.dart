@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:car_club/core/utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +38,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
 
     navigateToHome();
   }
+  @override
   Widget build(BuildContext context) {
     return Center(
       child: SingleChildScrollView(
@@ -74,7 +73,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
                 ],
                 isRepeatingAnimation: true,
                 onTap: () {
-                  print("Tap Event");
+                  debugPrint("Tap Event");
                 },
               ),
             ),

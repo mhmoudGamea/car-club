@@ -75,20 +75,20 @@ class LoginViewBody extends StatelessWidget {
                     child: Row(
                       children: [
                         BlocBuilder<LoginCubit, LoginStates>(
-                          builder: (context, state) => Container(
+                          builder: (context, state) => SizedBox(
                             width: 16,
                             height: 16,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(3),
-                                border: Border.all(color: Colors.cyanAccent)),
                             child: Checkbox(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5)
+                              ),
                               activeColor: secondaryLoginColor,
                               value: LoginCubit.get(context).remember,
                               onChanged: (value) {
                                 debugPrint(value.toString());
                                 LoginCubit.get(context).rememberMe(value!);
                               },
-                              checkColor: secondaryLoginColor,
+                              checkColor: whiteColor,
                             ),
                           ),
                         ),
