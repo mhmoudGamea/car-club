@@ -8,6 +8,6 @@ class PostRepoImpl implements PostRepo {
       FirebaseFirestore.instance.collection(postsColl);
   @override
   Future<void> addNewPost(String uId, Map<String, dynamic> post) async {
-    await postsCollection.doc(uId).collection(userPosts).add(post);
+    await postsCollection.doc(uId).collection(posts).add(post);
   }
 }

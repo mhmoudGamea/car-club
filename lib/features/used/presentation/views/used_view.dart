@@ -1,11 +1,17 @@
-import 'package:car_club/features/used/presentation/views/widgets/used_view_body.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../model_views/used_cubit/used_cubit.dart';
+import 'widgets/used_view_body.dart';
 
 class UsedView extends StatelessWidget {
   const UsedView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const UsedViewBody();
+    return BlocProvider(
+      create: (context) => UsedCubit(),
+      child: const UsedViewBody(),
+    );
   }
 }

@@ -14,7 +14,7 @@ class PostModel {
   final String description;
   final String address;
   final String phone;
-  final List<String> images;
+  final List<dynamic> images;
 
   const PostModel({
     required this.date,
