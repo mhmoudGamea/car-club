@@ -4,14 +4,16 @@ class InitialState extends LoginStates {}
 
 class LoadingEmailAndPasswordSigningState extends LoginStates{}
 class SuccessEmailAndPasswordSigningState extends LoginStates{
-  late final dynamic uid;
+  late  final dynamic uid;
   late final dynamic email;
+
   SuccessEmailAndPasswordSigningState(this.uid,this.email);
 }
 class ErrorEmailAndPasswordSigningState extends LoginStates{
   late final dynamic error;
   ErrorEmailAndPasswordSigningState(this.error);
 }
+
 
 class LoadingGoogleSigningState extends LoginStates{}
 class SuccessGoogleSigningState extends LoginStates{

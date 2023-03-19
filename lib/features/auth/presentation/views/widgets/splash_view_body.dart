@@ -30,6 +30,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
     navigateToHome();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Center(
       child: SingleChildScrollView(
@@ -57,7 +58,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
                 ],
                 isRepeatingAnimation: true,
                 onTap: () {
-                  print("Tap Event");
+                  debugPrint("Tap Event");
                 },
               ),
             ),

@@ -1,7 +1,7 @@
-import 'package:car_club/features/auth/presentation/views/widgets/flutter_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../core/utils/helper.dart';
 import 'login_services.dart';
 import 'login_states.dart';
 
@@ -20,13 +20,23 @@ class LoginCubit extends Cubit<LoginStates> {
     emit(SuccessRememberMeState());
   }
 
-  Future<void> resetPassword(String email) async {
+  Future<void> resetPassword(String email,context) async {
     emit(LoadingResetPasswordState());
     await sendPasswordResetEmail(email).then((value) {
-      defaultFlutterToast(message: 'Done', state: ToastState.success);
+      Helper.showCustomToast(
+          context: context,
+          icon: Icons.check_circle,
+          bgColor: Colors.greenAccent,
+          msg: 'Done reset password '
+      );
       emit(SuccessResetPasswordState());
     }).catchError((error) {
-      defaultFlutterToast(message: 'try again', state: ToastState.error);
+      Helper.showCustomToast(
+          context: context,
+          icon: Icons.check_circle,
+          bgColor: Colors.greenAccent,
+          msg: 'try again'
+      );
       emit(ErrorResetPasswordState());
     });
   }
