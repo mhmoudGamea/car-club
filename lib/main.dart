@@ -7,7 +7,6 @@ import 'core/constants.dart';
 import 'features/auth/data/auth_services/login/login_cubit/bloc_observe.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   CacheHelper.initialObject();
   await Firebase.initializeApp();
@@ -17,10 +16,8 @@ void main() async {
 }
 
 class CarClub extends StatelessWidget {
-
   const CarClub({Key? key}) : super(key: key);
   @override
-
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: AppRoutes.getRouter,

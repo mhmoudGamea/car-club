@@ -1,3 +1,4 @@
+import 'package:car_club/core/constants.dart';
 import 'package:car_club/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -17,11 +18,17 @@ class OptionBoxDetailsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset(imagePath),
+        Image.asset(
+          imagePath,
+          color: babyBlue,
+        ),
         const SizedBox(height: 10),
         Text(
           title,
-          style: Styles.title14.copyWith(color: const Color(0xffB7DFFF)),
+          style: Styles.title14.copyWith(
+            // color: const Color(0xffB7DFFF),
+            color: babyBlue,
+          ),
         ),
         const SizedBox(height: 5),
         Text(

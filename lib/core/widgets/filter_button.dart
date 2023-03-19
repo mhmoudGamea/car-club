@@ -19,7 +19,7 @@ class FilterButton extends StatelessWidget {
         backgroundColor: MaterialStatePropertyAll(backgroundColor),
         shape: MaterialStatePropertyAll(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(7),
           ),
         ),
       ),

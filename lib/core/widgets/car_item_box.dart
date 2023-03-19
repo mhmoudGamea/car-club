@@ -1,3 +1,4 @@
+import 'package:car_club/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -11,7 +12,7 @@ class CarItemBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xffBBD6EC),
+        color: greyColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -26,53 +27,101 @@ class CarItemBox extends StatelessWidget {
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10)),
                   child: Image.asset(
-                    price,
+                    car,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-              Positioned(
-                right: 10,
-                top: 10,
-                child: Container(
-                  width: 30,
-                  height: 30,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15)),
-                  child: const Icon(
-                    Icons.favorite_rounded,
-                    color: Color(0xff64636A),
-                  ),
-                ),
-              ),
+              // Positioned(
+              //   right: 10,
+              //   top: 10,
+              //   child: Container(
+              //     width: 30,
+              //     height: 30,
+              //     decoration: BoxDecoration(
+              //         color: Colors.white,
+              //         borderRadius: BorderRadius.circular(15)),
+              //     child: const Icon(
+              //       Icons.favorite_rounded,
+              //       color: Color(0xff64636A),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
-          const SizedBox(height: 5),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            padding: const EdgeInsets.all(10),
+            child: Column(
               children: [
-                Text(
-                  'Rolls-Royce Cullinan',
-                  style: Styles.titleSmall.copyWith(
-                    color: const Color(0xff171820),
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const FaIcon(
-                      FontAwesomeIcons.dollarSign,
-                      color: Colors.black,
-                      size: 19,
-                    ),
-                    const SizedBox(width: 5),
                     Text(
-                      '2100',
-                      style: Styles.titleSmall
-                          .copyWith(color: const Color(0xff171820)),
+                      'Rolls-Royce Cullinan',
+                      style: Styles.titleSmall.copyWith(
+                        color: textButtonColor,
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Icon(
+                      Icons.favorite_rounded,
+                      color: Color(0xff64636A),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  color: Colors.black45,
+                  thickness: 1,
+                ),
+                const SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        const FaIcon(
+                          FontAwesomeIcons.bolt,
+                          color: secondaryDark,
+                          size: 19,
+                        ),
+                        const SizedBox(width: 5),
+                        Text(
+                          '571 hp',
+                          style: Styles.titleSmall
+                              .copyWith(color: const Color(0xff171820)),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        const FaIcon(
+                          FontAwesomeIcons.stopwatch,
+                          color: secondaryDark,
+                          size: 19,
+                        ),
+                        const SizedBox(width: 5),
+                        Text(
+                          '5.2 sec',
+                          style: Styles.titleSmall
+                              .copyWith(color: const Color(0xff171820)),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        const FaIcon(
+                          FontAwesomeIcons.dollarSign,
+                          color: secondaryDark,
+                          size: 19,
+                        ),
+                        const SizedBox(width: 5),
+                        Text(
+                          '2100',
+                          style: Styles.titleSmall
+                              .copyWith(color: const Color(0xff171820)),
+                        ),
+                      ],
                     ),
                   ],
                 ),
