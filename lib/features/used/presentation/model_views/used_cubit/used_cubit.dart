@@ -11,19 +11,27 @@ part 'used_state.dart';
 class UsedCubit extends Cubit<UsedState> {
   UsedCubit() : super(UsedInitial());
 
+  // this func. used to get post that the user just added to postsCollection
+
   CollectionReference postsCollectionRF =
       FirebaseFirestore.instance.collection(postsColl);
 
-  // this func. used to get post that the user just added to postsCollection
-  Future<void> getPost() async {
-    List<PostModel> post = [];
+  List<PostModel> postsModel = [];
+  Future<void> getPosts() async {
+    emit(UsedCarPostsLoading());
+
     postsCollectionRF.snapshots().listen((event) async {
       // postsCollection > uId > posts > get all documents
-      final QuerySnapshot<Map<String, dynamic>> postsQuery =
-          await postsCollectionRF.doc(uId).collection(posts).get();
-      final post =
-          postsQuery.docs.map((e) => PostModel.fromJson(e.data())).toList();
-      print(post.length);
+      for (var doc in event.docs) {
+        final QuerySnapshot<Map<String, dynamic>> postsQuery =
+            await postsCollectionRF.doc(doc.id).collection(posts).get();
+
+        for (var e in postsQuery.docs) {
+          postsModel.add(PostModel.fromJson(e.data()));
+        }
+      }
+      emit(UsedCarPostsSuccess(posts: postsModel));
+      postsModel = [];
     });
   }
 }

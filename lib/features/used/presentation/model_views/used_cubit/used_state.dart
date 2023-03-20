@@ -5,8 +5,11 @@ abstract class UsedState {}
 
 class UsedInitial extends UsedState {}
 
-class UsedCarPostLoading extends UsedState {}
+class UsedCarPostsLoading extends UsedState {}
 
-class UsedCarPostSuccess extends UsedState {}
+class UsedCarPostsSuccess extends UsedState {
+  final List<PostModel> posts;
+  UsedCarPostsSuccess({required this.posts});
+}
 
-class UsedCarPostFailure extends UsedState {}
+class UsedCarPostsFailure extends UsedState {}
