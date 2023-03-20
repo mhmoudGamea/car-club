@@ -43,3 +43,4 @@ const volvo = 'assets/images/Volvo.jpg';
 // text for fields prefix icons
 
 const price = 'assets/images/price.png';
+const car = 'assets/images/car.png';

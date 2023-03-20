@@ -1,3 +1,4 @@
+import 'package:car_club/core/constants.dart';
 import 'package:car_club/core/widgets/favourite_box.dart';
 import 'package:flutter/material.dart';
 
@@ -30,6 +31,7 @@ class CarBoxPreviewDetails extends StatelessWidget {
             right: 20,
             child: FavouriteBox(
                 backGroundColor: Color(0xffB7DFFF),
+                // backGroundColor: babyBlue,
                 color: Color(0xff000000),
                 icon: Icons.favorite_rounded),
           ),

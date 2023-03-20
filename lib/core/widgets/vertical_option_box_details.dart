@@ -1,3 +1,4 @@
+import 'package:car_club/core/constants.dart';
 import 'package:car_club/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -48,7 +49,8 @@ class VerticalOptionDetailsItem extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(
           width: 1,
-          color: const Color(0xff282A3E),
+          // color: const Color(0xff282A3E),
+          color: greyColor,
         ),
         borderRadius: BorderRadius.circular(10),
       ),
@@ -63,7 +65,10 @@ class VerticalOptionDetailsItem extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             more,
-            style: Styles.title14.copyWith(color: const Color(0xffB7DFFF)),
+            style: Styles.title14.copyWith(
+              // color: const Color(0xffB7DFFF),
+              color: babyBlue,
+            ),
           )
         ],
       ),

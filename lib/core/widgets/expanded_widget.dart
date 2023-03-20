@@ -1,3 +1,4 @@
+import 'package:car_club/core/constants.dart';
 import 'package:car_club/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -51,14 +52,17 @@ class ExpandedWidgetState extends State<ExpandedWidget> {
                   children: [
                     Text(
                       tapped ? 'Show less' : 'Show more',
-                      style: Styles.title14
-                          .copyWith(color: const Color(0xffB7DFFF)),
+                      style: Styles.title14.copyWith(
+                        // color: const Color(0xffB7DFFF),
+                        color: babyBlue,
+                      ),
                     ),
                     Icon(
                       tapped
                           ? Icons.keyboard_arrow_up_rounded
                           : Icons.keyboard_arrow_down_rounded,
-                      color: const Color(0xffB7DFFF),
+                      // color: const Color(0xffB7DFFF),
+                      color: babyBlue,
                       size: 20,
                     ),
                   ],

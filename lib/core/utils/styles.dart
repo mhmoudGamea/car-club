@@ -40,7 +40,6 @@ abstract class Styles {
   static const titleLargest = TextStyle(
     fontWeight: FontWeight.w600,
     fontSize: 40,
-
   );
 
   static const titleMedium = TextStyle(
