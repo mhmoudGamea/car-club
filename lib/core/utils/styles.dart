@@ -1,7 +1,8 @@
-import 'package:car_club/core/constants.dart';
 import 'package:flutter/material.dart';
 
-abstract class Styles {
+import '../constants.dart';
+
+ class Styles {
   static const title12 = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w200,

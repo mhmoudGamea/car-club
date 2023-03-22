@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:car_club/core/constants.dart';
 
 import '../../../../core/cache_helper.dart';
 import 'package:go_router/go_router.dart';
@@ -23,6 +24,11 @@ class AuthenticationView extends StatelessWidget {
         listener: (context, state) {
           if (state is SuccessGoogleSigningState) {
             CacheHelper.saveData('uId', state.uid);
+            uId = CacheHelper.getData('uId');
+            debugPrint("uId : $uId");
+            CacheHelper.saveData('email', state.email);
+            email = CacheHelper.getData('email');
+            debugPrint("email : $email");
             GoRouter.of(context).pushReplacement(TabsView.rn);
             Helper.showCustomToast(
                 context: context,
@@ -32,6 +38,11 @@ class AuthenticationView extends StatelessWidget {
             );
           } else if (state is SuccessFacebookSigningState) {
             CacheHelper.saveData('uId', state.uid);
+            uId = CacheHelper.getData('uId');
+            debugPrint("uId : $uId");
+            CacheHelper.saveData('email', state.email);
+            email = CacheHelper.getData('email');
+            debugPrint("email : $email");
             GoRouter.of(context).pushReplacement(TabsView.rn);
             Helper.showCustomToast(
                 context: context,
@@ -41,6 +52,11 @@ class AuthenticationView extends StatelessWidget {
             );
           } else if (state is SuccessAppleSigningState) {
             CacheHelper.saveData('uId', state.uid);
+            uId = CacheHelper.getData('uId');
+            debugPrint("uId : $uId");
+            CacheHelper.saveData('email', state.email);
+            email = CacheHelper.getData('email');
+            debugPrint("email : $email");
             GoRouter.of(context).pushReplacement(TabsView.rn);
             Helper.showCustomToast(
                 context: context,

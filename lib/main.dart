@@ -12,6 +12,9 @@ void main() async {
   await Firebase.initializeApp();
   Bloc.observer = MyBlocObserver();
 
+  uId = CacheHelper.getData('uId');
+  email = CacheHelper.getData('email');
+
   runApp(const CarClub());
 }
 
@@ -19,12 +22,13 @@ class CarClub extends StatelessWidget {
   const CarClub({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    print('Gamea: uid = $uId');
+    print('Mazen: uid = $uId');
+    print('Mazen: email = $email');
     return MaterialApp.router(
       routerConfig: AppRoutes.getRouter,
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
-      darkTheme: darkTheme,
+      // darkTheme: darkTheme,
       themeMode: ThemeMode.light,
     );
   }

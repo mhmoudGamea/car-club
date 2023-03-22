@@ -10,6 +10,10 @@ import '../../features/home/presentation/views/home_view.dart';
 import '../../features/home/presentation/views/home_view_details.dart';
 import '../../features/post/presentation/views/post_view.dart';
 import '../../features/profile/presentation/views/profile_view.dart';
+import '../../features/services/presentation/views/add_car_center_form.dart';
+import '../../features/services/presentation/views/car_center_details.dart';
+import '../../features/services/presentation/views/car_center_location.dart';
+import '../../features/services/presentation/views/car_centers_view.dart';
 import '../cache_helper.dart';
 import '../constants.dart';
 
@@ -74,7 +78,23 @@ class AppRoutes {
       GoRoute(
         path: ResetPasswordPage.rn,
         builder: (context, state) => const ResetPasswordPage(),
-      )
+      ),
+      GoRoute(
+        path: CarCentersView.rn,
+        builder: (context, state) => const CarCentersView(),
+      ),
+      GoRoute(
+        path: CarCenterLocation.rn,
+        builder: (context, state) => const CarCenterLocation(),
+      ),
+      GoRoute(
+        path: CarCenterDetails.rn,
+        builder: (context, state) => const CarCenterDetails(),
+      ),
+      GoRoute(
+        path: AddCarCenter.rn,
+        builder: (context, state) => const AddCarCenter(),
+      ),
     ],
   );
 }
