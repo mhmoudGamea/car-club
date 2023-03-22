@@ -12,12 +12,14 @@ part 'used_state.dart';
 class UsedCubit extends Cubit<UsedState> {
   UsedCubit() : super(UsedInitial());
 
-  // this func. used to get post that the user just added to postsCollection
-
   CollectionReference postsCollectionRF =
       FirebaseFirestore.instance.collection(postsColl);
 
   List<PostModel> postsModel = [];
+
+  // this function is executed periodically when new user add new post
+  // but if the same user post his second post he must pull to refresh
+  // to execute this function again and see his post
   Future<void> getPosts() async {
     emit(UsedCarPostsLoading());
 
@@ -37,4 +39,6 @@ class UsedCubit extends Cubit<UsedState> {
       emit(UsedCarPostsFailure(error: error));
     });
   }
+
+  // this function executed to add a post to the user favourite collection
 }

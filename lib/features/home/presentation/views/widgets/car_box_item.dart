@@ -1,11 +1,12 @@
 import 'package:car_club/core/constants.dart';
 import 'package:car_club/core/utils/styles.dart';
+import 'package:car_club/features/post/data/models/post_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CarBoxItem extends StatelessWidget {
-  final String image;
-  const CarBoxItem({Key? key, required this.image}) : super(key: key);
+  final PostModel model;
+  const CarBoxItem({Key? key, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,18 +18,23 @@ class CarBoxItem extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const Align(
+          Align(
             alignment: Alignment.topRight,
-            child: Icon(
-              Icons.favorite,
-              size: 18,
-              color: Colors.red,
+            child: GestureDetector(
+              onTap: () {},
+              child: Icon(
+                model.isFavourite
+                    ? Icons.favorite
+                    : Icons.favorite_outline_rounded,
+                size: 18,
+                color: Colors.red,
+              ),
             ),
           ),
           const SizedBox(height: 10),
           SizedBox(
             height: 100,
-            child: Image.network(image, fit: BoxFit.cover),
+            child: Image.network(model.images[0], fit: BoxFit.cover),
           ),
           const SizedBox(height: 10),
           Container(
@@ -42,13 +48,13 @@ class CarBoxItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Mini Cooper',
-                  style: Styles.title14.copyWith(color: Colors.black),
+                  model.brand,
+                  style: Styles.title15.copyWith(color: Colors.black),
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  'This is my small mini cooper blue car',
-                  style: Styles.title12.copyWith(color: Colors.grey),
+                  '${model.price}',
+                  style: Styles.title13.copyWith(color: Colors.grey[700]),
                 ),
               ],
             ),

@@ -15,6 +15,7 @@ class PostModel {
   final String address;
   final String phone;
   final List<dynamic> images;
+  final bool isFavourite;
 
   const PostModel({
     required this.date,
@@ -33,6 +34,7 @@ class PostModel {
     required this.address,
     required this.phone,
     required this.images,
+    this.isFavourite = false,
   });
 
   factory PostModel.fromJson(Map<String, dynamic> json) {
@@ -53,6 +55,7 @@ class PostModel {
       address: json['address'],
       phone: json['phone'],
       images: json['images'],
+      isFavourite: json['isFavourite'],
     );
   }
 
@@ -74,6 +77,7 @@ class PostModel {
       'address': address,
       'phone': phone,
       'images': images,
+      'isFavourite': isFavourite,
     };
   }
 }

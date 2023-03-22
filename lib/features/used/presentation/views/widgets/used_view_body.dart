@@ -24,26 +24,18 @@ class UsedViewBody extends StatelessWidget {
           return RefreshIndicator(
             onRefresh: () => _refreshUsedCars(context),
             child: GridView.builder(
-                physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.only(left: 15, right: 15, bottom: 10),
-                itemCount: state.posts.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: 15 / 22,
-                ),
-                itemBuilder: (context, index) =>
-                    CarBoxItem(image: state.posts[index].images[0])),
-
-            // ListView.separated(
-            //   physics: const BouncingScrollPhysics(),
-            //   padding: const EdgeInsets.only(left: 15, right: 15, bottom: 10),
-            //   itemCount: state.posts.length,
-            //   itemBuilder: (context, index) =>
-            //       CarItemBox(image: state.posts[index].images[0]),
-            //   separatorBuilder: (context, index) => const SizedBox(height: 10),
-            // ),
+              physics: const BouncingScrollPhysics(),
+              padding: const EdgeInsets.only(left: 15, right: 15, bottom: 10),
+              itemCount: state.posts.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: 15 / 21,
+              ),
+              itemBuilder: (context, index) =>
+                  CarBoxItem(model: state.posts[index]),
+            ),
           );
         } else if (state is UsedCarPostsFailure) {
           return Text(
