@@ -6,13 +6,14 @@ import '../utils/assets.dart';
 import '../utils/styles.dart';
 
 class CarItemBox extends StatelessWidget {
-  const CarItemBox({Key? key}) : super(key: key);
+  final String image;
+  const CarItemBox({Key? key, required this.image}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: greyColor,
+        color: greyColor.withOpacity(0.4),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -20,33 +21,18 @@ class CarItemBox extends StatelessWidget {
           Stack(
             children: [
               SizedBox(
-                height: 170,
+                height: 130,
                 width: double.infinity,
                 child: ClipRRect(
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10)),
-                  child: Image.asset(
-                    car,
+                  child: Image.network(
+                    image,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-              // Positioned(
-              //   right: 10,
-              //   top: 10,
-              //   child: Container(
-              //     width: 30,
-              //     height: 30,
-              //     decoration: BoxDecoration(
-              //         color: Colors.white,
-              //         borderRadius: BorderRadius.circular(15)),
-              //     child: const Icon(
-              //       Icons.favorite_rounded,
-              //       color: Color(0xff64636A),
-              //     ),
-              //   ),
-              // ),
             ],
           ),
           Padding(
@@ -59,14 +45,14 @@ class CarItemBox extends StatelessWidget {
                     Text(
                       'Rolls-Royce Cullinan',
                       style: Styles.titleSmall.copyWith(
-                        color: textButtonColor,
+                        color: Colors.black,
                         fontSize: 17,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const Icon(
                       Icons.favorite_rounded,
-                      color: Color(0xff64636A),
+                      color: Colors.red,
                     ),
                   ],
                 ),
@@ -80,46 +66,43 @@ class CarItemBox extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const FaIcon(
+                        FaIcon(
                           FontAwesomeIcons.bolt,
-                          color: secondaryDark,
+                          color: Colors.grey[600],
                           size: 19,
                         ),
                         const SizedBox(width: 5),
                         Text(
                           '571 hp',
-                          style: Styles.titleSmall
-                              .copyWith(color: const Color(0xff171820)),
+                          style: Styles.titleSmall.copyWith(color: Colors.grey),
                         ),
                       ],
                     ),
                     Row(
                       children: [
-                        const FaIcon(
+                        FaIcon(
                           FontAwesomeIcons.stopwatch,
-                          color: secondaryDark,
+                          color: Colors.grey[600],
                           size: 19,
                         ),
                         const SizedBox(width: 5),
                         Text(
                           '5.2 sec',
-                          style: Styles.titleSmall
-                              .copyWith(color: const Color(0xff171820)),
+                          style: Styles.titleSmall.copyWith(color: Colors.grey),
                         ),
                       ],
                     ),
                     Row(
                       children: [
-                        const FaIcon(
+                        FaIcon(
                           FontAwesomeIcons.dollarSign,
-                          color: secondaryDark,
+                          color: Colors.grey[600],
                           size: 19,
                         ),
                         const SizedBox(width: 5),
                         Text(
                           '2100',
-                          style: Styles.titleSmall
-                              .copyWith(color: const Color(0xff171820)),
+                          style: Styles.titleSmall.copyWith(color: Colors.grey),
                         ),
                       ],
                     ),

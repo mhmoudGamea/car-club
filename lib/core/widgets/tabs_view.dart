@@ -57,7 +57,7 @@ class _TabsViewState extends State<TabsView> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
           child: GNav(
             gap: 8,
-            color: Colors.black54,
+            color: Colors.grey[600],
             activeColor: whiteColor,
             tabBackgroundColor: mintGreen,
             padding: const EdgeInsets.all(13),

@@ -12,4 +12,7 @@ class UsedCarPostsSuccess extends UsedState {
   UsedCarPostsSuccess({required this.posts});
 }
 
-class UsedCarPostsFailure extends UsedState {}
+class UsedCarPostsFailure extends UsedState {
+  final String error;
+  UsedCarPostsFailure({required this.error});
+}

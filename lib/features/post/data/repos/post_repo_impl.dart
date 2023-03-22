@@ -9,5 +9,7 @@ class PostRepoImpl implements PostRepo {
   @override
   Future<void> addNewPost(String uId, Map<String, dynamic> post) async {
     await postsCollection.doc(uId).collection(posts).add(post);
+    // this is to make uId documents descoverable as flutterFirestore said
+    await postsCollection.doc(uId).set({'dummy': '1'});
   }
 }

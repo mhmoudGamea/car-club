@@ -1,4 +1,5 @@
 import 'package:car_club/core/constants.dart';
+import 'package:car_club/core/utils/helper.dart';
 import 'package:car_club/features/post/data/models/post_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,6 +33,8 @@ class UsedCubit extends Cubit<UsedState> {
       }
       emit(UsedCarPostsSuccess(posts: postsModel));
       postsModel = [];
+    }, onError: (error) {
+      emit(UsedCarPostsFailure(error: error));
     });
   }
 }

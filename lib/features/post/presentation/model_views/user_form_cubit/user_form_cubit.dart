@@ -123,6 +123,13 @@ class UserFormCubit extends Cubit<UserFormState> {
         msg: 'Post added successfully.',
       );
     } catch (error) {
+      // TODO: error here because user id could be = null
+      Helper.showCustomToast(
+        context: context,
+        bgColor: Colors.red.shade300,
+        icon: FontAwesomeIcons.triangleExclamation,
+        msg: 'Please try later, or re-login again.',
+      );
       emit(PostAddedFailure());
     }
   }

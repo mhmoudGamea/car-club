@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import '../../../../../core/constants.dart';
+import '../../../../../core/utils/helper.dart';
 import '../../../../../core/widgets/progress.dart';
 
 class ConfirmationWidget extends StatelessWidget {
@@ -18,13 +19,13 @@ class ConfirmationWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          AppBar(
-            automaticallyImplyLeading: false,
+          Helper.normalAppBar(
+            context: context,
+            title: 'Confirm',
             backgroundColor: whiteColor,
-            title: Text(
-              'Confirm',
-              style: Styles.title16.copyWith(color: blackColor),
-            ),
+            color: blackColor,
+            fontSize: 14,
+            iconSize: 18,
             elevation: 1,
           ),
           Padding(
