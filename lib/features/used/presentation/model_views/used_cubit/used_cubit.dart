@@ -44,11 +44,12 @@ class UsedCubit extends Cubit<UsedState> {
 
   // this func executed to add model to favourite collection
 
-  Future<void> addToFavourites(PostModel model) async {
+  Future<void> addToFavourites(PostModel model, bool isLiked) async {
     await postsCollectionRF
         .doc(uId)
         .collection('favourites')
-        .add(model.toJson());
+        .add(model.toJson())
+        .then((value) => value.update({'isFavourite': true}));
   }
 
   // this func executed to remove model to favourite collection
@@ -112,7 +113,7 @@ class UsedCubit extends Cubit<UsedState> {
                 .doc(doc.id)
                 .update({'isFavourite': true}).then((value) async {
               print(model.isFavourite);
-              await addToFavourites(model);
+              await addToFavourites(model, isLiked);
             });
           } else {
             await postsCollectionRF
