@@ -37,14 +37,20 @@ class _CarBoxItemState extends State<CarBoxItem> {
                 });
                 data.updateIsFavourite(widget.model, _isLiked);
               },
-              icon: Icon(
-                _isLiked
-                    ? Icons.favorite
-                    : (widget.model.isFavourite
+              icon: BlocBuilder<UsedCubit, UsedState>(
+                builder: (context, state) {
+                  return Icon(
+                    _isLiked
                         ? Icons.favorite
-                        : Icons.favorite_outline_rounded),
-                size: 18,
-                color: Colors.red,
+                        : (widget.model.isFavourite
+                            ? (data.getFavourite
+                                ? Icons.favorite
+                                : Icons.favorite_outline_rounded)
+                            : Icons.favorite_outline_rounded),
+                    size: 18,
+                    color: Colors.red,
+                  );
+                },
               ),
             ),
           ),

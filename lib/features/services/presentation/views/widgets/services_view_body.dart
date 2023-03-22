@@ -51,7 +51,7 @@ class _ServicesViewBodyState extends State<ServicesViewBody> {
                 },
               ),
             ),
-          )
+          ),
         ],
       ),
     );

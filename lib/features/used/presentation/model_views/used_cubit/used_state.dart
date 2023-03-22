@@ -21,3 +21,5 @@ class UsedCarPostsFailure extends UsedState {
 class IsFavouriteSuccess extends UsedState {}
 
 class IsFavouriteFailure extends UsedState {}
+
+class AlreadyInFavourites extends UsedState {}

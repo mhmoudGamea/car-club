@@ -1,3 +1,4 @@
+import 'package:car_club/core/constants.dart';
 import 'package:car_club/features/post/data/models/post_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,6 +32,9 @@ class UsedCubit extends Cubit<UsedState> {
           postsModel.add(PostModel.fromJson(e.data()));
         }
       }
+      for (var post in postsModel) {
+        await checkInFavourites(post);
+      }
       emit(UsedCarPostsSuccess(posts: postsModel));
       postsModel = [];
     }, onError: (error) {
@@ -38,15 +42,60 @@ class UsedCubit extends Cubit<UsedState> {
     });
   }
 
-  // this function executed to make isFavourite field in postModel = true
-  final _isFavourite = false;
+  // this func executed to add model to favourite collection
 
-  bool get getIsFavourite {
-    return _isFavourite;
+  Future<void> addToFavourites(PostModel model) async {
+    await postsCollectionRF
+        .doc(uId)
+        .collection('favourites')
+        .add(model.toJson());
   }
 
+  // this func executed to remove model to favourite collection
+
+  Future<void> removeFromFavourites(PostModel model) async {
+    await postsCollectionRF
+        .doc(uId)
+        .collection('favourites')
+        .where('date', isEqualTo: model.date)
+        .get()
+        .then((value) async {
+      for (var doc in value.docs) {
+        await postsCollectionRF
+            .doc(uId)
+            .collection('favourites')
+            .doc(doc.id)
+            .delete();
+      }
+    });
+  }
+
+  // this function check if this model is in the current user favourite
+  // collection or not
+
+  var _isInFavourites = false;
+
+  bool get getFavourite {
+    return _isInFavourites;
+  }
+
+  Future<void> checkInFavourites(PostModel model) async {
+    await postsCollectionRF
+        .doc(uId)
+        .collection('favourites')
+        .where('date', isEqualTo: model.date)
+        .get()
+        .then((value) {
+      if (value.docs.isNotEmpty) {
+        _isInFavourites = true;
+        emit(AlreadyInFavourites());
+      }
+    });
+  }
+
+  // this func executed to make isFavourite field in postModel = true or false
+
   void updateIsFavourite(PostModel model, bool isLiked) async {
-    print(model.uid);
     await postsCollectionRF
         .doc(model.uid)
         .collection(posts)
@@ -54,25 +103,29 @@ class UsedCubit extends Cubit<UsedState> {
         .get()
         .then(
       (value) async {
-        print(value.docs.length);
         for (var doc in value.docs) {
           if (isLiked) {
+            // TODO: implement optemistic updating
             await postsCollectionRF
                 .doc(model.uid)
                 .collection(posts)
                 .doc(doc.id)
-                .update({'isFavourite': true});
+                .update({'isFavourite': true}).then((value) async {
+              print(model.isFavourite);
+              await addToFavourites(model);
+            });
           } else {
             await postsCollectionRF
                 .doc(model.uid)
                 .collection(posts)
                 .doc(doc.id)
-                .update({'isFavourite': false});
+                .update({'isFavourite': false}).then((value) async {
+              await removeFromFavourites(model);
+            });
           }
         }
       },
       onError: (error) {
-        print('in favourite $error');
         emit(IsFavouriteFailure());
       },
     );

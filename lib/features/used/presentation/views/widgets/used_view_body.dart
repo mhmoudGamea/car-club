@@ -9,7 +9,7 @@ class UsedViewBody extends StatelessWidget {
   const UsedViewBody({Key? key}) : super(key: key);
 
   // Future<void> _refreshUsedCars(BuildContext context) async {
-  //   await BlocProvider.of<UsedCubit>(context, listen: false).getPosts();
+  //   await BlocProvider.of<UsedCubit>(context).getPosts();
   // }
 
   @override
