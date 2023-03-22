@@ -1,11 +1,9 @@
 import 'dart:collection';
 
 import 'package:car_club/core/constants.dart';
-import 'package:car_club/features/services/presentation/views/add_car_center_form.dart';
+// import 'package:car_club/features/services/presentation/views/add_car_center_form.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 
 class ServicesViewBody extends StatefulWidget {
   const ServicesViewBody({Key? key}) : super(key: key);
@@ -24,7 +22,8 @@ class _ServicesViewBodyState extends State<ServicesViewBody> {
         alignment: Alignment.bottomCenter,
         children: [
           GoogleMap(
-            initialCameraPosition: const CameraPosition(target: LatLng(30.0444, 31.2357), zoom: 10),
+            initialCameraPosition: const CameraPosition(
+                target: LatLng(30.0444, 31.2357), zoom: 10),
             markers: markers,
             onMapCreated: (controller) {
               setState(() {
@@ -34,10 +33,8 @@ class _ServicesViewBodyState extends State<ServicesViewBody> {
                     infoWindow: InfoWindow(
                       title: "Car Center Name",
                       snippet: "description of the car center name",
-                      onTap: () {
-                      },
-                    )
-                ));
+                      onTap: () {},
+                    )));
               });
             },
           ),
@@ -46,19 +43,16 @@ class _ServicesViewBodyState extends State<ServicesViewBody> {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: babyBlue
-              ),
+                  borderRadius: BorderRadius.circular(10), color: babyBlue),
               child: MaterialButton(
                 child: const Text("Show Car Centers"),
-                onPressed: (){
-                  GoRouter.of(context).push(AddCarCenter.rn);
+                onPressed: () {
+                  // GoRouter.of(context).push(AddCarCenter.rn);
                 },
               ),
             ),
           )
         ],
-
       ),
     );
   }

@@ -16,3 +16,8 @@ class UsedCarPostsFailure extends UsedState {
   final String error;
   UsedCarPostsFailure({required this.error});
 }
+
+// handling favourite states
+class IsFavouriteSuccess extends UsedState {}
+
+class IsFavouriteFailure extends UsedState {}

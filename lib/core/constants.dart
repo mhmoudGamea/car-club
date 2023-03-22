@@ -37,7 +37,6 @@ ThemeData darkTheme = ThemeData(
   scaffoldBackgroundColor: primaryDark,
 );
 
-
 const textButtonStyle = TextStyle(
   color: whiteColor,
   fontSize: 18,

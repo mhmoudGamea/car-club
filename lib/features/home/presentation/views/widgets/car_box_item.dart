@@ -1,15 +1,23 @@
 import 'package:car_club/core/constants.dart';
 import 'package:car_club/core/utils/styles.dart';
 import 'package:car_club/features/post/data/models/post_model.dart';
+import 'package:car_club/features/used/presentation/model_views/used_cubit/used_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CarBoxItem extends StatelessWidget {
+class CarBoxItem extends StatefulWidget {
   final PostModel model;
   const CarBoxItem({Key? key, required this.model}) : super(key: key);
 
   @override
+  State<CarBoxItem> createState() => _CarBoxItemState();
+}
+
+class _CarBoxItemState extends State<CarBoxItem> {
+  var _isLiked = false;
+  @override
   Widget build(BuildContext context) {
+    final data = BlocProvider.of<UsedCubit>(context, listen: false);
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -20,12 +28,21 @@ class CarBoxItem extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.topRight,
-            child: GestureDetector(
-              onTap: () {},
-              child: Icon(
-                model.isFavourite
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(),
+              onPressed: () {
+                setState(() {
+                  _isLiked = !_isLiked;
+                });
+                data.updateIsFavourite(widget.model, _isLiked);
+              },
+              icon: Icon(
+                _isLiked
                     ? Icons.favorite
-                    : Icons.favorite_outline_rounded,
+                    : (widget.model.isFavourite
+                        ? Icons.favorite
+                        : Icons.favorite_outline_rounded),
                 size: 18,
                 color: Colors.red,
               ),
@@ -34,7 +51,7 @@ class CarBoxItem extends StatelessWidget {
           const SizedBox(height: 10),
           SizedBox(
             height: 100,
-            child: Image.network(model.images[0], fit: BoxFit.cover),
+            child: Image.network(widget.model.images[0], fit: BoxFit.cover),
           ),
           const SizedBox(height: 10),
           Container(
@@ -48,12 +65,12 @@ class CarBoxItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  model.brand,
+                  widget.model.brand,
                   style: Styles.title15.copyWith(color: Colors.black),
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  '${model.price}',
+                  '${widget.model.price}',
                   style: Styles.title13.copyWith(color: Colors.grey[700]),
                 ),
               ],

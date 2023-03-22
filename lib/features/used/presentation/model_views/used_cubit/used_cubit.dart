@@ -1,5 +1,3 @@
-import 'package:car_club/core/constants.dart';
-import 'package:car_club/core/utils/helper.dart';
 import 'package:car_club/features/post/data/models/post_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,5 +38,43 @@ class UsedCubit extends Cubit<UsedState> {
     });
   }
 
-  // this function executed to add a post to the user favourite collection
+  // this function executed to make isFavourite field in postModel = true
+  final _isFavourite = false;
+
+  bool get getIsFavourite {
+    return _isFavourite;
+  }
+
+  void updateIsFavourite(PostModel model, bool isLiked) async {
+    print(model.uid);
+    await postsCollectionRF
+        .doc(model.uid)
+        .collection(posts)
+        .where('date', isEqualTo: model.date)
+        .get()
+        .then(
+      (value) async {
+        print(value.docs.length);
+        for (var doc in value.docs) {
+          if (isLiked) {
+            await postsCollectionRF
+                .doc(model.uid)
+                .collection(posts)
+                .doc(doc.id)
+                .update({'isFavourite': true});
+          } else {
+            await postsCollectionRF
+                .doc(model.uid)
+                .collection(posts)
+                .doc(doc.id)
+                .update({'isFavourite': false});
+          }
+        }
+      },
+      onError: (error) {
+        print('in favourite $error');
+        emit(IsFavouriteFailure());
+      },
+    );
+  }
 }

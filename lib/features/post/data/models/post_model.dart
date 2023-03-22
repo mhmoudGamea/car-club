@@ -1,3 +1,5 @@
+import 'package:car_club/core/constants.dart';
+
 class PostModel {
   final String date;
   final String brand;
@@ -16,6 +18,7 @@ class PostModel {
   final String phone;
   final List<dynamic> images;
   final bool isFavourite;
+  final String uid;
 
   const PostModel({
     required this.date,
@@ -35,6 +38,7 @@ class PostModel {
     required this.phone,
     required this.images,
     this.isFavourite = false,
+    this.uid = '',
   });
 
   factory PostModel.fromJson(Map<String, dynamic> json) {
@@ -56,6 +60,7 @@ class PostModel {
       phone: json['phone'],
       images: json['images'],
       isFavourite: json['isFavourite'],
+      uid: json['uid'],
     );
   }
 
@@ -78,6 +83,7 @@ class PostModel {
       'phone': phone,
       'images': images,
       'isFavourite': isFavourite,
+      'uid': uid,
     };
   }
 }
