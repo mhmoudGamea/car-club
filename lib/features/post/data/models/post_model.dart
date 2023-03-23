@@ -1,5 +1,3 @@
-import 'package:car_club/core/constants.dart';
-
 class PostModel {
   final String date;
   final String brand;
@@ -17,7 +15,7 @@ class PostModel {
   final String address;
   final String phone;
   final List<dynamic> images;
-  final bool isFavourite;
+  final List<String> favourites;
   final String uid;
 
   const PostModel({
@@ -37,7 +35,7 @@ class PostModel {
     required this.address,
     required this.phone,
     required this.images,
-    this.isFavourite = false,
+    required this.favourites,
     this.uid = '',
   });
 
@@ -59,7 +57,7 @@ class PostModel {
       address: json['address'],
       phone: json['phone'],
       images: json['images'],
-      isFavourite: json['isFavourite'],
+      favourites: List.from(json['favourites']),
       uid: json['uid'],
     );
   }
@@ -82,7 +80,7 @@ class PostModel {
       'address': address,
       'phone': phone,
       'images': images,
-      'isFavourite': isFavourite,
+      'favourites': favourites,
       'uid': uid,
     };
   }

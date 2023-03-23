@@ -73,9 +73,8 @@ class _SplashViewBodyState extends State<SplashViewBody> {
         const Duration(
           seconds: 9,
         ), () {
-      GoRouter.of(context as BuildContext).push(AuthenticationView.rn);
-      Navigator.push(context as BuildContext,
-          MaterialPageRoute(builder: (context) {
+      GoRouter.of(context).push(AuthenticationView.rn);
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
         return const AuthenticationView();
       }));
     });

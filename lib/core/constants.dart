@@ -12,20 +12,14 @@ ThemeData lightTheme = ThemeData(
   fontFamily: 'Lexend',
   scaffoldBackgroundColor: Colors.white,
   appBarTheme: const AppBarTheme(
-      // titleSpacing: 20,
-      backgroundColor: Colors.white,
-      // elevation: 0,
-      titleTextStyle: TextStyle(
-        color: Colors.black,
-      ),
-      iconTheme: IconThemeData(color: Colors.black)),
-  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      // type: BottomNavigationBarType.fixed,
-      // unselectedItemColor: Colors.grey,
-      // backgroundColor: Colors.white,
-      // selectedItemColor: Theme.of(context).colorScheme.secondary,
-      // elevation: 20,
-      ),
+    // titleSpacing: 20,
+    backgroundColor: Colors.white,
+    // elevation: 0,
+    titleTextStyle: TextStyle(
+      color: Colors.black,
+    ),
+    iconTheme: IconThemeData(color: Colors.black),
+  ),
   colorScheme: ColorScheme.fromSwatch().copyWith(
     primary: mintGreen,
     secondary: babyBlue,

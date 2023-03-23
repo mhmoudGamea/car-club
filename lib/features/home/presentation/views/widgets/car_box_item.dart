@@ -16,6 +16,20 @@ class CarBoxItem extends StatefulWidget {
 class _CarBoxItemState extends State<CarBoxItem> {
   var _isLiked = false;
   @override
+  void didChangeDependencies() {
+    if (widget.model.favourites.contains(uId)) {
+      setState(() {
+        _isLiked = true;
+      });
+    } else {
+      setState(() {
+        _isLiked = false;
+      });
+    }
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final data = BlocProvider.of<UsedCubit>(context, listen: false);
     return Container(
@@ -26,33 +40,27 @@ class _CarBoxItemState extends State<CarBoxItem> {
       ),
       child: Column(
         children: [
-          Align(
-            alignment: Alignment.topRight,
-            child: IconButton(
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(),
-              onPressed: () {
-                setState(() {
-                  _isLiked = !_isLiked;
-                });
-                data.updateIsFavourite(widget.model, _isLiked);
-              },
-              icon: BlocBuilder<UsedCubit, UsedState>(
-                builder: (context, state) {
-                  return Icon(
-                    _isLiked
-                        ? Icons.favorite
-                        : (widget.model.isFavourite
-                            ? (data.getFavourite
-                                ? Icons.favorite
-                                : Icons.favorite_outline_rounded)
-                            : Icons.favorite_outline_rounded),
+          BlocBuilder<UsedCubit, UsedState>(
+            builder: (context, state) {
+              return Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                  onPressed: () {
+                    setState(() {
+                      _isLiked = !_isLiked;
+                    });
+                    data.updateFavourites(widget.model, _isLiked, context);
+                  },
+                  icon: Icon(
+                    _isLiked ? Icons.favorite : Icons.favorite_outline_rounded,
                     size: 18,
                     color: Colors.red,
-                  );
-                },
-              ),
-            ),
+                  ),
+                ),
+              );
+            },
           ),
           const SizedBox(height: 10),
           SizedBox(

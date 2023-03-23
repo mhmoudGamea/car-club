@@ -1,4 +1,3 @@
-import 'package:car_club/core/constants.dart';
 import 'package:car_club/core/widgets/favourite_box.dart';
 import 'package:flutter/material.dart';
 

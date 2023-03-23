@@ -8,13 +8,8 @@ import '../../model_views/used_cubit/used_cubit.dart';
 class UsedViewBody extends StatelessWidget {
   const UsedViewBody({Key? key}) : super(key: key);
 
-  // Future<void> _refreshUsedCars(BuildContext context) async {
-  //   await BlocProvider.of<UsedCubit>(context).getPosts();
-  // }
-
   @override
   Widget build(BuildContext context) {
-    // BlocProvider.of<UsedCubit>(context).getPosts();
     return BlocBuilder<UsedCubit, UsedState>(
       builder: (context, state) {
         if (state is UsedCarPostsSuccess) {

@@ -1,11 +1,11 @@
 import 'package:car_club/core/constants.dart';
+import 'package:car_club/core/utils/styles.dart';
 import 'package:car_club/features/home/presentation/views/home_view.dart';
 import 'package:car_club/features/post/presentation/views/post_view.dart';
 import 'package:car_club/features/used/presentation/views/used_view.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../../features/favourite/presentation/views/favourite_view.dart';
 import '../../features/services/presentation/views/services_view.dart';
@@ -21,7 +21,7 @@ class TabsView extends StatefulWidget {
 }
 
 class _TabsViewState extends State<TabsView> {
-  var _currentIndex = 0;
+  final _currentIndex = 0;
 
   final List<Map<String, dynamic>> _screens = [
     {'screen': const HomeView()},
@@ -51,16 +51,128 @@ class _TabsViewState extends State<TabsView> {
         ),
       ),
       drawer: const DrawerWidget(),
-      bottomNavigationBar: Container(
-        color: greyColor,
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 0,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          decoration: BoxDecoration(
+            color: whiteColor,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey[700]!,
+                blurRadius: 4,
+                spreadRadius: 1,
+                offset: const Offset(2, 2),
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // left of floating action button
+              Row(
+                children: [
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(FontAwesomeIcons.house, size: 15),
+                      const SizedBox(height: 3),
+                      Text(
+                        'Home',
+                        style: Styles.title13.copyWith(color: Colors.black),
+                      )
+                    ],
+                  ),
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.08),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(FontAwesomeIcons.retweet, size: 16),
+                      const SizedBox(height: 3),
+                      Text(
+                        'Used',
+                        style: Styles.title13.copyWith(color: Colors.black),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              const Spacer(),
+              Row(
+                children: [
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(FontAwesomeIcons.screwdriverWrench, size: 16),
+                      const SizedBox(height: 3),
+                      Text(
+                        'Service',
+                        style: Styles.title13.copyWith(color: Colors.black),
+                      )
+                    ],
+                  ),
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.08),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(FontAwesomeIcons.solidHeart, size: 16),
+                      const SizedBox(height: 3),
+                      Text(
+                        'Favourite',
+                        style: Styles.title13.copyWith(color: Colors.black),
+                      )
+                    ],
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          GoRouter.of(context).push(PostView.rn);
+        },
+        backgroundColor: mintGreen,
+        elevation: 2,
+        child: const CircleAvatar(
+          radius: 22,
+          backgroundColor: whiteColor,
+          child: Icon(Icons.add, color: mintGreen),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    );
+  }
+}
+/*
+
+decoration: BoxDecoration(
+          color: whiteColor,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey[700]!,
+              blurRadius: 4,
+              spreadRadius: 1,
+              offset: const Offset(2, 2),
+            ),
+          ],
+        ),
+*/
+
+/*
+
+Container(
+        
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
           child: GNav(
-            gap: 8,
-            color: Colors.grey[600],
+            gap: 10,
+            color: blackColor,
             activeColor: whiteColor,
             tabBackgroundColor: mintGreen,
-            padding: const EdgeInsets.all(13),
+            padding: const EdgeInsets.all(10),
             onTabChange: (index) {
               setState(() {
                 _currentIndex = index;
@@ -90,19 +202,6 @@ class _TabsViewState extends State<TabsView> {
             ],
           ),
         ),
-      ),
-      floatingActionButton: _currentIndex == 1
-          ? FloatingActionButton(
-              onPressed: () {
-                GoRouter.of(context).push(PostView.rn);
-              },
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              backgroundColor: mintGreen,
-              mini: true,
-              child: const Icon(Icons.add),
-            )
-          : null,
-    );
-  }
-}
+      )
+
+*/

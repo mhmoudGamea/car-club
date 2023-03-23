@@ -1,7 +1,9 @@
 import 'package:car_club/core/constants.dart';
+import 'package:car_club/core/utils/helper.dart';
 import 'package:car_club/features/post/data/models/post_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../post/data/post_constants.dart';
@@ -32,9 +34,6 @@ class UsedCubit extends Cubit<UsedState> {
           postsModel.add(PostModel.fromJson(e.data()));
         }
       }
-      for (var post in postsModel) {
-        await checkInFavourites(post);
-      }
       emit(UsedCarPostsSuccess(posts: postsModel));
       postsModel = [];
     }, onError: (error) {
@@ -44,12 +43,16 @@ class UsedCubit extends Cubit<UsedState> {
 
   // this func executed to add model to favourite collection
 
-  Future<void> addToFavourites(PostModel model, bool isLiked) async {
+  Future<void> addToFavourites(PostModel model) async {
     await postsCollectionRF
         .doc(uId)
         .collection('favourites')
         .add(model.toJson())
-        .then((value) => value.update({'isFavourite': true}));
+        .then((value) {
+      value.update({
+        'favourites': FieldValue.arrayUnion([uId])
+      });
+    });
   }
 
   // this func executed to remove model to favourite collection
@@ -71,32 +74,9 @@ class UsedCubit extends Cubit<UsedState> {
     });
   }
 
-  // this function check if this model is in the current user favourite
-  // collection or not
-
-  var _isInFavourites = false;
-
-  bool get getFavourite {
-    return _isInFavourites;
-  }
-
-  Future<void> checkInFavourites(PostModel model) async {
-    await postsCollectionRF
-        .doc(uId)
-        .collection('favourites')
-        .where('date', isEqualTo: model.date)
-        .get()
-        .then((value) {
-      if (value.docs.isNotEmpty) {
-        _isInFavourites = true;
-        emit(AlreadyInFavourites());
-      }
-    });
-  }
-
   // this func executed to make isFavourite field in postModel = true or false
 
-  void updateIsFavourite(PostModel model, bool isLiked) async {
+  void updateFavourites(PostModel model, bool isLiked, context) async {
     await postsCollectionRF
         .doc(model.uid)
         .collection(posts)
@@ -106,21 +86,33 @@ class UsedCubit extends Cubit<UsedState> {
       (value) async {
         for (var doc in value.docs) {
           if (isLiked) {
-            // TODO: implement optemistic updating
             await postsCollectionRF
                 .doc(model.uid)
                 .collection(posts)
                 .doc(doc.id)
-                .update({'isFavourite': true}).then((value) async {
-              print(model.isFavourite);
-              await addToFavourites(model, isLiked);
+                .update({
+              'favourites': FieldValue.arrayUnion([uId])
+            }).then((value) async {
+              Helper.showCustomToast(
+                  context: context,
+                  bgColor: babyBlue,
+                  icon: FontAwesomeIcons.circleCheck,
+                  msg: 'Added to your favourites');
+              await addToFavourites(model);
             });
           } else {
             await postsCollectionRF
                 .doc(model.uid)
                 .collection(posts)
                 .doc(doc.id)
-                .update({'isFavourite': false}).then((value) async {
+                .update({
+              'favourites': FieldValue.arrayRemove([uId])
+            }).then((value) async {
+              Helper.showCustomToast(
+                  context: context,
+                  bgColor: babyBlue,
+                  icon: FontAwesomeIcons.circleCheck,
+                  msg: 'Removed from your favourites');
               await removeFromFavourites(model);
             });
           }

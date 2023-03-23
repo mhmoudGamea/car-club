@@ -22,8 +22,6 @@ class CarClub extends StatelessWidget {
   const CarClub({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    print('Mazen: uid = $uId');
-    print('Mazen: email = $email');
     return MaterialApp.router(
       routerConfig: AppRoutes.getRouter,
       debugShowCheckedModeBanner: false,

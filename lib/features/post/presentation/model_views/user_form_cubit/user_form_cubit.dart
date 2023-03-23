@@ -111,6 +111,7 @@ class UserFormCubit extends Cubit<UserFormState> {
       address: getAddress.text,
       phone: getUserPhone.text,
       images: images,
+      favourites: [],
     );
     try {
       await postRepo.addNewPost(uId, _postModel.toJson());

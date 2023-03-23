@@ -1,12 +1,8 @@
-import 'package:car_club/core/constants.dart';
 import 'package:car_club/core/utils/styles.dart';
 import 'package:car_club/features/profile/presentation/views/profile_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-
-import '../utils/assets.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({Key? key}) : super(key: key);
