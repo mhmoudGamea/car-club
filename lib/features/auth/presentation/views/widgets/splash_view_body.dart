@@ -16,7 +16,14 @@ class SplashViewBody extends StatefulWidget {
     Color(0xff6f2973),
     Color(0xffaf1f79),
     Color(0xffeb126b),
+
+    //background-image: linear-gradient(to right top, #051937, #33265b, #6f2973, #af1f79, #eb126b);
   ];
+  // static const colorizeTextStyle = TextStyle(
+  //   //fontSize: 40.0,
+  //   //fontFamily: ''
+  //
+  // );
 
   @override
   State<SplashViewBody> createState() => _SplashViewBodyState();
@@ -73,8 +80,9 @@ class _SplashViewBodyState extends State<SplashViewBody> {
         const Duration(
           seconds: 9,
         ), () {
-      GoRouter.of(context).push(AuthenticationView.rn);
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
+      GoRouter.of(context as BuildContext).push(AuthenticationView.rn);
+      Navigator.push(context as BuildContext,
+          MaterialPageRoute(builder: (context) {
         return const AuthenticationView();
       }));
     });
