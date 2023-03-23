@@ -113,7 +113,8 @@ class UserFormCubit extends Cubit<UserFormState> {
       images: images,
     );
     try {
-      await postRepo.addNewPost(uId, _postModel.toJson());
+      await postRepo.addNewPost(
+          'yyTbyyKO9xREWQjg4aXIM2thJWp1', _postModel.toJson());
       emit(PostAddedSuccess());
       // ignore: use_build_context_synchronously
       Helper.showCustomToast(

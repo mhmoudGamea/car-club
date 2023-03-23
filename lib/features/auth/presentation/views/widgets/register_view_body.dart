@@ -3,6 +3,7 @@ import 'package:car_club/features/auth/presentation/views/widgets/or_sign_in_wit
 import 'package:car_club/features/auth/presentation/views/widgets/social_media_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/utils/helper.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../data/auth_services/login/login_cubit/login_cubit.dart';
@@ -58,10 +59,12 @@ class RegisterViewBody extends StatelessWidget {
                   onTap: () => cubit.changePasswordVisibility(),
                 ),
                 controller: cubit.passwordController,
+
               ),
               const SizedBox(
                 height: 18,
               ),
+
               DefaultTextField(
                 hintText: 'Confirm Password',
                 type: TextInputType.visiblePassword,
@@ -81,6 +84,7 @@ class RegisterViewBody extends StatelessWidget {
               defaultButton(
                   buttonName: 'Sign Up',
                   onTap: () {
+
                     if (cubit.passwordController.text !=
                         cubit.confirmPasswordController.text) {
 

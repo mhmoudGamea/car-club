@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/constants.dart';
 
 class DefaultTextField extends StatelessWidget {
-  const DefaultTextField(
+  DefaultTextField(
       {super.key,
       this.hintText,
       this.obscureText = false,
@@ -12,13 +12,13 @@ class DefaultTextField extends StatelessWidget {
       this.controller,
       this.validate,
       this.type});
-  final Function(String)? onChanged;
-  final bool? obscureText;
-  final String? hintText;
-  final Widget? suffix;
-  final TextInputType? type;
-  final Function(String)? validate;
-  final TextEditingController? controller;
+  Function(String)? onChanged;
+  bool? obscureText;
+  String? hintText;
+  Widget? suffix;
+  TextInputType? type;
+  Function(String)? validate;
+  TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return Padding(

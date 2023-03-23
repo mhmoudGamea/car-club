@@ -53,4 +53,11 @@ import '../constants.dart';
     fontSize: 16,
     color: textButtonColor,
   );
+  static const appBarTitleMedium = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 19,
+    color:secondaryDark ,
+
+  );
+
 }
