@@ -13,11 +13,9 @@ Future<void> sendPasswordResetEmail(String email) async {
 Future<UserCredential> signInWithEmailAndPassword({
   required String email,
   required String password,
-})async {
-  return await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: email,
-      password: password
-  );
+}) async {
+  return await FirebaseAuth.instance
+      .signInWithEmailAndPassword(email: email, password: password);
 }
 
 // Future<UserCredential> signInWithGoogle()async {
@@ -33,7 +31,8 @@ Future<UserCredential> signInWithEmailAndPassword({
 Future<UserCredential> signInWithFacebook() async {
   final LoginResult signInResult = await FacebookAuth.instance.login();
 
-  final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(signInResult.accessToken!.token);
+  final OAuthCredential facebookAuthCredential =
+      FacebookAuthProvider.credential(signInResult.accessToken!.token);
 
   return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
 }
@@ -54,11 +53,15 @@ Future<UserCredential> signInWithApple() async {
   );
   return await FirebaseAuth.instance.signInWithCredential(oauthCredential);
 }
+
 String generateNonce([int length = 32]) {
-  const charset = '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+  const charset =
+      '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
   final random = Random.secure();
-  return List.generate(length, (_) => charset[random.nextInt(charset.length)]).join();
+  return List.generate(length, (_) => charset[random.nextInt(charset.length)])
+      .join();
 }
+
 String sha256ofString(String input) {
   final bytes = utf8.encode(input);
   final digest = sha256.convert(bytes);

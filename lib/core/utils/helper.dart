@@ -65,11 +65,10 @@ class Helper {
       ),
     );
     fToast.showToast(
-        child: toast,
-        toastDuration: const Duration(seconds: 2),
-        fadeDuration: const Duration(milliseconds: 500),
-        gravity: ToastGravity.BOTTOM,
-
+      child: toast,
+      toastDuration: const Duration(seconds: 2),
+      fadeDuration: const Duration(milliseconds: 500),
+      gravity: ToastGravity.BOTTOM,
     );
   }
 }

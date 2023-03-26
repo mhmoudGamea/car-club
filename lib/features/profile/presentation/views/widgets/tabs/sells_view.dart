@@ -5,6 +5,8 @@ class SellsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child:  Text("sells View"),);
+    return const Center(
+      child: Text("sells View"),
+    );
   }
 }

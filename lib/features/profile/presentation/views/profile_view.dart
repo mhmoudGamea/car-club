@@ -16,10 +16,9 @@ class ProfileView extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           leading: Container(
-            margin: EdgeInsets.all(6),
+            margin: const EdgeInsets.all(6),
             width: 45,
             decoration: BoxDecoration(
-
                 border: Border.all(color: greyColor, width: 1),
                 color: whiteColor,
                 borderRadius: BorderRadius.circular(18.0)),
@@ -29,7 +28,6 @@ class ProfileView extends StatelessWidget {
               color: greyColor,
             ),
           ),
-
           title: const Center(
               child: Text(
             "MyProfile",
@@ -37,16 +35,18 @@ class ProfileView extends StatelessWidget {
           )),
           actions: [
             Container(
-              margin: const EdgeInsets.all(6),
+                margin: const EdgeInsets.all(6),
                 width: 45,
-              //  height: 10,
+                //  height: 10,
                 decoration: BoxDecoration(
-
                     border: Border.all(color: greyColor, width: 1),
                     color: const Color(0xfff4d4d4),
                     borderRadius: BorderRadius.circular(18.0)),
-                child: const Icon(FontAwesomeIcons.rocketchat,color: babyBlue,
-                size: 25,))
+                child: const Icon(
+                  FontAwesomeIcons.rocketchat,
+                  color: babyBlue,
+                  size: 25,
+                ))
           ],
         ),
         body: const SafeArea(

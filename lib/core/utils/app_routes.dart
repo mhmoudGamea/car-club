@@ -1,11 +1,14 @@
 import 'package:car_club/core/widgets/tabs_view.dart';
 import 'package:car_club/features/auth/presentation/views/reset_password_view.dart';
 import 'package:car_club/features/auth/presentation/views/splash_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/views/auth_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/register_view.dart';
+import '../../features/home/data/repos/home_repo_impl.dart';
+import '../../features/home/presentation/model_views/home_cubit/home_cubit.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/home/presentation/views/home_view_details.dart';
 import '../../features/post/presentation/views/post_view.dart';
@@ -45,7 +48,10 @@ class AppRoutes {
       ),
       GoRoute(
         path: TabsView.rn,
-        builder: (context, state) => const TabsView(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => HomeCubit(HomeRepoImpl()),
+          child: const TabsView(),
+        ),
       ),
       GoRoute(
         path: ProfileView.rn,

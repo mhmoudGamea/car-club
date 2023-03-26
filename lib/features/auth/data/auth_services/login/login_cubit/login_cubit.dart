@@ -20,23 +20,21 @@ class LoginCubit extends Cubit<LoginStates> {
     emit(SuccessRememberMeState());
   }
 
-  Future<void> resetPassword(String email,context) async {
+  Future<void> resetPassword(String email, context) async {
     emit(LoadingResetPasswordState());
     await sendPasswordResetEmail(email).then((value) {
       Helper.showCustomToast(
           context: context,
           icon: Icons.check_circle,
           bgColor: Colors.greenAccent,
-          msg: 'Done reset password '
-      );
+          msg: 'Done reset password ');
       emit(SuccessResetPasswordState());
     }).catchError((error) {
       Helper.showCustomToast(
           context: context,
           icon: Icons.check_circle,
           bgColor: Colors.greenAccent,
-          msg: 'try again'
-      );
+          msg: 'try again');
       emit(ErrorResetPasswordState());
     });
   }
