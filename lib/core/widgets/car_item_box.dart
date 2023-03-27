@@ -61,7 +61,7 @@ class CarItemBox extends StatelessWidget {
                 ),
                 const Divider(
                   color: Colors.black45,
-                  thickness: 1,
+                  // thickness: 1,
                 ),
                 const SizedBox(height: 5),
                 Row(
@@ -69,43 +69,46 @@ class CarItemBox extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        FaIcon(
+                        const FaIcon(
                           FontAwesomeIcons.bolt,
-                          color: Colors.grey[600],
+                          color: Colors.black54,
                           size: 19,
                         ),
                         const SizedBox(width: 5),
                         Text(
                           '${car.horsepower} hp',
-                          style: Styles.titleSmall.copyWith(color: Colors.grey),
+                          style:
+                              Styles.titleSmall.copyWith(color: Colors.black54),
                         ),
                       ],
                     ),
                     Row(
                       children: [
-                        FaIcon(
+                        const FaIcon(
                           FontAwesomeIcons.gaugeHigh,
-                          color: Colors.grey[600],
+                          color: Colors.black54,
                           size: 19,
                         ),
                         const SizedBox(width: 5),
                         Text(
-                          car.motor,
-                          style: Styles.titleSmall.copyWith(color: Colors.grey),
+                          '${car.maxspeed} km/h',
+                          style:
+                              Styles.titleSmall.copyWith(color: Colors.black54),
                         ),
                       ],
                     ),
                     Row(
                       children: [
-                        FaIcon(
+                        const FaIcon(
                           FontAwesomeIcons.dollarSign,
-                          color: Colors.grey[600],
+                          color: Colors.black54,
                           size: 19,
                         ),
                         const SizedBox(width: 5),
                         Text(
                           '${car.price}',
-                          style: Styles.titleSmall.copyWith(color: Colors.grey),
+                          style:
+                              Styles.titleSmall.copyWith(color: Colors.black54),
                         ),
                       ],
                     ),

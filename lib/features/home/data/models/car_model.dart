@@ -21,6 +21,7 @@ class CarModel {
   final int wheelbase;
   final String traction;
   final int seats;
+  final int cylinder;
   final String type;
   final List<dynamic> images;
 
@@ -42,6 +43,7 @@ class CarModel {
     required this.wheelbase,
     required this.traction,
     required this.seats,
+    required this.cylinder,
     required this.type,
     required this.images,
   });
@@ -64,6 +66,7 @@ class CarModel {
         wheelbase: data['wheelbase'] as int,
         traction: data['traction'] as String,
         seats: data['seats'] as int,
+        cylinder: data['cylinder'] as int,
         type: data['type'] as String,
         images: data['images'] as List<dynamic>,
       );
@@ -86,6 +89,7 @@ class CarModel {
         'wheelbase': wheelbase,
         'traction': traction,
         'seats': seats,
+        'cylinder': cylinder,
         'type': type,
         'images': images,
       };

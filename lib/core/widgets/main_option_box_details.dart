@@ -1,9 +1,15 @@
-import 'package:car_club/core/constants.dart';
-import 'package:car_club/core/widgets/option_box_details_item.dart';
 import 'package:flutter/material.dart';
 
-class HorizontalOptionBoxDetails extends StatelessWidget {
-  const HorizontalOptionBoxDetails({Key? key}) : super(key: key);
+import '../../features/home/data/models/car_model.dart';
+import '../constants.dart';
+import 'option_box_details_item.dart';
+
+class MainOptionBoxDetails extends StatelessWidget {
+  final CarModel car;
+  const MainOptionBoxDetails({
+    Key? key,
+    required this.car,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +26,20 @@ class HorizontalOptionBoxDetails extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
+        children: [
           OptionBoxDetailsItem(
-            imagePath: 'assets/images/rpm.png',
-            title: '6500 rpm',
-            description: 'Power',
+            imagePath: 'assets/images/car_icons/engine.png',
+            title: car.motor,
+            description: 'Motor',
           ),
           OptionBoxDetailsItem(
-            imagePath: 'assets/images/speed.png',
-            title: '190 mph',
+            imagePath: 'assets/images/car_icons/maxspeed.png',
+            title: '${car.maxspeed} mph',
             description: 'Top Speed',
           ),
           OptionBoxDetailsItem(
-            imagePath: 'assets/images/acceleration.png',
-            title: '4.4 Sec',
+            imagePath: 'assets/images/car_icons/acceleration.png',
+            title: '${car.acceleration} Sec',
             description: 'Acceleration',
           ),
         ],

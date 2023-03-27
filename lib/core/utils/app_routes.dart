@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/views/auth_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/register_view.dart';
+import '../../features/home/data/models/car_model.dart';
 import '../../features/home/data/repos/home_repo_impl.dart';
 import '../../features/home/presentation/model_views/home_cubit/home_cubit.dart';
 import '../../features/home/presentation/views/home_view.dart';
@@ -59,7 +60,9 @@ class AppRoutes {
       ),
       GoRoute(
         path: HomeViewDetails.rn,
-        builder: (context, state) => const HomeViewDetails(),
+        builder: (context, state) => HomeViewDetails(
+          car: state.extra as CarModel,
+        ),
       ),
       GoRoute(
         path: PostView.rn,
