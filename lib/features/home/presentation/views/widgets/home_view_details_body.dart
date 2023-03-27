@@ -1,4 +1,3 @@
-import 'package:car_club/core/widgets/expanded_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/widgets/car_box_preview_details.dart';

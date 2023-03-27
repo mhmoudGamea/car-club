@@ -19,7 +19,6 @@ class DimensionsOptionBoxDetails extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(
           width: 1,
-          // color: const Color(0xff282A3E),
           color: greyColor,
         ),
         borderRadius: BorderRadius.circular(10),

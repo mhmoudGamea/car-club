@@ -4,15 +4,17 @@ import 'package:flutter/material.dart';
 
 class OptionBoxDetailsItem extends StatelessWidget {
   final String imagePath;
-  final String title;
   final String description;
+  final String title;
+  final double iconWidth;
 
-  const OptionBoxDetailsItem(
-      {Key? key,
-      required this.imagePath,
-      required this.title,
-      required this.description})
-      : super(key: key);
+  const OptionBoxDetailsItem({
+    Key? key,
+    required this.imagePath,
+    required this.description,
+    required this.title,
+    this.iconWidth = 22,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,22 +22,20 @@ class OptionBoxDetailsItem extends StatelessWidget {
       children: [
         Image.asset(
           imagePath,
-          color: babyBlue,
-          height: 26,
-          width: 26,
-        ),
-        const SizedBox(height: 10),
-        Text(
-          title,
-          style: Styles.title14.copyWith(
-            // color: const Color(0xffB7DFFF),
-            color: babyBlue,
-          ),
+          color: babyBlue.withOpacity(0.6),
+          width: iconWidth,
         ),
         const SizedBox(height: 5),
         Text(
           description,
-          style: Styles.title12,
+          style: Styles.title14.copyWith(color: blackColor),
+        ),
+        const SizedBox(height: 5),
+        Text(
+          title,
+          style: Styles.title13.copyWith(
+            color: Colors.grey.shade600,
+          ),
         ),
       ],
     );

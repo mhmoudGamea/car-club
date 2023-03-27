@@ -1,16 +1,18 @@
 import 'package:car_club/core/widgets/tabs_view.dart';
 import 'package:car_club/features/auth/presentation/views/reset_password_view.dart';
 import 'package:car_club/features/auth/presentation/views/splash_view.dart';
+import 'package:car_club/features/home/data/models/car_model.dart';
+import 'package:car_club/features/home/data/repos/home_repo_impl.dart';
+import 'package:car_club/features/home/presentation/model_views/home_cubit/home_cubit.dart';
 import 'package:car_club/features/post/data/models/post_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/views/auth_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/register_view.dart';
-import '../../features/home/data/models/car_model.dart';
-import '../../features/home/data/repos/home_repo_impl.dart';
-import '../../features/home/presentation/model_views/home_cubit/home_cubit.dart';
 import '../../features/home/presentation/views/home_view.dart';
+import '../../features/home/presentation/views/home_view_details.dart';
 import '../../features/post/presentation/views/post_view.dart';
 import '../../features/profile/presentation/views/profile_view.dart';
 // import '../../features/services/presentation/views/add_car_center_form.dart';
@@ -49,7 +51,10 @@ class AppRoutes {
       ),
       GoRoute(
         path: TabsView.rn,
-        builder: (context, state) => const TabsView(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => HomeCubit(HomeRepoImpl()),
+          child: const TabsView(),
+        ),
       ),
       GoRoute(
         path: ProfileView.rn,
@@ -59,6 +64,11 @@ class AppRoutes {
         path: DetailsView.rn,
         builder: (context, state) =>
             DetailsView(model: state.extra as PostModel),
+      ),
+      GoRoute(
+        path: HomeViewDetails.rn,
+        builder: (context, state) =>
+            HomeViewDetails(car: state.extra as CarModel),
       ),
       GoRoute(
         path: PostView.rn,

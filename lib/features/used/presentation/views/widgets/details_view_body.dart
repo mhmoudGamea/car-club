@@ -5,7 +5,9 @@ import 'package:car_club/core/widgets/shimmer_indecator.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../post/data/models/post_model.dart';
-import 'car_details_horizontal_box.dart';
+import 'used_car_color_box.dart';
+import 'used_car_dates_box.dart';
+import 'used_car_option_box.dart';
 
 class DetailsViewBody extends StatefulWidget {
   final PostModel model;
@@ -20,81 +22,90 @@ class _DetailsViewBodyState extends State<DetailsViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Helper.normalAppBar(
-          backgroundColor: whiteColor,
-          context: context,
-          color: blackColor,
-          elevation: 1,
-          title: 'Details',
-          iconSize: 20,
-        ),
-        const SizedBox(height: 2),
-        Stack(
-          children: [
-            SizedBox(
-              width: double.infinity,
-              height: 230,
-              child: CachedNetworkImage(
-                imageUrl: widget.model.images[_index],
-                fit: BoxFit.cover,
-                placeholder: (context, url) =>
-                    const ShimmerIndicator(width: double.infinity, height: 150),
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Column(
+        children: [
+          Helper.normalAppBar(
+            backgroundColor: whiteColor,
+            context: context,
+            color: blackColor,
+            elevation: 1,
+            title: 'Details',
+            iconSize: 20,
+          ),
+          const SizedBox(height: 2),
+          Stack(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                height: 230,
+                child: CachedNetworkImage(
+                  imageUrl: widget.model.images[_index],
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => const ShimmerIndicator(
+                      width: double.infinity, height: 150),
+                ),
               ),
-            ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                height: 50,
-                color: greyColor.withOpacity(0.5),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: widget.model.images.length,
-                    itemBuilder: (context, index) => GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _index = index;
-                        });
-                      },
-                      child: Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          border: Border(
-                            left:
-                                const BorderSide(color: mintGreen, width: 1.2),
-                            top: const BorderSide(color: mintGreen, width: 1.2),
-                            bottom:
-                                const BorderSide(color: mintGreen, width: 1.2),
-                            right: (index == widget.model.images.length - 1)
-                                ? const BorderSide(color: mintGreen, width: 1.2)
-                                : BorderSide.none,
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  height: 50,
+                  color: greyColor.withOpacity(0.5),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: widget.model.images.length,
+                      itemBuilder: (context, index) => GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _index = index;
+                          });
+                        },
+                        child: Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              left: const BorderSide(
+                                  color: mintGreen, width: 1.2),
+                              top: const BorderSide(
+                                  color: mintGreen, width: 1.2),
+                              bottom: const BorderSide(
+                                  color: mintGreen, width: 1.2),
+                              right: (index == widget.model.images.length - 1)
+                                  ? const BorderSide(
+                                      color: mintGreen, width: 1.2)
+                                  : BorderSide.none,
+                            ),
                           ),
+                          child: CachedNetworkImage(
+                              imageUrl: widget.model.images[index]),
                         ),
-                        child: CachedNetworkImage(
-                            imageUrl: widget.model.images[index]),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            children: [
-              CraDetailsHorizontalBox(model: widget.model),
             ],
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              children: [
+                UsedCarOptionBox(car: widget.model),
+                const SizedBox(height: 15),
+                UsedCarColorBox(car: widget.model),
+                const SizedBox(height: 15),
+                UsedCarDatesBox(car: widget.model),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
