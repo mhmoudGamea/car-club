@@ -21,7 +21,7 @@ class TabsView extends StatefulWidget {
 }
 
 class _TabsViewState extends State<TabsView> {
-  final _currentIndex = 0;
+  var _currentIndex = 0;
 
   final List<Map<String, dynamic>> _screens = [
     {'screen': const HomeView()},
@@ -73,56 +73,105 @@ class _TabsViewState extends State<TabsView> {
               // left of floating action button
               Row(
                 children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(FontAwesomeIcons.house, size: 15),
-                      const SizedBox(height: 3),
-                      Text(
-                        'Home',
-                        style: Styles.title13.copyWith(color: Colors.black),
-                      )
-                    ],
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _currentIndex = 0;
+                      });
+                    },
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(FontAwesomeIcons.house,
+                            size: 15,
+                            color: _currentIndex == 0 ? mintGreen : blackColor),
+                        const SizedBox(height: 3),
+                        Text(
+                          'Home',
+                          style: Styles.title13.copyWith(
+                              color: _currentIndex == 0
+                                  ? mintGreen
+                                  : Colors.black),
+                        )
+                      ],
+                    ),
                   ),
                   SizedBox(width: MediaQuery.of(context).size.width * 0.08),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(FontAwesomeIcons.retweet, size: 16),
-                      const SizedBox(height: 3),
-                      Text(
-                        'Used',
-                        style: Styles.title13.copyWith(color: Colors.black),
-                      )
-                    ],
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _currentIndex = 1;
+                      });
+                    },
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(FontAwesomeIcons.retweet,
+                            size: 16,
+                            color: _currentIndex == 1 ? mintGreen : blackColor),
+                        const SizedBox(height: 3),
+                        Text(
+                          'Used',
+                          style: Styles.title13.copyWith(
+                              color: _currentIndex == 1
+                                  ? mintGreen
+                                  : Colors.black),
+                        )
+                      ],
+                    ),
                   ),
                 ],
               ),
               const Spacer(),
               Row(
                 children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(FontAwesomeIcons.screwdriverWrench, size: 16),
-                      const SizedBox(height: 3),
-                      Text(
-                        'Service',
-                        style: Styles.title13.copyWith(color: Colors.black),
-                      )
-                    ],
+                  //right of floating action button
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _currentIndex = 2;
+                      });
+                    },
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(FontAwesomeIcons.screwdriverWrench,
+                            size: 16,
+                            color: _currentIndex == 2 ? mintGreen : blackColor),
+                        const SizedBox(height: 3),
+                        Text(
+                          'Service',
+                          style: Styles.title13.copyWith(
+                              color: _currentIndex == 2
+                                  ? mintGreen
+                                  : Colors.black),
+                        )
+                      ],
+                    ),
                   ),
                   SizedBox(width: MediaQuery.of(context).size.width * 0.08),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(FontAwesomeIcons.solidHeart, size: 16),
-                      const SizedBox(height: 3),
-                      Text(
-                        'Favourite',
-                        style: Styles.title13.copyWith(color: Colors.black),
-                      )
-                    ],
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _currentIndex = 3;
+                      });
+                    },
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(FontAwesomeIcons.solidHeart,
+                            size: 16,
+                            color: _currentIndex == 3 ? mintGreen : blackColor),
+                        const SizedBox(height: 3),
+                        Text(
+                          'Favourite',
+                          style: Styles.title13.copyWith(
+                              color: _currentIndex == 3
+                                  ? mintGreen
+                                  : Colors.black),
+                        )
+                      ],
+                    ),
                   ),
                 ],
               )

@@ -1,19 +1,20 @@
 import 'package:car_club/core/widgets/tabs_view.dart';
 import 'package:car_club/features/auth/presentation/views/reset_password_view.dart';
 import 'package:car_club/features/auth/presentation/views/splash_view.dart';
+import 'package:car_club/features/post/data/models/post_model.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/views/auth_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/register_view.dart';
 import '../../features/home/presentation/views/home_view.dart';
-import '../../features/home/presentation/views/home_view_details.dart';
 import '../../features/post/presentation/views/post_view.dart';
 import '../../features/profile/presentation/views/profile_view.dart';
 // import '../../features/services/presentation/views/add_car_center_form.dart';
 // import '../../features/services/presentation/views/car_center_details.dart';
 // import '../../features/services/presentation/views/car_center_location.dart';
 // import '../../features/services/presentation/views/car_centers_view.dart';
+import '../../features/used/presentation/views/details_view.dart';
 import '../cache_helper.dart';
 import '../constants.dart';
 
@@ -52,8 +53,9 @@ class AppRoutes {
         builder: (context, state) => const ProfileView(),
       ),
       GoRoute(
-        path: HomeViewDetails.rn,
-        builder: (context, state) => const HomeViewDetails(),
+        path: DetailsView.rn,
+        builder: (context, state) =>
+            DetailsView(model: state.extra as PostModel),
       ),
       GoRoute(
         path: PostView.rn,

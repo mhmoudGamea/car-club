@@ -4,6 +4,7 @@ import 'package:car_club/features/post/data/models/post_model.dart';
 import 'package:car_club/features/used/presentation/model_views/used_cubit/used_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class CarBoxItem extends StatefulWidget {
   final PostModel model;
@@ -29,9 +30,12 @@ class _CarBoxItemState extends State<CarBoxItem> {
     super.didChangeDependencies();
   }
 
+  final _format = NumberFormat('###,###,##0');
+
   @override
   Widget build(BuildContext context) {
     final data = BlocProvider.of<UsedCubit>(context, listen: false);
+    String formatedPrice = _format.format(widget.model.price);
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -81,10 +85,12 @@ class _CarBoxItemState extends State<CarBoxItem> {
                 Text(
                   widget.model.brand,
                   style: Styles.title15.copyWith(color: Colors.black),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  '${widget.model.price}',
+                  formatedPrice,
                   style: Styles.title13.copyWith(color: Colors.grey[700]),
                 ),
               ],

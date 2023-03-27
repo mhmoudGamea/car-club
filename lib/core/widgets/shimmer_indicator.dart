@@ -10,15 +10,12 @@ class ShimmerIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.grey.withOpacity(0.5),
-      highlightColor: Colors.grey,
+      baseColor: Colors.grey[900]!,
+      highlightColor: Colors.grey[800]!,
       child: Container(
         width: width,
         height: height,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(10),
-        ),
+        color: Colors.black,
       ),
     );
   }

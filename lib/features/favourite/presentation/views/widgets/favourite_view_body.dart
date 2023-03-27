@@ -23,7 +23,6 @@ class FavouriteViewBody extends StatelessWidget {
               child: CircularProgressIndicator(color: babyBlue));
         }
         List<PostModel> favs = [];
-        print(snapshot.data!.docs.length);
         snapshot.data!.docs
             .map(
               (json) => favs.add(

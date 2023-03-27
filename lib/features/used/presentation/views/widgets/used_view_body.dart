@@ -1,7 +1,9 @@
 import 'package:car_club/core/constants.dart';
 import 'package:car_club/core/utils/styles.dart';
+import 'package:car_club/features/used/presentation/views/details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../home/presentation/views/widgets/car_box_item.dart';
 import '../../model_views/used_cubit/used_cubit.dart';
 
@@ -23,8 +25,10 @@ class UsedViewBody extends StatelessWidget {
               mainAxisSpacing: 10,
               childAspectRatio: 15 / 21,
             ),
-            itemBuilder: (context, index) =>
-                CarBoxItem(model: state.posts[index]),
+            itemBuilder: (context, index) => GestureDetector(
+                onTap: () => GoRouter.of(context)
+                    .push(DetailsView.rn, extra: state.posts[index]),
+                child: CarBoxItem(model: state.posts[index])),
           );
         } else if (state is UsedCarPostsFailure) {
           return Text(
@@ -32,8 +36,12 @@ class UsedViewBody extends StatelessWidget {
             style: Styles.title13.copyWith(color: blackColor),
           );
         } else {
-          return const Center(
-            child: CircularProgressIndicator(color: mintGreen),
+          return Container(
+            height: 10,
+            alignment: Alignment.topCenter,
+            padding: const EdgeInsets.only(left: 120, right: 120),
+            child: const LinearProgressIndicator(
+                color: mintGreen, backgroundColor: greyColor),
           );
         }
       },

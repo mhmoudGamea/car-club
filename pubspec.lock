@@ -448,14 +448,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "10.4.0"
-  galleryimage:
-    dependency: "direct main"
-    description:
-      name: galleryimage
-      sha256: fff5822aff2e76835634bd8e235164fecb8a05ea8d31928857acc3bcbf326e69
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   geocoding:
     dependency: "direct main"
     description:
@@ -824,14 +816,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.1.0"
-  photo_view:
-    dependency: transitive
-    description:
-      name: photo_view
-      sha256: aedb4371e5bf67546ecd92aed341df714f9de5db7c417ce7538a91c2b43d931a
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.12.0"
   platform:
     dependency: transitive
     description:
