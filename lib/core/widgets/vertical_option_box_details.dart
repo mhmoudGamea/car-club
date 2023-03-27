@@ -1,28 +1,30 @@
-import 'package:car_club/core/constants.dart';
-import 'package:car_club/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/home/data/models/car_model.dart';
+import '../constants.dart';
 import './option_box_details_item.dart';
 
 class VerticalOptionBoxDetails extends StatelessWidget {
-  const VerticalOptionBoxDetails({Key? key}) : super(key: key);
+  final CarModel car;
+  const VerticalOptionBoxDetails({
+    Key? key,
+    required this.car,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: const [
+      children: [
         VerticalOptionDetailsItem(
-          imagePath: 'assets/images/climate-change.png',
-          title: 'Climate Control',
-          description: 'Two-Zone',
-          more: '23.5 c',
+          imagePath: 'assets/images/car_icons/transmission.png',
+          title: car.transmission,
+          description: 'Transmission Type',
         ),
         VerticalOptionDetailsItem(
-          imagePath: 'assets/images/pressure.png',
-          title: 'Type Pressure',
-          description: 'Last Update: 7m ago',
-          more: '23.5 Bar',
+          imagePath: 'assets/images/car_icons/traction.png',
+          title: car.traction,
+          description: 'Traction Type',
         ),
       ],
     );
@@ -33,18 +35,18 @@ class VerticalOptionDetailsItem extends StatelessWidget {
   final String imagePath;
   final String title;
   final String description;
-  final String more;
-  const VerticalOptionDetailsItem(
-      {super.key,
-      required this.imagePath,
-      required this.title,
-      required this.description,
-      required this.more});
+  const VerticalOptionDetailsItem({
+    super.key,
+    required this.imagePath,
+    required this.title,
+    required this.description,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 130,
+      width: 110,
       padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
       decoration: BoxDecoration(
         border: Border.all(
@@ -62,14 +64,6 @@ class VerticalOptionDetailsItem extends StatelessWidget {
             title: title,
             description: description,
           ),
-          const SizedBox(height: 10),
-          Text(
-            more,
-            style: Styles.title14.copyWith(
-              // color: const Color(0xffB7DFFF),
-              color: babyBlue,
-            ),
-          )
         ],
       ),
     );

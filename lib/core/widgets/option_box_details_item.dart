@@ -21,6 +21,8 @@ class OptionBoxDetailsItem extends StatelessWidget {
         Image.asset(
           imagePath,
           color: babyBlue,
+          height: 26,
+          width: 26,
         ),
         const SizedBox(height: 10),
         Text(
