@@ -20,8 +20,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginStates>(
         listener: (context, state) {
-          if (state is SuccessEmailAndPasswordSigningState )
-          {
+          if (state is SuccessEmailAndPasswordSigningState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
             debugPrint("uId : $uId");
@@ -32,19 +31,16 @@ class LoginScreen extends StatelessWidget {
             debugPrint("navigation is done");
 
             Helper.showCustomToast(
-              context: context,
-              icon: Icons.check_circle,
-              bgColor: Colors.greenAccent,
-              msg: 'login successful ,enjoy'
-            );
+                context: context,
+                icon: Icons.check_circle,
+                bgColor: Colors.greenAccent,
+                msg: 'login successful ,enjoy');
 
             if (LoginCubit.get(context).remember) {
-              CacheHelper.saveData('remember', LoginCubit.get(context).remember);
+              CacheHelper.saveData(
+                  'remember', LoginCubit.get(context).remember);
             }
-
-          }
-          else if (state is SuccessGoogleSigningState)
-          {
+          } else if (state is SuccessGoogleSigningState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
             debugPrint("uId : $uId");
@@ -56,14 +52,12 @@ class LoginScreen extends StatelessWidget {
                 context: context,
                 icon: Icons.check_circle,
                 bgColor: Colors.greenAccent,
-                msg: 'login successful ,enjoy'
-            );
+                msg: 'login successful ,enjoy');
             if (LoginCubit.get(context).remember) {
-              CacheHelper.saveData('remember', LoginCubit.get(context).remember);
+              CacheHelper.saveData(
+                  'remember', LoginCubit.get(context).remember);
             }
-          }
-          else if (state is SuccessFacebookSigningState)
-          {
+          } else if (state is SuccessFacebookSigningState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
             debugPrint("uId : $uId");
@@ -75,14 +69,12 @@ class LoginScreen extends StatelessWidget {
                 context: context,
                 icon: Icons.check_circle,
                 bgColor: Colors.greenAccent,
-                msg: 'login successful ,enjoy'
-            );
+                msg: 'login successful ,enjoy');
             if (LoginCubit.get(context).remember) {
-              CacheHelper.saveData('remember', LoginCubit.get(context).remember);
+              CacheHelper.saveData(
+                  'remember', LoginCubit.get(context).remember);
             }
-          }
-          else if (state is SuccessAppleSigningState)
-          {
+          } else if (state is SuccessAppleSigningState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
             debugPrint("uId : $uId");
@@ -94,23 +86,18 @@ class LoginScreen extends StatelessWidget {
                 context: context,
                 icon: Icons.check_circle,
                 bgColor: Colors.greenAccent,
-                msg: 'login successful ,enjoy'
-            );
+                msg: 'login successful ,enjoy');
             if (LoginCubit.get(context).remember) {
-              CacheHelper.saveData('remember', LoginCubit.get(context).remember);
+              CacheHelper.saveData(
+                  'remember', LoginCubit.get(context).remember);
             }
-          }
-          else if (state is ErrorEmailAndPasswordSigningState ||
+          } else if (state is ErrorEmailAndPasswordSigningState ||
               state is ErrorGoogleSigningState ||
               state is ErrorFacebookSigningState ||
-              state is ErrorAppleSigningState
-          ) {
-
+              state is ErrorAppleSigningState) {
             authErrorHandle(context: context, state: state);
-
           }
         },
-        child: const LoginViewBody()
-    );
+        child: const LoginViewBody());
   }
 }

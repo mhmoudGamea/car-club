@@ -32,8 +32,7 @@ class RegisterScreen extends StatelessWidget {
                 context: context,
                 icon: Icons.check_circle,
                 bgColor: Colors.greenAccent,
-                msg: 'register successful ,enjoy'
-            );
+                msg: 'register successful ,enjoy');
           } else if (state is SuccessEmailAndPasswordRegisterState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
@@ -46,8 +45,7 @@ class RegisterScreen extends StatelessWidget {
                 context: context,
                 icon: Icons.check_circle,
                 bgColor: Colors.greenAccent,
-                msg: 'register successful ,enjoy'
-            );
+                msg: 'register successful ,enjoy');
           } else if (state is SuccessGoogleRegisterState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
@@ -60,8 +58,7 @@ class RegisterScreen extends StatelessWidget {
                 context: context,
                 icon: Icons.check_circle,
                 bgColor: Colors.greenAccent,
-                msg: 'register successful ,enjoy'
-            );
+                msg: 'register successful ,enjoy');
           } else if (state is SuccessFacebookRegisterState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
@@ -74,8 +71,7 @@ class RegisterScreen extends StatelessWidget {
                 context: context,
                 icon: Icons.check_circle,
                 bgColor: Colors.greenAccent,
-                msg: 'register successful ,enjoy'
-            );
+                msg: 'register successful ,enjoy');
           } else if (state is SuccessAppleRegisterState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
@@ -88,16 +84,12 @@ class RegisterScreen extends StatelessWidget {
                 context: context,
                 icon: Icons.check_circle,
                 bgColor: Colors.greenAccent,
-                msg: 'register successful ,enjoy'
-            );
+                msg: 'register successful ,enjoy');
           } else if (state is ErrorEmailAndPasswordRegisterState ||
               state is ErrorGoogleRegisterState ||
               state is ErrorFacebookRegisterState ||
-              state is ErrorAppleRegisterState
-          ) {
-
+              state is ErrorAppleRegisterState) {
             authErrorHandle(context: context, state: state);
-
           }
         },
         builder: (context, state) {

@@ -80,8 +80,7 @@ class LoginViewBody extends StatelessWidget {
                             height: 16,
                             child: Checkbox(
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5)
-                              ),
+                                  borderRadius: BorderRadius.circular(5)),
                               activeColor: secondaryLoginColor,
                               value: LoginCubit.get(context).remember,
                               onChanged: (value) {

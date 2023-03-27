@@ -13,13 +13,13 @@ class FeedView extends StatelessWidget {
       child: MasonryGridView.builder(
         itemCount: 10,
         physics: const NeverScrollableScrollPhysics(),
-        gridDelegate:
-            const SliverSimpleGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2),
         itemBuilder: (context, index) => ClipRRect(
-borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(25),
           child: Padding(
             padding: const EdgeInsets.all(4.0),
-            child: Image.asset(i_0 ),
+            child: Image.asset(i_0),
           ),
         ),
       ),

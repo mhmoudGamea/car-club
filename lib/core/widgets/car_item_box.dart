@@ -2,11 +2,15 @@ import 'package:car_club/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../features/home/data/models/car_model.dart';
 import '../utils/styles.dart';
 
 class CarItemBox extends StatelessWidget {
-  final String image;
-  const CarItemBox({Key? key, required this.image}) : super(key: key);
+  final CarModel car;
+  const CarItemBox({
+    Key? key,
+    required this.car,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,7 @@ class CarItemBox extends StatelessWidget {
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10)),
                   child: Image.network(
-                    image,
+                    car.images[0],
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -42,7 +46,7 @@ class CarItemBox extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Rolls-Royce Cullinan',
+                      '${car.brand} ${car.model}',
                       style: Styles.titleSmall.copyWith(
                         color: Colors.black,
                         fontSize: 17,
@@ -72,7 +76,7 @@ class CarItemBox extends StatelessWidget {
                         ),
                         const SizedBox(width: 5),
                         Text(
-                          '571 hp',
+                          '${car.horsepower} hp',
                           style: Styles.titleSmall.copyWith(color: Colors.grey),
                         ),
                       ],
@@ -80,13 +84,13 @@ class CarItemBox extends StatelessWidget {
                     Row(
                       children: [
                         FaIcon(
-                          FontAwesomeIcons.stopwatch,
+                          FontAwesomeIcons.gaugeHigh,
                           color: Colors.grey[600],
                           size: 19,
                         ),
                         const SizedBox(width: 5),
                         Text(
-                          '5.2 sec',
+                          car.motor,
                           style: Styles.titleSmall.copyWith(color: Colors.grey),
                         ),
                       ],
@@ -100,7 +104,7 @@ class CarItemBox extends StatelessWidget {
                         ),
                         const SizedBox(width: 5),
                         Text(
-                          '2100',
+                          '${car.price}',
                           style: Styles.titleSmall.copyWith(color: Colors.grey),
                         ),
                       ],

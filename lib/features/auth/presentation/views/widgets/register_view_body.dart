@@ -59,12 +59,10 @@ class RegisterViewBody extends StatelessWidget {
                   onTap: () => cubit.changePasswordVisibility(),
                 ),
                 controller: cubit.passwordController,
-
               ),
               const SizedBox(
                 height: 18,
               ),
-
               DefaultTextField(
                 hintText: 'Confirm Password',
                 type: TextInputType.visiblePassword,
@@ -84,17 +82,13 @@ class RegisterViewBody extends StatelessWidget {
               defaultButton(
                   buttonName: 'Sign Up',
                   onTap: () {
-
                     if (cubit.passwordController.text !=
                         cubit.confirmPasswordController.text) {
-
                       return Helper.showCustomToast(
                           context: context,
                           icon: Icons.warning_sharp,
                           bgColor: Colors.yellowAccent,
-                          msg: 'the confirm password not match the password'
-                      );
-
+                          msg: 'the confirm password not match the password');
                     }
                     if (cubit.registerFormKey.currentState!.validate()) {
                       RegisterCubit.get(context).userRegister(

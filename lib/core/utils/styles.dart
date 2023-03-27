@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
- class Styles {
+class Styles {
   static const title12 = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w200,
@@ -56,8 +56,6 @@ import '../constants.dart';
   static const appBarTitleMedium = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 19,
-    color:secondaryDark ,
-
+    color: secondaryDark,
   );
-
 }

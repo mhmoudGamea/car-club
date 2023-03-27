@@ -64,7 +64,9 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                 height: 180,
                 width: 180,
                 decoration: const BoxDecoration(
-                  image: DecorationImage(image:AssetImage('assets/images/cover.jpg'),fit: BoxFit.cover),
+                  image: DecorationImage(
+                      image: AssetImage('assets/images/cover.jpg'),
+                      fit: BoxFit.cover),
                   shape: BoxShape.circle,
                   color: greyColor,
                 ),

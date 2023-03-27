@@ -54,5 +54,5 @@ void authErrorHandle({required BuildContext context, required dynamic state}) {
               color: secondaryLoginColor,
             ),
             backgroundColor: whiteColor,
-      ));
+          ));
 }

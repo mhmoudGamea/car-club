@@ -34,8 +34,7 @@ class AuthenticationView extends StatelessWidget {
                 context: context,
                 icon: Icons.check_circle,
                 bgColor: Colors.greenAccent,
-                msg: 'login successful ,enjoy'
-            );
+                msg: 'login successful ,enjoy');
           } else if (state is SuccessFacebookSigningState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
@@ -48,8 +47,7 @@ class AuthenticationView extends StatelessWidget {
                 context: context,
                 icon: Icons.check_circle,
                 bgColor: Colors.greenAccent,
-                msg: 'login successful ,enjoy'
-            );
+                msg: 'login successful ,enjoy');
           } else if (state is SuccessAppleSigningState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
@@ -62,16 +60,11 @@ class AuthenticationView extends StatelessWidget {
                 context: context,
                 icon: Icons.check_circle,
                 bgColor: Colors.greenAccent,
-                msg: 'login successful ,enjoy'
-            );
-          } else if (
-              state is ErrorGoogleSigningState ||
+                msg: 'login successful ,enjoy');
+          } else if (state is ErrorGoogleSigningState ||
               state is ErrorFacebookSigningState ||
-              state is ErrorAppleSigningState
-          ) {
-
+              state is ErrorAppleSigningState) {
             authErrorHandle(context: context, state: state);
-
           }
         },
         child: const AuthenticationViewBody(),
