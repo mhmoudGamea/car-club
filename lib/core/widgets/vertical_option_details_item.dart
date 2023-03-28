@@ -17,12 +17,10 @@ class VerticalOptionDetailsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 130,
       padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
       decoration: BoxDecoration(
         border: Border.all(
           width: 1,
-          // color: const Color(0xff282A3E),
           color: greyColor,
         ),
         borderRadius: BorderRadius.circular(10),
@@ -34,6 +32,7 @@ class VerticalOptionDetailsItem extends StatelessWidget {
             imagePath: imagePath,
             title: title,
             description: description,
+            iconWidth: 20,
           ),
         ],
       ),

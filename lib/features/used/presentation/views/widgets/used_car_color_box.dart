@@ -42,10 +42,3 @@ class UsedCarColorBox extends StatelessWidget {
     );
   }
 }
-
-/*
-
-
-
-
-*/

@@ -1,111 +1,103 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:car_club/core/constants.dart';
-import 'package:car_club/core/utils/helper.dart';
-import 'package:car_club/core/widgets/shimmer_indecator.dart';
-import 'package:flutter/material.dart';
+import 'package:car_club/features/used/presentation/views/widgets/used_car_map_box.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
+import '../../../../../core/utils/styles.dart';
 import '../../../../post/data/models/post_model.dart';
+import 'details_app_bar.dart';
 import 'used_car_color_box.dart';
 import 'used_car_dates_box.dart';
+import 'used_car_image_box.dart';
 import 'used_car_option_box.dart';
 
-class DetailsViewBody extends StatefulWidget {
+class DetailsViewBody extends StatelessWidget {
   final PostModel model;
   const DetailsViewBody({Key? key, required this.model}) : super(key: key);
 
   @override
-  State<DetailsViewBody> createState() => _DetailsViewBodyState();
-}
-
-class _DetailsViewBodyState extends State<DetailsViewBody> {
-  var _index = 0;
-
-  @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      child: Column(
-        children: [
-          Helper.normalAppBar(
-            backgroundColor: whiteColor,
-            context: context,
-            color: blackColor,
-            elevation: 1,
-            title: 'Details',
-            iconSize: 20,
-          ),
-          const SizedBox(height: 2),
-          Stack(
-            children: [
-              SizedBox(
-                width: double.infinity,
-                height: 230,
-                child: CachedNetworkImage(
-                  imageUrl: widget.model.images[_index],
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => const ShimmerIndicator(
-                      width: double.infinity, height: 150),
-                ),
-              ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                  height: 50,
-                  color: greyColor.withOpacity(0.5),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: widget.model.images.length,
-                      itemBuilder: (context, index) => GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _index = index;
-                          });
-                        },
-                        child: Container(
-                          height: 50,
-                          width: 50,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              left: const BorderSide(
-                                  color: mintGreen, width: 1.2),
-                              top: const BorderSide(
-                                  color: mintGreen, width: 1.2),
-                              bottom: const BorderSide(
-                                  color: mintGreen, width: 1.2),
-                              right: (index == widget.model.images.length - 1)
-                                  ? const BorderSide(
-                                      color: mintGreen, width: 1.2)
-                                  : BorderSide.none,
-                            ),
-                          ),
-                          child: CachedNetworkImage(
-                              imageUrl: widget.model.images[index]),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
+    return Column(
+      children: [
+        Expanded(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
-                UsedCarOptionBox(car: widget.model),
-                const SizedBox(height: 15),
-                UsedCarColorBox(car: widget.model),
-                const SizedBox(height: 15),
-                UsedCarDatesBox(car: widget.model),
+                DetailsAppBar(model: model),
+                const SizedBox(height: 1),
+                UsedCarImageBox(images: model.images),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    children: [
+                      UsedCarOptionBox(car: model),
+                      const SizedBox(height: 15),
+                      UsedCarColorBox(car: model),
+                      const SizedBox(height: 15),
+                      UsedCarDatesBox(car: model),
+                      const SizedBox(height: 15),
+                      UsedCarMapBox(ownerAddress: model.address),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
-        ],
-      ),
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+          decoration: BoxDecoration(
+            color: whiteColor,
+            boxShadow: [
+              BoxShadow(
+                color: greyColor.withOpacity(0.7),
+                offset: const Offset(0, -2),
+                blurRadius: 2,
+                spreadRadius: 1,
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: NeumorphicButton(
+                  onPressed: () {},
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  style: NeumorphicStyle(
+                    color: whiteColor,
+                    depth: 0.5,
+                    border: NeumorphicBorder(
+                      width: 1,
+                      color: Colors.grey[200],
+                    ),
+                  ),
+                  child: Text(
+                    'Chat',
+                    textAlign: TextAlign.center,
+                    style: Styles.title15.copyWith(color: blackColor),
+                  ),
+                ),
+              ),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.05),
+              Expanded(
+                child: NeumorphicButton(
+                  onPressed: () {},
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  style: const NeumorphicStyle(
+                    color: mintGreen,
+                    depth: 0.5,
+                  ),
+                  child: Text(
+                    'Call',
+                    textAlign: TextAlign.center,
+                    style: Styles.title15.copyWith(color: whiteColor),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

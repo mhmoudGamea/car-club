@@ -18,6 +18,10 @@ class UsedCubit extends Cubit<UsedState> {
 
   List<PostModel> postsModel = [];
 
+  List<PostModel> get getPostsModel {
+    return [...postsModel];
+  }
+
   // this function is executed periodically when new user add new post
   // but if the same user post his second post he must pull to refresh
   // to execute this function again and see his post
@@ -74,7 +78,7 @@ class UsedCubit extends Cubit<UsedState> {
     });
   }
 
-  // this func executed to make isFavourite field in postModel = true or false
+  // this func executed to make favourites field in firestore by add or remove user uid
 
   void updateFavourites(PostModel model, bool isLiked, context) async {
     await postsCollectionRF
@@ -123,4 +127,6 @@ class UsedCubit extends Cubit<UsedState> {
       },
     );
   }
+
+  // details page
 }

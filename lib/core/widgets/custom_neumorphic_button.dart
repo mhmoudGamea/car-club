@@ -7,13 +7,13 @@ class CustomNeumorphicButton extends StatelessWidget {
   final Color backgroundColor;
   final VoidCallback onPress;
   final Color? textColor;
-  const CustomNeumorphicButton(
-      {Key? key,
-      required this.text,
-      required this.backgroundColor,
-      required this.onPress,
-      this.textColor})
-      : super(key: key);
+  const CustomNeumorphicButton({
+    Key? key,
+    required this.text,
+    required this.backgroundColor,
+    required this.onPress,
+    this.textColor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

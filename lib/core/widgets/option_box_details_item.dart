@@ -22,7 +22,7 @@ class OptionBoxDetailsItem extends StatelessWidget {
       children: [
         Image.asset(
           imagePath,
-          color: babyBlue.withOpacity(0.6),
+          color: greyColor,
           width: iconWidth,
         ),
         const SizedBox(height: 5),

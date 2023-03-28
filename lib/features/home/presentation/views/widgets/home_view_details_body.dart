@@ -35,10 +35,6 @@ class HomeViewDetailsBody extends StatelessWidget {
                   const SizedBox(height: 30),
                   DimensionsOptionBoxDetails(car: car),
                   const SizedBox(height: 30),
-                  // const ExpandedWidget(
-                  //   description:
-                  //       'The 2022 Porsche Macan is a compact SUV with sports car character. For 2022, the Porsche Macan features a revised front and rear fascia, new rear diffuser, and newly designed side blades. There are also seven new wheel designs to choose from. For performance, the standard 2.0-liter four-cylinder engine has received a 13-horsepower increase to 261-hp,',
-                  // ),
                 ],
               ),
             )
