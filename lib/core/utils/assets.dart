@@ -39,7 +39,7 @@ const subaru = 'assets/images/Subaru.jpg';
 const suzuki = 'assets/images/Suzuki.jpg';
 const vw = 'assets/images/Volkswagen.jpg';
 const volvo = 'assets/images/Volvo.jpg';
-
+const service ='assets/images/service_1.jpg';
 // text for fields prefix icons
 
 const price = 'assets/images/price.png';

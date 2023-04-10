@@ -2,9 +2,7 @@ import 'package:car_club/core/utils/styles.dart';
 import 'package:car_club/features/profile/presentation/views/widgets/tabs/sells_view.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../../../../../core/constants.dart';
-
 import 'tabs/feed_view.dart';
 import 'tabs/fav_view.dart';
 
