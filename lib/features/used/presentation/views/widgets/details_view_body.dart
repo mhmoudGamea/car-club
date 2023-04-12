@@ -2,9 +2,9 @@ import 'package:car_club/core/constants.dart';
 import 'package:car_club/features/used/presentation/views/widgets/used_car_map_box.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
+import '../../../../../core/utils/helper.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../post/data/models/post_model.dart';
-import 'details_app_bar.dart';
 import 'used_car_color_box.dart';
 import 'used_car_dates_box.dart';
 import 'used_car_image_box.dart';
@@ -23,7 +23,14 @@ class DetailsViewBody extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
-                DetailsAppBar(model: model),
+                // DetailsAppBar(model: model),
+                Helper.normalAppBar(
+                  context: context,
+                  title: model.brand,
+                  backgroundColor: whiteColor,
+                  elevation: 1,
+                  iconSize: 20,
+                ),
                 const SizedBox(height: 1),
                 UsedCarImageBox(images: model.images),
                 Padding(

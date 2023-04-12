@@ -5,6 +5,7 @@ import 'package:car_club/features/used/presentation/model_views/used_cubit/used_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:like_button/like_button.dart';
 
 class CarBoxItem extends StatefulWidget {
   final PostModel model;
@@ -48,20 +49,43 @@ class _CarBoxItemState extends State<CarBoxItem> {
             builder: (context, state) {
               return Align(
                 alignment: Alignment.topRight,
-                child: IconButton(
-                  padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(),
-                  onPressed: () {
+                child: LikeButton(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  onTap: (isLiked) async {
                     setState(() {
                       _isLiked = !_isLiked;
                     });
                     data.updateFavourites(widget.model, _isLiked, context);
+                    return _isLiked;
                   },
-                  icon: Icon(
-                    _isLiked ? Icons.favorite : Icons.favorite_outline_rounded,
-                    size: 18,
-                    color: Colors.red,
-                  ),
+                  isLiked: _isLiked,
+                  size: 22,
+                  likeBuilder: (bool isLiked) {
+                    return Icon(
+                      _isLiked
+                          ? Icons.favorite
+                          : Icons.favorite_outline_rounded,
+                      color: Colors.red,
+                      size: 20,
+                    );
+                  },
+                  likeCount: widget.model.favourites.length,
+                  countBuilder: (int? count, bool isLiked, String text) {
+                    var color = isLiked ? blackColor : greyColor;
+                    Widget result;
+                    if (count == 0) {
+                      result = Text(
+                        "0",
+                        style: TextStyle(color: color),
+                      );
+                    } else {
+                      result = Text(
+                        text,
+                        style: TextStyle(color: color),
+                      );
+                    }
+                    return result;
+                  },
                 ),
               );
             },
@@ -101,3 +125,21 @@ class _CarBoxItemState extends State<CarBoxItem> {
     );
   }
 }
+/*
+// child: IconButton(
+                //   padding: EdgeInsets.zero,
+                //   constraints: const BoxConstraints(),
+                //   onPressed: () {
+                //     setState(() {
+                //       _isLiked = !_isLiked;
+                //     });
+                //     data.updateFavourites(widget.model, _isLiked, context);
+                //   },
+                //   icon: Icon(
+                //     _isLiked ? Icons.favorite : Icons.favorite_outline_rounded,
+                //     size: 18,
+                //     color: Colors.red,
+                //   ),
+                // ),
+
+*/

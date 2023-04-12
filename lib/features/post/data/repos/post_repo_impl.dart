@@ -4,16 +4,12 @@ import '../post_constants.dart';
 
 class PostRepoImpl implements PostRepo {
 // postsCollection > uid > posts > dynamically generated document for each post
-  CollectionReference postsCollection =
-      FirebaseFirestore.instance.collection(postsColl);
+  CollectionReference postsCollectionRF =
+      FirebaseFirestore.instance.collection(collectionName);
   @override
   Future<void> addNewPost(String uId, Map<String, dynamic> post) async {
-    await postsCollection.doc(uId).collection(posts).add(post).then(
-          (value) => value.update(
-            {'uid': uId},
-          ),
-        );
+    await postsCollectionRF.add(post);
     // this is to make uId documents descoverable as flutterFirestore said
-    await postsCollection.doc(uId).set({'dummy': '1'});
+    // await postsCollectionRF.doc(uId).set({'dummy': '1'});
   }
 }

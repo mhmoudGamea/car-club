@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class PostModel {
   final String date;
   final String brand;
@@ -40,6 +42,29 @@ class PostModel {
   });
 
   factory PostModel.fromJson(Map<String, dynamic> json) {
+    return PostModel(
+      date: json['date'],
+      brand: json['brand'],
+      manufacturingYear: json['manufacturingYear'],
+      price: json['price'],
+      fuel: json['fuel'],
+      transmission: json['transmission'],
+      mileage: json['mileage'],
+      exColor: json['exColor'],
+      inColor: json['inColor'],
+      vehicleType: json['vehicleType'],
+      noOfOwners: json['noOfOwners'],
+      wheelSize: json['wheelSize'],
+      description: json['description'],
+      address: json['address'],
+      phone: json['phone'],
+      images: json['images'],
+      favourites: List.from(json['favourites']),
+      uid: json['uid'],
+    );
+  }
+
+  factory PostModel.fromFireStore(QueryDocumentSnapshot<Object?> json) {
     return PostModel(
       date: json['date'],
       brand: json['brand'],

@@ -5,9 +5,14 @@ abstract class FavouriteState {}
 
 class FavouriteInitial extends FavouriteState {}
 
-class AddedToFavourite extends FavouriteState {
+class FavouriteLoading extends FavouriteState {}
+
+class AddedToFavouriteSuccess extends FavouriteState {
   final List<PostModel> favs;
-  AddedToFavourite({required this.favs});
+  AddedToFavouriteSuccess({required this.favs});
 }
 
-class RemovedFromFavourite extends FavouriteState {}
+class FavouriteFailure extends FavouriteState {
+  final String error;
+  FavouriteFailure({required this.error});
+}

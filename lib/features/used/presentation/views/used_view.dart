@@ -10,7 +10,7 @@ class UsedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => UsedCubit()..getPosts(),
+      create: (context) => UsedCubit(),
       child: const UsedViewBody(),
     );
   }

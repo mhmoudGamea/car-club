@@ -1,2 +1,2 @@
-const postsColl = 'postsCollection';
+const collectionName = 'usersPosts';
 const posts = 'posts';

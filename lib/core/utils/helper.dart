@@ -34,11 +34,12 @@ class Helper {
     );
   }
 
-  static void showCustomToast(
-      {required BuildContext context,
-      required Color bgColor,
-      required IconData icon,
-      required String msg}) {
+  static void showCustomToast({
+    required BuildContext context,
+    required Color bgColor,
+    required IconData icon,
+    required String msg,
+  }) {
     FToast fToast = FToast();
     fToast.init(context);
     Widget toast = Align(

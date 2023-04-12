@@ -112,10 +112,10 @@ class UserFormCubit extends Cubit<UserFormState> {
       phone: getUserPhone.text,
       images: images,
       favourites: [],
+      uid: uId,
     );
     try {
-      await postRepo.addNewPost(
-          'yyTbyyKO9xREWQjg4aXIM2thJWp1', _postModel.toJson());
+      await postRepo.addNewPost(uId, _postModel.toJson());
       emit(PostAddedSuccess());
       // ignore: use_build_context_synchronously
       Helper.showCustomToast(
@@ -152,11 +152,12 @@ class UserFormCubit extends Cubit<UserFormState> {
     );
   }
 
-  Future<void> validate(
-      {required GlobalKey<FormState> formKey,
-      required BuildContext context,
-      required UploadImageCubit uploadedImages,
-      required UserFormCubit userFormCubit}) async {
+  Future<void> validate({
+    required GlobalKey<FormState> formKey,
+    required BuildContext context,
+    required UploadImageCubit uploadedImages,
+    required UserFormCubit userFormCubit,
+  }) async {
     if (formKey.currentState!.validate()) {
       if (uploadedImages.getUploadedUrls.isNotEmpty) {
         // show confirmation box

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:car_club/core/constants.dart';
 import 'package:car_club/core/error/failure.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -57,8 +58,7 @@ class UploadImageCubit extends Cubit<UploadImageState> {
   Future<void> uploadImageToFireStorage() async {
     emit(UploadImageLoading());
 
-    String imageName =
-        'images/yyTbyyKO9xREWQjg4aXIM2thJWp1/${DateTime.now().microsecondsSinceEpoch}';
+    String imageName = 'images/$uId/${DateTime.now().microsecondsSinceEpoch}';
 
     String? downloadedUrl;
 

@@ -16,27 +16,34 @@ class OwnerAddress extends StatelessWidget {
       child: BlocBuilder<MapCubit, MapState>(
         builder: (context, state) {
           if (state is CarOwnerAddressSuccess) {
-            return ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: GoogleMap(
-                mapType: MapType.normal,
-                initialCameraPosition: CameraPosition(
-                  zoom: 9.4746,
-                  target: LatLng(
-                    state.locationModel.latitude,
-                    state.locationModel.longitude,
-                  ),
-                ),
-                markers: {
-                  Marker(
-                    markerId: const MarkerId('m1'),
-                    position: LatLng(
-                      state.locationModel.latitude,
-                      state.locationModel.longitude,
+            return Stack(
+              children: [
+                Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: GoogleMap(
+                      mapType: MapType.normal,
+                      initialCameraPosition: CameraPosition(
+                        zoom: 9.4746,
+                        target: LatLng(
+                          state.locationModel.latitude,
+                          state.locationModel.longitude,
+                        ),
+                      ),
+                      // markers: {
+                      //   Marker(
+                      //     markerId: const MarkerId('m1'),
+                      //     position: LatLng(
+                      //       state.locationModel.latitude,
+                      //       state.locationModel.longitude,
+                      //     ),
+                      //   ),
+                      // },
                     ),
                   ),
-                },
-              ),
+                ),
+                const Icon(Icons.location_on_rounded)
+              ],
             );
           } else {
             return const ShimmerIndicator(width: double.infinity, height: 200);

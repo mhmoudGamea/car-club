@@ -1,35 +1,35 @@
 import 'package:car_club/features/post/data/models/post_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-
-import '../../../../post/data/post_constants.dart';
 
 part 'favourite_state.dart';
 
 class FavouriteCubit extends Cubit<FavouriteState> {
   FavouriteCubit() : super(FavouriteInitial());
 
-  CollectionReference postsCollectionRF =
-      FirebaseFirestore.instance.collection(postsColl);
+  // CollectionReference postsCollectionRF =
+  //     FirebaseFirestore.instance.collection(collectionName);
 
-  // final List<PostModel> _favList = [];
+  // List<PostModel> _favList = [];
 
   // List<PostModel> get getFavList {
   //   return _favList;
   // }
 
   // Future<void> getFavourites() async {
-  //   postsCollectionRF
-  //       .doc(uId)
-  //       .collection('favourites')
-  //       .snapshots()
-  //       .listen((event) {
+  //   emit(FavouriteLoading());
+
+  //   postsCollectionRF.snapshots().listen((event) async {
+  //     // usersPosts > get all documents
   //     for (var doc in event.docs) {
-  //       _favList.add(PostModel.fromJson(doc.data()));
+  //       if (doc['favourites'].contains(uId)) {
+  //         _favList.add(PostModel.fromFireStore(doc));
+  //       }
   //     }
-  //     emit(AddedToFavourite(favs: _favList));
-  //     _favList.clear();
+  //     emit(AddedToFavouriteSuccess(favs: _favList));
+  //     _favList = [];
+  //   }, onError: (error) {
+  //     emit(FavouriteFailure(error: error));
   //   });
   // }
 }

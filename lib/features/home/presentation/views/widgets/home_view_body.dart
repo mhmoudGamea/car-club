@@ -29,6 +29,13 @@ class HomeViewBody extends StatelessWidget {
           //           Container()), //const CarBoxItem()),
           // ),
           Expanded(child: CarListView()),
+          // FloatingActionButton(
+          //   onPressed: () {
+          //     FirebaseAuth.instance.signOut();
+          //     print('Signed out');
+          //   },
+          //   child: const Icon(Icons.add),
+          // )
         ],
       ),
     );
