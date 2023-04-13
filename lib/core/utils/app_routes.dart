@@ -1,6 +1,9 @@
+import 'package:car_club/core/models/user_model.dart';
 import 'package:car_club/core/widgets/tabs_view.dart';
 import 'package:car_club/features/auth/presentation/views/reset_password_view.dart';
 import 'package:car_club/features/auth/presentation/views/splash_view.dart';
+import 'package:car_club/features/chats/presentation/views/chat_view.dart';
+import 'package:car_club/features/chats/presentation/views/users_chats_view.dart';
 import 'package:car_club/features/home/data/models/car_model.dart';
 import 'package:car_club/features/home/data/repos/home_repo_impl.dart';
 import 'package:car_club/features/home/presentation/model_views/home_cubit/home_cubit.dart';
@@ -64,6 +67,15 @@ class AppRoutes {
         path: DetailsView.rn,
         builder: (context, state) =>
             DetailsView(model: state.extra as PostModel),
+      ),
+      GoRoute(
+        path: UsersChatsView.rn,
+        builder: (context, state) => const UsersChatsView(),
+      ),
+      GoRoute(
+        path: ChatView.rn,
+        builder: (context, state) =>
+            ChatView(userModel: state.extra as UserModel),
       ),
       GoRoute(
         path: HomeViewDetails.rn,

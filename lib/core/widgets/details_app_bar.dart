@@ -1,12 +1,15 @@
 import 'package:car_club/core/constants.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/utils/styles.dart';
-import '../../../../post/data/models/post_model.dart';
+import '../utils/styles.dart';
 
 class DetailsAppBar extends StatelessWidget {
-  final PostModel model;
-  const DetailsAppBar({Key? key, required this.model}) : super(key: key);
+  final String text;
+  final IconData icon;
+  final VoidCallback onpress;
+  const DetailsAppBar(
+      {Key? key, required this.text, required this.icon, required this.onpress})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +26,23 @@ class DetailsAppBar extends StatelessWidget {
       ),
       centerTitle: true,
       title: Text(
-        'Details',
+        text,
         style: Styles.title16.copyWith(color: blackColor, fontSize: 16),
       ),
       backgroundColor: whiteColor,
       elevation: 1,
+      actions: [
+        IconButton(
+          padding: const EdgeInsets.only(right: 14),
+          constraints: const BoxConstraints(),
+          onPressed: onpress,
+          icon: const Icon(
+            Icons.search_rounded,
+            size: 25,
+            color: Colors.black,
+          ),
+        ),
+      ],
     );
   }
 }

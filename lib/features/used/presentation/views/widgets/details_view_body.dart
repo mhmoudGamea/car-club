@@ -1,6 +1,8 @@
 import 'package:car_club/core/constants.dart';
+import 'package:car_club/features/chats/presentation/views/users_chats_view.dart';
 import 'package:car_club/features/used/presentation/views/widgets/used_car_map_box.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../core/utils/helper.dart';
 import '../../../../../core/utils/styles.dart';
@@ -68,7 +70,9 @@ class DetailsViewBody extends StatelessWidget {
             children: [
               Expanded(
                 child: NeumorphicButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    GoRouter.of(context).push(UsersChatsView.rn);
+                  },
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   style: NeumorphicStyle(
                     color: whiteColor,
