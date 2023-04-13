@@ -1,116 +1,162 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/constants.dart';
+
 class ItemViewBody extends StatelessWidget {
   const ItemViewBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            height: 400,
-            width: 380,
-            decoration: BoxDecoration(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10),
+        child: Container(
+          width: double.infinity,
+          height: 400,
+          decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              image: const DecorationImage(
-                  image: AssetImage('assets/images/service_1.jpg'), fit: BoxFit.cover),
-              // shape: BoxShape.circle,
-            ),
-          ),
-          const SizedBox(
-            height: 40,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: Row(
-              children: const [
-                CircleAvatar(
-                  radius: 40.0,
-                  backgroundImage: AssetImage('assets/images/service_1.jpg'),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  'Test Text',
-                  style: TextStyle(fontSize: 22, color: Colors.grey),
-                ),
-              ],
-            ),
-          ),
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Stack(
-                  alignment: AlignmentDirectional.center,
-                  children:[ Container(
-
-                    width: 125,
-                    height: 65,
-                    decoration: BoxDecoration(
-
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(width: 5, color: Colors.white10),
-                      color: const Color(0xffc9c9c9),
+              border: Border.all(
+                width: 2,
+                color: blackColor,
+              ),
+              color: whiteColor),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Container(
+                  height: 210,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      width: 2,
+                      color: Colors.grey,
                     ),
+
+                    // border: Border.all(width: 3, color: Colors.black),
+                    image: const DecorationImage(
+                        image: NetworkImage(
+                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY0krYPMsaRUX7JXXT_NV06KhxNg7g-OX5HsGehirfvQ&s"),
+                        fit: BoxFit.cover),
+                    // shape: BoxShape.circle,
                   ),
-                    const Text("10 KM")
-                  ],
-
-
                 ),
-                Stack(
-                  alignment: AlignmentDirectional.center,
-                  children:[ Container(
-
-                    width: 125,
-                    height: 65,
-                    decoration: BoxDecoration(
-
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(width: 5, color: Colors.white10),
-                      color: const Color(0xffc9c9c9),
+              ),
+              const Divider(
+                color: blackColor,
+                height: 20,
+                thickness: 1,
+                indent: 20,
+                endIndent: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  children: const [
+                    CircleAvatar(
+                      radius: 30.0,
+                      backgroundImage: NetworkImage(
+                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY0krYPMsaRUX7JXXT_NV06KhxNg7g-OX5HsGehirfvQ&s"),
                     ),
-                  ),
-                    const Text("40 Minute")
-                  ],
-
-
-                ),
-                Stack(
-                  alignment: AlignmentDirectional.center,
-                  children:[ Container(
-
-                    width: 125,
-                    height: 65,
-                    decoration: BoxDecoration(
-
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(width: 5, color: Colors.white10),
-                      color: const Color(0xffc9c9c9),
+                    SizedBox(
+                      width: 20,
                     ),
-                  ),
-                    const Text("Open")
+                    Text(
+                      'Test Text',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: blackColor,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ],
-
-
                 ),
-
-              ],
-            ),
-          )
-        ],
+              ),
+              Container(
+                width: double.infinity,
+                height: 50,
+                decoration: const BoxDecoration(color: Colors.white12),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 95,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(width: 5, color: Colors.white10),
+                          color: const Color(0xff778899),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text(
+                            "10 KM",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: blackColor,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 95,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(width: 5, color: Colors.white10),
+                          color: const Color(0xff778899),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text(
+                            "40 Min",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: blackColor,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 95,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(width: 5, color: Colors.white10),
+                          color: const Color(0xff778899),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text(
+                            "Open",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: blackColor,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

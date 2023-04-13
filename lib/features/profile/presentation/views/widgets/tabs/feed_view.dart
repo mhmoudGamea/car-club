@@ -11,7 +11,7 @@ class FeedView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
       child: MasonryGridView.builder(
-        itemCount: 10,
+        itemCount: tabs.length,
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2),
