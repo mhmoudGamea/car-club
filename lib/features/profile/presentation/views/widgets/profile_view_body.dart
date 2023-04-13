@@ -1,5 +1,6 @@
-import 'package:car_club/core/utils/styles.dart';
+
 import 'package:car_club/features/profile/presentation/views/widgets/tabs/sells_view.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../../core/constants.dart';
@@ -14,6 +15,8 @@ class ProfileViewBody extends StatefulWidget {
 }
 
 class _ProfileViewBodyState extends State<ProfileViewBody> {
+CollectionReference userRef= FirebaseFirestore.instance.collection("usersPosts");
+
   // tabs
   final List<Widget> tabs = const [
     //feed tab
@@ -70,9 +73,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                 ),
               ),
             ),
-            const Text(
-              "Tawhed",
-              style: Styles.appBarTitleMedium,
+            const Text("tawhed"
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -96,7 +97,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
           tabs: tabs,
         ),
         // tab bar view
-        SizedBox(height: 10000, child: TabBarView(children: tabsBarViews))
+        SizedBox(height:3000 , child: TabBarView(children: tabsBarViews))
       ],
     );
   }
