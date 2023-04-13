@@ -3,6 +3,8 @@ import 'package:car_club/features/chats/presentation/views/widgets/chat_app_bar.
 import 'package:car_club/features/chats/presentation/views/widgets/send_message_widget.dart';
 import 'package:flutter/material.dart';
 
+import 'chat_body_content.dart';
+
 class ChatViewBody extends StatelessWidget {
   final UserModel userModel;
   const ChatViewBody({Key? key, required this.userModel}) : super(key: key);
@@ -13,9 +15,9 @@ class ChatViewBody extends StatelessWidget {
       children: [
         ChatAppBar(name: userModel.name, image: userModel.profileImage),
         Expanded(
-          child: Container(),
+          child: ChatBodyContent(userModel: userModel),
         ),
-        SendMessageWidget()
+        SendMessageWidget(userModel: userModel)
       ],
     );
   }

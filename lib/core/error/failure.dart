@@ -11,6 +11,13 @@ class ServerFailure extends Failure {
   }
 }
 
+class FireStoreFailure extends Failure {
+  FireStoreFailure(super.error);
+  factory FireStoreFailure.fromSendMessage(String error) {
+    return FireStoreFailure(error);
+  }
+}
+
 class MaxNumberOfImagesError implements Exception {
   final String errorMessage;
 

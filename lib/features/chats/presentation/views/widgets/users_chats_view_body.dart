@@ -23,7 +23,7 @@ class UsersChatsViewBody extends StatelessWidget {
             }),
         BlocBuilder<ChatCubit, ChatState>(
           builder: (context, state) {
-            if (state is ChatLoading) {
+            if (state is UsersChatsLoading) {
               return Container(
                 height: 10,
                 alignment: Alignment.topCenter,
@@ -32,7 +32,7 @@ class UsersChatsViewBody extends StatelessWidget {
                 child: const LinearProgressIndicator(
                     color: mintGreen, backgroundColor: greyColor),
               );
-            } else if (state is ChatSuccess) {
+            } else if (state is UsersChatsSuccess) {
               return Expanded(
                 child: ListView.separated(
                   physics: const BouncingScrollPhysics(),
@@ -51,7 +51,7 @@ class UsersChatsViewBody extends StatelessWidget {
                 ),
               );
             } else {
-              return Text(state is ChatFailure
+              return Text(state is UsersChatsFailure
                   ? 'Error'
                   : 'texting'); // TODO: put a nice error message here instead of text
             }

@@ -1,3 +1,4 @@
+import 'package:car_club/features/chats/data/repos/chat_repo_impl.dart';
 import 'package:car_club/features/chats/presentation/model_views/cubit/chat_cubit.dart';
 import 'package:car_club/features/chats/presentation/views/widgets/users_chats_view_body.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ class UsersChatsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ChatCubit()..getChats(),
+      create: (context) => ChatCubit(ChatRepoImpl())..getUsersChats(),
       child: const Scaffold(
         body: SafeArea(
           child: UsersChatsViewBody(),

@@ -1,14 +1,20 @@
 import 'package:car_club/core/constants.dart';
+import 'package:car_club/core/models/user_model.dart';
 import 'package:car_club/core/utils/styles.dart';
+import 'package:car_club/features/chats/presentation/model_views/cubit/chat_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SendMessageWidget extends StatelessWidget {
-  SendMessageWidget({Key? key}) : super(key: key);
+  final UserModel userModel;
+  SendMessageWidget({Key? key, required this.userModel}) : super(key: key);
   final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final data = BlocProvider.of<ChatCubit>(context);
+    String? message;
     return Container(
         width: double.infinity,
         height: 55,
@@ -31,13 +37,12 @@ class SendMessageWidget extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () {
-                // data.sendMessage(
-                //     receiver: receiverId,
-                //     message: _controller.text,
-                //     date: DateTime.now().toIso8601String());
-                // print('Message send');
-                _controller.clear();
+              onTap: () async {
+                if (_controller.text.isNotEmpty) {
+                  message = _controller.text;
+                  _controller.clear();
+                  await data.sendMessage(userModel, message!);
+                }
               },
               child: Container(
                 width: 65,
