@@ -51,7 +51,7 @@ class RegisterViewBody extends StatelessWidget {
                 onChanged: (value) {},
                 controller: cubit.phoneController,
 
-                suffix: InkWell(
+                suffix: const InkWell(
                   child: Icon(Icons.call_outlined),
 
                 ),
