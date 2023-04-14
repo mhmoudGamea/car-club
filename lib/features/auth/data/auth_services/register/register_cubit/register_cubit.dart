@@ -14,7 +14,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
+  final TextEditingController phoneController =
       TextEditingController();
 
   GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
@@ -24,7 +24,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     required String name,
     required String email,
     required String password,
-    required String confirmPassword,
+    required String phone,
   }) {
     emit(RegisterLoading());
     FirebaseAuth.instance
@@ -37,6 +37,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         name: name,
         uId: value.user!.uid,
         email: email,
+        phone: phone,
       );
     }).catchError((error) {
       emit(RegisterFailure(errMessage: error.toString()));
@@ -47,8 +48,9 @@ class RegisterCubit extends Cubit<RegisterState> {
     required String name,
     required String uId,
     required String email,
+    required String phone,
   }) {
-    UserModel model = UserModel(uId: uId, name: name, email: email);
+    UserModel model = UserModel(uId: uId, name: name, email: email, phone: phone);
     FirebaseFirestore.instance
         .collection('users')
         .doc(uId)

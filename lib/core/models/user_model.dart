@@ -5,18 +5,21 @@ class UserModel {
   late final String name;
   late final String email;
   late final String profileImage;
+  late final String phone;
 
   UserModel({
     required this.uId,
     required this.name,
     required this.email,
     this.profileImage = "",
+    required this.phone ,
   });
 
   UserModel.fromJson(Map<String, dynamic> json) {
     email = json['email'];
     name = json['name'];
     uId = json['uId'];
+    phone = json['phone'];
     profileImage = json['profileImage'];
   }
   UserModel.fromFireStore(QueryDocumentSnapshot<Object?> json) {
@@ -24,6 +27,7 @@ class UserModel {
     name = json['name'];
     profileImage = json['profileImage'];
     uId = json['uId'];
+    phone = json['phone'];
   }
 
   Map<String, dynamic> toMap() {
@@ -31,6 +35,7 @@ class UserModel {
       'name': name,
       'email': email,
       'uId': uId,
+      'phone': phone,
       'profileImage': profileImage,
     };
   }

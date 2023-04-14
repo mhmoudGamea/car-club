@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../../../../../../core/utils/assets.dart';
-
 class FeedView extends StatelessWidget {
   const FeedView({Key? key}) : super(key: key);
   final List<Widget> tabs = const [];
@@ -19,7 +17,7 @@ class FeedView extends StatelessWidget {
           borderRadius: BorderRadius.circular(25),
           child: Padding(
             padding: const EdgeInsets.all(4.0),
-            child: Image.asset(i_0),
+            child: Image.asset('images'),
           ),
         ),
       ),

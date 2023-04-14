@@ -1,4 +1,3 @@
-
 import 'package:car_club/features/profile/presentation/views/widgets/tabs/sells_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,8 @@ class ProfileViewBody extends StatefulWidget {
 }
 
 class _ProfileViewBodyState extends State<ProfileViewBody> {
-CollectionReference userRef= FirebaseFirestore.instance.collection("usersPosts");
+  CollectionReference userRef =
+      FirebaseFirestore.instance.collection("usersPosts");
 
   // tabs
   final List<Widget> tabs = const [
@@ -59,8 +59,8 @@ CollectionReference userRef= FirebaseFirestore.instance.collection("usersPosts")
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 20.0, vertical: 10.0),
               child: Container(
                 height: 180,
                 width: 180,
@@ -73,20 +73,19 @@ CollectionReference userRef= FirebaseFirestore.instance.collection("usersPosts")
                 ),
               ),
             ),
-            const Text("tawhed"
-            ),
+            const Text("Tawheed"),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 Text(
                   "+20",
-                  style:
-                      TextStyle(color: greyColor, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: greyColor, fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  "1007436737",
-                  style:
-                      TextStyle(color: greyColor, fontWeight: FontWeight.bold),
+                Text('01007436737'
+                  ,
+                  style: TextStyle(
+                      color: greyColor, fontWeight: FontWeight.bold),
                 ),
               ],
             )
@@ -97,7 +96,7 @@ CollectionReference userRef= FirebaseFirestore.instance.collection("usersPosts")
           tabs: tabs,
         ),
         // tab bar view
-        SizedBox(height:3000 , child: TabBarView(children: tabsBarViews))
+        SizedBox(height: 3000, child: TabBarView(children: tabsBarViews))
       ],
     );
   }
