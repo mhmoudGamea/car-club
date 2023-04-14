@@ -11,7 +11,7 @@ class HomeViewDetails extends StatelessWidget {
   final CarModel car;
   const HomeViewDetails({
     Key? key,
-    required this.car,
+     required this.car,
   }) : super(key: key);
 
   @override
