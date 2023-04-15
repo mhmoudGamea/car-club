@@ -1,15 +1,17 @@
 
 import 'package:car_club/core/utils/styles.dart';
 import 'package:car_club/features/home/presentation/views/home_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../core/constants.dart';
+import '../../../auth/presentation/views/login_view.dart';
 import 'widgets/profile_view_body.dart';
 
 class ProfileView extends StatelessWidget {
   static const rn = '/profileView';
-  const ProfileView({Key? key}) : super(key: key);
-
+   ProfileView({Key? key}) : super(key: key);
+ final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -57,10 +59,21 @@ class ProfileView extends StatelessWidget {
                     border: Border.all(color: greyColor, width: 1),
                     color: const Color(0xfff4d4d4),
                     borderRadius: BorderRadius.circular(18.0)),
-                child: const Icon(
-                  FontAwesomeIcons.rightFromBracket,
-                  color: babyBlue,
-                  size: 25,
+                child: IconButton(
+                  onPressed: () {
+               _auth.signOut();
+               Navigator.pop(
+                 context,
+                 MaterialPageRoute(
+
+                     builder: (BuildContext context)=>  const LoginScreen()
+                 ),
+               );
+                  },
+                  icon: const Icon(FontAwesomeIcons.rightFromBracket,
+                    color: babyBlue,
+                    size: 25,)
+
                 ))
           ],
         ),
