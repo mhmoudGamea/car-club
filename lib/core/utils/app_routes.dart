@@ -37,7 +37,7 @@ class AppRoutes {
     if (remember == false || remember == null) {
       path = '/';
     } else {
-      path = ItemViewBody.rn;
+      path = TabsView.rn;
     }
     return _router;
   }
