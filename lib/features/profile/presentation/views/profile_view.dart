@@ -19,31 +19,23 @@ class ProfileView extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
-          leading: Container(
-            margin: const EdgeInsets.all(6),
-            width: 45,
-            decoration: BoxDecoration(
-                border: Border.all(color: greyColor, width: 1),
-                color: whiteColor,
-                borderRadius: BorderRadius.circular(18.0)),
-            child: IconButton(
+          leading: IconButton(
 
-              onPressed: () {
-                Navigator.pop(
-                  context,
-                  MaterialPageRoute(
+            onPressed: () {
+              Navigator.pop(
+                context,
+                MaterialPageRoute(
 
-                       builder: (BuildContext context)=>  const HomeView()
-                  ),
-                );
-              },
-              icon: const Icon(FontAwesomeIcons.chevronLeft,
-                  size: 25.0,
-                  color: greyColor,)
+                     builder: (BuildContext context)=>  const HomeView()
+                ),
+              );
+            },
+            icon: const Icon(FontAwesomeIcons.chevronLeft,
+                size: 20.0,
+                color: blackColor,)
 
 
 
-            ),
           ),
           title: const Center(
               child: Text(
@@ -51,30 +43,22 @@ class ProfileView extends StatelessWidget {
             style: Styles.appBarTitleMedium,
           )),
           actions: [
-            Container(
-                margin: const EdgeInsets.all(6),
-                width: 45,
-                //  height: 10,
-                decoration: BoxDecoration(
-                    border: Border.all(color: greyColor, width: 1),
-                    color: const Color(0xfff4d4d4),
-                    borderRadius: BorderRadius.circular(18.0)),
-                child: IconButton(
-                  onPressed: () {
+            IconButton(
+              onPressed: () {
                _auth.signOut();
                Navigator.pop(
-                 context,
-                 MaterialPageRoute(
+             context,
+             MaterialPageRoute(
 
-                     builder: (BuildContext context)=>  const LoginScreen()
-                 ),
+                 builder: (BuildContext context)=>  const LoginScreen()
+             ),
                );
-                  },
-                  icon: const Icon(FontAwesomeIcons.rightFromBracket,
-                    color: babyBlue,
-                    size: 25,)
+              },
+              icon: const Icon(FontAwesomeIcons.rightFromBracket,
+                color: Colors.pink,
+                size: 20,)
 
-                ))
+            )
           ],
         ),
         body: const ProfileViewBody(),

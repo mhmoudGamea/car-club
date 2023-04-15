@@ -87,8 +87,8 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                 alignment: AlignmentDirectional.bottomEnd,
                 children: [
                   Container(
-                    height: 180,
-                    width: 180,
+                    height: 160,
+                    width: 160,
                     decoration: const BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage('assets/images/cover.jpg'),
@@ -102,7 +102,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                         height: 45,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
-                          color: const Color(0xffD8DADF)
+                          color:  mintGreen.withOpacity(0.5)
                         ),
                         child: const Icon(FontAwesomeIcons.camera,))
                 ],
