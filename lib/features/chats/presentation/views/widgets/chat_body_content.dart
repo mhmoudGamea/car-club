@@ -57,6 +57,7 @@ Widget buildMessageWidget(
     padding: EdgeInsets.only(right: isMe ? 10 : 0, left: isMe ? 0 : 10),
     child: Row(
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         if (!isMe)
           CircleAvatar(

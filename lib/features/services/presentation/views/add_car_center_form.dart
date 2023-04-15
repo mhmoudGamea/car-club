@@ -7,6 +7,7 @@ import '../view_models/address_cubit/address_cubit.dart';
 import '../view_models/upload_image_cubit/upload_image_cubit.dart';
 import '../view_models/user_form_cubit/car_center_form_cubit.dart';
 import 'widgets/add_car_center_form_body.dart';
+
 class AddCarCenter extends StatelessWidget {
   const AddCarCenter({Key? key}) : super(key: key);
   static const rn = '/AddCarCenter';
@@ -31,6 +32,5 @@ class AddCarCenter extends StatelessWidget {
         body: const AddCarCenterBody(),
       ),
     );
-
   }
 }

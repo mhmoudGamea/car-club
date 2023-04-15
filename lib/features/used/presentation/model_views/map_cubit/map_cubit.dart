@@ -31,6 +31,8 @@ class MapCubit extends Cubit<MapState> {
           address: ownerAddress);
       emit(CarOwnerAddressSuccess(locationModel: _locationModel!));
     } catch (error) {
+      //TODO: handle if user try to open details in used view and he is not connected to internet
+      //PlatformException(IO_ERROR, A network error occurred trying to lookup the address ''., null, null)
       emit(CarOwnerAddressFailure());
     }
   }

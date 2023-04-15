@@ -15,23 +15,25 @@ class ProfileViewBody extends StatefulWidget {
 }
 
 class _ProfileViewBodyState extends State<ProfileViewBody> {
-  String? name= '';
-  String? phone= '';
-  String? profileImage= '';
+  String? name = '';
+  String? phone = '';
+  String? profileImage = '';
   Future _getDataFromDataBase() async {
-    await FirebaseFirestore.instance.collection("users")
+    await FirebaseFirestore.instance
+        .collection("users")
         .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get().then((snapshot)async{
-       if(snapshot.exists){
-         setState(() {
-           name = snapshot.data()!["name"];
-           phone = snapshot.data()!["phone"];
-           profileImage = snapshot.data()!["profileImage"];
-
-         });
-       }
+        .get()
+        .then((snapshot) async {
+      if (snapshot.exists) {
+        setState(() {
+          name = snapshot.data()!["name"];
+          phone = snapshot.data()!["phone"];
+          profileImage = snapshot.data()!["profileImage"];
+        });
+      }
     });
   }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -97,21 +99,22 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                       color: greyColor,
                     ),
                   ),
-                    Container(
-                        width: 45,
-                        height: 45,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                          color: const Color(0xffD8DADF)
-                        ),
-                        child: const Icon(FontAwesomeIcons.camera,))
+                  Container(
+                      width: 45,
+                      height: 45,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: const Color(0xffD8DADF)),
+                      child: const Icon(
+                        FontAwesomeIcons.camera,
+                      ))
                 ],
               ),
             ),
             Text(name!),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children:  [
+              children: [
                 const Text(
                   "+2",
                   style:
@@ -119,8 +122,8 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                 ),
                 Text(
                   phone!,
-                  style:
-                      TextStyle(color: greyColor, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      color: greyColor, fontWeight: FontWeight.bold),
                 ),
               ],
             )

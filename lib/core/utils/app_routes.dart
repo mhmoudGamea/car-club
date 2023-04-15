@@ -4,7 +4,6 @@ import 'package:car_club/features/auth/presentation/views/reset_password_view.da
 import 'package:car_club/features/auth/presentation/views/splash_view.dart';
 import 'package:car_club/features/chats/presentation/views/chat_view.dart';
 import 'package:car_club/features/chats/presentation/views/users_chats_view.dart';
-import 'package:car_club/features/services/presentation/views/services_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -24,6 +23,7 @@ import '../../features/services/presentation/views/add_car_center_form.dart';
 import '../../features/services/presentation/views/car_center_details.dart';
 import '../../features/services/presentation/views/car_center_location.dart';
 import '../../features/services/presentation/views/car_centers_view.dart';
+import '../../features/services/presentation/views/services_view.dart';
 import '../../features/services/presentation/views/widgets/car_center_item_body.dart';
 import '../../features/used/presentation/views/details_view.dart';
 import '../cache_helper.dart';
@@ -37,7 +37,7 @@ class AppRoutes {
     if (remember == false || remember == null) {
       path = '/';
     } else {
-      path = ItemViewBody.rn;
+      path = TabsView.rn;
     }
     return _router;
   }

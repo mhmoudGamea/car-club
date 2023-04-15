@@ -1,26 +1,60 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../../../../core/constants.dart';
+import '../../../../../home/presentation/views/widgets/car_box_item.dart';
+import '../../../../../post/data/models/post_model.dart';
+import '../../../../../post/data/post_constants.dart';
+import '../../../../../used/presentation/views/details_view.dart';
 
 class FeedView extends StatelessWidget {
   const FeedView({Key? key}) : super(key: key);
-  final List<Widget> tabs = const [];
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4.0),
-      child: MasonryGridView.builder(
-        itemCount: tabs.length,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2),
-        itemBuilder: (context, index) => ClipRRect(
-          borderRadius: BorderRadius.circular(25),
-          child: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Image.asset('images'),
-          ),
-        ),
-      ),
-    );
+    return StreamBuilder<QuerySnapshot>(
+        stream:
+            FirebaseFirestore.instance.collection(collectionName).snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Container(
+              height: 10,
+              alignment: Alignment.topCenter,
+              padding: const EdgeInsets.only(left: 120, right: 120),
+              child: const LinearProgressIndicator(
+                  color: mintGreen, backgroundColor: greyColor),
+            );
+          } else if (snapshot.hasError) {
+            print(snapshot.data);
+            print(snapshot.error);
+            return Text(snapshot.error.toString());
+          }
+          List<PostModel> posts = [];
+          snapshot.data!.docs.map(
+            (doc) {
+              if (uId == doc['uid']) {
+                posts.add(PostModel.fromFireStore(doc));
+              }
+            },
+          ).toList();
+          return GridView.builder(
+            physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.only(left: 15, right: 15, bottom: 10),
+            itemCount: posts.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              childAspectRatio: 15 / 21,
+            ),
+            itemBuilder: (context, index) => GestureDetector(
+                onTap: () {
+                  GoRouter.of(context)
+                      .push(DetailsView.rn, extra: posts[index]);
+                },
+                child: CarBoxItem(model: posts[index])),
+          );
+          // return const Text('data');
+        });
   }
 }

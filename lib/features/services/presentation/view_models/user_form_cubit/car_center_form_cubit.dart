@@ -124,22 +124,21 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
       thursday: thursday,
     );
     _carCenterModel = CarCenterModel(
-      uId: uId,
-      date: DateTime.now().toIso8601String(),
-      name: getName.text,
-      description: getDescription.text,
-      address: getAddress.text,
-      distance: AddressCubit.getLocationModel!.distance,
-      time: AddressCubit.calculateDistanceTime(
-        AddressCubit.getLocationModel!.distance,
-      ),
-      phone: getUserPhone.text,
-      phone2: getUserPhone2.text,
-      openingTimes: openingTimes,
-      images: images,
-      latitude: AddressCubit.getLocationModel!.latitude,
-      longitude: AddressCubit.getLocationModel!.longitude
-    );
+        uId: uId,
+        date: DateTime.now().toIso8601String(),
+        name: getName.text,
+        description: getDescription.text,
+        address: getAddress.text,
+        distance: AddressCubit.getLocationModel!.distance,
+        time: AddressCubit.calculateDistanceTime(
+          AddressCubit.getLocationModel!.distance,
+        ),
+        phone: getUserPhone.text,
+        phone2: getUserPhone2.text,
+        openingTimes: openingTimes,
+        images: images,
+        latitude: AddressCubit.getLocationModel!.latitude,
+        longitude: AddressCubit.getLocationModel!.longitude);
     try {
       await postRepo.addNewCarCenter(uId, _carCenterModel.toMap());
       emit(PostAddedSuccess());
@@ -157,9 +156,9 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
   }
 
   void showConfirmationBox(
-      BuildContext context,
-      UploadImageCubit uploadedImages,
-      CarCenterFormCubit userFormCubit,
+    BuildContext context,
+    UploadImageCubit uploadedImages,
+    CarCenterFormCubit userFormCubit,
   ) {
     showDialog(
       context: context,
@@ -175,12 +174,11 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
     );
   }
 
-  Future<void> validate({
-    required GlobalKey<FormState> formKey,
-    required BuildContext context,
-    required UploadImageCubit uploadedImages,
-    required CarCenterFormCubit userFormCubit
-  }) async {
+  Future<void> validate(
+      {required GlobalKey<FormState> formKey,
+      required BuildContext context,
+      required UploadImageCubit uploadedImages,
+      required CarCenterFormCubit userFormCubit}) async {
     if (formKey.currentState!.validate()) {
       if (uploadedImages.getUploadedUrls.isNotEmpty) {
         // show confirmation box

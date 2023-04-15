@@ -17,21 +17,18 @@ class CarCentersViewBody extends StatelessWidget {
       child: BlocBuilder<CarCenterCubit, CarCentersStates>(
         builder: (context, state) {
           if (state is GetCarCentersLoading) {
-
             return const Center(child: CircularProgressIndicator());
-
           } else if (state is GetCarCentersSuccess) {
             return ListView.separated(
                 itemBuilder: (context, index) => InkWell(
-                    onTap: () => GoRouter.of(context).push(CarCenterDetails.rn,extra: state.carCenters[index]),
-                    child:ItemViewBody(carCenterModel: state.carCenters[index])
-                ),
-                separatorBuilder: (context, index) => const SizedBox(height: 10),
-                itemCount: state.carCenters.length
-            );
-
+                    onTap: () => GoRouter.of(context).push(CarCenterDetails.rn,
+                        extra: state.carCenters[index]),
+                    child:
+                        ItemViewBody(carCenterModel: state.carCenters[index])),
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 10),
+                itemCount: state.carCenters.length);
           } else if (state is GetCarCentersFailure) {
-
             return Center(
               widthFactor: 10,
               child: Text(
@@ -39,15 +36,12 @@ class CarCentersViewBody extends StatelessWidget {
                 maxLines: 1,
               ),
             );
-
           } else {
-
             return const Center(
               child: Text(
                 "{Car Centers List View failure}",
               ),
             );
-
           }
         },
       ),

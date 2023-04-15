@@ -16,6 +16,9 @@ void main() async {
   FirebaseMessaging.onMessage.listen((event) {
     print(event.data.toString());
   });
+  FirebaseMessaging.onMessageOpenedApp.listen((event) {
+    print(event.data.toString());
+  });
   Bloc.observer = MyBlocObserver();
 
   uId = CacheHelper.getData('uId');

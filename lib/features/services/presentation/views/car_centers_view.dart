@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/utils/helper.dart';
 import 'widgets/car_centers_view_body.dart';
+
 class CarCentersView extends StatelessWidget {
   const CarCentersView({Key? key}) : super(key: key);
   static const rn = '/CarCentersView';
