@@ -6,18 +6,34 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 
 class ChatRepoImpl implements ChatRepo {
-  CollectionReference chatRF = FirebaseFirestore.instance
-      .collection('users')
-      .doc(uId)
-      .collection('chats');
+  CollectionReference chatRF = FirebaseFirestore.instance.collection('users');
+
   @override
   Future<Either<Failure, bool>> sendMessage(ChatModel chatModel) async {
     try {
       await chatRF
+          .doc(uId)
+          .collection('chats')
           .doc(chatModel.receiverUid)
           .collection('messages')
           .add(chatModel.toMap());
-      await chatRF.doc(chatModel.receiverUid).set({'dummy': ''});
+      // await chatRF
+      //     .doc(uId)
+      //     .collection('chats')
+      //     .doc(chatModel.receiverUid)
+      //     .set({'dummy': ''});
+      print(chatModel.receiverUid);
+      await chatRF
+          .doc(chatModel.receiverUid)
+          .collection('chats')
+          .doc(uId)
+          .collection('messages')
+          .add(chatModel.toMap());
+      // await chatRF
+      //     .doc(chatModel.receiverUid)
+      //     .collection('chats')
+      //     .doc(uId)
+      //     .set({'dummy': ''});
       return right(true);
     } catch (error) {
       return left(FireStoreFailure.fromSendMessage(error.toString()));

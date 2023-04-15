@@ -45,7 +45,7 @@ class ChatBodyContent extends StatelessWidget {
                 context,
                 uId == chatModel[index].senderUid,
                 chatModel[index].message,
-                chatModel[index].receiverProfileImage),
+                userModel.profileImage),
           );
         });
   }

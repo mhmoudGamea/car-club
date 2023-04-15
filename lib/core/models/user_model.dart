@@ -22,8 +22,8 @@ class UserModel {
   UserModel.fromFireStore(QueryDocumentSnapshot<Object?> json) {
     email = json['email'];
     name = json['name'];
-    profileImage = json['profileImage'];
     uId = json['uId'];
+    profileImage = json['profileImage'];
   }
 
   Map<String, dynamic> toMap() {

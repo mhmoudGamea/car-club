@@ -16,6 +16,7 @@ import '../../features/home/data/repos/home_repo_impl.dart';
 import '../../features/home/presentation/model_views/home_cubit/home_cubit.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/home/presentation/views/home_view_details.dart';
+import '../../features/post/data/models/post_model.dart';
 import '../../features/post/presentation/views/post_view.dart';
 import '../../features/profile/presentation/views/profile_view.dart';
 import '../../features/services/data/models/car_center_model.dart';
@@ -24,6 +25,7 @@ import '../../features/services/presentation/views/car_center_details.dart';
 import '../../features/services/presentation/views/car_center_location.dart';
 import '../../features/services/presentation/views/car_centers_view.dart';
 import '../../features/services/presentation/views/widgets/car_center_item_body.dart';
+import '../../features/used/presentation/views/details_view.dart';
 import '../cache_helper.dart';
 import '../constants.dart';
 
@@ -53,7 +55,8 @@ class AppRoutes {
       ),
       GoRoute(
         path: ItemViewBody.rn,
-        builder: (context, state) =>  ItemViewBody(carCenterModel: state.extra as CarCenterModel),
+        builder: (context, state) =>
+            ItemViewBody(carCenterModel: state.extra as CarCenterModel),
       ),
       GoRoute(
         path: ServicesView.rn,
@@ -70,7 +73,11 @@ class AppRoutes {
         path: ProfileView.rn,
         builder: (context, state) => const ProfileView(),
       ),
-
+      GoRoute(
+        path: DetailsView.rn,
+        builder: (context, state) =>
+            DetailsView(model: state.extra as PostModel),
+      ),
       GoRoute(
         path: UsersChatsView.rn,
         builder: (context, state) => const UsersChatsView(),
@@ -82,9 +89,9 @@ class AppRoutes {
       ),
       GoRoute(
         path: HomeViewDetails.rn,
-        builder: (context, state) =>  HomeViewDetails(car: state.extra as CarModel),
+        builder: (context, state) =>
+            HomeViewDetails(car: state.extra as CarModel),
       ),
-
       GoRoute(
         path: PostView.rn,
         builder: (context, state) => const PostView(),
@@ -115,7 +122,9 @@ class AppRoutes {
       ),
       GoRoute(
         path: CarCenterDetails.rn,
-        builder: (context, state) => CarCenterDetails(carCenterModel: state.extra as CarCenterModel,),
+        builder: (context, state) => CarCenterDetails(
+          carCenterModel: state.extra as CarCenterModel,
+        ),
       ),
       GoRoute(
         path: AddCarCenter.rn,

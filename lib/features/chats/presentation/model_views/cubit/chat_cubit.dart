@@ -41,8 +41,7 @@ class ChatCubit extends Cubit<ChatState> {
         date: DateTime.now().toIso8601String(),
         message: message,
         senderUid: uid,
-        receiverUid: userModel.uId,
-        receiverProfileImage: userModel.profileImage);
+        receiverUid: userModel.uId);
     final response = await _chatRepo.sendMessage(chatModel);
     response.fold((failure) {
       emit(ChatFailure(error: failure.errMsg));
