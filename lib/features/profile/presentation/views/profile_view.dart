@@ -1,4 +1,6 @@
+
 import 'package:car_club/core/utils/styles.dart';
+import 'package:car_club/features/home/presentation/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../core/constants.dart';
@@ -22,10 +24,23 @@ class ProfileView extends StatelessWidget {
                 border: Border.all(color: greyColor, width: 1),
                 color: whiteColor,
                 borderRadius: BorderRadius.circular(18.0)),
-            child: const Icon(
-              Icons.arrow_back_ios_new_outlined,
-              size: 25.0,
-              color: greyColor,
+            child: IconButton(
+
+              onPressed: () {
+                Navigator.pop(
+                  context,
+                  MaterialPageRoute(
+
+                       builder: (BuildContext context)=>  const HomeView()
+                  ),
+                );
+              },
+              icon: const Icon(FontAwesomeIcons.chevronLeft,
+                  size: 25.0,
+                  color: greyColor,)
+
+
+
             ),
           ),
           title: const Center(
@@ -43,7 +58,7 @@ class ProfileView extends StatelessWidget {
                     color: const Color(0xfff4d4d4),
                     borderRadius: BorderRadius.circular(18.0)),
                 child: const Icon(
-                  FontAwesomeIcons.rocketchat,
+                  FontAwesomeIcons.rightFromBracket,
                   color: babyBlue,
                   size: 25,
                 ))

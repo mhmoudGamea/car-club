@@ -3,8 +3,6 @@ import 'package:car_club/features/auth/presentation/views/widgets/or_sign_in_wit
 import 'package:car_club/features/auth/presentation/views/widgets/social_media_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../../core/utils/helper.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../data/auth_services/login/login_cubit/login_cubit.dart';
 import '../../../data/auth_services/register/register_cubit/register_cubit.dart';
@@ -48,6 +46,21 @@ class RegisterViewBody extends StatelessWidget {
                 height: 18,
               ),
               DefaultTextField(
+                hintText: 'phone',
+                type: TextInputType.phone,
+                onChanged: (value) {},
+                controller: cubit.phoneController,
+
+                suffix: const InkWell(
+                  child: Icon(Icons.call_outlined),
+
+                ),
+              ),
+
+              const SizedBox(
+                height: 18,
+              ),
+              DefaultTextField(
                 hintText: 'password',
                 type: TextInputType.visiblePassword,
                 onChanged: (value) {},
@@ -63,40 +76,17 @@ class RegisterViewBody extends StatelessWidget {
               const SizedBox(
                 height: 18,
               ),
-              DefaultTextField(
-                hintText: 'Confirm Password',
-                type: TextInputType.visiblePassword,
-                onChanged: (value) {},
-                controller: cubit.confirmPasswordController,
-                obscureText: cubit.visibility,
-                suffix: InkWell(
-                  child: Icon(cubit.visibility
-                      ? Icons.visibility
-                      : Icons.visibility_off),
-                  onTap: () => cubit.changePasswordVisibility(),
-                ),
-              ),
-              const SizedBox(
-                height: 18,
-              ),
               defaultButton(
                   buttonName: 'Sign Up',
                   onTap: () {
-                    if (cubit.passwordController.text !=
-                        cubit.confirmPasswordController.text) {
-                      return Helper.showCustomToast(
-                          context: context,
-                          icon: Icons.warning_sharp,
-                          bgColor: Colors.yellowAccent,
-                          msg: 'the confirm password not match the password');
-                    }
+
                     if (cubit.registerFormKey.currentState!.validate()) {
                       RegisterCubit.get(context).userRegister(
                           name: cubit.nameController.text,
                           email: cubit.emailController.text,
                           password: cubit.passwordController.text,
-                          confirmPassword:
-                              cubit.confirmPasswordController.text);
+                         phone:
+                              cubit.phoneController.text,);
                     }
                   }),
               const SizedBox(height: 95),
