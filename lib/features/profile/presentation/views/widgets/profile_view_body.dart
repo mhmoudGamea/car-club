@@ -89,8 +89,8 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                 alignment: AlignmentDirectional.bottomEnd,
                 children: [
                   Container(
-                    height: 180,
-                    width: 180,
+                    height: 160,
+                    width: 160,
                     decoration: const BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage('assets/images/cover.jpg'),
@@ -99,6 +99,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                       color: greyColor,
                     ),
                   ),
+<<<<<<< HEAD
                   Container(
                       width: 45,
                       height: 45,
@@ -108,6 +109,16 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                       child: const Icon(
                         FontAwesomeIcons.camera,
                       ))
+=======
+                    Container(
+                        width: 45,
+                        height: 45,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                          color:  mintGreen.withOpacity(0.5)
+                        ),
+                        child: const Icon(FontAwesomeIcons.camera,))
+>>>>>>> 5d08ab0c4dfc050255ceabd826c3441156dd9fef
                 ],
               ),
             ),
