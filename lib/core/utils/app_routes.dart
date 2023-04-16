@@ -45,6 +45,10 @@ class AppRoutes {
   static final _router = GoRouter(
     initialLocation: path,
     routes: [
+      // GoRoute(
+      //   path: Test.rn,
+      //   builder: (context, state) => Test(),
+      // ),
       GoRoute(
         path: '/',
         builder: (context, state) => const SplashView(),
@@ -130,6 +134,10 @@ class AppRoutes {
         path: AddCarCenter.rn,
         builder: (context, state) => const AddCarCenter(),
       ),
+      // GoRoute(
+      //   path: ShowImage.rn,
+      //   builder: (context, state) => ShowImage(image: state.extra as String),
+      // ),
     ],
   );
 }

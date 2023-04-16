@@ -75,6 +75,13 @@ class _PostViewBodyState extends State<AddCarCenterBody> {
                             child: TextFiledWidget(
                               controller: userFormData.getAddress,
                               label: 'Address*',
+                              validate: (p0) {
+                                if(p0 == null || p0.isEmpty){
+                                  return 'Address is required';
+                                }else{
+                                  return null;
+                                }
+                              },
                               isEnabled: false,
                               prefixIcon: const Icon(
                                 FontAwesomeIcons.locationDot,
@@ -82,6 +89,7 @@ class _PostViewBodyState extends State<AddCarCenterBody> {
                                 color: Color(0xffd35400),
                               ),
                               maxLines: 2,
+
                             ),
                           ),
                         ),
@@ -135,10 +143,386 @@ class _PostViewBodyState extends State<AddCarCenterBody> {
                           alignment: Alignment.center,
                           child: Text(
                             "Opening Times",
-                            style: Styles.titleLarge,
+                            // style: Styles.titleLarge,
+                            style: Styles.title16,
                           ),
                         ),
                         const SizedBox(height: 10),
+                        Container(
+                          padding: const EdgeInsets.all(20),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 16,
+                                          height: 16,
+                                          child: Checkbox(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            activeColor: secondaryLoginColor,
+                                            value: userFormData.friday,
+                                            onChanged: (value) {
+                                              userFormData.openFriday(value!);
+                                            },
+                                            checkColor: whiteColor,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 20),
+                                        const Text(
+                                          "Friday",
+                                          style: Styles.title16,
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 16,
+                                          height: 16,
+                                          child: Checkbox(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            activeColor: secondaryLoginColor,
+                                            value: userFormData.saturday,
+                                            onChanged: (value) {
+                                              userFormData.openSaturday(value!);
+                                            },
+                                            checkColor: whiteColor,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 20),
+                                        const Text(
+                                          "saturday",
+                                          style: Styles.title16,
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 16,
+                                          height: 16,
+                                          child: Checkbox(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            activeColor: secondaryLoginColor,
+                                            value: userFormData.sunday,
+                                            onChanged: (value) {
+                                              userFormData.openSunday(value!);
+                                            },
+                                            checkColor: whiteColor,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 20),
+                                        const Text(
+                                          "Sunday",
+                                          style: Styles.title16,
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 16,
+                                          height: 16,
+                                          child: Checkbox(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            activeColor: secondaryLoginColor,
+                                            value: userFormData.monday,
+                                            onChanged: (value) {
+                                              userFormData.openMonday(value!);
+                                            },
+                                            checkColor: whiteColor,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 20),
+                                        const Text(
+                                          "Monday",
+                                          style: Styles.title16,
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 16,
+                                          height: 16,
+                                          child: Checkbox(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            activeColor: secondaryLoginColor,
+                                            value: userFormData.tuesday,
+                                            onChanged: (value) {
+                                              userFormData.openTuesday(value!);
+                                            },
+                                            checkColor: whiteColor,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 20),
+                                        const Text(
+                                          "tuesday",
+                                          style: Styles.title16,
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 16,
+                                          height: 16,
+                                          child: Checkbox(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            activeColor: secondaryLoginColor,
+                                            value: userFormData.thursday,
+                                            onChanged: (value) {
+                                              userFormData.openThursday(value!);
+                                            },
+                                            checkColor: whiteColor,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 20),
+                                        const Text(
+                                          "thursday",
+                                          style: Styles.title16,
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 16,
+                                          height: 16,
+                                          child: Checkbox(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            activeColor: secondaryLoginColor,
+                                            value: userFormData.wednesday,
+                                            onChanged: (value) {
+                                              userFormData
+                                                  .openWednesday(value!);
+                                            },
+                                            checkColor: whiteColor,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 20),
+                                        const Text(
+                                          "wednesday",
+                                          style: Styles.title16,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      "Opening Hour",
+                                      style: TextStyle(color: mintGreen),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    TextFormField(
+                                      decoration: InputDecoration(
+                                        errorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(10),
+                                            borderSide: const BorderSide(
+                                                color: Colors.red
+                                            )
+                                        ),
+                                        focusedErrorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(10),
+                                            borderSide: const BorderSide(
+                                                color: Colors.red
+                                            )
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            borderSide: const BorderSide(
+                                                color: babyBlue)),
+                                        focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            borderSide: const BorderSide(
+                                                color: mintGreen)),
+                                      ),
+                                      controller: userFormData.getOpenHour,
+                                      onTap: () {
+                                        showTimePicker(
+                                                context: context,
+                                                initialTime: TimeOfDay.now())
+                                            .then((value) => {
+                                                  userFormData
+                                                          .getOpenHour.text =
+                                                      value!.format(context)
+                                                });
+                                      },
+                                      validator: (value) {
+                                        if(value!.isEmpty){
+                                          return "Open Hour is required";
+                                        }else{
+                                          return null;
+                                        }
+                                      },
+                                    ),
+                                    const SizedBox(height: 10),
+                                    const Text(
+                                      "Close Hour",
+                                      style: TextStyle(color: mintGreen),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    TextFormField(
+                                      validator: (value) {
+                                        if (value == null ||
+                                            value.isEmpty) {
+                                          return 'Close Hour is required';
+                                        }
+                                        return null;
+                                      },
+                                      decoration: InputDecoration(
+                                        focusedErrorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(10),
+                                            borderSide: const BorderSide(
+                                                color: Colors.red
+                                            )
+                                        ),
+                                        errorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(10),
+                                            borderSide: const BorderSide(
+                                                color: Colors.red
+                                            )
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            borderSide: const BorderSide(
+                                                color: babyBlue)),
+                                        focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            borderSide: const BorderSide(
+                                                color: mintGreen)),
+                                      ),
+                                      controller: userFormData.getCloseHour,
+                                      onTap: () {
+                                        showTimePicker(
+                                                context: context,
+                                                initialTime: TimeOfDay.now())
+                                            .then((value) => {
+                                                  userFormData
+                                                          .getCloseHour.text =
+                                                      value!.format(context)
+                                                });
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        // uploaded image section
+                        if (uploadImageData.getUploadedUrls.isNotEmpty)
+                          BlocBuilder<UploadImageCubit, UploadImageState>(
+                            builder: (context, state) {
+                              return Container(
+                                margin: const EdgeInsets.only(top: 10),
+                                padding: const EdgeInsets.all(10),
+                                height: 120,
+                                decoration: BoxDecoration(
+                                  color: greyColor,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: UploadedImageBuilder(
+                                    uploadImage: uploadImageData),
+                              );
+                            },
+                          ),
+                        // upload image button
+                        const SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CustomNeumorphicButton(
+                                text: 'Upload Image',
+                                backgroundColor: greyColor,
+                                textColor: whiteColor,
+                                onPress: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) =>
+                                        BlocProvider<UploadImageCubit>.value(
+                                      value: uploadImageData,
+                                      child: ImagePickerWidget(
+                                          uploadImage: uploadImageData),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              NeumorphicButton(
+                // onPressed: validate the form,
+                onPressed: () async {
+                  await userFormData.validate(
+                    formKey: _formKey,
+                    context: context,
+                    uploadedImages: uploadImageData,
+                    userFormCubit: userFormData,
+                  );
+                },
+                padding: const EdgeInsets.symmetric(vertical: 13),
+                style: const NeumorphicStyle(color: mintGreen, depth: 1),
+                child: Text(
+                  'Next',
+                  textAlign: TextAlign.center,
+                  style: Styles.title15.copyWith(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+
+
+/*
                         Container(
                           padding: const EdgeInsets.all(20),
                           child: Row(
@@ -417,75 +801,5 @@ class _PostViewBodyState extends State<AddCarCenterBody> {
                             ],
                           ),
                         ),
-                        // uploaded image section
-                        if (uploadImageData.getUploadedUrls.isNotEmpty)
-                          BlocBuilder<UploadImageCubit, UploadImageState>(
-                            builder: (context, state) {
-                              return Container(
-                                margin: const EdgeInsets.only(top: 10),
-                                padding: const EdgeInsets.all(10),
-                                height: 120,
-                                decoration: BoxDecoration(
-                                  color: greyColor,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: UploadedImageBuilder(
-                                    uploadImage: uploadImageData),
-                              );
-                            },
-                          ),
-                        // upload image button
-                        const SizedBox(height: 10),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: CustomNeumorphicButton(
-                                text: 'Upload Image',
-                                backgroundColor: greyColor,
-                                textColor: whiteColor,
-                                onPress: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) =>
-                                        BlocProvider<UploadImageCubit>.value(
-                                      value: uploadImageData,
-                                      child: ImagePickerWidget(
-                                          uploadImage: uploadImageData),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              NeumorphicButton(
-                // onPressed: validate the form,
-                onPressed: () async {
-                  await userFormData.validate(
-                    formKey: _formKey,
-                    context: context,
-                    uploadedImages: uploadImageData,
-                    userFormCubit: userFormData,
-                  );
-                },
-                padding: const EdgeInsets.symmetric(vertical: 13),
-                style: const NeumorphicStyle(color: mintGreen, depth: 1),
-                child: Text(
-                  'Next',
-                  textAlign: TextAlign.center,
-                  style: Styles.title15.copyWith(color: Colors.white),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
+
+*/

@@ -54,3 +54,5 @@ const i_4 = "assets/images/dummy_images/i_4.jpg";
 const i_5 = "assets/images/dummy_images/i_5.jpg";
 const i_6 = "assets/images/dummy_images/i_6.jpg";
 const i_7 = "assets/images/dummy_images/i_7.jpg";
+
+const whiteImage = "assets/images/whiteimage.jpg";
