@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'styles.dart';
 
 class Helper {
+
   static AppBar normalAppBar({
     required BuildContext context,
     required String title,
