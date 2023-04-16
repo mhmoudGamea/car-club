@@ -41,24 +41,25 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
     _getDataFromDataBase();
   }
 
+  final _currentIndex = 0;
   // tabs
-  final List<Widget> tabs = const [
+  final List<Widget> tabs = [
     //feed tab
-    Tab(
+    const Tab(
       icon: Icon(
         Icons.home,
         color: greyColor,
       ),
     ),
     // fav tab
-    Tab(
+    const Tab(
       icon: Icon(
         Icons.favorite,
         color: greyColor,
       ),
     ),
     // sells tab
-    Tab(
+    const Tab(
       icon: Icon(
         FontAwesomeIcons.cartArrowDown,
         color: greyColor,
@@ -89,8 +90,8 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                 alignment: AlignmentDirectional.bottomEnd,
                 children: [
                   Container(
-                    height: 180,
-                    width: 180,
+                    height: 135,
+                    width: 135,
                     decoration: const BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage('assets/images/cover.jpg'),
@@ -99,15 +100,18 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                       color: greyColor,
                     ),
                   ),
-                  Container(
-                      width: 45,
-                      height: 45,
+                  Positioned(
+                    bottom: 10,
+                    right: 5,
+                    child: Container(
+                      width: 30,
+                      height: 30,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          color: const Color(0xffD8DADF)),
-                      child: const Icon(
-                        FontAwesomeIcons.camera,
-                      ))
+                          color: mintGreen.withOpacity(0.5)),
+                      child: const Icon(FontAwesomeIcons.camera, size: 18),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -131,6 +135,8 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
         ),
         //tab bar
         TabBar(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          indicatorColor: mintGreen,
           tabs: tabs,
         ),
         // tab bar view

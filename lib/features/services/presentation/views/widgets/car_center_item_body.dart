@@ -1,5 +1,10 @@
 import 'package:car_club/features/services/data/models/car_center_model.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../../../../../core/constants.dart';
+import '../../../../../core/utils/assets.dart';
+import '../../../../../core/utils/styles.dart';
 
 class ItemViewBody extends StatelessWidget {
   const ItemViewBody({Key? key, required this.carCenterModel }) : super(key: key);
@@ -7,108 +12,107 @@ class ItemViewBody extends StatelessWidget {
   final CarCenterModel carCenterModel;
   @override
   Widget build(BuildContext context) {
-    print(carCenterModel.name);
-    return  Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+    return Container(
+      decoration: BoxDecoration(
+        color: greyColor.withOpacity(0.4),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
         children: [
-          Container(
-            height: 400,
-            width: 380,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              image: const DecorationImage(
-                  image: AssetImage('assets/images/service_1.jpg'),
-                  fit: BoxFit.cover),
-              // shape: BoxShape.circle,
-            ),
-          ),
-          const SizedBox(
-            height: 40,
+          Stack(
+            children: const [
+              SizedBox(
+                height: 130,
+                width: double.infinity,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10)),
+                  child: Image(image: AssetImage(ford),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ],
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: Row(
-              children: const [
-                CircleAvatar(
-                  radius: 40.0,
-                  backgroundImage: AssetImage('assets/images/service_1.jpg'),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  'Test Text',
-                  style: TextStyle(fontSize: 22, color: Colors.grey),
-                ),
-              ],
-            ),
-          ),
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
+            padding: const EdgeInsets.all(10),
+            child: Column(
               children: [
-                Stack(
-                  alignment: AlignmentDirectional.center,
-                  children:[ Container(
-
-                    width: 125,
-                    height: 65,
-                    decoration: BoxDecoration(
-
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(width: 5, color: Colors.white10),
-                      color: const Color(0xffc9c9c9),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Car name',
+                      style: Styles.titleSmall.copyWith(
+                        color: Colors.black,
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                    const Text("10 KM")
+
                   ],
-
-
                 ),
-                Stack(
-                  alignment: AlignmentDirectional.center,
-                  children:[ Container(
-
-                    width: 125,
-                    height: 65,
-                    decoration: BoxDecoration(
-
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(width: 5, color: Colors.white10),
-                      color: const Color(0xffc9c9c9),
+                const Divider(
+                  color: Colors.black45,
+                  // thickness: 1,
+                ),
+                const SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        const FaIcon(
+                          FontAwesomeIcons.bolt,
+                          color: Colors.black54,
+                          size: 19,
+                        ),
+                        const SizedBox(width: 5),
+                        Text(
+                          ' hp',
+                          style:
+                          Styles.titleSmall.copyWith(color: Colors.black54),
+                        ),
+                      ],
                     ),
-                  ),
-                    const Text("40 Minute")
-                  ],
-
-
-                ),
-                Stack(
-                  alignment: AlignmentDirectional.center,
-                  children:[ Container(
-
-                    width: 125,
-                    height: 65,
-                    decoration: BoxDecoration(
-
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(width: 5, color: Colors.white10),
-                      color: const Color(0xffc9c9c9),
+                    Row(
+                      children: [
+                        const FaIcon(
+                          FontAwesomeIcons.gaugeHigh,
+                          color: Colors.black54,
+                          size: 19,
+                        ),
+                        const SizedBox(width: 5),
+                        Text(
+                          '15 km/h',
+                          style:
+                          Styles.titleSmall.copyWith(color: Colors.black54),
+                        ),
+                      ],
                     ),
-                  ),
-                    const Text("Open")
+                    Row(
+                      children: [
+                        const FaIcon(
+                          FontAwesomeIcons.dollarSign,
+                          color: Colors.black54,
+                          size: 19,
+                        ),
+                        const SizedBox(width: 5),
+                        Text(
+                          '50',
+                          style:
+                          Styles.titleSmall.copyWith(color: Colors.black54),
+                        ),
+                      ],
+                    ),
                   ],
-
-
                 ),
-
               ],
             ),
-          )
+          ),
         ],
-      );
+      ),
+    );
   }
 }
