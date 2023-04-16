@@ -1,10 +1,10 @@
 import 'package:car_club/core/utils/styles.dart';
-import 'package:car_club/features/home/presentation/views/home_view.dart';
 import 'package:car_club/features/used/presentation/model_views/used_cubit/used_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/constants.dart';
 import 'widgets/profile_view_body.dart';
 
@@ -21,46 +21,34 @@ class ProfileView extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             elevation: 0,
-            leading: Container(
-              margin: const EdgeInsets.all(6),
-              width: 45,
-              decoration: BoxDecoration(
-                  border: Border.all(color: greyColor, width: 1),
-                  color: whiteColor,
-                  borderRadius: BorderRadius.circular(18.0)),
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.pop(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => const HomeView()),
-                    );
-                  },
-                  icon: const Icon(
-                    FontAwesomeIcons.chevronLeft,
-                    size: 25.0,
-                    color: greyColor,
-                  )),
+            leading: IconButton(
+              constraints: const BoxConstraints(),
+              padding: EdgeInsets.zero,
+              icon: const Icon(
+                Icons.arrow_back_ios_rounded,
+                color: blackColor,
+                size: 21,
+              ),
+              onPressed: () {
+                GoRouter.of(context).pop();
+              },
             ),
-            title: const Center(
+            title: Center(
                 child: Text(
               "MyProfile",
-              style: Styles.appBarTitleMedium,
+              style: Styles.title16.copyWith(color: blackColor),
             )),
             actions: [
-              Container(
-                  margin: const EdgeInsets.all(6),
-                  width: 45,
-                  //  height: 10,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: greyColor, width: 1),
-                      color: const Color(0xfff4d4d4),
-                      borderRadius: BorderRadius.circular(18.0)),
-                  child: const Icon(
-                    FontAwesomeIcons.rightFromBracket,
-                    color: babyBlue,
-                    size: 25,
-                  ))
+              IconButton(
+                constraints: const BoxConstraints(),
+                padding: const EdgeInsets.only(right: 10),
+                icon: const Icon(
+                  FontAwesomeIcons.signOut,
+                  color: Colors.red,
+                  size: 21,
+                ),
+                onPressed: () {},
+              ),
             ],
           ),
           body: const ProfileViewBody(),

@@ -25,8 +25,6 @@ class FeedView extends StatelessWidget {
                   color: mintGreen, backgroundColor: greyColor),
             );
           } else if (snapshot.hasError) {
-            print(snapshot.data);
-            print(snapshot.error);
             return Text(snapshot.error.toString());
           }
           List<PostModel> posts = [];
@@ -37,22 +35,26 @@ class FeedView extends StatelessWidget {
               }
             },
           ).toList();
-          return GridView.builder(
-            physics: const BouncingScrollPhysics(),
-            padding: const EdgeInsets.only(left: 15, right: 15, bottom: 10),
-            itemCount: posts.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 15 / 21,
+          return Container(
+            margin: const EdgeInsets.only(top: 15),
+            child: GridView.builder(
+              physics: const BouncingScrollPhysics(),
+              padding: const EdgeInsets.only(
+                  left: 10, right: 10, bottom: 10, top: 20),
+              itemCount: posts.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: 15 / 21,
+              ),
+              itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    GoRouter.of(context)
+                        .push(DetailsView.rn, extra: posts[index]);
+                  },
+                  child: CarBoxItem(model: posts[index])),
             ),
-            itemBuilder: (context, index) => GestureDetector(
-                onTap: () {
-                  GoRouter.of(context)
-                      .push(DetailsView.rn, extra: posts[index]);
-                },
-                child: CarBoxItem(model: posts[index])),
           );
           // return const Text('data');
         });
