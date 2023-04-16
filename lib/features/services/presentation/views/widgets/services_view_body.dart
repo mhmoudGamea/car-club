@@ -70,7 +70,7 @@ class _ServicesViewBodyState extends State<ServicesViewBody> {
                         child: MaterialButton(
                           child: const Text("Show Car Centers"),
                           onPressed: () {
-                            //GoRouter.of(context).push(CarCentersView.rn);
+                            GoRouter.of(context).push(CarCentersView.rn);
                           },
                         ),
                       ),

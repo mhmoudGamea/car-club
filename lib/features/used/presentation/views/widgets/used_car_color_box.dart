@@ -18,7 +18,7 @@ class UsedCarColorBox extends StatelessWidget {
           width: 1,
           color: greyColor,
         ),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(5),
       ),
       child: Column(
         children: [

@@ -22,19 +22,20 @@ class OptionBoxDetailsItem extends StatelessWidget {
       children: [
         Image.asset(
           imagePath,
-          color: greyColor,
+          color: blackColor,
           width: iconWidth,
         ),
         const SizedBox(height: 5),
         Text(
           description,
-          style: Styles.title14.copyWith(color: blackColor),
+          style: Styles.title14
+              .copyWith(color: blackColor, fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 5),
         Text(
           title,
           style: Styles.title13.copyWith(
-            color: Colors.grey.shade600,
+            color: Colors.grey,
           ),
         ),
       ],

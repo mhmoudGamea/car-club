@@ -10,6 +10,7 @@ class UsedCarMapBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(ownerAddress);
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       width: double.infinity,
@@ -18,7 +19,7 @@ class UsedCarMapBox extends StatelessWidget {
           width: 1,
           color: greyColor,
         ),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(5),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,9 +32,18 @@ class UsedCarMapBox extends StatelessWidget {
           const SizedBox(height: 15),
           const OwnerAddress(),
           const SizedBox(height: 15),
-          Text(
-            ownerAddress,
-            style: Styles.title14.copyWith(color: Colors.black),
+          Row(
+            children: [
+              const Icon(Icons.location_on_rounded,
+                  size: 20, color: blackColor),
+              const SizedBox(width: 5),
+              Flexible(
+                child: Text(
+                  ownerAddress,
+                  style: Styles.title14.copyWith(color: Colors.black),
+                ),
+              ),
+            ],
           ),
         ],
       ),

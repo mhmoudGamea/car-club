@@ -19,7 +19,7 @@ class UsedCarDatesBox extends StatelessWidget {
           width: 1,
           color: greyColor,
         ),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(5),
       ),
       child: Column(
         children: [
@@ -30,11 +30,13 @@ class UsedCarDatesBox extends StatelessWidget {
                 imagePath: 'assets/images/car_icons/year.png',
                 description: 'Manufacturing year',
                 title: car.manufacturingYear,
+                iconWidth: 20,
               ),
               OptionBoxDetailsItem(
                 imagePath: 'assets/images/car_icons/year.png',
                 title: DateFormat.yMMMd().format(DateTime.parse(car.date)),
                 description: 'Posted at',
+                iconWidth: 20,
               ),
             ],
           ),

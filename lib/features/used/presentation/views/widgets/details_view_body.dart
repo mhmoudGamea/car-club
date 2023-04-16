@@ -3,6 +3,7 @@ import 'package:car_club/features/chats/presentation/views/users_chats_view.dart
 import 'package:car_club/features/used/presentation/views/widgets/used_car_map_box.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../core/utils/helper.dart';
 import '../../../../../core/utils/styles.dart';
@@ -15,6 +16,10 @@ import 'used_car_option_box.dart';
 class DetailsViewBody extends StatelessWidget {
   final PostModel model;
   const DetailsViewBody({Key? key, required this.model}) : super(key: key);
+
+  void _callLauncher(phone) async {
+    await launchUrl(Uri.parse(phone));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +97,9 @@ class DetailsViewBody extends StatelessWidget {
               SizedBox(width: MediaQuery.of(context).size.width * 0.05),
               Expanded(
                 child: NeumorphicButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _callLauncher('tel:${model.phone}');
+                  },
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   style: const NeumorphicStyle(
                     color: mintGreen,
