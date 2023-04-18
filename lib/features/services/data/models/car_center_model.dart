@@ -14,9 +14,13 @@ class CarCenterModel {
   final int time;
   final double latitude;
   final double longitude;
+  final bool credit;
+  final bool offers;
 
 
   const CarCenterModel({
+    required this.credit,
+    required this.offers,
     required this.uId,
     required this.latitude,
     required this.longitude,
@@ -47,12 +51,16 @@ class CarCenterModel {
       phone2: json['phone2'],
       openingTimes: OpeningTimes.fromJson(json['openingTimes']),
       images: json['images'],
+      credit: json['credit'],
+      offers : json['offers'],
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'uId':uId,
+      'credit': credit,
+      'offers':offers,
       'date': date,
       'name': name,
       'description': description,
@@ -65,7 +73,6 @@ class CarCenterModel {
       'time':time,
       'latitude':latitude,
       'longitude':longitude,
-
     };
   }
 

@@ -12,8 +12,7 @@ class ChatCubit extends Cubit<ChatState> {
   final ChatRepo _chatRepo;
   ChatCubit(this._chatRepo) : super(ChatInitial());
 
-  CollectionReference chatsCollectionRF =
-      FirebaseFirestore.instance.collection('users');
+  CollectionReference chatsCollectionRF = FirebaseFirestore.instance.collection('users');
   final uid = FirebaseAuth.instance.currentUser!.uid;
 
   List<UserModel> chats = [];
