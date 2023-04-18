@@ -1,9 +1,13 @@
 import 'package:car_club/core/constants.dart';
 import 'package:car_club/core/models/user_model.dart';
+import 'package:car_club/core/utils/helper.dart';
 import 'package:car_club/core/utils/styles.dart';
+import 'package:car_club/core/widgets/shimmer_indecator.dart';
 import 'package:car_club/features/chats/data/models/chat_model.dart';
+import 'package:car_club/features/chats/presentation/model_views/cubit/chat_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatBodyContent extends StatelessWidget {
   final UserModel userModel;
@@ -80,9 +84,19 @@ Widget buildMessageWidget(
                   isMe ? const Radius.circular(10) : const Radius.circular(0),
             ),
           ),
-          child: Text(text,
-              style: Styles.title14
-                  .copyWith(color: blackColor, letterSpacing: 0.8)),
+          child: text.contains('https')
+              ? BlocBuilder<ChatCubit, ChatState>(
+                  builder: (context, state) {
+                    if (state is StoredImageLoading || state is ChatLoading) {
+                      return const ShimmerIndicator(width: 250, height: 200);
+                    } else {
+                      return Image.network(text);
+                    }
+                  },
+                )
+              : Text(text,
+                  style: Styles.title14
+                      .copyWith(color: blackColor, letterSpacing: 0.8)),
         )
       ],
     ),

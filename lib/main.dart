@@ -8,18 +8,31 @@ import 'core/constants.dart';
 import 'features/auth/data/auth_services/login/login_cubit/bloc_observe.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   CacheHelper.initialObject();
   await Firebase.initializeApp();
-  var token = await FirebaseMessaging.instance.getToken();
-  print(token);
-  FirebaseMessaging.onMessage.listen((event) {
-    print(event.data.toString());
-  });
-  FirebaseMessaging.onMessageOpenedApp.listen((event) {
-    print(event.data.toString());
-  });
+  // var token = await FirebaseMessaging.instance.getToken();
+  // print(token);
+  await FirebaseMessaging.instance.getInitialMessage();
+  // FirebaseMessaging messaging = FirebaseMessaging.instance;
+  // NotificationSettings settings = await messaging.requestPermission(
+  //   alert: true,
+  //   announcement: false,
+  //   badge: true,
+  //   carPlay: false,
+  //   criticalAlert: false,
+  //   provisional: false,
+  //   sound: true,
+  // );
+
+  // FirebaseMessaging.onMessage.listen((event) {
+  //   print(event.data.toString());
+  // });
+
+  // FirebaseMessaging.onMessageOpenedApp.listen((event) {
+  //   print(event.data.toString());
+  // });
+
   Bloc.observer = MyBlocObserver();
 
   uId = CacheHelper.getData('uId');

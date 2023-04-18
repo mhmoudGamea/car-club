@@ -13,7 +13,7 @@ class ChatView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ChatCubit(ChatRepoImpl()),
+      create: (context) => ChatCubit(ChatRepoImpl())..setUserModel(userModel),
       child: Scaffold(
         body: SafeArea(
           child: ChatViewBody(userModel: userModel),

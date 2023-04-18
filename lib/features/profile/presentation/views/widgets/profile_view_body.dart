@@ -41,7 +41,6 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
     _getDataFromDataBase();
   }
 
-  final _currentIndex = 0;
   // tabs
   final List<Widget> tabs = [
     //feed tab

@@ -1,10 +1,13 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
+import 'package:car_club/core/constants.dart';
 import 'package:car_club/core/models/user_model.dart';
 import 'package:car_club/features/chats/data/models/chat_model.dart';
 import 'package:car_club/features/chats/data/repos/chat_repo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 part 'chat_state.dart';
 
@@ -14,7 +17,6 @@ class ChatCubit extends Cubit<ChatState> {
 
   CollectionReference chatsCollectionRF =
       FirebaseFirestore.instance.collection('users');
-  final uid = FirebaseAuth.instance.currentUser!.uid;
 
   List<UserModel> chats = [];
 
@@ -24,7 +26,7 @@ class ChatCubit extends Cubit<ChatState> {
     chatsCollectionRF.snapshots().listen((event) {
       chats = [];
       for (var chat in event.docs) {
-        if (chat.id != uid) {
+        if (chat.id != uId) {
           chats.add(UserModel.fromFireStore(chat));
         }
       }
@@ -34,19 +36,111 @@ class ChatCubit extends Cubit<ChatState> {
     });
   }
 
-  Future<void> sendMessage(UserModel userModel, String message) async {
+  // this function is used to save the userModel while enter on his chat
+
+  late UserModel _userModel;
+
+  void setUserModel(UserModel userModel) {
+    _userModel = userModel;
+  }
+
+  // send method is used to send text or picked image or picked camera image
+  // to firebase
+  Future<void> sendMessage(String message) async {
     emit(ChatLoading());
 
     ChatModel chatModel = ChatModel(
         date: DateTime.now().toIso8601String(),
         message: message,
-        senderUid: uid,
-        receiverUid: userModel.uId);
+        senderUid: uId,
+        receiverUid: _userModel.uId);
     final response = await _chatRepo.sendMessage(chatModel);
     response.fold((failure) {
       emit(ChatFailure(error: failure.errMsg));
     }, (r) {
       emit(ChatSuccess());
     });
+  }
+
+  // more status add button
+  bool _moreStatus = false;
+
+  bool get getMoreStatus {
+    return _moreStatus;
+  }
+
+  void addMoreStates() {
+    _moreStatus = !_moreStatus;
+    emit(AddMoreSatesClicked());
+  }
+
+  // attachment button
+
+  // gallery button
+  final ImagePicker picker = ImagePicker();
+
+  // function to pick the image
+  void pickImage() async {
+    try {
+      XFile? image = await picker.pickImage(source: ImageSource.gallery);
+      if (image != null) {
+        emit(ImageSelectedSuccess());
+        savePickedImage(image);
+      }
+    } catch (error) {
+      emit(ImageSelectedFailure());
+    }
+  }
+
+  // function to save picked image in firebase storage then get the downloaded url
+  // then send the downloaded url to firebase storage
+  void savePickedImage(XFile? image) async {
+    emit(StoredImageLoading());
+    final response = await _chatRepo.uploadImage(File(image!.path));
+
+    response.fold(
+      (failure) {
+        emit(StoredImageFailure());
+      },
+      (downloadedImageUrl) {
+        // send method is used to send text or picked image or picked camera image
+        sendMessage(downloadedImageUrl!);
+        emit(StoredImageSuccess());
+      },
+    );
+  }
+  // camera button
+
+  void pickCameraImage() async {
+    try {
+      XFile? cameraImage = await picker.pickImage(
+        source: ImageSource.camera,
+        maxWidth: 300,
+      );
+      if (cameraImage != null) {
+        emit(CameraImageSelectedSuccess());
+        savePickedCameraImage(cameraImage);
+      }
+    } catch (error) {
+      emit(CameraImageSelectedFailure());
+    }
+  }
+
+  // function to save picked image in firebase storage then get the downloaded url
+  // then send the downloaded url to firebase storage
+  void savePickedCameraImage(XFile? cameraImage) async {
+    emit(CameraImageStoredLoading());
+    final response = await _chatRepo.uploadCameraImage(File(cameraImage!.path));
+
+    response.fold(
+      (failure) {
+        emit(CameraImageStoredFailure());
+      },
+      (downloadedImageUrl) {
+        // send method is used to send text or picked image or picked camera image
+        sendMessage(downloadedImageUrl!);
+        emit(CameraImageStoredSuccess());
+      },
+    );
   }
 }
