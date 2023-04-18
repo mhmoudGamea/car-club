@@ -21,8 +21,11 @@ class CarCentersViewBody extends StatelessWidget {
           } else if (state is GetCarCentersSuccess) {
             return ListView.separated(
                 itemBuilder: (context, index) => InkWell(
-                    onTap: () => GoRouter.of(context).push(CarCenterDetails.rn,
-                        extra: state.carCenters[index]),
+                    onTap: () => GoRouter.of(context).push(
+                      CarCenterDetails.rn,
+                      extra: state.carCenters[index],
+
+                    ),
                     child:
                         ItemViewBody(carCenterModel: state.carCenters[index])),
                 separatorBuilder: (context, index) =>

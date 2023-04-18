@@ -39,18 +39,23 @@ class _ServicesViewBodyState extends State<ServicesViewBody> {
                   onMapCreated: (controller) {
                     setState(() {
                       for (int i = 0; i < state.carCenters.length; i++) {
-                        markers.add(Marker(
-                            markerId: MarkerId("$i"),
-                            position: LatLng(state.carCenters[i].latitude,
-                                state.carCenters[i].longitude),
-                            infoWindow: InfoWindow(
-                              title: state.carCenters[i].name,
-                              snippet: state.carCenters[i].address,
-                              onTap: () {
-                                // go to Car Center Details
-                                // GoRouter.of(context).push(CarCenterDetails.rn);
-                              },
-                            )));
+                        markers.add(
+                            Marker(
+                              markerId: MarkerId("$i"),
+                              position: LatLng(state.carCenters[i].latitude,
+                                  state.carCenters[i].longitude
+                              ),
+                              infoWindow: InfoWindow(
+
+                                title: state.carCenters[i].name,
+                                snippet: state.carCenters[i].address,
+                                onTap: () {
+                                  // go to Car Center Details
+                                  // GoRouter.of(context).push(CarCenterDetails.rn);
+                                },
+                              )
+                            )
+                        );
                       }
                     });
                   },

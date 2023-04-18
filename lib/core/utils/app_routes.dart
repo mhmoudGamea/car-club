@@ -21,10 +21,11 @@ import '../../features/profile/presentation/views/profile_view.dart';
 import '../../features/services/data/models/car_center_model.dart';
 import '../../features/services/presentation/views/add_car_center_form.dart';
 import '../../features/services/presentation/views/car_center_details.dart';
-import '../../features/services/presentation/views/car_center_location.dart';
 import '../../features/services/presentation/views/car_centers_view.dart';
 import '../../features/services/presentation/views/services_view.dart';
 import '../../features/services/presentation/views/widgets/car_center_item_body.dart';
+import '../../features/services/presentation/views/widgets/car_center_map.dart';
+import '../../features/services/presentation/views/widgets/showImage.dart';
 import '../../features/used/presentation/views/details_view.dart';
 import '../cache_helper.dart';
 import '../constants.dart';
@@ -49,6 +50,10 @@ class AppRoutes {
       //   path: Test.rn,
       //   builder: (context, state) => Test(),
       // ),
+      GoRoute(
+        path: CarCenterMap.rn,
+        builder: (context, state) => const CarCenterMap(),
+      ),
       GoRoute(
         path: '/',
         builder: (context, state) => const SplashView(),
@@ -121,23 +126,21 @@ class AppRoutes {
         builder: (context, state) => const CarCentersView(),
       ),
       GoRoute(
-        path: CarCenterLocation.rn,
-        builder: (context, state) => const CarCenterLocation(),
-      ),
-      GoRoute(
         path: CarCenterDetails.rn,
         builder: (context, state) => CarCenterDetails(
           carCenterModel: state.extra as CarCenterModel,
+          // userModel: state.extra as UserModel,
         ),
       ),
       GoRoute(
         path: AddCarCenter.rn,
         builder: (context, state) => const AddCarCenter(),
       ),
-      // GoRoute(
-      //   path: ShowImage.rn,
-      //   builder: (context, state) => ShowImage(image: state.extra as String),
-      // ),
+
+      GoRoute(
+        path: ShowImage.rn,
+        builder: (context, state) => ShowImage(image: state.extra as String),
+      ),
     ],
   );
 }

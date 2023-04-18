@@ -447,6 +447,71 @@ class _PostViewBodyState extends State<AddCarCenterBody> {
                             ],
                           ),
                         ),
+
+                        const SizedBox(height: 10),
+                        Container(
+                          height: 1,
+                          color: greyColor,
+                        ),
+                        const SizedBox(height: 10,),
+
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 16,
+                                    height: 16,
+                                    child: Checkbox(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(5)),
+                                      activeColor: secondaryLoginColor,
+                                      value: userFormData.credit,
+                                      onChanged: (value) {
+                                        userFormData.acceptCreditCard(value!);
+                                      },
+                                      checkColor: whiteColor,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  const Text(
+                                    "Accept Credit Cards",
+                                    style: Styles.title16,
+                                  ),
+                                ],
+                              ),
+                              const Spacer(),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 16,
+                                    height: 16,
+                                    child: Checkbox(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(5)),
+                                      activeColor: secondaryLoginColor,
+                                      value: userFormData.offers,
+                                      onChanged: (value) {
+                                        userFormData.acceptOffers(value!);
+                                      },
+                                      checkColor: whiteColor,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  const Text(
+                                    "Accept discounts",
+                                    style: Styles.title16,
+                                  ),
+                                ],
+                              ),
+
+                            ],
+                          ),
+                        ),
                         // uploaded image section
                         if (uploadImageData.getUploadedUrls.isNotEmpty)
                           BlocBuilder<UploadImageCubit, UploadImageState>(

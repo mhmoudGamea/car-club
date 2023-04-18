@@ -61,6 +61,19 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
     return _phoneController;
   }
 
+  bool credit = false;
+  Future<void> acceptCreditCard(bool value) async {
+    credit = value;
+    emit(SuccessFridayState());
+  }
+
+  bool offers = false;
+  Future<void> acceptOffers(bool value) async {
+    offers = value;
+    emit(SuccessFridayState());
+  }
+
+
   bool friday = false;
   Future<void> openFriday(bool value) async {
     friday = value;
@@ -124,6 +137,8 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
       thursday: thursday,
     );
     _carCenterModel = CarCenterModel(
+      credit: credit,
+        offers: offers,
         uId: uId,
         date: DateTime.now().toIso8601String(),
         name: getName.text,
@@ -149,6 +164,7 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
         icon: FontAwesomeIcons.circleCheck,
         msg: 'Car Center added successfully.',
       );
+
       GoRouter.of(context).push(CarCentersView.rn);
     } catch (error) {
       emit(PostAddedFailure());
