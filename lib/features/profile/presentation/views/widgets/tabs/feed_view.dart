@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../../core/constants.dart';
-import '../../../../../home/presentation/views/widgets/car_box_item.dart';
+import '../../../../../used/presentation/views/widgets/car_box_item.dart';
 import '../../../../../post/data/models/post_model.dart';
 import '../../../../../post/data/post_constants.dart';
 import '../../../../../used/presentation/views/details_view.dart';

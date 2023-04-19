@@ -34,7 +34,7 @@ class CarListView extends StatelessWidget {
         } else if (state is HomeFailure) {
           return Text(state.errMsg);
         } else {
-          return const CircularProgressIndicator();
+          return const Center(child: CircularProgressIndicator());
         }
       },
     );

@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../home/presentation/views/widgets/car_box_item.dart';
+import '../../../../used/presentation/views/widgets/car_box_item.dart';
 import '../../../../post/data/post_constants.dart';
 import '../../../../used/presentation/views/details_view.dart';
 

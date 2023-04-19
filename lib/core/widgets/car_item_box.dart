@@ -47,6 +47,8 @@ class CarItemBox extends StatelessWidget {
                   children: [
                     Text(
                       '${car.brand} ${car.model}',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: Styles.titleSmall.copyWith(
                         color: Colors.black,
                         fontSize: 17,
