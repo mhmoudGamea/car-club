@@ -19,6 +19,20 @@ class UsersChatsFailure extends ChatState {
   UsersChatsFailure({required this.error});
 }
 
+// users search chats states section
+
+class UsersSearchChatsLoading extends ChatState {}
+
+class UsersSearchChatsSuccess extends ChatState {
+  final List<UserModel> chats;
+  UsersSearchChatsSuccess({required this.chats});
+}
+
+class UsersSearchChatsFailure extends ChatState {
+  final String error;
+  UsersSearchChatsFailure({required this.error});
+}
+
 // sending message states section
 
 class ChatLoading extends ChatState {}
