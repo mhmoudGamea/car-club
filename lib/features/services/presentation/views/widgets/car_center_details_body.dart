@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../../core/constants.dart';
 import '../../../../../core/utils/styles.dart';
+import 'abstract_info.dart';
 import 'car_center_address_details.dart';
 import 'show_bottom_sheet.dart';
 class CarCenterDetailsBody extends StatelessWidget {
@@ -31,6 +32,161 @@ class CarCenterDetailsBody extends StatelessWidget {
               ShowCenterImages(images: images),
               const SizedBox(height: 15),
               Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(images[0]),
+                          radius: 25,
+                        ),
+                        const SizedBox(width: 10),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Car Club',
+                              style: Styles.title16,
+                            ),
+                            Text(
+                              'Mazen Glal',
+                              style: Styles.title12
+                                  .copyWith(fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Row(
+                        children: [
+                          const Icon(
+                            FontAwesomeIcons.locationDot,
+                          ),
+                          const SizedBox(width: 5),
+                          Expanded(
+                            child: Text(
+                              'United States, California, San Mateo County, Menlo Park',
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              style: Styles.title15
+                                  .copyWith(fontWeight: FontWeight.w400,color: Colors.black),
+                              softWrap: true,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const AbstractInformation(),
+
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Divider(
+                      height: 1,
+                      color: greyColor,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+
+                    const CarCenterAddress(),
+
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Divider(
+                      height: 1,
+                      color: greyColor,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+
+                    const WorkingHoursDetails(),
+                    const SizedBox(
+                      height: 10,
+                    ),
+
+                    const Divider(
+                      height: 1,
+                      color: greyColor,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            width: (MediaQuery.of(context).size.width / 3) ,
+                            child:  Text(
+                              'communicate with the center ',
+                              style: Styles.title16.copyWith(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500
+                              ),
+                              maxLines: 2,
+                              softWrap: true,
+                            ),
+                          ),
+                          const Spacer(),
+                          OutlinedButton(
+                            onPressed: () {
+                              showModalBottomSheet(
+                                context: context,
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                shape: const OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(30),
+                                      topLeft: Radius.circular(30),
+                                    )
+                                ),
+                                builder: (context) => const ShowBottomSheet(),
+                              );
+                            },
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            style: OutlinedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                side:  const BorderSide(
+                                    color: mintGreen,
+                                    style: BorderStyle.solid
+                                )
+                            ),
+                            child:  Text("Contact",style: Styles.title15.copyWith(color: mintGreen)),
+                          ),
+
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+/*
+ Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Column(
                   children: [
@@ -341,10 +497,4 @@ class CarCenterDetailsBody extends StatelessWidget {
                   ],
                 ),
               )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+ */

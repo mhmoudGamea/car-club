@@ -3,6 +3,7 @@ import 'package:car_club/features/auth/presentation/views/widgets/or_sign_in_wit
 import 'package:car_club/features/auth/presentation/views/widgets/social_media_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/constants.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../data/auth_services/login/login_cubit/login_cubit.dart';
 import '../../../data/auth_services/register/register_cubit/register_cubit.dart';
@@ -76,19 +77,24 @@ class RegisterViewBody extends StatelessWidget {
               const SizedBox(
                 height: 18,
               ),
-              defaultButton(
-                  buttonName: 'Sign Up',
-                  onTap: () {
-
-                    if (cubit.registerFormKey.currentState!.validate()) {
-                      RegisterCubit.get(context).userRegister(
+              BlocBuilder<RegisterCubit, RegisterState>(
+                  builder: (context, state) => defaultButton(
+                    buttonName: state is LoadingEmailAndPasswordRegisterState ?  const SizedBox(
+                      height: 28,
+                      width: 28,
+                      child: CircularProgressIndicator(color: whiteColor,),
+                    ): const Text("Sign Up",style: textButtonStyle),
+                    onTap: () {
+                      if (cubit.registerFormKey.currentState!.validate()) {
+                        RegisterCubit.get(context).userRegister(
                           name: cubit.nameController.text,
                           email: cubit.emailController.text,
                           password: cubit.passwordController.text,
-                         phone:
-                              cubit.phoneController.text,);
-                    }
-                  }),
+                          phone:  cubit.phoneController.text,
+                        );
+                      }
+                    }),
+              ),
               const SizedBox(height: 95),
               const OrSignInText(),
               const SizedBox(height: 18),

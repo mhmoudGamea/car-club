@@ -61,6 +61,16 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
     return _phoneController;
   }
 
+
+  // DateTime.now()
+  bool isOpen(){
+    // if(DateTime.now()){
+
+    // }
+    return true;
+  }
+
+
   bool credit = false;
   Future<void> acceptCreditCard(bool value) async {
     credit = value;

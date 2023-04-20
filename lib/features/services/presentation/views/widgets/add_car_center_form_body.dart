@@ -139,14 +139,23 @@ class _PostViewBodyState extends State<AddCarCenterBody> {
                           },
                         ),
                         const SizedBox(height: 30),
-                        const Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "Opening Times",
-                            // style: Styles.titleLarge,
-                            style: Styles.title16,
-                          ),
-                        ),
+                         Row(
+                           mainAxisAlignment: MainAxisAlignment.center,
+                           children: const [
+                             Icon(
+                               FontAwesomeIcons.clock,
+                               size: 20,
+                             ),
+                             SizedBox(
+                               width: 5,
+                             ),
+                             Text(
+                               "Opening Times",
+                               // style: Styles.titleLarge,
+                               style: Styles.title16,
+                             ),
+                           ],
+                         ),
                         const SizedBox(height: 10),
                         Container(
                           padding: const EdgeInsets.all(20),
@@ -174,9 +183,9 @@ class _PostViewBodyState extends State<AddCarCenterBody> {
                                           ),
                                         ),
                                         const SizedBox(width: 20),
-                                        const Text(
+                                        Text(
                                           "Friday",
-                                          style: Styles.title16,
+                                          style: Styles.title15.copyWith(color: Colors.black),
                                         ),
                                       ],
                                     ),
@@ -199,9 +208,9 @@ class _PostViewBodyState extends State<AddCarCenterBody> {
                                           ),
                                         ),
                                         const SizedBox(width: 20),
-                                        const Text(
+                                        Text(
                                           "saturday",
-                                          style: Styles.title16,
+                                          style: Styles.title15.copyWith(color: Colors.black),
                                         ),
                                       ],
                                     ),
@@ -224,9 +233,9 @@ class _PostViewBodyState extends State<AddCarCenterBody> {
                                           ),
                                         ),
                                         const SizedBox(width: 20),
-                                        const Text(
+                                        Text(
                                           "Sunday",
-                                          style: Styles.title16,
+                                          style: Styles.title15.copyWith(color: Colors.black),
                                         ),
                                       ],
                                     ),
@@ -249,9 +258,9 @@ class _PostViewBodyState extends State<AddCarCenterBody> {
                                           ),
                                         ),
                                         const SizedBox(width: 20),
-                                        const Text(
+                                         Text(
                                           "Monday",
-                                          style: Styles.title16,
+                                          style: Styles.title15.copyWith(color: Colors.black),
                                         ),
                                       ],
                                     ),
@@ -274,9 +283,9 @@ class _PostViewBodyState extends State<AddCarCenterBody> {
                                           ),
                                         ),
                                         const SizedBox(width: 20),
-                                        const Text(
+                                         Text(
                                           "tuesday",
-                                          style: Styles.title16,
+                                          style: Styles.title15.copyWith(color: Colors.black),
                                         ),
                                       ],
                                     ),
@@ -299,9 +308,9 @@ class _PostViewBodyState extends State<AddCarCenterBody> {
                                           ),
                                         ),
                                         const SizedBox(width: 20),
-                                        const Text(
+                                         Text(
                                           "thursday",
-                                          style: Styles.title16,
+                                          style: Styles.title15.copyWith(color: Colors.black),
                                         ),
                                       ],
                                     ),
@@ -325,9 +334,9 @@ class _PostViewBodyState extends State<AddCarCenterBody> {
                                           ),
                                         ),
                                         const SizedBox(width: 20),
-                                        const Text(
+                                         Text(
                                           "wednesday",
-                                          style: Styles.title16,
+                                          style: Styles.title15.copyWith(color: Colors.black),
                                         ),
                                       ],
                                     ),
@@ -456,8 +465,8 @@ class _PostViewBodyState extends State<AddCarCenterBody> {
                         const SizedBox(height: 10,),
 
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Row(
+                          padding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 20),
+                          child: Column(
                             children: [
                               Row(
                                 children: [
@@ -477,13 +486,13 @@ class _PostViewBodyState extends State<AddCarCenterBody> {
                                     ),
                                   ),
                                   const SizedBox(width: 10),
-                                  const Text(
+                                  Text(
                                     "Accept Credit Cards",
-                                    style: Styles.title16,
+                                    style: Styles.title15.copyWith(color: Colors.black),
                                   ),
                                 ],
                               ),
-                              const Spacer(),
+                              const SizedBox(height: 10,),
                               Row(
                                 children: [
                                   SizedBox(
@@ -502,13 +511,12 @@ class _PostViewBodyState extends State<AddCarCenterBody> {
                                     ),
                                   ),
                                   const SizedBox(width: 10),
-                                  const Text(
+                                  Text(
                                     "Accept discounts",
-                                    style: Styles.title16,
+                                    style: Styles.title15.copyWith(color: Colors.black),
                                   ),
                                 ],
                               ),
-
                             ],
                           ),
                         ),

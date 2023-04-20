@@ -28,7 +28,7 @@ class ShowBottomSheet extends StatelessWidget {
           topLeft: Radius.circular(30),
         ),
       ),
-      height: (MediaQuery.of(context).size.height)/3.1,
+      height: 265,
       child: Column(
         children: [
           Container(

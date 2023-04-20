@@ -33,9 +33,7 @@ class ShowCenterImages extends StatelessWidget {
           alignment: Alignment.topCenter,
           children: [
             PageView.builder(
-              reverse: true,
-              itemBuilder: (context, index) =>
-                  ItemImage(image: images[index]),
+              itemBuilder: (context, index) => ItemImage(image: images[index]),
               itemCount: 2,
               controller: controller,
               physics: const BouncingScrollPhysics(),
@@ -52,6 +50,7 @@ class ShowCenterImages extends StatelessWidget {
                       child: Icon(
                         FontAwesomeIcons.chevronLeft,
                         color: mintGreen,
+                        size: 17,
                       ),
                     ),
                     onPressed: () {
@@ -66,6 +65,7 @@ class ShowCenterImages extends StatelessWidget {
                       child: Icon(
                         FontAwesomeIcons.phone,
                         color: mintGreen,
+                        size: 17,
                       ),
                     ),
                     onPressed: () {
@@ -90,6 +90,7 @@ class ShowCenterImages extends StatelessWidget {
                     icon: const CircleAvatar(
                       backgroundColor: whiteColor,
                       child: Icon(
+                        size: 17,
                         FontAwesomeIcons.locationDot,
                         color: mintGreen,
                       ),

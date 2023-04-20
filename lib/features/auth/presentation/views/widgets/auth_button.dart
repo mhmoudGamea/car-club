@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/constants.dart';
 
-Widget defaultButton({required String buttonName, required Function() onTap}) {
+Widget defaultButton({required Widget buttonName, required Function() onTap}) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 30.0),
     child: Container(
@@ -15,10 +15,7 @@ Widget defaultButton({required String buttonName, required Function() onTap}) {
       ),
       child: MaterialButton(
         onPressed: onTap,
-        child: Text(
-          buttonName,
-          style: textButtonStyle,
-        ),
+        child: buttonName,
       ),
     ),
   );

@@ -73,7 +73,7 @@ class AuthenticationViewBody extends StatelessWidget {
                     height: 19,
                   ),
                   defaultButton(
-                    buttonName: 'Create Account',
+                    buttonName: const Text("Create Account",style: textButtonStyle),
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {

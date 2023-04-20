@@ -25,7 +25,7 @@ class ShowPhoneSheet extends StatelessWidget {
           topLeft: Radius.circular(30),
         ),
       ),
-      height: (MediaQuery.of(context).size.height) / 4,
+      height:210,
       child: Column(
         children: [
           Container(

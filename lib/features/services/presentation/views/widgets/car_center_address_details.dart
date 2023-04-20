@@ -24,14 +24,14 @@ class CarCenterAddress extends StatelessWidget {
             children: const [
               Icon(
                 FontAwesomeIcons.locationDot,
-                size: 28,
+                size: 20,
               ),
               SizedBox(
                 width: 10,
               ),
               Text(
                 'Address',
-                style: Styles.titleLarge,
+                style: Styles.title16,
               ),
               Spacer(),
               Icon(
@@ -133,7 +133,7 @@ class CarCenterAddress extends StatelessWidget {
                   child: const CircleAvatar(
                     radius: 25,
                     backgroundColor: mintGreen,
-                    child: Icon(FontAwesomeIcons.locationArrow,size: 20,),
+                    child: Icon(FontAwesomeIcons.locationArrow,size: 20,color: whiteColor,),
                   ),
                 ),
               )

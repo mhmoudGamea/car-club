@@ -47,7 +47,7 @@ class ResetPasswordBody extends StatelessWidget {
                   height: 18,
                 ),
                 defaultButton(
-                    buttonName: 'Send',
+                    buttonName: const Text("Send",style: textButtonStyle),
                     onTap: () {
                       if (formKey.currentState!.validate()) {
                         LoginCubit.get(context).resetPassword(

@@ -120,21 +120,28 @@ class LoginViewBody extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 27),
-                  defaultButton(
-                      buttonName: 'Sign in',
-                      onTap: () {
-                        if (LoginCubit.get(context)
-                            .loginFormKey
-                            .currentState!
-                            .validate()) {
-                          LoginCubit.get(context).loginWithEmailAndPassword(
-                              email:
-                                  LoginCubit.get(context).emailController.text,
-                              password: LoginCubit.get(context)
-                                  .passwordController
-                                  .text);
-                        }
-                      }),
+                  BlocBuilder<LoginCubit,LoginStates>(
+                    builder:(context, state) => defaultButton(
+                        buttonName:state is LoadingEmailAndPasswordSigningState ? const SizedBox(
+                          height: 28,
+                          width: 28,
+                          child: CircularProgressIndicator(color: whiteColor,),
+                        ) : const Text("Sign In",style: textButtonStyle),
+
+                        onTap: () {
+                          if (LoginCubit.get(context)
+                              .loginFormKey
+                              .currentState!
+                              .validate()) {
+                            LoginCubit.get(context).loginWithEmailAndPassword(
+                                email:
+                                    LoginCubit.get(context).emailController.text,
+                                password: LoginCubit.get(context)
+                                    .passwordController
+                                    .text);
+                          }
+                        }),
+                  ),
                   const SizedBox(height: 45),
                   const OrSignInText(),
                   const SizedBox(height: 18),
