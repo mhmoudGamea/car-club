@@ -4,6 +4,7 @@ import 'package:car_club/features/auth/presentation/views/reset_password_view.da
 import 'package:car_club/features/auth/presentation/views/splash_view.dart';
 import 'package:car_club/features/chats/presentation/views/chat_view.dart';
 import 'package:car_club/features/chats/presentation/views/users_chats_view.dart';
+import 'package:car_club/features/chats/presentation/views/chat_search_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -95,6 +96,10 @@ class AppRoutes {
         path: ChatView.rn,
         builder: (context, state) =>
             ChatView(userModel: state.extra as UserModel),
+      ),
+      GoRoute(
+        path: ChatSearchView.rn,
+        builder: (context, state) => const ChatSearchView(),
       ),
       GoRoute(
         path: HomeViewDetails.rn,

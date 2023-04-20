@@ -83,6 +83,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
+
   flutter_lints: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
@@ -103,6 +104,7 @@ flutter:
     - assets/images/dummy_images/
     - assets/images/car_icons/
     - assets/chat/
+    - assets/used/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

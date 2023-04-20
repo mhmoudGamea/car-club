@@ -32,13 +32,13 @@ class UsedViewBody extends StatelessWidget {
         ).toList();
         return GridView.builder(
           physics: const BouncingScrollPhysics(),
-          padding: const EdgeInsets.only(left: 15, right: 15, bottom: 10),
+          padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
           itemCount: posts.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
-            childAspectRatio: 15 / 21,
+            childAspectRatio: 15 / 23.8,
           ),
           itemBuilder: (context, index) => GestureDetector(
               onTap: () {

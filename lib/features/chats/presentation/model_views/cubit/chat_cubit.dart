@@ -35,7 +35,47 @@ class ChatCubit extends Cubit<ChatState> {
       emit(UsersChatsFailure(error: error));
     });
   }
+  // this function to get all users to search view depending on the name i search about
 
+  TextEditingController _searchController = TextEditingController();
+
+  TextEditingController get getSearchController {
+    return _searchController;
+  }
+
+  void getSearchUsersChats({String? name}) {
+    emit(UsersSearchChatsLoading());
+
+    if (name != null) {
+      chatsCollectionRF
+          .where('name', isGreaterThanOrEqualTo: name)
+          .where('name', isLessThanOrEqualTo: '${name}z')
+          .snapshots()
+          .listen((event) {
+        chats = [];
+        for (var chat in event.docs) {
+          if (chat.id != uId) {
+            chats.add(UserModel.fromFireStore(chat));
+          }
+        }
+        emit(UsersSearchChatsSuccess(chats: chats));
+      }, onError: (error) {
+        emit(UsersSearchChatsFailure(error: error));
+      });
+    } else {
+      chatsCollectionRF.snapshots().listen((event) {
+        chats = [];
+        for (var chat in event.docs) {
+          if (chat.id != uId) {
+            chats.add(UserModel.fromFireStore(chat));
+          }
+        }
+        emit(UsersSearchChatsSuccess(chats: chats));
+      }, onError: (error) {
+        emit(UsersSearchChatsFailure(error: error));
+      });
+    }
+  }
   // this function is used to save the userModel while enter on his chat
 
   late UserModel _userModel;

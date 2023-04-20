@@ -1,6 +1,7 @@
 import 'package:car_club/core/widgets/details_app_bar.dart';
 import 'package:car_club/features/chats/presentation/model_views/cubit/chat_cubit.dart';
 import 'package:car_club/features/chats/presentation/views/chat_view.dart';
+import 'package:car_club/features/chats/presentation/views/chat_search_view.dart';
 import 'package:car_club/features/chats/presentation/views/widgets/user_chat_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +20,7 @@ class UsersChatsViewBody extends StatelessWidget {
             text: 'Chats',
             icon: Icons.search_rounded,
             onpress: () {
-              //TODO: handle search about specific user chat here
+              GoRouter.of(context).push(ChatSearchView.rn);
             }),
         BlocBuilder<ChatCubit, ChatState>(
           builder: (context, state) {
