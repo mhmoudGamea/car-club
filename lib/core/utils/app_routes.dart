@@ -24,6 +24,8 @@ import '../../features/services/presentation/views/add_car_center_form.dart';
 import '../../features/services/presentation/views/car_center_details.dart';
 import '../../features/services/presentation/views/car_centers_view.dart';
 import '../../features/services/presentation/views/services_view.dart';
+import '../../features/services/presentation/views/test.dart';
+import '../../features/services/presentation/views/widgets/add_review_screen.dart';
 import '../../features/services/presentation/views/widgets/car_center_item_body.dart';
 import '../../features/services/presentation/views/widgets/car_center_map.dart';
 import '../../features/services/presentation/views/widgets/showImage.dart';
@@ -47,10 +49,14 @@ class AppRoutes {
   static final _router = GoRouter(
     initialLocation: path,
     routes: [
-      // GoRoute(
-      //   path: Test.rn,
-      //   builder: (context, state) => Test(),
-      // ),
+      GoRoute(
+        path: Test.rn,
+        builder: (context, state) => Test(),
+      ),
+      GoRoute(
+        path: AddReviewScreen.rn,
+        builder: (context, state) => const AddReviewScreen(),
+      ),
       GoRoute(
         path: CarCenterMap.rn,
         builder: (context, state) => const CarCenterMap(),
@@ -141,7 +147,6 @@ class AppRoutes {
         path: AddCarCenter.rn,
         builder: (context, state) => const AddCarCenter(),
       ),
-
       GoRoute(
         path: ShowImage.rn,
         builder: (context, state) => ShowImage(image: state.extra as String),
