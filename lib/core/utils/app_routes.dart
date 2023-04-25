@@ -48,10 +48,6 @@ class AppRoutes {
   static final _router = GoRouter(
     initialLocation: path,
     routes: [
-      // GoRoute(
-      //   path: Test.rn,
-      //   builder: (context, state) => Test(),
-      // ),
       GoRoute(
         path: AddReviewScreen.rn,
         builder: (context, state) => const AddReviewScreen(),

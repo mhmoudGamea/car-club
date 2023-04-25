@@ -37,8 +37,15 @@ const textButtonStyle = TextStyle(
   fontWeight: FontWeight.w600,
 );
 
-const Color greyColor2 = Color.fromARGB(255, 229, 234, 240);
+/// *********************************************
+// default
 const Color greyColor = Color(0xffc8d6e5);
+// less darkness
+const Color greyColor2 = Color.fromARGB(255, 229, 234, 240);
+// most darkness
+const Color greyColo3 = Color.fromARGB(255, 173, 183, 194);
+
+/// *********************************************
 const Color mintGreen = Color(0xff3EF1BD);
 const Color babyBlue = Color(0xff0abde3);
 const Color whiteColor = Color(0xffffffff);

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:car_club/features/reviews/presentation/views/reviews_view.dart';
 import 'package:car_club/features/services/data/models/car_center_model.dart';
 import 'package:car_club/features/services/presentation/views/widgets/car_center_info.dart';
 import 'package:car_club/features/services/presentation/views/widgets/show_center_images.dart';
@@ -8,23 +9,33 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../../core/constants.dart';
 import '../../../../../core/utils/styles.dart';
 import 'abstract_info.dart';
+
 class CarCenterDetailsBody extends StatelessWidget {
-   CarCenterDetailsBody({Key? key, required this.carCenterModel, }) : super(key: key);
+  CarCenterDetailsBody({
+    Key? key,
+    required this.carCenterModel,
+  }) : super(key: key);
   final CarCenterModel carCenterModel;
-   // tabs
-   final List<Widget> tabs = [
-     Tab(
-       child: Text("Info",style: TextStyle(color: blackColor.withOpacity(0.6)),),
-     ),
-      Tab(
-       child: Text("Reviews",style: TextStyle(color: blackColor.withOpacity(0.6)),),
-     ),
-   ];
-   // tab bar views
-   final List<Widget> tabsBarViews = [
-     const CarCenterInfo(),
-     const Center(child: Text("AddReviewScreen")),
-   ];
+  // tabs
+  final List<Widget> tabs = [
+    Tab(
+      child: Text(
+        "Info",
+        style: TextStyle(color: blackColor.withOpacity(0.6)),
+      ),
+    ),
+    Tab(
+      child: Text(
+        "Reviews",
+        style: TextStyle(color: blackColor.withOpacity(0.6)),
+      ),
+    ),
+  ];
+  // tab bar views
+  final List<Widget> tabsBarViews = [
+    const CarCenterInfo(),
+    const ReviewsView(),
+  ];
 
   // final UserModel userModel;
   final List<String> images = [
@@ -53,7 +64,8 @@ class CarCenterDetailsBody extends StatelessWidget {
                       Row(
                         children: [
                           CircleAvatar(
-                            backgroundImage: CachedNetworkImageProvider(images[0]),
+                            backgroundImage:
+                                CachedNetworkImageProvider(images[0]),
                             radius: 25,
                           ),
                           const SizedBox(width: 10),
@@ -88,8 +100,9 @@ class CarCenterDetailsBody extends StatelessWidget {
                                 'United States, California, San Mateo County, Menlo Park',
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
-                                style: Styles.title15
-                                    .copyWith(fontWeight: FontWeight.w400,color: Colors.black),
+                                style: Styles.title15.copyWith(
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black),
                                 softWrap: true,
                               ),
                             )
@@ -122,7 +135,9 @@ class CarCenterDetailsBody extends StatelessWidget {
                         height: 15,
                       ),
 
-                      SizedBox(height:500,child: TabBarView(children: tabsBarViews)),
+                      SizedBox(
+                          height: 500,
+                          child: TabBarView(children: tabsBarViews)),
                     ],
                   ),
                 )
