@@ -9,24 +9,13 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Column(
-        children: const [
-          SizedBox(height: 10),
-          SearchFilterBox(),
-          SizedBox(height: 15),
-          Expanded(child: CarGridView()),
-          // Expanded(child: CarListView()),
-          // FloatingActionButton(
-          //   onPressed: () {
-          //     FirebaseAuth.instance.signOut();
-          //     print('Signed out');
-          //   },
-          //   child: const Icon(Icons.add),
-          // )
-        ],
-      ),
+    return Column(
+      children: const [
+        SizedBox(height: 10),
+        SearchFilterBox(),
+        SizedBox(height: 15),
+        Expanded(child: CarGridView()),
+      ],
     );
   }
 }

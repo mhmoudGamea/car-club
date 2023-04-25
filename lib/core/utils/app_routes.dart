@@ -24,7 +24,6 @@ import '../../features/services/presentation/views/add_car_center_form.dart';
 import '../../features/services/presentation/views/car_center_details.dart';
 import '../../features/services/presentation/views/car_centers_view.dart';
 import '../../features/services/presentation/views/services_view.dart';
-import '../../features/services/presentation/views/test.dart';
 import '../../features/services/presentation/views/widgets/add_review_screen.dart';
 import '../../features/services/presentation/views/widgets/car_center_item_body.dart';
 import '../../features/services/presentation/views/widgets/car_center_map.dart';
@@ -49,10 +48,10 @@ class AppRoutes {
   static final _router = GoRouter(
     initialLocation: path,
     routes: [
-      GoRoute(
-        path: Test.rn,
-        builder: (context, state) => Test(),
-      ),
+      // GoRoute(
+      //   path: Test.rn,
+      //   builder: (context, state) => Test(),
+      // ),
       GoRoute(
         path: AddReviewScreen.rn,
         builder: (context, state) => const AddReviewScreen(),
@@ -87,7 +86,7 @@ class AppRoutes {
       ),
       GoRoute(
         path: ProfileView.rn,
-        builder: (context, state) =>   const ProfileView(),
+        builder: (context, state) => const ProfileView(),
       ),
       GoRoute(
         path: DetailsView.rn,

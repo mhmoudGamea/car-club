@@ -16,13 +16,13 @@ class CarGridView extends StatelessWidget {
         if (state is HomeSuccess) {
           return GridView.builder(
             physics: const BouncingScrollPhysics(),
-            padding: const EdgeInsets.only(left: 15, right: 15, bottom: 10),
+            padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
             itemCount: state.cars.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
-              childAspectRatio: 15 / 21,
+              childAspectRatio: 15 / 19,
             ),
             itemBuilder: (context, index) => GestureDetector(
                 onTap: () {
@@ -35,7 +35,6 @@ class CarGridView extends StatelessWidget {
                   car: state.cars[index],
                 )),
           );
-          ;
         } else if (state is HomeFailure) {
           return Text(state.errMsg);
         } else {
