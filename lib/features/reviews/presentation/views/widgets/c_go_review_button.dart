@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../core/constants.dart';
 import '../../../../../core/utils/styles.dart';
-import '../../../../services/presentation/views/widgets/add_review_screen.dart';
+import 'add_review_screen.dart';
 
 class CGoReviewButton extends StatelessWidget {
   const CGoReviewButton({Key? key}) : super(key: key);
