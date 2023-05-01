@@ -24,7 +24,6 @@ class CarCentersViewBody extends StatelessWidget {
                     onTap: () => GoRouter.of(context).push(
                       CarCenterDetails.rn,
                       extra: state.carCenters[index],
-
                     ),
                     child:
                         ItemViewBody(carCenterModel: state.carCenters[index])),

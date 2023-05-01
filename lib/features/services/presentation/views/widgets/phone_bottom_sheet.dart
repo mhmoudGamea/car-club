@@ -1,3 +1,4 @@
+import 'package:car_club/features/services/data/models/car_center_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -7,8 +8,8 @@ import '../../../../../core/utils/helper.dart';
 import '../../../../../core/utils/styles.dart';
 
 class ShowPhoneSheet extends StatelessWidget {
-  const ShowPhoneSheet({Key? key}) : super(key: key);
-
+  const ShowPhoneSheet({Key? key, required this.carCenterModel}) : super(key: key);
+  final CarCenterModel carCenterModel;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -68,7 +69,7 @@ class ShowPhoneSheet extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   width: (MediaQuery.of(context).size.width / 3),
                   child: Text(
-                    '01129547302 ',
+                    '${carCenterModel.phone} ',
                     style: Styles.title16
                         .copyWith(fontSize: 15, fontWeight: FontWeight.w500),
                     maxLines: 2,
@@ -86,7 +87,7 @@ class ShowPhoneSheet extends StatelessWidget {
                   child: ElevatedButton(
                     child: const Text("Call", style: Styles.title16),
                     onPressed: () async {
-                      final Uri phoneUri =Uri(scheme: "tel", path: "01129547302");
+                      final Uri phoneUri =Uri(scheme: "tel", path: carCenterModel.phone);
                       try {
                         if (await canLaunchUrl(phoneUri)) {
                           await launchUrl(phoneUri);
@@ -114,7 +115,7 @@ class ShowPhoneSheet extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   width: (MediaQuery.of(context).size.width / 3),
                   child: Text(
-                    '01226929816 ',
+                    '${carCenterModel.phone2} ',
                     style: Styles.title16
                         .copyWith(fontSize: 15, fontWeight: FontWeight.w500),
                     maxLines: 2,
@@ -132,7 +133,7 @@ class ShowPhoneSheet extends StatelessWidget {
                   child: ElevatedButton(
                     child: const Text("Call", style: Styles.title16),
                     onPressed: () async {
-                      final Uri phoneUri =Uri(scheme: "tel", path: "01226929816");
+                      final Uri phoneUri =Uri(scheme: "tel", path: carCenterModel.phone2);
                       try {
                         if (await canLaunchUrl(phoneUri)) {
                           await launchUrl(phoneUri);

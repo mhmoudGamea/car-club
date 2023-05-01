@@ -1,3 +1,4 @@
+import 'package:car_club/features/services/data/models/car_center_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/constants.dart';
@@ -6,7 +7,8 @@ import 'car_center_address_details.dart';
 import 'show_bottom_sheet.dart';
 import 'working_hour_details.dart';
 class CarCenterInfo extends StatelessWidget {
-   const CarCenterInfo({Key? key}) : super(key: key);
+   const CarCenterInfo({Key? key, required this.carCenterModel,}) : super(key: key);
+      final CarCenterModel carCenterModel;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class CarCenterInfo extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
-          const CarCenterAddress(),
+          CarCenterAddress(carCenterModel: carCenterModel,),
 
           const SizedBox(
             height: 10,
@@ -27,8 +29,9 @@ class CarCenterInfo extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-
-          const WorkingHoursDetails(),
+          WorkingHoursDetails(
+            carCenterModel: carCenterModel,
+          ),
           const SizedBox(
             height: 10,
           ),
@@ -40,6 +43,7 @@ class CarCenterInfo extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
+
           Padding(
             padding: const EdgeInsets.only(left: 8.0,right: 8.0),
             child: Row(
@@ -69,7 +73,9 @@ class CarCenterInfo extends StatelessWidget {
                             topLeft: Radius.circular(30),
                           )
                       ),
-                      builder: (context) => const ShowBottomSheet(),
+                      builder: (context) => ShowBottomSheet(
+                        carCenterModel: carCenterModel,
+                      ),
                     );
                   },
                   clipBehavior: Clip.antiAliasWithSaveLayer,

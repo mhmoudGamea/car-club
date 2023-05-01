@@ -1,10 +1,11 @@
 import 'package:car_club/core/utils/styles.dart';
+import 'package:car_club/features/services/data/models/car_center_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class WorkingHoursDetails extends StatelessWidget {
-  const WorkingHoursDetails({Key? key}) : super(key: key);
-
+  const WorkingHoursDetails({Key? key, required this.carCenterModel}) : super(key: key);
+  final CarCenterModel carCenterModel;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,18 +27,19 @@ class WorkingHoursDetails extends StatelessWidget {
                 style: Styles.title16,
               ),
               const Spacer(),
-
-              // Row(
-              //   children: const [
-              //     Icon(FontAwesomeIcons.circleExclamation,size: 18,color: Colors.red,),
-              //     SizedBox(width: 5,),
-              //     Text(
-              //       'Closed now',
-              //       style: Styles.title14,
-              //     ),
-              //   ],
-              // ),
-              Row(
+              if(carCenterModel.openingTimes.isOpenMethod(open: carCenterModel.openingTimes.openHour, close: carCenterModel.openingTimes.closeHour)==false)
+                Row(
+                children: const [
+                  Icon(FontAwesomeIcons.circleExclamation,size: 18,color: Colors.red,),
+                  SizedBox(width: 5,),
+                  Text(
+                    'Closed now',
+                    style: Styles.title14,
+                  ),
+                ],
+              ),
+              if(carCenterModel.openingTimes.isOpenMethod(open: carCenterModel.openingTimes.openHour, close: carCenterModel.openingTimes.closeHour)==true)
+                Row(
                 children: const [
                   Icon(FontAwesomeIcons.solidCircleCheck,
                       size: 18, color: Colors.green),
@@ -60,53 +62,65 @@ class WorkingHoursDetails extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                if(carCenterModel.openingTimes.friday == true)
                 Text(
-                  "Friday              12:00 pm - 10 pm",
+                  "Friday                 ${carCenterModel.openingTimes.openHour} - ${carCenterModel.openingTimes.closeHour}",
                   style: Styles.title15.copyWith(
                       fontWeight: FontWeight.w400, color: Colors.black),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
+                if(carCenterModel.openingTimes.saturday == true)
                 Text(
-                  "Saturday         12:00 pm - 10 pm",
+                  "Saturday              ${carCenterModel.openingTimes.openHour} - ${carCenterModel.openingTimes.closeHour}",
                   style: Styles.title15.copyWith(
                       fontWeight: FontWeight.w400, color: Colors.black),
                 ),
+                if(carCenterModel.openingTimes.saturday == true)
                 const SizedBox(
                   height: 10,
                 ),
+                if(carCenterModel.openingTimes.sunday == true)
                 Text(
-                  "Sunday            12:00 pm - 10 pm",
+                  "Sunday               ${carCenterModel.openingTimes.openHour} - ${carCenterModel.openingTimes.closeHour}",
                   style: Styles.title15.copyWith(
                       fontWeight: FontWeight.w400, color: Colors.black),                ),
+                if(carCenterModel.openingTimes.sunday == true)
                 const SizedBox(
                   height: 10,
                 ),
+                if(carCenterModel.openingTimes.monday == true)
                 Text(
-                  "Monday           12:00 pm - 10 pm",
+                  "Monday              ${carCenterModel.openingTimes.openHour} - ${carCenterModel.openingTimes.closeHour}",
                   style: Styles.title15.copyWith(
                       fontWeight: FontWeight.w400, color: Colors.black),                ),
+                if(carCenterModel.openingTimes.monday == true)
                 const SizedBox(
                   height: 10,
                 ),
+                if(carCenterModel.openingTimes.tuesday == true)
                 Text(
-                  "Tuesday          12:00 pm - 10 pm",
+                  "Tuesday             ${carCenterModel.openingTimes.openHour} - ${carCenterModel.openingTimes.closeHour}",
                   style: Styles.title15.copyWith(
                       fontWeight: FontWeight.w400, color: Colors.black),                ),
+                if(carCenterModel.openingTimes.tuesday == true)
                 const SizedBox(
                   height: 10,
                 ),
+                if(carCenterModel.openingTimes.wednesday == true)
                 Text(
-                  "Wednesday    12:00 pm - 10 pm",
+                  "Wednesday           ${carCenterModel.openingTimes.openHour} - ${carCenterModel.openingTimes.closeHour}",
                   style: Styles.title15.copyWith(
                       fontWeight: FontWeight.w400, color: Colors.black),
                 ),
+                if(carCenterModel.openingTimes.wednesday == true)
                 const SizedBox(
                   height: 10,
                 ),
+                if(carCenterModel.openingTimes.thursday == true)
                 Text(
-                  "Thursday        12:00 pm - 10 pm",
+                  "Thursday            ${carCenterModel.openingTimes.openHour} - ${carCenterModel.openingTimes.closeHour}",
                   style: Styles.title15.copyWith(
                       fontWeight: FontWeight.w400, color: Colors.black),                ),
               ],

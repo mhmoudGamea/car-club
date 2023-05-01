@@ -81,7 +81,8 @@ class ItemViewBody extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Row(
+                          if(carCenterModel.openingTimes.isOpenMethod(open: carCenterModel.openingTimes.openHour, close: carCenterModel.openingTimes.closeHour)==true)
+                            Row(
                             children: [
                               const FaIcon(
                                 FontAwesomeIcons.unlock,
@@ -90,9 +91,25 @@ class ItemViewBody extends StatelessWidget {
                               ),
                               const SizedBox(width: 5),
                               Text(
-                                'open',
+                                'opened',
                                 style: Styles.titleSmall
                                     .copyWith(color: Colors.green),
+                              ),
+                            ],
+                          ),
+                          if(carCenterModel.openingTimes.isOpenMethod(open: carCenterModel.openingTimes.openHour, close: carCenterModel.openingTimes.closeHour)==false)
+                            Row(
+                            children: [
+                              const FaIcon(
+                                FontAwesomeIcons.lock,
+                                color: Colors.black,
+                                size: 19,
+                              ),
+                              const SizedBox(width: 5),
+                              Text(
+                                'closed',
+                                style: Styles.titleSmall
+                                    .copyWith(color: Colors.red),
                               ),
                             ],
                           ),

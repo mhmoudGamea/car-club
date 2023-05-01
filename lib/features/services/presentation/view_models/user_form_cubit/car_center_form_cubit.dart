@@ -19,14 +19,29 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
   final PostRepo postRepo;
   CarCenterFormCubit(this.postRepo) : super(UserFormInitial());
 
-  final TextEditingController openHour = TextEditingController();
-  TextEditingController get getOpenHour {
+  late final TimeOfDay openHour ;
+  void setOpenHour(TimeOfDay openHour) {
+    this.openHour=openHour;
+  }
+  late final TimeOfDay closeHour ;
+  void setCloseHour(TimeOfDay closeHour) {
+    this.closeHour=closeHour;
+  }
+  TimeOfDay getOpenHour() {
     return openHour;
   }
-
-  final TextEditingController closeHour = TextEditingController();
-  TextEditingController get getCloseHour {
+  TimeOfDay getCloseHour() {
     return closeHour;
+  }
+
+
+  final TextEditingController closeHourController = TextEditingController();
+  TextEditingController get getCloseHourController {
+    return closeHourController;
+  }
+  final TextEditingController openHourController = TextEditingController();
+  TextEditingController get getOpenHourController {
+    return openHourController;
   }
 
   final _nameController = TextEditingController();
@@ -62,14 +77,19 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
   }
 
 
-  // DateTime.now()
-  bool isOpen(){
-    // if(DateTime.now()){
 
-    // }
-    return true;
+
+
+
+
+
+
+
+  bool delivery = false;
+  Future<void> deliveryIsAvailable(bool value) async {
+    delivery = value;
+    emit(SuccessFridayState());
   }
-
 
   bool credit = false;
   Future<void> acceptCreditCard(bool value) async {
@@ -136,8 +156,10 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
   Future<void> addCarCenter(List<String> images, BuildContext context) async {
     emit(PostLoading());
     openingTimes = OpeningTimes(
-      openHour: getOpenHour.text,
-      closeHour: getCloseHour.text,
+      // localCloseHour: getCloseHour(),
+      // localOpenHour: getOpenHour(),
+      openHour: getOpenHourController.text,
+      closeHour: getCloseHourController.text,
       wednesday: wednesday,
       tuesday: tuesday,
       friday: friday,
@@ -147,6 +169,8 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
       thursday: thursday,
     );
     _carCenterModel = CarCenterModel(
+      delivery: delivery,
+      isOpen: true,
       credit: credit,
         offers: offers,
         uId: uId,

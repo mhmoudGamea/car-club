@@ -15,6 +15,7 @@ class CarCenterDetailsBody extends StatelessWidget {
     Key? key,
     required this.carCenterModel,
   }) : super(key: key);
+
   final CarCenterModel carCenterModel;
   // tabs
   final List<Widget> tabs = [
@@ -32,9 +33,11 @@ class CarCenterDetailsBody extends StatelessWidget {
     ),
   ];
   // tab bar views
-  final List<Widget> tabsBarViews = [
-    const CarCenterInfo(),
+  late final List<Widget> tabsBarViews = [
+
+    CarCenterInfo(carCenterModel: carCenterModel),
     const ReviewsView(),
+
   ];
 
   // final UserModel userModel;
@@ -55,7 +58,7 @@ class CarCenterDetailsBody extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
-                ShowCenterImages(images: images),
+                ShowCenterImages(carCenterModel: carCenterModel),
                 const SizedBox(height: 15),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -72,8 +75,8 @@ class CarCenterDetailsBody extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'Car Club',
+                              Text(
+                                carCenterModel.name,
                                 style: Styles.title16,
                               ),
                               Text(
@@ -97,7 +100,7 @@ class CarCenterDetailsBody extends StatelessWidget {
                             const SizedBox(width: 5),
                             Expanded(
                               child: Text(
-                                'United States, California, San Mateo County, Menlo Park',
+                                carCenterModel.address,
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
                                 style: Styles.title15.copyWith(
@@ -113,7 +116,7 @@ class CarCenterDetailsBody extends StatelessWidget {
                         height: 20,
                       ),
 
-                      const AbstractInformation(),
+                      AbstractInformation(carCenterModel: carCenterModel),
 
                       const SizedBox(
                         height: 15,

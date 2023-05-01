@@ -54,7 +54,9 @@ class AppRoutes {
       ),
       GoRoute(
         path: CarCenterMap.rn,
-        builder: (context, state) => const CarCenterMap(),
+        builder: (context, state) => CarCenterMap(
+          carCenterModel: state.extra as CarCenterModel,
+        ),
       ),
       GoRoute(
         path: '/',

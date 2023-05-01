@@ -379,15 +379,16 @@ class _PostViewBodyState extends State<AddCarCenterBody> {
                                             borderSide: const BorderSide(
                                                 color: mintGreen)),
                                       ),
-                                      controller: userFormData.getOpenHour,
+                                      controller: userFormData.getOpenHourController,
                                       onTap: () {
                                         showTimePicker(
                                                 context: context,
                                                 initialTime: TimeOfDay.now())
-                                            .then((value) => {
+                                            .then((value) {
                                                   userFormData
-                                                          .getOpenHour.text =
-                                                      value!.format(context)
+                                                          .getOpenHourController.text =
+                                                      value!.format(context);
+                                                  userFormData.setOpenHour(value);
                                                 });
                                       },
                                       validator: (value) {
@@ -438,15 +439,16 @@ class _PostViewBodyState extends State<AddCarCenterBody> {
                                             borderSide: const BorderSide(
                                                 color: mintGreen)),
                                       ),
-                                      controller: userFormData.getCloseHour,
+                                      controller: userFormData.getCloseHourController,
                                       onTap: () {
                                         showTimePicker(
                                                 context: context,
                                                 initialTime: TimeOfDay.now())
-                                            .then((value) => {
+                                            .then((value) {
                                                   userFormData
-                                                          .getCloseHour.text =
-                                                      value!.format(context)
+                                                          .getCloseHourController.text =
+                                                      value!.format(context);
+                                                  userFormData.setCloseHour(value);
                                                 });
                                       },
                                     ),
@@ -513,6 +515,31 @@ class _PostViewBodyState extends State<AddCarCenterBody> {
                                   const SizedBox(width: 10),
                                   Text(
                                     "Accept discounts",
+                                    style: Styles.title15.copyWith(color: Colors.black),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 10,),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 16,
+                                    height: 16,
+                                    child: Checkbox(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(5)),
+                                      activeColor: secondaryLoginColor,
+                                      value: userFormData.delivery,
+                                      onChanged: (value) {
+                                        userFormData.deliveryIsAvailable(value!);
+                                      },
+                                      checkColor: whiteColor,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Text(
+                                    "Delivery is available",
                                     style: Styles.title15.copyWith(color: Colors.black),
                                   ),
                                 ],

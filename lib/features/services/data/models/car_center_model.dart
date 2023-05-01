@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'opening_times.dart';
 
 class CarCenterModel {
@@ -16,11 +18,14 @@ class CarCenterModel {
   final double longitude;
   final bool credit;
   final bool offers;
-
+  final bool delivery;
+  final bool isOpen;
 
   const CarCenterModel({
+    required this.isOpen,
     required this.credit,
     required this.offers,
+    required this.delivery,
     required this.uId,
     required this.latitude,
     required this.longitude,
@@ -33,17 +38,19 @@ class CarCenterModel {
     required this.openingTimes,//
     required this.images,
     required this.distance,//
-    required this.time
+    required this.time,
   });
 
   factory CarCenterModel.fromJson(Map<String, dynamic> json) {
     return CarCenterModel(
       uId: json['uId'],
+      delivery: json['delivery'],
       latitude: json['latitude'],
       longitude: json['longitude'],
       time: json['time'],
       distance: json['distance'],
       date: json['date'],
+      isOpen: json['isOpen'],
       name: json['name'],
       description: json['description'],
       address: json['address'],
@@ -71,9 +78,12 @@ class CarCenterModel {
       'images': images,
       'distance':distance,
       'time':time,
+      'isOpen':isOpen,
       'latitude':latitude,
+      'delivery':delivery,
       'longitude':longitude,
     };
   }
+
 
 }

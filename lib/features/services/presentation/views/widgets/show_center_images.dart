@@ -1,3 +1,4 @@
+import 'package:car_club/features/services/data/models/car_center_model.dart';
 import 'package:car_club/features/services/presentation/views/widgets/show_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -10,10 +11,9 @@ import 'car_details_image_item.dart';
 class ShowCenterImages extends StatelessWidget {
   ShowCenterImages({
     super.key,
-    required this.images,
+    required this.carCenterModel,
   });
-
-  final List<String> images;
+  final CarCenterModel carCenterModel;
   final PageController controller = PageController();
 
   @override
@@ -33,8 +33,8 @@ class ShowCenterImages extends StatelessWidget {
           alignment: Alignment.topCenter,
           children: [
             PageView.builder(
-              itemBuilder: (context, index) => ItemImage(image: images[index]),
-              itemCount: 2,
+              itemBuilder: (context, index) => ItemImage(image: carCenterModel.images[index]),
+              itemCount: carCenterModel.images.length,
               controller: controller,
               physics: const BouncingScrollPhysics(),
               onPageChanged: (value) {},
@@ -78,7 +78,9 @@ class ShowCenterImages extends StatelessWidget {
                               topLeft: Radius.circular(30),
                             )
                         ),
-                        builder: (context) => const ShowBottomSheet(),
+                        builder: (context) => ShowBottomSheet(
+                          carCenterModel: carCenterModel,
+                        ),
                       );
                     },
                   ),
@@ -96,7 +98,11 @@ class ShowCenterImages extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      GoRouter.of(context).push(CarCenterMap.rn);
+                      GoRouter.of(context).push(
+                          CarCenterMap.rn,
+                          extra: carCenterModel
+                      );
+
                     },
                   ),
                 ],
@@ -108,7 +114,7 @@ class ShowCenterImages extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: SmoothPageIndicator(
                   controller: controller,
-                  count: 2,
+                  count: carCenterModel.images.length,
                   effect: const ExpandingDotsEffect(
                     dotColor: whiteColor,
                     activeDotColor: mintGreen,

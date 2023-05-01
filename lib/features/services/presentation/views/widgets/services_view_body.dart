@@ -46,7 +46,6 @@ class _ServicesViewBodyState extends State<ServicesViewBody> {
                                   state.carCenters[i].longitude
                               ),
                               infoWindow: InfoWindow(
-
                                 title: state.carCenters[i].name,
                                 snippet: state.carCenters[i].address,
                                 onTap: () {
