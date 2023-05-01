@@ -113,7 +113,10 @@ class LoginViewBody extends StatelessWidget {
                                 MaterialPageRoute(
                                     builder: (context) => BlocProvider.value(
                                         value: loginCubit,
-                                        child: const ResetPasswordPage())));
+                                        child: const ResetPasswordPage()
+                                    )
+                                )
+                            );
                           },
                         ),
                       ],

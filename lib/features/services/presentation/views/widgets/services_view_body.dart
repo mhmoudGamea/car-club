@@ -22,7 +22,7 @@ class _ServicesViewBodyState extends State<ServicesViewBody> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CarCenterCubit()..getCarCenters(),
+      create: (context) => CarCenterCubit()..getCarCentersDocs()..getCarCenters(),
       child: BlocBuilder<CarCenterCubit, CarCentersStates>(
         builder: (context, state) {
           if (state is GetCarCentersLoading) {

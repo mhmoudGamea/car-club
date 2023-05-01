@@ -5,6 +5,7 @@ import 'package:car_club/features/auth/presentation/views/splash_view.dart';
 import 'package:car_club/features/chats/presentation/views/chat_view.dart';
 import 'package:car_club/features/chats/presentation/views/users_chats_view.dart';
 import 'package:car_club/features/chats/presentation/views/chat_search_view.dart';
+import 'package:car_club/features/reviews/presentation/view_models/review_cubit/review_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -50,7 +51,21 @@ class AppRoutes {
     routes: [
       GoRoute(
         path: AddReviewScreen.rn,
-        builder: (context, state) => const AddReviewScreen(),
+        name: "AddReviewScreen",
+        builder: (context, state) {
+          // Map <String,dynamic> args = state.extra as Map<String,dynamic>;
+          return MultiBlocProvider(
+          providers: [
+            BlocProvider.value(
+              value: state.extra as ReviewCubit,
+            ),
+            // BlocProvider.value(value:state.extra as CarCenterCubit),
+          ],
+          child: const AddReviewScreen(),
+
+        );
+        },
+      //context.read<ReviewCubit>()
       ),
       GoRoute(
         path: CarCenterMap.rn,

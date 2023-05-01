@@ -15,3 +15,15 @@ class GetCarCentersFailure extends CarCentersStates{
 
   GetCarCentersFailure(this.error);
 }
+
+class GetCarCentersDocsLoading extends CarCentersStates{}
+class GetCarCentersDocsSuccess extends CarCentersStates{
+  final List<String> carCentersDocs;
+
+  GetCarCentersDocsSuccess(this.carCentersDocs);
+}
+class GetCarCentersDocsFailure extends CarCentersStates{
+  final String error;
+
+  GetCarCentersDocsFailure(this.error);
+}

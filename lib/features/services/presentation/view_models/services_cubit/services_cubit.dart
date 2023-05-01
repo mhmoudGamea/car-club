@@ -8,6 +8,7 @@ class CarCenterCubit extends Cubit<CarCentersStates> {
   CarCenterCubit() : super(InitialState());
 
   late List<CarCenterModel> carCenters;
+  late List<String> carCentersDocs;
 
   Future<void> getCarCenters() async {
     emit(GetCarCentersLoading());
@@ -17,6 +18,17 @@ class CarCenterCubit extends Cubit<CarCentersStates> {
     }).catchError((error) {
       print("error is doc ::::: ${error.toString()}");
       emit(GetCarCentersFailure(error.toString()));
+    });
+  }
+  Future<void> getCarCentersDocs() async {
+    emit(GetCarCentersDocsLoading());
+    await FirebaseFirestore.instance.collection('Centers').get().then((value) {
+      carCentersDocs = value.docs.map((e) => e.id).toList();
+      emit(GetCarCentersDocsSuccess(carCentersDocs));
+      emit(GetCarCentersSuccess(carCenters));
+    }).catchError((error) {
+      print("error is doc ::::: ${error.toString()}");
+      emit(GetCarCentersDocsFailure(error.toString()));
     });
   }
 
