@@ -1,5 +1,6 @@
 import 'package:car_club/core/utils/styles.dart';
 import 'package:car_club/features/used/presentation/model_views/used_cubit/used_cubit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,7 +10,8 @@ import 'widgets/profile_view_body.dart';
 
 class ProfileView extends StatelessWidget {
   static const rn = '/profileView';
-  const ProfileView({Key? key}) : super(key: key);
+  ProfileView({Key? key}) : super(key: key);
+  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

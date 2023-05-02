@@ -1,3 +1,4 @@
+
 import 'package:car_club/features/profile/presentation/views/widgets/tabs/sells_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -91,9 +92,9 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                   Container(
                     height: 135,
                     width: 135,
-                    decoration: const BoxDecoration(
+                    decoration:  const BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage('assets/images/cover.jpg'),
+                          image: AssetImage('assets/images/cover.jpg'),//profileImage == null ? : FileImage(profileImage),
                           fit: BoxFit.cover),
                       shape: BoxShape.circle,
                       color: greyColor,
