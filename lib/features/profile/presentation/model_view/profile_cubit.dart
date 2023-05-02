@@ -12,18 +12,21 @@ part 'profile_state.dart';
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit(super.initialState);
   File?  profileImage ;
-  final picker = ImagePicker();
+  var picker = ImagePicker();
   Future <void> getProfileImage()async{
     final  PickedFile = await picker.pickImage(source: ImageSource.gallery,);
     if(PickedFile != null){
-      profileImage = File(PickedFile.path );
+      profileImage = File(PickedFile.path ) ;
       emit(ProfileImagePickedSuccessState());
     }
     else {
-      print('No image selected.');
+     // print('No image selected.');
       emit(ProfileImagePickedErrorState());
     }
   }
+
+
+  
 
 
  }
