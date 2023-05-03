@@ -14,22 +14,23 @@ class CarCenterCubit extends Cubit<CarCentersStates> {
     emit(GetCarCentersLoading());
     await FirebaseFirestore.instance.collection('Centers').get().then((value) {
       carCenters = value.docs.map((e) => CarCenterModel.fromJson(e.data())).toList();
-      emit(GetCarCentersSuccess(carCenters));
+      carCentersDocs = value.docs.map((e) => e.id).toList();
+      emit(GetCarCentersSuccess(carCenters,carCentersDocs));
     }).catchError((error) {
       print("error is doc ::::: ${error.toString()}");
       emit(GetCarCentersFailure(error.toString()));
     });
   }
-  Future<void> getCarCentersDocs() async {
-    emit(GetCarCentersDocsLoading());
-    await FirebaseFirestore.instance.collection('Centers').get().then((value) {
-      carCentersDocs = value.docs.map((e) => e.id).toList();
-      emit(GetCarCentersDocsSuccess(carCentersDocs));
-      emit(GetCarCentersSuccess(carCenters));
-    }).catchError((error) {
-      print("error is doc ::::: ${error.toString()}");
-      emit(GetCarCentersDocsFailure(error.toString()));
-    });
-  }
+  // Future<void> getCarCentersDocs() async {
+  //   emit(GetCarCentersDocsLoading());
+  //   await FirebaseFirestore.instance.collection('Centers').get().then((value) {
+  //     carCentersDocs = value.docs.map((e) => e.id).toList();
+  //     emit(GetCarCentersDocsSuccess(carCentersDocs));
+  //     emit(GetCarCentersSuccess(carCenters,carCentersDocs));
+  //   }).catchError((error) {
+  //     print("error is doc ::::: ${error.toString()}");
+  //     emit(GetCarCentersDocsFailure(error.toString()));
+  //   });
+  // }
 
 }

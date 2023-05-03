@@ -5,7 +5,6 @@ import 'package:car_club/features/auth/presentation/views/splash_view.dart';
 import 'package:car_club/features/chats/presentation/views/chat_view.dart';
 import 'package:car_club/features/chats/presentation/views/users_chats_view.dart';
 import 'package:car_club/features/chats/presentation/views/chat_search_view.dart';
-import 'package:car_club/features/reviews/presentation/view_models/review_cubit/review_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -21,6 +20,7 @@ import '../../features/post/data/models/post_model.dart';
 import '../../features/post/presentation/views/post_view.dart';
 import '../../features/profile/presentation/views/profile_view.dart';
 import '../../features/services/data/models/car_center_model.dart';
+import '../../features/services/presentation/view_models/services_cubit/services_cubit.dart';
 import '../../features/services/presentation/views/add_car_center_form.dart';
 import '../../features/services/presentation/views/car_center_details.dart';
 import '../../features/services/presentation/views/car_centers_view.dart';
@@ -51,21 +51,12 @@ class AppRoutes {
     routes: [
       GoRoute(
         path: AddReviewScreen.rn,
-        name: "AddReviewScreen",
         builder: (context, state) {
-          // Map <String,dynamic> args = state.extra as Map<String,dynamic>;
-          return MultiBlocProvider(
-          providers: [
-            BlocProvider.value(
-              value: state.extra as ReviewCubit,
-            ),
-            // BlocProvider.value(value:state.extra as CarCenterCubit),
-          ],
-          child: const AddReviewScreen(),
-
-        );
+          return AddReviewScreen(
+            doc : state.params["doc"]!,
+            carCenterModel: state.extra as CarCenterModel,
+          );
         },
-      //context.read<ReviewCubit>()
       ),
       GoRoute(
         path: CarCenterMap.rn,
@@ -146,11 +137,14 @@ class AppRoutes {
       ),
       GoRoute(
         path: CarCentersView.rn,
-        builder: (context, state) => const CarCentersView(),
+        builder: (context, state) => BlocProvider.value(
+          value:  state.extra as CarCenterCubit,
+          child: const CarCentersView(),),
       ),
       GoRoute(
         path: CarCenterDetails.rn,
         builder: (context, state) => CarCenterDetails(
+          doc : state.params["doc"]!,
           carCenterModel: state.extra as CarCenterModel,
           // userModel: state.extra as UserModel,
         ),
@@ -158,6 +152,10 @@ class AppRoutes {
       GoRoute(
         path: AddCarCenter.rn,
         builder: (context, state) => const AddCarCenter(),
+      ),
+      GoRoute(
+        path: CarCentersView.rn,
+        builder: (context, state) => const CarCentersView(),
       ),
       GoRoute(
         path: ShowImage.rn,

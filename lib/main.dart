@@ -1,5 +1,6 @@
 import 'package:car_club/core/cache_helper.dart';
 import 'package:car_club/core/utils/app_routes.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   CacheHelper.initialObject();
   await Firebase.initializeApp();
+  await FirebaseAppCheck.instance.activate(webRecaptchaSiteKey: 'recaptcha-v3-site-key');
+
   // var token = await FirebaseMessaging.instance.getToken();
   // print(token);
   await FirebaseMessaging.instance.getInitialMessage();
@@ -39,6 +42,7 @@ void main() async {
   email = CacheHelper.getData('email');
 
   runApp(const CarClub());
+
 }
 
 class CarClub extends StatelessWidget {

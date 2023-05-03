@@ -1,4 +1,5 @@
 import 'package:car_club/features/services/data/models/car_center_model.dart';
+import 'package:car_club/features/services/presentation/views/services_view.dart';
 import 'package:car_club/features/services/presentation/views/widgets/show_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -54,7 +55,12 @@ class ShowCenterImages extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      GoRouter.of(context).pop();
+                      context.go(
+                        ServicesView.rn
+                      );
+                      // GoRouter.of(context).pop(
+                        // CarCentersView.rn
+                      // );
                     },
                   ),
                   const Spacer(),

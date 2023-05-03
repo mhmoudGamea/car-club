@@ -14,7 +14,7 @@ class ReviewRepoImple implements ReviewRepo{
 
   @override
   Future<Either<void, File>> pickReviewImage({required context})async {
-    File? reviewImage;
+    late File reviewImage;
     var picker = ImagePicker();
     final pickedImage = await picker.pickImage(source: ImageSource.gallery);
     if (pickedImage == null) {
@@ -39,28 +39,32 @@ class ReviewRepoImple implements ReviewRepo{
     await FirebaseStorage.instance.ref()
         .child('reviewImages/${Uri.file(image.path).pathSegments.last}')
         .putFile(image)
-        .then((p0){
-      p0.ref.getDownloadURL().then((value) {
+        .then((p0) async {
+          print("image uploaded");
+      await p0.ref.getDownloadURL().then((value) {
         link = value;
+        print("link is : $link");
       }).catchError((error){
+        print(error.toString());
       });
     }).catchError((error){
+      print(error.toString());
     });
     if(link!.isNotEmpty){
+      print("link is : $link");
       return right(link!);
+
     }else{
+      // print("link is : $link");
       return left(null);
     }
   }
 
   @override
-  Future<void> addReview({required String uId,required Map<String, dynamic> review,required String centerDoc}) async {
+  Future<void> addReview({required Map<String, dynamic> review}) async {
     await FirebaseFirestore.instance
-        .collection("Centers")
-        .doc(centerDoc)
         .collection("Reviews")
-        .doc(uId)
-        .set(review)
+        .add(review)
     ;
   }
 

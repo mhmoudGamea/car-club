@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../car_center_details.dart';
 import 'car_center_item_body.dart';
 
 class CarCentersViewBody extends StatelessWidget {
@@ -12,41 +11,45 @@ class CarCentersViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CarCenterCubit()..getCarCenters(),
-      child: BlocBuilder<CarCenterCubit, CarCentersStates>(
-        builder: (context, state) {
-          if (state is GetCarCentersLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is GetCarCentersSuccess) {
-            return ListView.separated(
-                itemBuilder: (context, index) => InkWell(
-                    onTap: () => GoRouter.of(context).push(
-                      CarCenterDetails.rn,
-                      extra: state.carCenters[index],
-                    ),
-                    child:
-                        ItemViewBody(carCenterModel: state.carCenters[index])),
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 10),
-                itemCount: state.carCenters.length);
-          } else if (state is GetCarCentersFailure) {
-            return Center(
-              widthFactor: 10,
-              child: Text(
-                state.error.toString(),
-                maxLines: 1,
-              ),
-            );
-          } else {
-            return const Center(
-              child: Text(
-                "{Car Centers List View failure}",
-              ),
-            );
-          }
-        },
-      ),
+    return BlocBuilder<CarCenterCubit, CarCentersStates>(
+      builder: (context, state) {
+        if (state is GetCarCentersLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is GetCarCentersSuccess) {
+          return ListView.separated(
+              itemBuilder: (context, index) => InkWell(
+                  onTap: () {
+                    context.go(
+                      '/CarCenterDetails/${state.carCenterDoc[index].characters}',
+                      extra: state.carCenters[index]
+                    );
+                    // GoRouter.of(context).push(
+                    //   CarCenterDetails.rn,
+                    //   extra: state.carCenters[index],
+                    // );
+                  },
+                  child:
+                      ItemViewBody(carCenterModel: state.carCenters[index],
+                      )),
+              separatorBuilder: (context, index) =>
+                  const SizedBox(height: 10),
+              itemCount: state.carCenters.length);
+        } else if (state is GetCarCentersFailure) {
+          return Center(
+            widthFactor: 10,
+            child: Text(
+              state.error.toString(),
+              maxLines: 1,
+            ),
+          );
+        } else {
+          return const Center(
+            child: Text(
+              "{Car Centers List View failure}",
+            ),
+          );
+        }
+      },
     );
   }
 }

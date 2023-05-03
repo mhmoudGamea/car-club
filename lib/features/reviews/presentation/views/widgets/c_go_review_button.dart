@@ -6,30 +6,32 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../core/constants.dart';
 import '../../../../../core/utils/styles.dart';
-import 'add_review_screen.dart';
+import '../../../../services/data/models/car_center_model.dart';
 
 class CGoReviewButton extends StatelessWidget {
-  const CGoReviewButton({Key? key}) : super(key: key);
-
+  const CGoReviewButton({Key? key, required this.carCenterModel, required this.doc}) : super(key: key);
+  final CarCenterModel carCenterModel;
+  final String doc;
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ReviewCubit,ReviewStates>(
-      listener: (context, state) {
-
-      },
+    return BlocConsumer<ReviewCubit, ReviewStates>(
+      listener: (context, state) {},
       builder: (context, state) => Row(
         children: [
           Expanded(
             child: NeumorphicButton(
               // onPressed: go to add review page,
               onPressed: () async {
-                // context.read<ReviewCubit>()
-                // from here not from app_routes.dart for the right context
-                GoRouter.of(context).push(
-                  AddReviewScreen.rn,
-                  extra: context.read<ReviewCubit>(),
+                context.go(
+                  '/AddReviewScreen/$doc',
+                  extra: carCenterModel
                 );
-              },
+                // GoRouter.of(context).push(
+                //   AddReviewScreen.rn,
+                //   extra : carCenterModel,
+                // );
+
+            },
               padding: const EdgeInsets.symmetric(vertical: 13),
               style: const NeumorphicStyle(color: mintGreen, depth: 1),
               child: Text(

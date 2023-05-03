@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 import 'opening_times.dart';
 
@@ -20,9 +19,10 @@ class CarCenterModel {
   final bool offers;
   final bool delivery;
   final bool isOpen;
-
+  final int reviewCount;
   const CarCenterModel({
     required this.isOpen,
+    required this.reviewCount,
     required this.credit,
     required this.offers,
     required this.delivery,
@@ -44,6 +44,7 @@ class CarCenterModel {
   factory CarCenterModel.fromJson(Map<String, dynamic> json) {
     return CarCenterModel(
       uId: json['uId'],
+      reviewCount: json['reviewCount'],
       delivery: json['delivery'],
       latitude: json['latitude'],
       longitude: json['longitude'],
@@ -66,6 +67,7 @@ class CarCenterModel {
   Map<String, dynamic> toMap() {
     return {
       'uId':uId,
+      'reviewCount':reviewCount,
       'credit': credit,
       'offers':offers,
       'date': date,

@@ -169,6 +169,7 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
       thursday: thursday,
     );
     _carCenterModel = CarCenterModel(
+      reviewCount: 0,
       delivery: delivery,
       isOpen: true,
       credit: credit,

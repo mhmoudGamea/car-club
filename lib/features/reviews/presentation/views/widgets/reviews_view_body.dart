@@ -5,12 +5,14 @@ import 'package:car_club/features/reviews/presentation/views/widgets/review_list
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
-class ReviewsViewBody extends StatelessWidget {
-  const ReviewsViewBody({Key? key}) : super(key: key);
+import '../../../../services/data/models/car_center_model.dart';
 
+class ReviewsViewBody extends StatelessWidget {
+  const ReviewsViewBody({Key? key,required this.carCenterModel, required this.doc}) : super(key: key);
+  final CarCenterModel carCenterModel;
+  final String doc;
   @override
   Widget build(BuildContext context) {
-    // final cubit = BlocProvider.of<ReviewCubit>(context);
     return BlocConsumer<ReviewCubit,ReviewStates>(
       listener: (context, state) {
 
@@ -20,7 +22,7 @@ class ReviewsViewBody extends StatelessWidget {
         padding: const EdgeInsets.all(5),
         child: Column(
           children: [
-            const CGoReviewButton(),
+            CGoReviewButton(carCenterModel: carCenterModel,doc:doc ),
             const SizedBox(height: 10),
             Expanded(
               child: ListView.separated(

@@ -14,9 +14,11 @@ class CarCenterDetailsBody extends StatelessWidget {
   CarCenterDetailsBody({
     Key? key,
     required this.carCenterModel,
+    required this.doc
   }) : super(key: key);
 
   final CarCenterModel carCenterModel;
+  final String doc;
   // tabs
   final List<Widget> tabs = [
     Tab(
@@ -36,7 +38,7 @@ class CarCenterDetailsBody extends StatelessWidget {
   late final List<Widget> tabsBarViews = [
 
     CarCenterInfo(carCenterModel: carCenterModel),
-    const ReviewsView(),
+    ReviewsView(carCenterModel: carCenterModel,doc: doc),
 
   ];
 

@@ -2,21 +2,21 @@ class ReviewModel {
   String reviewText;
   String reviewImage;
   double reviewRate;
-  int count;
   int helpfulCount;
   String uId;
+  String carCenterDoc;
 
   ReviewModel(
       {required this.reviewText,
+        required this.carCenterDoc,
       required this.reviewImage,
         required this.uId,
-        required this.count,
         required this.helpfulCount,
       required this.reviewRate});
 
   factory ReviewModel.fromJson(Map<String, dynamic> json) {
     return ReviewModel(
-        count: json['count'],
+        carCenterDoc:json['carCenterDoc'],
         uId: json['uId'],
         helpfulCount: json['helpfulCount'],
       reviewImage: json['reviewImage'],
@@ -29,9 +29,9 @@ class ReviewModel {
     return {
       'reviewText': reviewText,
       'uId': uId,
+      'carCenterDoc':carCenterDoc,
       'reviewRate': reviewRate,
       'reviewImage': reviewImage,
-      'count':count,
       'helpfulCount':helpfulCount
     };
   }

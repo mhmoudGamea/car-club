@@ -22,7 +22,7 @@ class _ServicesViewBodyState extends State<ServicesViewBody> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CarCenterCubit()..getCarCentersDocs()..getCarCenters(),
+      create: (context) => CarCenterCubit()..getCarCenters(),
       child: BlocBuilder<CarCenterCubit, CarCentersStates>(
         builder: (context, state) {
           if (state is GetCarCentersLoading) {
@@ -74,7 +74,10 @@ class _ServicesViewBodyState extends State<ServicesViewBody> {
                         child: MaterialButton(
                           child: const Text("Show Car Centers"),
                           onPressed: () {
-                            GoRouter.of(context).push(CarCentersView.rn);
+                            GoRouter.of(context).push(
+                              CarCentersView.rn,
+                              extra: context.read<CarCenterCubit>()
+                            );
                           },
                         ),
                       ),
