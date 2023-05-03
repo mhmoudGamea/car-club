@@ -90,7 +90,7 @@ class AppRoutes {
       ),
       GoRoute(
         path: ProfileView.rn,
-        builder: (context, state) => const ProfileView(),
+        builder: (context, state) => ProfileView(),
       ),
       GoRoute(
         path: DetailsView.rn,

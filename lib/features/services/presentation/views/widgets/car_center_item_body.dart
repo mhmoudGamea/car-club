@@ -1,142 +1,141 @@
-import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:car_club/features/services/data/models/car_center_model.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../../../../../core/constants.dart';
-import '../../../../../core/utils/assets.dart';
-import '../../../../../core/utils/styles.dart';
-
-class ItemViewBody extends StatelessWidget {
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+class ItemViewBody extends StatefulWidget {
   const ItemViewBody({Key? key, required this.carCenterModel})
       : super(key: key);
   static const rn = '/ItemViewBody';
   final CarCenterModel carCenterModel;
+
+  @override
+  State<ItemViewBody> createState() => _ItemViewBodyState();
+}
+
+class _ItemViewBodyState extends State<ItemViewBody> {
+  double rating = 0;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: ClipRRect(
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        borderRadius: BorderRadius.circular(30),
-        child: Card(
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          elevation: 3,
-          child: Container(
-            color: greyColor,
-            child: Column(
-              children: [
-                Container(
-                  padding:
-                      const EdgeInsets.only(top: 10.0, left: 10, right: 10),
-                  height: 250,
-                  child: Container(
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                    child: CachedNetworkImage(
-                      imageUrl: carCenterModel.images[0],
-                      errorWidget: (context, url, error) =>
-                          const Image(image: AssetImage(whiteImage)),
-                      placeholder: (context, url) =>
-                          const Center(child: CircularProgressIndicator()),
-                      width: double.infinity,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        carCenterModel.name,
-                        style: Styles.titleSmall.copyWith(
-                          color: Colors.black,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const Divider(
-                        color: Colors.black45,
-                        // thickness: 1,
-                      ),
-                      const SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              const FaIcon(
-                                FontAwesomeIcons.clock,
-                                color: Colors.black,
-                                size: 19,
-                              ),
-                              const SizedBox(width: 5),
-                              Text(
-                                '${carCenterModel.time} minutes',
-                                style: Styles.titleSmall
-                                    .copyWith(color: Colors.black54),
-                              ),
-                            ],
-                          ),
-                          if(carCenterModel.openingTimes.isOpenMethod(open: carCenterModel.openingTimes.openHour, close: carCenterModel.openingTimes.closeHour)==true)
-                            Row(
-                            children: [
-                              const FaIcon(
-                                FontAwesomeIcons.unlock,
-                                color: Colors.black,
-                                size: 19,
-                              ),
-                              const SizedBox(width: 5),
-                              Text(
-                                'opened',
-                                style: Styles.titleSmall
-                                    .copyWith(color: Colors.green),
-                              ),
-                            ],
-                          ),
-                          if(carCenterModel.openingTimes.isOpenMethod(open: carCenterModel.openingTimes.openHour, close: carCenterModel.openingTimes.closeHour)==false)
-                            Row(
-                            children: [
-                              const FaIcon(
-                                FontAwesomeIcons.lock,
-                                color: Colors.black,
-                                size: 19,
-                              ),
-                              const SizedBox(width: 5),
-                              Text(
-                                'closed',
-                                style: Styles.titleSmall
-                                    .copyWith(color: Colors.red),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              const FaIcon(
-                                FontAwesomeIcons.paperPlane,
-                                color: Colors.black,
-                                size: 19,
-                              ),
-                              const SizedBox(width: 5),
-                              Text(
-                                '${carCenterModel.distance.ceil()} km',
-                                style: Styles.titleSmall
-                                    .copyWith(color: Colors.black54),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+      child: Column(
+        children: [
+          Container(
+            height: 250,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(12),
+                topLeft: Radius.circular(12),
+              ),
+              image: DecorationImage(
+                image: NetworkImage(
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi4aXrkkEuxA30xGfyl1FNyCiRcw-CGKblhQ&usqp=CAU"),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-        ),
+          Container(
+            width: double.infinity,
+            height: 160,
+            decoration:  BoxDecoration(
+              color: const Color(0xffffffff),
+              borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(12),
+                  bottomRight: Radius.circular(12)),
+              border: Border.all(width: 2, color: Colors.grey.shade100),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  right: 12.0, left: 12.0),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      const CircleAvatar(
+                        radius: 33.0,
+                        backgroundImage: NetworkImage(
+                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi4aXrkkEuxA30xGfyl1FNyCiRcw-CGKblhQ&usqp=CAU"),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 22),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children:  [
+                            Row(
+                              children:  [
+                                const Text(
+                                  "Choco Jail",
+                                  style: TextStyle(
+                                      fontSize: 19, fontWeight: FontWeight.bold),
+                                ),
+
+                                const SizedBox(width: 60,),
+                                RatingBar.builder(
+                                  itemSize: 15,
+                                  initialRating: 4,
+                                  minRating: 1,
+                                  direction: Axis.horizontal,
+                                  allowHalfRating: true,
+                                  itemCount: 5,
+                                  itemPadding: const EdgeInsets.symmetric(horizontal: 2.0),
+                                  itemBuilder: (context, _) => const Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                  onRatingUpdate: (rating) => setState(() {
+                                    this.rating = rating;
+                                  }),
+                                ),
+                                Text('($rating)')
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const Text(
+                              "Tarts and chocolates, Desserts",
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                    ],
+                  ),
+                  const Divider(
+                    height: 5,
+                    thickness: 1,
+                    color: Colors.grey,
+                    indent: 0,
+
+                  ),
+                  const SizedBox(height: 15,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children:  const [
+                      Icon(Icons.schedule,color: Color(0xff53787c),),
+                      SizedBox(width: 7,),
+                      Text("40 mins",style: TextStyle(color: Color(0xff308d46)),),
+                      SizedBox(width: 75,),
+
+                      Icon(Icons.delivery_dining,color: Color(0xff53787c),),
+                      SizedBox(width: 7,),
+                      Text("20.0 EGP",style: TextStyle(color: Color(0xff308d46))),
+
+                    ],
+                  )
+                ],
+              ),
+
+            ),
+
+          )
+        ],
       ),
     );
   }

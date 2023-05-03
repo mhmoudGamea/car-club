@@ -1,9 +1,13 @@
+
+import 'dart:io';
+
 import 'package:car_club/features/profile/presentation/views/widgets/tabs/sells_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../../core/constants.dart';
+//import '../../model_view/profile_cubit.dart';
 import 'tabs/feed_view.dart';
 import 'tabs/fav_view.dart';
 
@@ -17,7 +21,7 @@ class ProfileViewBody extends StatefulWidget {
 class _ProfileViewBodyState extends State<ProfileViewBody> {
   String? name = '';
   String? phone = '';
-  String? profileImage = '';
+  String? profileImage = ""  ;
   Future _getDataFromDataBase() async {
     await FirebaseFirestore.instance
         .collection("users")
@@ -91,9 +95,10 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                   Container(
                     height: 135,
                     width: 135,
-                    decoration: const BoxDecoration(
+                    decoration:   BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage('assets/images/cover.jpg'),
+                          image: profileImage == null ? const AssetImage('assets/images/cover.jpg')
+                              : FileImage(profileImage as File  )as ImageProvider,
                           fit: BoxFit.cover),
                       shape: BoxShape.circle,
                       color: greyColor,
@@ -108,7 +113,10 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           color: mintGreen.withOpacity(0.5)),
-                      child: const Icon(FontAwesomeIcons.camera, size: 18),
+                      child: IconButton(  onPressed: () {
+                      //  ProfileCubit.get(context).getProfileImage();
+                      },
+                        icon:const Icon(FontAwesomeIcons.camera, size: 18), ),
                     ),
                   ),
                 ],
