@@ -34,10 +34,10 @@ class ReviewRepoImple implements ReviewRepo{
   }
 
   @override
-  Future<Either<void,String>> uploadReviewImage({required File image}) async {
+  Future<Either<void,String>> uploadReviewImage({ File? image}) async {
     String? link;
     await FirebaseStorage.instance.ref()
-        .child('reviewImages/${Uri.file(image.path).pathSegments.last}')
+        .child('reviewImages/${Uri.file(image!.path).pathSegments.last}')
         .putFile(image)
         .then((p0) async {
           print("image uploaded");

@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:car_club/features/reviews/presentation/views/reviews_view.dart';
 import 'package:car_club/features/services/data/models/car_center_model.dart';
+import 'package:car_club/features/services/presentation/view_models/services_cubit/services_cubit.dart';
 import 'package:car_club/features/services/presentation/views/widgets/car_center_info.dart';
 import 'package:car_club/features/services/presentation/views/widgets/show_center_images.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../../core/constants.dart';

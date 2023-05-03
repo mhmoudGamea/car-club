@@ -12,6 +12,7 @@ class CarCentersViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CarCenterCubit, CarCentersStates>(
+
       builder: (context, state) {
         if (state is GetCarCentersLoading) {
           return const Center(child: CircularProgressIndicator());
@@ -19,14 +20,12 @@ class CarCentersViewBody extends StatelessWidget {
           return ListView.separated(
               itemBuilder: (context, index) => InkWell(
                   onTap: () {
-                    context.go(
+                    // GoRouter.of(context).go(location)
+                    GoRouter.of(context).go(
                       '/CarCenterDetails/${state.carCenterDoc[index]}',
                       extra: state.carCenters[index]
                     );
-                    // GoRouter.of(context).push(
-                    //   CarCenterDetails.rn,
-                    //   extra: state.carCenters[index],
-                    // );
+
                   },
                   child:
                       ItemViewBody(carCenterModel: state.carCenters[index],

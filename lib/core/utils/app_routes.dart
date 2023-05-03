@@ -155,7 +155,9 @@ class AppRoutes {
       ),
       GoRoute(
         path: CarCentersView.rn,
-        builder: (context, state) => const CarCentersView(),
+        builder: (context, state) {
+            return const CarCentersView();
+        },
       ),
       GoRoute(
         path: ShowImage.rn,

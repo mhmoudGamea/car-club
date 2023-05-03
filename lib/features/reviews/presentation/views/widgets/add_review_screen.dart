@@ -3,6 +3,8 @@ import 'package:car_club/features/reviews/presentation/view_models/review_cubit/
 import 'package:car_club/features/reviews/presentation/view_models/review_cubit/review_state.dart';
 import 'package:car_club/features/services/presentation/view_models/services_cubit/car_centers_states.dart';
 import 'package:car_club/features/services/presentation/view_models/services_cubit/services_cubit.dart';
+import 'package:car_club/features/services/presentation/views/car_center_details.dart';
+import 'package:car_club/features/services/presentation/views/services_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:car_club/core/constants.dart';
@@ -51,8 +53,11 @@ class AddReviewScreen extends StatelessWidget {
             BlocListener<ReviewCubit,ReviewStates>(
               listener: (context, state) {
                 if(state is SuccessAddReview) {
+                  // context.go(
+                  //   ServicesView.rn
+                  // );
                   context.go(
-                      '/CarCenterDetails/:$doc',
+                      '/CarCenterDetails/$doc',
                       extra: carCenterModel
                   );
                 }else if(state is FailureUploadReviewImage){
@@ -95,7 +100,10 @@ class AddReviewScreen extends StatelessWidget {
                     }else if(cubit.getReviewTextController().text.isEmpty){
                       Helper.showCustomToast(context: context, bgColor: Colors.red, icon: FontAwesomeIcons.x, msg: "please text your review");
                     }else{
-                      await cubit.addReview(context, doc.toString(),carCenterModel);
+                      await cubit.addReview(context, doc.toString(),carCenterModel).then((value) {
+                        cubit.getReviews(carCenterDoc: doc);
+                        cubit.getCarCenterReviews(carCenterDoc: doc);
+                      });
                     }
 
                   },

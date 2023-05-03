@@ -37,7 +37,7 @@ class ReviewCubit extends Cubit<ReviewStates> {
     var result = await reviewRepo.pickReviewImage(context: context);
     emit(LoadingPickReviewImage());
     result.fold((l) {
-      file = null;
+      // file = null;
       emit(FailurePickReviewImage());
     }, (r) {
       file = r;
@@ -47,8 +47,8 @@ class ReviewCubit extends Cubit<ReviewStates> {
   }
   // upload reviewImage
   String? link;
-  Future<void> uploadReviewImage({required File image}) async {
-    var result = await reviewRepo.uploadReviewImage(image: image);
+  Future<void> uploadReviewImage({File? image}) async {
+    var result = await reviewRepo.uploadReviewImage(image: image!);
     emit(LoadingUploadReviewImage());
     result.fold((l) {
       link = " ";
@@ -65,7 +65,7 @@ class ReviewCubit extends Cubit<ReviewStates> {
     reviewModel = ReviewModel(
       like: like,
       reviewText: getReviewTextController().text,
-      reviewImage: link,
+      reviewImage: link ?? "",
       carCenterDoc: centerDoc,
       uId: uId,
       helpfulCount: 0,
@@ -117,6 +117,8 @@ class ReviewCubit extends Cubit<ReviewStates> {
         .listen((event)  async {
       reviews = event.docs.map((e) => ReviewModel.fromJson(e.data())).toList();
       reviewsDocs = event.docs.map((e) {
+
+        //e.data()['carCenterDoc'] == carCenterDoc
         if(e.data()['carCenterDoc'] == carCenterDoc){
           carCenterReviewsDocs.add(e.id);
         }
@@ -128,7 +130,6 @@ class ReviewCubit extends Cubit<ReviewStates> {
       emit(FailureGetReviews());
     });
   }
-
   late List<ReviewModel> carCenterReviews ;
   Future<void> getCarCenterReviews({required String carCenterDoc})async {
     carCenterReviews = [];
@@ -136,7 +137,8 @@ class ReviewCubit extends Cubit<ReviewStates> {
     print(carCenterDoc.toString());
     for (int i=0;i<reviews.length;i++) {
       print(reviews[i].carCenterDoc.toString());
-      if(reviews[i].carCenterDoc == carCenterDoc){
+      // reviews[i].carCenterDoc == carCenterDoc
+      if(reviews[i].carCenterDoc == carCenterDoc) {
         carCenterReviews.add(reviews[i]);
       }
     }
