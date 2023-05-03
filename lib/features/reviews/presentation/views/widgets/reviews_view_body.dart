@@ -13,30 +13,37 @@ class ReviewsViewBody extends StatelessWidget {
   final String doc;
   @override
   Widget build(BuildContext context) {
+    ReviewCubit cubit = BlocProvider.of<ReviewCubit>(context);
     return BlocConsumer<ReviewCubit,ReviewStates>(
       listener: (context, state) {
-
+        if(state is SuccessGetReviews){
+          cubit.getCarCenterReviews(carCenterDoc: doc);
+        }
       },
       builder: (context, state) {
-        return Padding(
-        padding: const EdgeInsets.all(5),
-        child: Column(
-          children: [
-            CGoReviewButton(carCenterModel: carCenterModel,doc:doc ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: ListView.separated(
-                // physics: const NeverScrollableScrollPhysics(),
-                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                itemCount: 5,
-                itemBuilder: (context, index) => const ReviewListItem(),
-                separatorBuilder: (context, index) =>
+        if(state is SuccessGetCarCenterReviews ||state is SuccessLikeIncrease ||state is SuccessLikeDecrease  ){
+          return Padding(
+            padding: const EdgeInsets.all(5),
+            child: Column(
+              children: [
+                CGoReviewButton(carCenterModel: carCenterModel,doc:doc ),
+                const SizedBox(height: 10),
+                Expanded(
+                  child: ListView.separated(
+                    // physics: const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                    itemCount: cubit.carCenterReviews.length,
+                    itemBuilder: (context, index) =>  ReviewListItem(model: cubit.carCenterReviews[index],doc: cubit.carCenterReviewsDocs[index]),
+                    separatorBuilder: (context, index) =>
                     const SizedBox(height: 10),
-              ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      );
+          );
+        }else{
+          return const Center(child: CircularProgressIndicator());
+        }
       },
     );
   }

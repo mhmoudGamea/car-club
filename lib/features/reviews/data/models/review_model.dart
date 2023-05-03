@@ -5,6 +5,7 @@ class ReviewModel {
   int helpfulCount;
   String uId;
   String carCenterDoc;
+  bool like;
 
   ReviewModel(
       {required this.reviewText,
@@ -12,11 +13,14 @@ class ReviewModel {
       required this.reviewImage,
         required this.uId,
         required this.helpfulCount,
-      required this.reviewRate});
+      required this.reviewRate,
+        required this.like
+      });
 
   factory ReviewModel.fromJson(Map<String, dynamic> json) {
     return ReviewModel(
         carCenterDoc:json['carCenterDoc'],
+        like:json['like'],
         uId: json['uId'],
         helpfulCount: json['helpfulCount'],
       reviewImage: json['reviewImage'],
@@ -28,6 +32,7 @@ class ReviewModel {
   Map<String, dynamic> toMap() {
     return {
       'reviewText': reviewText,
+      'like': like,
       'uId': uId,
       'carCenterDoc':carCenterDoc,
       'reviewRate': reviewRate,

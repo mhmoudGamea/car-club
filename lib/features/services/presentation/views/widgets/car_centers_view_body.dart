@@ -20,7 +20,7 @@ class CarCentersViewBody extends StatelessWidget {
               itemBuilder: (context, index) => InkWell(
                   onTap: () {
                     context.go(
-                      '/CarCenterDetails/${state.carCenterDoc[index].characters}',
+                      '/CarCenterDetails/${state.carCenterDoc[index]}',
                       extra: state.carCenters[index]
                     );
                     // GoRouter.of(context).push(

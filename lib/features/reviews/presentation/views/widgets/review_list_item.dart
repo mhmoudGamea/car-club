@@ -1,3 +1,4 @@
+import 'package:car_club/features/reviews/data/models/review_model.dart';
 import 'package:car_club/features/reviews/presentation/views/widgets/c_reviewers_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,8 +10,9 @@ import '../../view_models/review_cubit/review_state.dart';
 import 'c_helpful_widget.dart';
 
 class ReviewListItem extends StatelessWidget {
-  const ReviewListItem({Key? key}) : super(key: key);
-
+  const ReviewListItem({Key? key, required this.model, required this.doc}) : super(key: key);
+  final ReviewModel model;
+  final String doc;
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<ReviewCubit>(context);
@@ -38,12 +40,12 @@ class ReviewListItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CReviewersDetails(),
+             CReviewersDetails(model: model),
             const SizedBox(height: 5),
             // review body
             Flexible(
               child: Text(
-                'photo arrangement of delicious taco bread and ingredients',
+                model.reviewText,
                 style: Styles.title14.copyWith(
                     color: greyColo3,
                     letterSpacing: 0.9,
@@ -58,7 +60,7 @@ class ReviewListItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
                 color: greyColor2,
               ),
-              child: const CHelpfulWidget(),
+              child:  CHelpfulWidget(model: model,doc: doc),
             ),
           ],
         ),

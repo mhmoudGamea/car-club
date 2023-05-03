@@ -63,6 +63,7 @@ class ReviewCubit extends Cubit<ReviewStates> {
   Future<void> addReview(context,String centerDoc,CarCenterModel carCenterModel )async {
     emit(LoadingAddReview());
     reviewModel = ReviewModel(
+      like: like,
         reviewText: getReviewTextController().text,
         reviewImage: link,
         carCenterDoc: centerDoc,
@@ -100,6 +101,93 @@ class ReviewCubit extends Cubit<ReviewStates> {
       Helper.showCustomToast(context: context, bgColor: Colors.red, icon: FontAwesomeIcons.x, msg: "Review add failure");
       emit(FailureAddReview());
     });
+  }
+
+  late List<ReviewModel> reviews ;
+  late List<String> reviewsDocs ;
+  late List<String> carCenterReviewsDocs ;
+  Future<void> getReviews({required String carCenterDoc})async {
+    emit(LoadingGetReviews());
+    reviews = [];
+    reviewsDocs = [];
+    carCenterReviewsDocs = [];
+    FirebaseFirestore.instance
+        .collection("Reviews")
+        .snapshots()
+        .listen((event)  async {
+      reviews = event.docs.map((e) => ReviewModel.fromJson(e.data())).toList();
+      reviewsDocs = event.docs.map((e) {
+        if(e.data()['carCenterDoc'] == carCenterDoc){
+          carCenterReviewsDocs.add(e.id);
+        }
+        return e.id;
+      }).toList();
+      emit(SuccessGetReviews());
+    }).onError((error) async {
+      print(error.toString());
+      emit(FailureGetReviews());
+    });
+  }
+
+  late List<ReviewModel> carCenterReviews ;
+  Future<void> getCarCenterReviews({required String carCenterDoc})async {
+    carCenterReviews = [];
+    emit(LoadingGetCarCenterReviews());
+    print(carCenterDoc.toString());
+    for (int i=0;i<reviews.length;i++) {
+      print(reviews[i].carCenterDoc.toString());
+      if(reviews[i].carCenterDoc == carCenterDoc){
+        carCenterReviews.add(reviews[i]);
+      }
+    }
+    print(reviews.length.toString());
+    print(carCenterReviews.length.toString());
+    emit(SuccessGetCarCenterReviews());
+  }
+
+  bool like = false;
+  Future<void> clickHelpful({required ReviewModel model ,required String doc}) async{
+    emit(LoadingLike());
+    if(like == false){
+      like = !like;
+      ReviewModel newIncreaseModel = ReviewModel(
+        like: like,
+        reviewText: model.reviewText,
+        carCenterDoc: model.carCenterDoc,
+        reviewImage: model.reviewImage,
+        uId: model.uId,
+        helpfulCount: model.helpfulCount+1,
+        reviewRate: model.reviewRate,
+      );
+      await FirebaseFirestore.instance
+        .collection("Reviews")
+        .doc(doc)
+        .update(newIncreaseModel.toMap()).then((value) {
+          emit(SuccessLikeIncrease());
+      }).catchError((error){
+        emit(FailureLike());
+      });
+    }else{
+      like = !like;
+      ReviewModel newDecreaseModel = ReviewModel(
+        like: like,
+        reviewText: model.reviewText,
+        carCenterDoc: model.carCenterDoc,
+        reviewImage: model.reviewImage,
+        uId: model.uId,
+        helpfulCount: model.helpfulCount-1,
+        reviewRate: model.reviewRate,
+      );
+      await FirebaseFirestore.instance
+          .collection("Reviews")
+          .doc(doc)
+          .update(newDecreaseModel.toMap()).then((value) {
+        emit(SuccessLikeDecrease());
+      }).catchError((error){
+        emit(FailureLike());
+      });
+    }
+
   }
 
 }

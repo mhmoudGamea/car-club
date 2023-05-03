@@ -1,11 +1,12 @@
+import 'package:car_club/features/reviews/data/models/review_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/constants.dart';
 import '../../../../../core/utils/styles.dart';
 
 class CReviewersDetails extends StatelessWidget {
-  const CReviewersDetails({Key? key}) : super(key: key);
-
+  const CReviewersDetails({Key? key, required this.model}) : super(key: key);
+  final ReviewModel model;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -26,7 +27,7 @@ class CReviewersDetails extends StatelessWidget {
         children: [
           Row(
             children: List.generate(
-              5,
+              model.reviewRate.toInt() ,
               (index) => const Icon(
                 Icons.star_rounded,
                 size: 15,
