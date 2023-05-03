@@ -31,31 +31,31 @@ class ReviewCubit extends Cubit<ReviewStates> {
   TextEditingController getReviewTextController(){return controller;}
 
   // pick reviewImage
-  late File file;
+  File? file;
   Future<void> pickReviewImage({required context}) async {
 
     var result = await reviewRepo.pickReviewImage(context: context);
     emit(LoadingPickReviewImage());
     result.fold((l) {
+      file = null;
       emit(FailurePickReviewImage());
     }, (r) {
+      file = r;
       Helper.showCustomToast(context: context, bgColor: Colors.greenAccent, icon: FontAwesomeIcons.check, msg: "1 image selected");
       emit(SuccessPickReviewImage());
-      file = r;
     });
   }
   // upload reviewImage
-  late String link;
+  String? link;
   Future<void> uploadReviewImage({required File image}) async {
     var result = await reviewRepo.uploadReviewImage(image: image);
     emit(LoadingUploadReviewImage());
     result.fold((l) {
-
+      link = " ";
       emit(FailureUploadReviewImage());
-
       }, (r) {
-      emit(SuccessUploadReviewImage());
       link = r;
+      emit(SuccessUploadReviewImage());
     });
 
   }
@@ -64,12 +64,12 @@ class ReviewCubit extends Cubit<ReviewStates> {
     emit(LoadingAddReview());
     reviewModel = ReviewModel(
       like: like,
-        reviewText: getReviewTextController().text,
-        reviewImage: link,
-        carCenterDoc: centerDoc,
-        uId: uId,
-        helpfulCount: 0,
-        reviewRate: getReviewRate()
+      reviewText: getReviewTextController().text,
+      reviewImage: link,
+      carCenterDoc: centerDoc,
+      uId: uId,
+      helpfulCount: 0,
+      reviewRate: getReviewRate(),
     );
     CarCenterModel newCarCenter = CarCenterModel(
       isOpen: carCenterModel.isOpen,

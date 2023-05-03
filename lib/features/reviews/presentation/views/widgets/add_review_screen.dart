@@ -88,16 +88,16 @@ class AddReviewScreen extends StatelessWidget {
                 style: Styles.title16,
               ),
               actions: [
-                if(state is! SuccessUploadReviewImage)
                   TextButton(
                   onPressed: () async {
-                  },
-                  child: const Text("Share  "),
-                ),
-                if(state is SuccessUploadReviewImage)
-                  TextButton(
-                  onPressed: () async {
-                    await cubit.addReview(context, doc.toString(),carCenterModel);
+                    if(cubit.rate == 0.0){
+                      Helper.showCustomToast(context: context, bgColor: Colors.red, icon: FontAwesomeIcons.x, msg: "please choice your rate");
+                    }else if(cubit.getReviewTextController().text.isEmpty){
+                      Helper.showCustomToast(context: context, bgColor: Colors.red, icon: FontAwesomeIcons.x, msg: "please text your review");
+                    }else{
+                      await cubit.addReview(context, doc.toString(),carCenterModel);
+                    }
+
                   },
                   child: const Text("Share  "),
                 ),
@@ -210,7 +210,7 @@ class AddReviewScreen extends StatelessWidget {
                       TextButton(
                         onPressed: () async {
                           await cubit.pickReviewImage(context: context).then((value) async {
-                            await cubit.uploadReviewImage(image: cubit.file);
+                            await cubit.uploadReviewImage(image: cubit.file!);
 
                           });
                         },

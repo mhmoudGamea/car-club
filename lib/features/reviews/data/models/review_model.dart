@@ -1,6 +1,6 @@
 class ReviewModel {
   String reviewText;
-  String reviewImage;
+  String? reviewImage;
   double reviewRate;
   int helpfulCount;
   String uId;
@@ -10,7 +10,7 @@ class ReviewModel {
   ReviewModel(
       {required this.reviewText,
         required this.carCenterDoc,
-      required this.reviewImage,
+      this.reviewImage,
         required this.uId,
         required this.helpfulCount,
       required this.reviewRate,

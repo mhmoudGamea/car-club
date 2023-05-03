@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:car_club/features/reviews/data/models/review_model.dart';
 import 'package:car_club/features/reviews/presentation/views/widgets/c_reviewers_details.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class ReviewListItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             CReviewersDetails(model: model),
+            CReviewersDetails(model: model),
             const SizedBox(height: 5),
             // review body
             Flexible(
@@ -53,6 +54,20 @@ class ReviewListItem extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
+            if(model.reviewImage!.isNotEmpty)
+              CachedNetworkImage(
+              imageUrl: model.reviewImage ?? "" ,
+              errorWidget: (context, url, error) {
+                return const Placeholder();
+              },
+              placeholder: (context, url) {
+                return const CircularProgressIndicator();
+
+              },
+
+            ),
+            if(model.reviewImage!.isNotEmpty)
+              const SizedBox(height: 10),
             // helpful section
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
