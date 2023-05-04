@@ -16,7 +16,9 @@ import 'drawer_widget.dart';
 
 class TabsView extends StatefulWidget {
   static const rn = '/TabsView';
-  const TabsView({Key? key}) : super(key: key);
+  const TabsView({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<TabsView> createState() => _TabsViewState();
