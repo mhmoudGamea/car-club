@@ -7,6 +7,8 @@ import 'package:go_router/go_router.dart';
 import '../../../../../core/constants.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../services/data/models/car_center_model.dart';
+import '../../../../services/presentation/view_models/services_cubit/services_cubit.dart';
+import 'add_review_screen.dart';
 
 class CGoReviewButton extends StatelessWidget {
   const CGoReviewButton({Key? key, required this.carCenterModel, required this.doc}) : super(key: key);
@@ -22,13 +24,20 @@ class CGoReviewButton extends StatelessWidget {
             child: NeumorphicButton(
               // onPressed: go to add review page,
               onPressed: () async {
-                context.go(
-                  '/AddReviewScreen/$doc',
-                  extra: carCenterModel
+
+                GoRouter.of(context).push(
+                    AddReviewScreen.rn,
+                    extra: {
+                      "cubit1":context.read<CarCenterCubit>(),
+                      "cubit2":context.read<ReviewCubit>(),
+                      "doc":doc,
+                      "model":carCenterModel,
+                    }
                 );
-                // GoRouter.of(context).push(
-                //   AddReviewScreen.rn,
-                //   extra : carCenterModel,
+
+                // context.go(
+                //   '/AddReviewScreen/$doc',
+                //   extra: carCenterModel
                 // );
 
             },

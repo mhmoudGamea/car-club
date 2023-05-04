@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../car_center_details.dart';
 import 'car_center_item_body.dart';
 
 class CarCentersViewBody extends StatelessWidget {
@@ -20,16 +21,33 @@ class CarCentersViewBody extends StatelessWidget {
           return ListView.separated(
               itemBuilder: (context, index) => InkWell(
                   onTap: () {
-                    // GoRouter.of(context).go(location)
-                    GoRouter.of(context).go(
-                      '/CarCenterDetails/${state.carCenterDoc[index]}',
-                      extra: state.carCenters[index]
+
+                    GoRouter.of(context).push(
+                        CarCenterDetails.rn,
+                        extra: {
+                          "doc":state.carCenterDoc[index],
+                          "model":state.carCenters[index],
+                          "cubit1":context.read<CarCenterCubit>()
+                        }
                     );
+                    //
+                    // GoRouter.of(context).go(
+                    //   '/CarCenterDetails/${state.carCenterDoc[index]}',
+                    //   extra: {
+                    //     "doc":state.carCenterDoc[index],
+                    //     "model":state.carCenters[index],
+                    //     "cubit1":context.read<CarCenterCubit>()
+                    //   }
+                    // //    state.carCenters[index]
+                    // );
 
                   },
                   child:
-                      ItemViewBody(carCenterModel: state.carCenters[index],
-                      )),
+                      BlocProvider.value(
+                        value: context.read<CarCenterCubit>(),
+                        child: ItemViewBody(carCenterModel: state.carCenters[index]),
+                      )
+              ),
               separatorBuilder: (context, index) =>
                   const SizedBox(height: 10),
               itemCount: state.carCenters.length);

@@ -5,6 +5,7 @@ import 'package:car_club/features/auth/presentation/views/splash_view.dart';
 import 'package:car_club/features/chats/presentation/views/chat_view.dart';
 import 'package:car_club/features/chats/presentation/views/users_chats_view.dart';
 import 'package:car_club/features/chats/presentation/views/chat_search_view.dart';
+import 'package:car_club/features/reviews/presentation/view_models/review_cubit/review_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -52,9 +53,18 @@ class AppRoutes {
       GoRoute(
         path: AddReviewScreen.rn,
         builder: (context, state) {
-          return AddReviewScreen(
-            doc : state.params["doc"]!,
-            carCenterModel: state.extra as CarCenterModel,
+          Map<String , dynamic> map = state.extra as Map<String , dynamic>;
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider.value(value: map["cubit1"] as CarCenterCubit),
+              BlocProvider.value(value: map["cubit2"] as ReviewCubit),
+            ],
+            child: AddReviewScreen(
+              doc : map["doc"] as String,
+              // state.params["doc"]!
+              carCenterModel: map["model"] as CarCenterModel,
+            //  state.extra as CarCenterModel
+            ),
           );
         },
       ),
@@ -143,11 +153,19 @@ class AppRoutes {
       ),
       GoRoute(
         path: CarCenterDetails.rn,
-        builder: (context, state) => CarCenterDetails(
-          doc : state.params["doc"]!,
-          carCenterModel: state.extra as CarCenterModel,
-          // userModel: state.extra as UserModel,
+        builder: (context, state) {
+          Map<String,dynamic> map = state.extra as  Map<String,dynamic>;
+          return BlocProvider.value(
+            value: map["cubit1"] as CarCenterCubit,
+            child: CarCenterDetails(
+            doc : map["doc"] as String,
+            //state.params["doc"]!
+            carCenterModel: map["model"] as CarCenterModel,
+            //state.extra as CarCenterModel
+            // userModel: state.extra as UserModel,
         ),
+          );
+        },
       ),
       GoRoute(
         path: AddCarCenter.rn,
@@ -156,7 +174,7 @@ class AppRoutes {
       GoRoute(
         path: CarCentersView.rn,
         builder: (context, state) {
-            return const CarCentersView();
+          return const CarCentersView();
         },
       ),
       GoRoute(

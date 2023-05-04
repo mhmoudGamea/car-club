@@ -1,15 +1,11 @@
 import 'package:car_club/features/services/data/models/car_center_model.dart';
-import 'package:car_club/features/services/presentation/view_models/services_cubit/services_cubit.dart';
-import 'package:car_club/features/services/presentation/views/services_view.dart';
 import 'package:car_club/features/services/presentation/views/widgets/show_bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../../core/constants.dart';
-import '../car_centers_view.dart';
 import 'car_center_map.dart';
 import 'car_details_image_item.dart';
 class ShowCenterImages extends StatelessWidget {
@@ -58,14 +54,10 @@ class ShowCenterImages extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      GoRouter.of(context).go(
-                        CarCentersView.rn,
-                      );
-
-
-                      // GoRouter.of(context).pop(
-                      //   CarCentersView.rn
+                      // GoRouter.of(context).go(
+                      //   ServicesView.rn,
                       // );
+                      GoRouter.of(context).pop();
                     },
                   ),
                   const Spacer(),
