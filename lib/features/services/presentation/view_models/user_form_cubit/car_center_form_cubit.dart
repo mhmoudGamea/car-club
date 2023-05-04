@@ -10,6 +10,7 @@ import 'package:go_router/go_router.dart';
 import '../../../data/repos/post_repo.dart';
 import '../../views/car_centers_view.dart';
 import '../../views/widgets/confirmation_widget.dart';
+import '../services_cubit/services_cubit.dart';
 import '../upload_image_cubit/upload_image_cubit.dart';
 
 part 'car_center_form_state.dart';
@@ -156,8 +157,6 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
   Future<void> addCarCenter(List<String> images, BuildContext context) async {
     emit(PostLoading());
     openingTimes = OpeningTimes(
-      // localCloseHour: getCloseHour(),
-      // localOpenHour: getOpenHour(),
       openHour: getOpenHourController.text,
       closeHour: getCloseHourController.text,
       wednesday: wednesday,
@@ -170,6 +169,7 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
     );
     _carCenterModel = CarCenterModel(
       reviewCount: 0,
+      user: user,
       delivery: delivery,
       isOpen: true,
       credit: credit,
@@ -189,6 +189,7 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
         images: images,
         latitude: AddressCubit.getLocationModel!.latitude,
         longitude: AddressCubit.getLocationModel!.longitude);
+
     try {
       await postRepo.addNewCarCenter(uId, _carCenterModel.toMap());
       emit(PostAddedSuccess());
@@ -199,9 +200,14 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
         icon: FontAwesomeIcons.circleCheck,
         msg: 'Car Center added successfully.',
       );
+      GoRouter.of(context).push(
+          CarCentersView.rn,
+          extra: context.read<CarCenterCubit>()
+      );
+      // GoRouter.of(context).push(CarCentersView.rn);
 
-      GoRouter.of(context).push(CarCentersView.rn);
     } catch (error) {
+      print(error.toString());
       emit(PostAddedFailure());
     }
   }

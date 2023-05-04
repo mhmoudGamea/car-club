@@ -72,6 +72,7 @@ class ReviewCubit extends Cubit<ReviewStates> {
       reviewRate: getReviewRate(),
     );
     CarCenterModel newCarCenter = CarCenterModel(
+      user: user,
       isOpen: carCenterModel.isOpen,
       reviewCount: (carCenterModel.reviewCount)+1,
       credit: carCenterModel.credit,

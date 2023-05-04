@@ -33,7 +33,7 @@ class ReviewsViewBody extends StatelessWidget {
                     // physics: const NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                     itemCount: cubit.carCenterReviews.length,
-                    itemBuilder: (context, index) =>  ReviewListItem(model: cubit.carCenterReviews[index],doc: cubit.carCenterReviewsDocs[index]),
+                    itemBuilder: (context, index) =>  ReviewListItem(model: cubit.carCenterReviews[index],doc: cubit.carCenterReviewsDocs[index],carCenterModel: carCenterModel),
                     separatorBuilder: (context, index) =>
                     const SizedBox(height: 10),
                   ),

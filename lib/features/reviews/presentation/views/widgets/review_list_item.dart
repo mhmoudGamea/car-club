@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:car_club/features/reviews/data/models/review_model.dart';
 import 'package:car_club/features/reviews/presentation/views/widgets/c_reviewers_details.dart';
+import 'package:car_club/features/services/data/models/car_center_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,12 +12,13 @@ import '../../view_models/review_cubit/review_state.dart';
 import 'c_helpful_widget.dart';
 
 class ReviewListItem extends StatelessWidget {
-  const ReviewListItem({Key? key, required this.model, required this.doc}) : super(key: key);
+  const ReviewListItem({Key? key, required this.model, required this.doc, required this.carCenterModel}) : super(key: key);
   final ReviewModel model;
   final String doc;
+  final CarCenterModel carCenterModel;
   @override
   Widget build(BuildContext context) {
-    final cubit = BlocProvider.of<ReviewCubit>(context);
+    // final cubit = BlocProvider.of<ReviewCubit>(context);
     return BlocConsumer<ReviewCubit,ReviewStates>(
       listener: (context, state) {
 
@@ -41,7 +43,7 @@ class ReviewListItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CReviewersDetails(model: model),
+            CReviewersDetails(model: model,carCenterModel: carCenterModel),
             const SizedBox(height: 5),
             // review body
             Flexible(

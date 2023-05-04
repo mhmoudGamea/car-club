@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../features/profile/data/models/user_model.dart';
+
+
 dynamic uId;
 dynamic email;
 dynamic remember;
+late List<UserModel> users;
+late UserModel user;
 const primaryDark = Color(0xff171820);
 const secondaryDark = Color(0xff282A3E);
 const textButtonColor = Color(0xff171820);

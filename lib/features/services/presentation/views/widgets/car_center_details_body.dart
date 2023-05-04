@@ -42,12 +42,6 @@ class CarCenterDetailsBody extends StatelessWidget {
 
   ];
 
-  // final UserModel userModel;
-  final List<String> images = [
-    'https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-    'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg'
-  ];
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -69,9 +63,14 @@ class CarCenterDetailsBody extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          CircleAvatar(
-                            backgroundImage:
-                                CachedNetworkImageProvider(images[0]),
+                          if(carCenterModel.user.profileImage!.isNotEmpty)
+                            CircleAvatar(
+                            backgroundImage: CachedNetworkImageProvider(carCenterModel.user.profileImage!),
+                            radius: 25,
+                          ),
+                          if(carCenterModel.user.profileImage!.isEmpty)
+                            const CircleAvatar(
+                              backgroundColor: greyColor,
                             radius: 25,
                           ),
                           const SizedBox(width: 10),
@@ -83,7 +82,7 @@ class CarCenterDetailsBody extends StatelessWidget {
                                 style: Styles.title16,
                               ),
                               Text(
-                                'Mazen Glal',
+                                carCenterModel.user.name,
                                 style: Styles.title12
                                     .copyWith(fontWeight: FontWeight.bold),
                               ),

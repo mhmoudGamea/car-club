@@ -10,6 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../car_center_details.dart';
+
 class ServicesViewBody extends StatefulWidget {
   const ServicesViewBody({Key? key}) : super(key: key);
 
@@ -45,12 +47,19 @@ class _ServicesViewBodyState extends State<ServicesViewBody> {
                               position: LatLng(state.carCenters[i].latitude,
                                   state.carCenters[i].longitude
                               ),
+
                               infoWindow: InfoWindow(
                                 title: state.carCenters[i].name,
                                 snippet: state.carCenters[i].address,
                                 onTap: () {
-                                  // go to Car Center Details
-                                  // GoRouter.of(context).push(CarCenterDetails.rn);
+                                  GoRouter.of(context).push(
+                                      CarCenterDetails.rn,
+                                      extra: {
+                                        "doc":state.carCenterDoc[i],
+                                        "model":state.carCenters[i],
+                                        "cubit1":context.read<CarCenterCubit>()
+                                      }
+                                  );
                                 },
                               )
                             )
@@ -74,6 +83,7 @@ class _ServicesViewBodyState extends State<ServicesViewBody> {
                         child: MaterialButton(
                           child: const Text("Show Car Centers"),
                           onPressed: () {
+                            // GoRouter.of(context).pop();
                             GoRouter.of(context).push(
                               CarCentersView.rn,
                               extra: context.read<CarCenterCubit>()

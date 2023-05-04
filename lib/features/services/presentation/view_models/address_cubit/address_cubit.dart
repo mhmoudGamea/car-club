@@ -64,12 +64,13 @@ class AddressCubit extends Cubit<AddressState> {
         lat2: currentLocation.latitude!,
         lon2: currentLocation.longitude!,
       );
+      int time = calculateDistanceTime(distance);
       _locationModel = LocationModel(
         latitude: currentLocation.latitude!,
         longitude: currentLocation.longitude!,
         address: address,
         distance: distance,
-        time: calculateDistanceTime(distance)
+        time: time
       );
       emit(MyLocationSuccess());
     } catch (error) {

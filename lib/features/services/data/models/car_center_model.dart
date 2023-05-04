@@ -1,4 +1,4 @@
-
+import '../../../profile/data/models/user_model.dart';
 import 'opening_times.dart';
 
 class CarCenterModel {
@@ -9,7 +9,6 @@ class CarCenterModel {
   final String address;
   final String phone;
   final String phone2;
-  final OpeningTimes openingTimes;
   final List<dynamic> images;
   final double distance;
   final int time;
@@ -20,8 +19,12 @@ class CarCenterModel {
   final bool delivery;
   final bool isOpen;
   final int reviewCount;
-  const CarCenterModel({
+  final UserModel user;
+  final OpeningTimes openingTimes;
+
+  const CarCenterModel( {
     required this.isOpen,
+    required this.user,
     required this.reviewCount,
     required this.credit,
     required this.offers,
@@ -44,6 +47,7 @@ class CarCenterModel {
   factory CarCenterModel.fromJson(Map<String, dynamic> json) {
     return CarCenterModel(
       uId: json['uId'],
+      user: UserModel.fromJson(json['user']),
       reviewCount: json['reviewCount'],
       delivery: json['delivery'],
       latitude: json['latitude'],
@@ -67,6 +71,7 @@ class CarCenterModel {
   Map<String, dynamic> toMap() {
     return {
       'uId':uId,
+      'user':user.toMap(),
       'reviewCount':reviewCount,
       'credit': credit,
       'offers':offers,
