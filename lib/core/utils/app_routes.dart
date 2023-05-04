@@ -5,6 +5,7 @@ import 'package:car_club/features/auth/presentation/views/splash_view.dart';
 import 'package:car_club/features/chats/presentation/views/chat_view.dart';
 import 'package:car_club/features/chats/presentation/views/users_chats_view.dart';
 import 'package:car_club/features/chats/presentation/views/chat_search_view.dart';
+import 'package:car_club/features/favourite/presentation/views/favourite_view.dart';
 import 'package:car_club/features/reviews/presentation/view_models/review_cubit/review_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -31,6 +32,7 @@ import '../../features/services/presentation/views/widgets/car_center_item_body.
 import '../../features/services/presentation/views/widgets/car_center_map.dart';
 import '../../features/services/presentation/views/widgets/showImage.dart';
 import '../../features/used/presentation/views/details_view.dart';
+import '../../features/used/presentation/views/used_view.dart';
 import '../cache_helper.dart';
 import '../constants.dart';
 
@@ -53,17 +55,17 @@ class AppRoutes {
       GoRoute(
         path: AddReviewScreen.rn,
         builder: (context, state) {
-          Map<String , dynamic> map = state.extra as Map<String , dynamic>;
+          Map<String, dynamic> map = state.extra as Map<String, dynamic>;
           return MultiBlocProvider(
             providers: [
               BlocProvider.value(value: map["cubit1"] as CarCenterCubit),
               BlocProvider.value(value: map["cubit2"] as ReviewCubit),
             ],
             child: AddReviewScreen(
-              doc : map["doc"] as String,
+              doc: map["doc"] as String,
               // state.params["doc"]!
               carCenterModel: map["model"] as CarCenterModel,
-            //  state.extra as CarCenterModel
+              //  state.extra as CarCenterModel
             ),
           );
         },
@@ -88,8 +90,16 @@ class AppRoutes {
             ItemViewBody(carCenterModel: state.extra as CarCenterModel),
       ),
       GoRoute(
+        path: UsedView.rn,
+        builder: (context, state) => const UsedView(),
+      ),
+      GoRoute(
         path: ServicesView.rn,
         builder: (context, state) => const ServicesView(),
+      ),
+      GoRoute(
+        path: FavouriteView.rn,
+        builder: (context, state) => const FavouriteView(),
       ),
       GoRoute(
         path: TabsView.rn,
@@ -148,22 +158,23 @@ class AppRoutes {
       GoRoute(
         path: CarCentersView.rn,
         builder: (context, state) => BlocProvider.value(
-          value:  state.extra as CarCenterCubit,
-          child: const CarCentersView(),),
+          value: state.extra as CarCenterCubit,
+          child: const CarCentersView(),
+        ),
       ),
       GoRoute(
         path: CarCenterDetails.rn,
         builder: (context, state) {
-          Map<String,dynamic> map = state.extra as  Map<String,dynamic>;
+          Map<String, dynamic> map = state.extra as Map<String, dynamic>;
           return BlocProvider.value(
             value: map["cubit1"] as CarCenterCubit,
             child: CarCenterDetails(
-            doc : map["doc"] as String,
-            //state.params["doc"]!
-            carCenterModel: map["model"] as CarCenterModel,
-            //state.extra as CarCenterModel
-            // userModel: state.extra as UserModel,
-        ),
+              doc: map["doc"] as String,
+              //state.params["doc"]!
+              carCenterModel: map["model"] as CarCenterModel,
+              //state.extra as CarCenterModel
+              // userModel: state.extra as UserModel,
+            ),
           );
         },
       ),
