@@ -24,6 +24,7 @@ class CarModel {
   final int cylinder;
   final String type;
   final List<dynamic> images;
+  final List<dynamic> favorites;
 
   const CarModel({
     required this.brand,
@@ -46,6 +47,7 @@ class CarModel {
     required this.cylinder,
     required this.type,
     required this.images,
+    required this.favorites,
   });
 
   factory CarModel.fromMap(Map<String, dynamic> data) => CarModel(
@@ -69,6 +71,7 @@ class CarModel {
         cylinder: data['cylinder'] as int,
         type: data['type'] as String,
         images: data['images'] as List<dynamic>,
+        favorites: data['favorites'] as List<dynamic>,
       );
 
   Map<String, dynamic> toMap() => {
@@ -92,6 +95,7 @@ class CarModel {
         'cylinder': cylinder,
         'type': type,
         'images': images,
+        'favorites': favorites,
       };
 
   /// `dart:convert`

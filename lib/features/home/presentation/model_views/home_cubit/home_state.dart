@@ -18,3 +18,9 @@ class HomeFailure extends HomeState {
 
   HomeFailure(this.errMsg);
 }
+
+class IsFavouriteSuccess extends HomeState {}
+
+class IsFavouriteFailure extends HomeState {}
+
+class AlreadyInFavourites extends HomeState {}
