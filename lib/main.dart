@@ -9,6 +9,7 @@ import 'core/constants.dart';
 import 'features/auth/data/auth_services/login/login_cubit/bloc_observe.dart';
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   CacheHelper.initialObject();
   await Firebase.initializeApp();
@@ -16,7 +17,9 @@ void main() async {
 
   // var token = await FirebaseMessaging.instance.getToken();
   // print(token);
+
   await FirebaseMessaging.instance.getInitialMessage();
+
   // FirebaseMessaging messaging = FirebaseMessaging.instance;
   // NotificationSettings settings = await messaging.requestPermission(
   //   alert: true,

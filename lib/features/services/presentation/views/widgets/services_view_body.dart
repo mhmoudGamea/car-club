@@ -27,9 +27,11 @@ class _ServicesViewBodyState extends State<ServicesViewBody> {
       create: (context) => CarCenterCubit()..getCarCenters(),
       child: BlocBuilder<CarCenterCubit, CarCentersStates>(
         builder: (context, state) {
+
           if (state is GetCarCentersLoading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is GetCarCentersSuccess) {
+          }
+          else if (state is GetCarCentersSuccess) {
             print("number of centers :: ${state.carCenters.length}");
             return Stack(
               alignment: Alignment.bottomCenter,
@@ -83,7 +85,6 @@ class _ServicesViewBodyState extends State<ServicesViewBody> {
                         child: MaterialButton(
                           child: const Text("Show Car Centers"),
                           onPressed: () {
-                            // GoRouter.of(context).pop();
                             GoRouter.of(context).push(
                               CarCentersView.rn,
                               extra: context.read<CarCenterCubit>()
@@ -118,42 +119,21 @@ class _ServicesViewBodyState extends State<ServicesViewBody> {
                     ),
                   ],
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.only(top: 16.0,left: 20.0),
-                //   child: Align(
-                //     alignment: Alignment.topLeft,
-                //     child: IconButton(
-                //       padding: EdgeInsets.zero,
-                //       icon: const CircleAvatar(
-                //         radius: 25,
-                //         backgroundColor: whiteColor,
-                //         child: Icon(
-                //           FontAwesomeIcons.chevronLeft,
-                //           color: mintGreen,
-                //           size: 20,
-                //         ),
-                //       ),
-                //       onPressed: () {
-                //         GoRouter.of(context).go(
-                //           TabsView.rn,
-                //         );
-                //
-                //       },
-                //     ),
-                //   ),
-                // ),
               ],
             );
-          } else if (state is GetCarCentersFailure) {
+          }
+          else if (state is GetCarCentersFailure) {
             return Center(
                 widthFactor: 10,
                 child: Text(
                   state.error.toString(),
                   maxLines: 1,
                 ));
-          } else {
+          }
+          else {
             return const Text('');
           }
+
         },
       ),
     );

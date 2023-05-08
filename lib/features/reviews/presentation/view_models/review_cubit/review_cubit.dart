@@ -14,8 +14,8 @@ import '../../../data/repos/review_repo.dart';
 
 class ReviewCubit extends Cubit<ReviewStates> {
   ReviewCubit({required this.reviewRepo}) : super(InitialReview());
-
-
+  // ADD button
+  bool press = false;
   final ReviewRepo reviewRepo;
   late  String reviewText;
   late double rate = 0.0;
