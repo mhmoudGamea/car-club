@@ -1,9 +1,14 @@
+import 'dart:ffi';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../core/constants.dart';
 import '../../../../core/error/failure.dart';
+import '../../../../core/utils/helper.dart';
 import '../models/car_model.dart';
 import 'home_repo.dart';
 
@@ -92,7 +97,48 @@ class HomeRepoImpl implements HomeRepo {
       cars.add(CarModel.fromMap(element.data()));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> updateFavourites(
+      CarModel car, bool isLiked, BuildContext context) async {
+    try {
+      CollectionReference carsCollectionRF = FirebaseFirestore.instance
+          .collection('cars')
+          .doc('brands')
+          .collection(car.brand.toLowerCase());
+      var data1 = await carsCollectionRF.get();
+      for (var element in data1.docs) {
+        if (element.id == car.model) {
+          if (isLiked) {
+            await carsCollectionRF.doc(element.id).update({
+              'favorites': FieldValue.arrayUnion([uId])
+            }).then((value) async {
+              Helper.showCustomToast(
+                  context: context,
+                  bgColor: babyBlue,
+                  icon: FontAwesomeIcons.circleCheck,
+                  msg: 'Added to your favourites');
+            });
+          } else {
+            await carsCollectionRF.doc(element.id).update({
+              'favorites': FieldValue.arrayRemove([uId])
+            }).then((value) async {
+              Helper.showCustomToast(
+                  context: context,
+                  bgColor: babyBlue,
+                  icon: FontAwesomeIcons.circleCheck,
+                  msg: 'Removed from your favourites');
+            });
+          }
+        }
+      }
+      return const Right(true);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
 }
+
 
 // try {
 //       var data = await FirebaseFirestore.instance

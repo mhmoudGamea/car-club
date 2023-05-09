@@ -19,50 +19,50 @@ class HomeCubit extends Cubit<HomeState> {
     var result = await homeRepo.fetchNewCars();
     result.fold(
       (failure) => emit(HomeFailure(failure.errMsg)),
-      (books) => emit(HomeSuccess(books)),
+      (cars) => emit(HomeSuccess(cars)),
     );
   }
 
-  CollectionReference carsCollectionRF =
-      FirebaseFirestore.instance.collection('cars');
-
-  // this func executed to make favourites field in firestore by add or remove user uid
-
-  void updateFavourites(
+  Future<void> updateFavourites(
       CarModel car, bool isLiked, BuildContext context) async {
-    // print(isLiked);
-    await carsCollectionRF.where('model', isEqualTo: car.model).get().then(
-      (value) async {
-        // here i got only one document if there is no 2 posts added at the same second
-        // for (var doc in value.docs) {
-        //   if (isLiked) {
-        //     await carsCollectionRF.doc(doc.id).update({
-        //       'favourites': FieldValue.arrayUnion([uId])
-        //     }).then((value) async {
-        //       Helper.showCustomToast(
-        //           context: context,
-        //           bgColor: babyBlue,
-        //           icon: FontAwesomeIcons.circleCheck,
-        //           msg: 'Added to your favourites');
-        //       //await addToFavourites(model);
-        //     });
-        //   } else {
-        //     await carsCollectionRF.doc(doc.id).update({
-        //       'favourites': FieldValue.arrayRemove([uId])
-        //     }).then((value) async {
-        //       Helper.showCustomToast(
-        //           context: context,
-        //           bgColor: babyBlue,
-        //           icon: FontAwesomeIcons.circleCheck,
-        //           msg: 'Removed from your favourites');
-        //       //await removeFromFavourites(model);
-        //     });
-        //   }
-        // }
-      },
-      onError: (error) {
-        emit(IsFavouriteFailure());
-      },
+    var result = await homeRepo.updateFavourites(car, isLiked, context);
+    result.fold(
+      (failure) => emit(IsFavouriteFailure(failure.errMsg)),
+      (_) {},
     );
   }
+
+  // void updateFavourites(
+  //     CarModel car, bool isLiked, BuildContext context) async {
+  //   CollectionReference carsCollectionRF = FirebaseFirestore.instance
+  //       .collection('cars')
+  //       .doc('brands')
+  //       .collection(car.brand.toLowerCase());
+  //   var data1 = await carsCollectionRF.get();
+  //   for (var element in data1.docs) {
+  //     if (element.id == car.model) {
+  //       if (isLiked) {
+  //         await carsCollectionRF.doc(element.id).update({
+  //           'favorites': FieldValue.arrayUnion([uId])
+  //         }).then((value) async {
+  //           Helper.showCustomToast(
+  //               context: context,
+  //               bgColor: babyBlue,
+  //               icon: FontAwesomeIcons.circleCheck,
+  //               msg: 'Added to your favourites');
+  //         });
+  //       } else {
+  //         await carsCollectionRF.doc(element.id).update({
+  //           'favorites': FieldValue.arrayRemove([uId])
+  //         }).then((value) async {
+  //           Helper.showCustomToast(
+  //               context: context,
+  //               bgColor: babyBlue,
+  //               icon: FontAwesomeIcons.circleCheck,
+  //               msg: 'Removed from your favourites');
+  //         });
+  //       }
+  //     }
+  //   }
+  // }
 }
