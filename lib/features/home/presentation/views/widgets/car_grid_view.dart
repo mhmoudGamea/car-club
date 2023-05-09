@@ -14,26 +14,29 @@ class CarGridView extends StatelessWidget {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         if (state is HomeSuccess) {
-          return GridView.builder(
-            physics: const BouncingScrollPhysics(),
-            padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-            itemCount: state.cars.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 15 / 19,
+          return RefreshIndicator(
+            onRefresh: () => BlocProvider.of<HomeCubit>(context).fetchNewCars(),
+            child: GridView.builder(
+              physics: const BouncingScrollPhysics(),
+              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+              itemCount: state.cars.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: 15 / 19,
+              ),
+              itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    GoRouter.of(context).push(
+                      HomeViewDetails.rn,
+                      extra: state.cars[index],
+                    );
+                  },
+                  child: CarGridItem(
+                    car: state.cars[index],
+                  )),
             ),
-            itemBuilder: (context, index) => GestureDetector(
-                onTap: () {
-                  GoRouter.of(context).push(
-                    HomeViewDetails.rn,
-                    extra: state.cars[index],
-                  );
-                },
-                child: CarGridItem(
-                  car: state.cars[index],
-                )),
           );
         } else if (state is HomeFailure) {
           return Text(state.errMsg);

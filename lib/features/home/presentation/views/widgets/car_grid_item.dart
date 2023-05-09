@@ -37,7 +37,7 @@ class _CarGridItemState extends State<CarGridItem> {
 
   @override
   Widget build(BuildContext context) {
-    final data = BlocProvider.of<HomeCubit>(context, listen: false);
+    final data = BlocProvider.of<HomeCubit>(context, listen: true);
     String formatedPrice = _format.format(widget.car.price);
     return Container(
       padding: const EdgeInsets.all(10),

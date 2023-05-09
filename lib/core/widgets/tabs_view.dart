@@ -43,9 +43,9 @@ class _TabsViewState extends State<TabsView> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ProfileCubit()..getUsers(),
-      child: BlocListener<ProfileCubit,ProfileState>(
+      child: BlocListener<ProfileCubit, ProfileState>(
         listener: (context, state) async {
-          if(state is GetUsersSuccess){
+          if (state is GetUsersSuccess) {
             await BlocProvider.of<ProfileCubit>(context).getUser(uId: uId);
             print(user.name.toString());
           }
@@ -56,7 +56,11 @@ class _TabsViewState extends State<TabsView> {
             child: Column(
               children: [
                 const CustomAppBar(),
-                const Divider(color: secondaryDark),
+                const SizedBox(height: 8),
+                const Divider(
+                  color: secondaryDark,
+                  height: 1,
+                ),
                 Expanded(
                   child: getScreen(_currentIndex)['screen'],
                 ),
@@ -97,7 +101,9 @@ class _TabsViewState extends State<TabsView> {
                           children: [
                             Icon(FontAwesomeIcons.house,
                                 size: 15,
-                                color: _currentIndex == 0 ? mintGreen : blackColor),
+                                color: _currentIndex == 0
+                                    ? mintGreen
+                                    : blackColor),
                             const SizedBox(height: 3),
                             Text(
                               'Home',
@@ -121,7 +127,9 @@ class _TabsViewState extends State<TabsView> {
                           children: [
                             Icon(FontAwesomeIcons.retweet,
                                 size: 16,
-                                color: _currentIndex == 1 ? mintGreen : blackColor),
+                                color: _currentIndex == 1
+                                    ? mintGreen
+                                    : blackColor),
                             const SizedBox(height: 3),
                             Text(
                               'Used',
@@ -150,7 +158,9 @@ class _TabsViewState extends State<TabsView> {
                           children: [
                             Icon(FontAwesomeIcons.screwdriverWrench,
                                 size: 16,
-                                color: _currentIndex == 2 ? mintGreen : blackColor),
+                                color: _currentIndex == 2
+                                    ? mintGreen
+                                    : blackColor),
                             const SizedBox(height: 3),
                             Text(
                               'Service',
@@ -174,7 +184,9 @@ class _TabsViewState extends State<TabsView> {
                           children: [
                             Icon(FontAwesomeIcons.solidHeart,
                                 size: 16,
-                                color: _currentIndex == 3 ? mintGreen : blackColor),
+                                color: _currentIndex == 3
+                                    ? mintGreen
+                                    : blackColor),
                             const SizedBox(height: 3),
                             Text(
                               'Favourite',
@@ -204,7 +216,8 @@ class _TabsViewState extends State<TabsView> {
               child: Icon(Icons.add, color: mintGreen),
             ),
           ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
         ),
       ),
     );
