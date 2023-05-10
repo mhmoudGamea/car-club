@@ -19,6 +19,15 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
+  Future<void> fetchFavCars() async {
+    emit(FavLoading());
+    var result = await homeRepo.fetchFavCars();
+    result.fold(
+      (failure) => emit(FavFailure(failure.errMsg)),
+      (cars) => emit(FavSuccess(cars)),
+    );
+  }
+
   Future<void> updateFavourites(
       CarModel car, bool isLiked, BuildContext context) async {
     var result = await homeRepo.updateFavourites(car, isLiked, context);

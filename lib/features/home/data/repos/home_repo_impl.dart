@@ -13,6 +13,36 @@ import '../models/car_model.dart';
 import 'home_repo.dart';
 
 class HomeRepoImpl implements HomeRepo {
+  final List brands = [
+    'audi',
+    'brilliance',
+    'byd',
+    'chevrolet',
+    'fiat',
+    'ford',
+    'geely',
+    'haval',
+    'honda',
+    'hyundai',
+    'jaguar',
+    'jeep',
+    'jetour',
+    'kia',
+    'mazda',
+    'mg',
+    'mini',
+    'mitsubishi',
+    'nissan',
+    'opel',
+    'peugeot',
+    'proton',
+    'renault',
+    'seat',
+    'skoda',
+    'subaru',
+    'toyota',
+    'volvo',
+  ];
   @override
   Future<Either<Failure, List<CarModel>>> fetchNewCars() async {
     try {
@@ -21,36 +51,7 @@ class HomeRepoImpl implements HomeRepo {
         10,
         (index) => rng.nextInt(28),
       );
-      final List brands = [
-        'audi',
-        'brilliance',
-        'byd',
-        'chevrolet',
-        'fiat',
-        'ford',
-        'geely',
-        'haval',
-        'honda',
-        'hyundai',
-        'jaguar',
-        'jeep',
-        'jetour',
-        'kia',
-        'mazda',
-        'mg',
-        'mini',
-        'mitsubishi',
-        'nissan',
-        'opel',
-        'peugeot',
-        'proton',
-        'renault',
-        'seat',
-        'skoda',
-        'subaru',
-        'toyota',
-        'volvo',
-      ];
+
       List<CarModel> cars = [];
       var data1 = await FirebaseFirestore.instance
           .collection('cars')
@@ -95,6 +96,28 @@ class HomeRepoImpl implements HomeRepo {
         .get();
     for (var element in data.docs) {
       cars.add(CarModel.fromMap(element.data()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<CarModel>>> fetchFavCars() async {
+    try {
+      List<CarModel> cars = [];
+      for (var i = 0; i < brands.length; i++) {
+        var data = await FirebaseFirestore.instance
+            .collection('cars')
+            .doc('brands')
+            .collection(brands[i])
+            .get();
+        for (var element in data.docs) {
+          if (element['favorites'].contains(uId)) {
+            cars.add(CarModel.fromMap(element.data()));
+          }
+        }
+      }
+      return right(cars);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 

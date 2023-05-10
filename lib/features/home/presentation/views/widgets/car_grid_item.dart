@@ -19,6 +19,7 @@ class CarGridItem extends StatefulWidget {
 
 class _CarGridItemState extends State<CarGridItem> {
   var _isLiked = false;
+
   @override
   void didChangeDependencies() {
     if (widget.car.favorites.contains(uId)) {
@@ -37,7 +38,7 @@ class _CarGridItemState extends State<CarGridItem> {
 
   @override
   Widget build(BuildContext context) {
-    final data = BlocProvider.of<HomeCubit>(context, listen: true);
+    final data = BlocProvider.of<HomeCubit>(context, listen: false);
     String formatedPrice = _format.format(widget.car.price);
     return Container(
       padding: const EdgeInsets.all(10),
