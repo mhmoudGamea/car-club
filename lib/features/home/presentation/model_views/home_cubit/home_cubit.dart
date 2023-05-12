@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
 
 import '../../../data/models/car_model.dart';
 import '../../../data/repos/home_repo.dart';
@@ -15,7 +15,25 @@ class HomeCubit extends Cubit<HomeState> {
     var result = await homeRepo.fetchNewCars();
     result.fold(
       (failure) => emit(HomeFailure(failure.errMsg)),
-      (books) => emit(HomeSuccess(books)),
+      (cars) => emit(HomeSuccess(cars)),
+    );
+  }
+
+  Future<void> fetchFavCars() async {
+    emit(FavLoading());
+    var result = await homeRepo.fetchFavCars();
+    result.fold(
+      (failure) => emit(FavFailure(failure.errMsg)),
+      (cars) => emit(FavSuccess(cars)),
+    );
+  }
+
+  Future<void> updateFavourites(
+      CarModel car, bool isLiked, BuildContext context) async {
+    var result = await homeRepo.updateFavourites(car, isLiked, context);
+    result.fold(
+      (failure) => emit(IsFavouriteFailure(failure.errMsg)),
+      (_) {},
     );
   }
 }

@@ -1,32 +1,37 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:car_club/features/reviews/data/models/review_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/constants.dart';
 import '../../../../../core/utils/styles.dart';
+import '../../../../services/data/models/car_center_model.dart';
 
 class CReviewersDetails extends StatelessWidget {
-  const CReviewersDetails({Key? key, required this.model}) : super(key: key);
+  const CReviewersDetails({Key? key, required this.model, required this.carCenterModel}) : super(key: key);
   final ReviewModel model;
+  final CarCenterModel carCenterModel;
   @override
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       // image section
-      leading: const CircleAvatar(
+
+    leading: carCenterModel.user.profileImage!.isNotEmpty ?CircleAvatar(
+        backgroundImage: CachedNetworkImageProvider(carCenterModel.user.profileImage!),
         radius: 26,
-        backgroundImage: NetworkImage(
-            'https://img.freepik.com/free-photo/arrangement-delicious-taco-bread-ingredients_23-2148329051.jpg?w=1060&t=st=1682412421~exp=1682413021~hmac=88e38513ec31607f0715730044891dcc79f454922d7de465d15d669698a001e2'),
-      ),
+      ) : const CircleAvatar(
+        backgroundColor: greyColor, radius: 26),
+
       // name section
       title: Text(
-        'Tako Holiday',
+        carCenterModel.user.name,
         style: Styles.title15.copyWith(color: blackColor),
       ),
       // rating section and date
       subtitle: Row(
         children: [
           Row(
-            children: List.generate(
+             children: List.generate(
               model.reviewRate.toInt() ,
               (index) => const Icon(
                 Icons.star_rounded,

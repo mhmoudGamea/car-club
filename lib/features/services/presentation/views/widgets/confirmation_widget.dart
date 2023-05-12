@@ -1,11 +1,14 @@
 import 'package:car_club/core/utils/styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../core/constants.dart';
 import '../../../../../core/widgets/progress.dart';
+import '../../view_models/services_cubit/services_cubit.dart';
 import '../../view_models/upload_image_cubit/upload_image_cubit.dart';
 import '../../view_models/user_form_cubit/car_center_form_cubit.dart';
+import '../car_centers_view.dart';
 
 class ConfirmationWidget extends StatelessWidget {
   const ConfirmationWidget({Key? key}) : super(key: key);
@@ -87,7 +90,16 @@ class ConfirmationWidget extends StatelessWidget {
                           child: NeumorphicButton(
                             onPressed: () {
                               userData.addCarCenter(
-                                  uploadImageData.getUploadedUrls, context);
+                                  uploadImageData.getUploadedUrls,
+                                  context,
+                              ).then((value) {
+                                GoRouter.of(context).push(
+                                    CarCentersView.rn,
+                                    extra: context.read<CarCenterCubit>()
+                                );
+
+                              });
+
                             },
                             padding: const EdgeInsets.symmetric(vertical: 13),
                             style: const NeumorphicStyle(

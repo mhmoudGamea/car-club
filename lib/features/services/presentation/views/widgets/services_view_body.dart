@@ -10,6 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../car_center_details.dart';
+
 class ServicesViewBody extends StatefulWidget {
   const ServicesViewBody({Key? key}) : super(key: key);
 
@@ -25,9 +27,11 @@ class _ServicesViewBodyState extends State<ServicesViewBody> {
       create: (context) => CarCenterCubit()..getCarCenters(),
       child: BlocBuilder<CarCenterCubit, CarCentersStates>(
         builder: (context, state) {
+
           if (state is GetCarCentersLoading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is GetCarCentersSuccess) {
+          }
+          else if (state is GetCarCentersSuccess) {
             print("number of centers :: ${state.carCenters.length}");
             return Stack(
               alignment: Alignment.bottomCenter,
@@ -45,12 +49,19 @@ class _ServicesViewBodyState extends State<ServicesViewBody> {
                               position: LatLng(state.carCenters[i].latitude,
                                   state.carCenters[i].longitude
                               ),
+
                               infoWindow: InfoWindow(
                                 title: state.carCenters[i].name,
                                 snippet: state.carCenters[i].address,
                                 onTap: () {
-                                  // go to Car Center Details
-                                  // GoRouter.of(context).push(CarCenterDetails.rn);
+                                  GoRouter.of(context).push(
+                                      CarCenterDetails.rn,
+                                      extra: {
+                                        "doc":state.carCenterDoc[i],
+                                        "model":state.carCenters[i],
+                                        "cubit1":context.read<CarCenterCubit>()
+                                      }
+                                  );
                                 },
                               )
                             )
@@ -108,42 +119,21 @@ class _ServicesViewBodyState extends State<ServicesViewBody> {
                     ),
                   ],
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.only(top: 16.0,left: 20.0),
-                //   child: Align(
-                //     alignment: Alignment.topLeft,
-                //     child: IconButton(
-                //       padding: EdgeInsets.zero,
-                //       icon: const CircleAvatar(
-                //         radius: 25,
-                //         backgroundColor: whiteColor,
-                //         child: Icon(
-                //           FontAwesomeIcons.chevronLeft,
-                //           color: mintGreen,
-                //           size: 20,
-                //         ),
-                //       ),
-                //       onPressed: () {
-                //         GoRouter.of(context).go(
-                //           TabsView.rn,
-                //         );
-                //
-                //       },
-                //     ),
-                //   ),
-                // ),
               ],
             );
-          } else if (state is GetCarCentersFailure) {
+          }
+          else if (state is GetCarCentersFailure) {
             return Center(
                 widthFactor: 10,
                 child: Text(
                   state.error.toString(),
                   maxLines: 1,
                 ));
-          } else {
+          }
+          else {
             return const Text('');
           }
+
         },
       ),
     );
