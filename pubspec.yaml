@@ -38,8 +38,7 @@ dependencies:
   shared_preferences:
   webview_flutter: ^3.0.4
   fluttertoast:
-  conditional_builder_null_safety:
-  conditional_builder:
+  conditional_builder_null_safety: ^0.0.6
   carousel_slider: ^4.2.1
   firebase_core: ^2.4.0
   firebase_auth: ^4.2.3
