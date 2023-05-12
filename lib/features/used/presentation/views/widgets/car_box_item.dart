@@ -37,7 +37,6 @@ class _CarBoxItemState extends State<CarBoxItem> {
   Widget build(BuildContext context) {
     final data = BlocProvider.of<UsedCubit>(context, listen: false);
     String formatedPrice = _format.format(widget.model.price);
-    String formatedKm = _format.format(widget.model.mileage);
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -99,7 +98,7 @@ class _CarBoxItemState extends State<CarBoxItem> {
           const SizedBox(height: 10),
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Colors.white,
@@ -115,38 +114,8 @@ class _CarBoxItemState extends State<CarBoxItem> {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  formatedPrice,
+                  '$formatedPrice EGP',
                   style: Styles.title14.copyWith(color: Colors.black),
-                ),
-                const SizedBox(height: 5),
-                Row(
-                  children: [
-                    Image.asset(
-                      'assets/used/km.png',
-                      color: mintGreen,
-                      width: 19,
-                    ),
-                    const SizedBox(width: 5),
-                    Text(
-                      '$formatedKm km',
-                      style: Styles.title13.copyWith(color: Colors.grey[700]),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 5),
-                Row(
-                  children: [
-                    Image.asset(
-                      'assets/used/transmission.png',
-                      color: mintGreen,
-                      width: 20,
-                    ),
-                    const SizedBox(width: 5),
-                    Text(
-                      widget.model.transmission,
-                      style: Styles.title13.copyWith(color: Colors.grey[700]),
-                    ),
-                  ],
                 ),
               ],
             ),

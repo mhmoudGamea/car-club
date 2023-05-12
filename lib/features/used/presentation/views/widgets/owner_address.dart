@@ -47,11 +47,12 @@ class OwnerAddress extends StatelessWidget {
                 const Center(
                     child: Icon(
                   Icons.location_on_rounded,
+                  color: Colors.red,
                   size: 25,
                 )),
                 Center(
                   child: CircleAvatar(
-                    backgroundColor: blackColor.withOpacity(0.12),
+                    backgroundColor: Colors.red.withOpacity(0.2),
                     radius: 45,
                   ),
                 ),

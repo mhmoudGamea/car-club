@@ -39,7 +39,7 @@ class UsedViewBody extends StatelessWidget {
             crossAxisCount: 2,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
-            childAspectRatio: 15 / 23.8,
+            childAspectRatio: 15 / 20,
           ),
           itemBuilder: (context, index) => GestureDetector(
               onTap: () {
