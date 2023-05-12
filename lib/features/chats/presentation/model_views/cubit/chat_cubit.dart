@@ -6,7 +6,6 @@ import 'package:car_club/core/models/user_model.dart';
 import 'package:car_club/features/chats/data/models/chat_model.dart';
 import 'package:car_club/features/chats/data/repos/chat_repo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -22,13 +21,9 @@ class ChatCubit extends Cubit<ChatState> {
   List<UserModel> chats = [];
 
   UserModel? ownerUserModel;
-  Future<void> getOwnerChat(String uId)async {
-    for(int i=0;i<chats.length;i++){
-      print(chats[i].uId);
-      print(uId);
-      if((uId == chats[i].uId))
-      {
-        print(chats[i].uId);
+  Future<void> getOwnerChat(String uId) async {
+    for (int i = 0; i < chats.length; i++) {
+      if ((uId == chats[i].uId)) {
         ownerUserModel = chats[i];
       }
     }
@@ -51,7 +46,7 @@ class ChatCubit extends Cubit<ChatState> {
   }
   // this function to get all users to search view depending on the name i search about
 
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
 
   TextEditingController get getSearchController {
     return _searchController;

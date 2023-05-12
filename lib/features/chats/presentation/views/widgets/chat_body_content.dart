@@ -1,6 +1,5 @@
 import 'package:car_club/core/constants.dart';
 import 'package:car_club/core/models/user_model.dart';
-import 'package:car_club/core/utils/helper.dart';
 import 'package:car_club/core/utils/styles.dart';
 import 'package:car_club/core/widgets/shimmer_indecator.dart';
 import 'package:car_club/features/chats/data/models/chat_model.dart';

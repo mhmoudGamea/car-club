@@ -53,17 +53,17 @@ class AppRoutes {
       GoRoute(
         path: AddReviewScreen.rn,
         builder: (context, state) {
-          Map<String , dynamic> map = state.extra as Map<String , dynamic>;
+          Map<String, dynamic> map = state.extra as Map<String, dynamic>;
           return MultiBlocProvider(
             providers: [
               BlocProvider.value(value: map["cubit1"] as CarCenterCubit),
               BlocProvider.value(value: map["cubit2"] as ReviewCubit),
             ],
             child: AddReviewScreen(
-              doc : map["doc"] as String,
+              doc: map["doc"] as String,
               // state.params["doc"]!
               carCenterModel: map["model"] as CarCenterModel,
-            //  state.extra as CarCenterModel
+              //  state.extra as CarCenterModel
             ),
           );
         },
@@ -148,22 +148,23 @@ class AppRoutes {
       GoRoute(
         path: CarCentersView.rn,
         builder: (context, state) => BlocProvider.value(
-          value:  state.extra as CarCenterCubit,
-          child: const CarCentersView(),),
+          value: state.extra as CarCenterCubit,
+          child: const CarCentersView(),
+        ),
       ),
       GoRoute(
         path: CarCenterDetails.rn,
         builder: (context, state) {
-          Map<String,dynamic> map = state.extra as  Map<String,dynamic>;
+          Map<String, dynamic> map = state.extra as Map<String, dynamic>;
           return BlocProvider.value(
             value: map["cubit1"] as CarCenterCubit,
             child: CarCenterDetails(
-            doc : map["doc"] as String,
-            //state.params["doc"]!
-            carCenterModel: map["model"] as CarCenterModel,
-            //state.extra as CarCenterModel
-            // userModel: state.extra as UserModel,
-        ),
+              doc: map["doc"] as String,
+              //state.params["doc"]!
+              carCenterModel: map["model"] as CarCenterModel,
+              //state.extra as CarCenterModel
+              // userModel: state.extra as UserModel,
+            ),
           );
         },
       ),

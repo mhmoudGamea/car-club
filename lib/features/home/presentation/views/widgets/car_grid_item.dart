@@ -1,11 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:car_club/core/constants.dart';
 import 'package:car_club/core/utils/styles.dart';
-import 'package:car_club/features/used/presentation/model_views/used_cubit/used_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:like_button/like_button.dart';
 
 import '../../../data/models/car_model.dart';
 
@@ -18,7 +15,7 @@ class CarGridItem extends StatefulWidget {
 }
 
 class _CarGridItemState extends State<CarGridItem> {
-  var _isLiked = false;
+  final _isLiked = false;
   // @override
   // void didChangeDependencies() {
   //   if (widget.model.favourites.contains(uId)) {

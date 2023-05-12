@@ -1,8 +1,6 @@
 import 'package:car_club/core/constants.dart';
-import 'package:car_club/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../model_views/cubit/chat_cubit.dart';
