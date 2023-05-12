@@ -10,9 +10,11 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/constants.dart';
 import '../../../../../core/utils/styles.dart';
 import 'car_center_map.dart';
+
 class CarCenterAddress extends StatelessWidget {
   const CarCenterAddress({
-    super.key, required this.carCenterModel,
+    super.key,
+    required this.carCenterModel,
   });
   final CarCenterModel carCenterModel;
 
@@ -53,11 +55,10 @@ class CarCenterAddress extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             width: (MediaQuery.of(context).size.width / 3) * 2.6,
             child: Text(
-              'place : ${carCenterModel.address}',
+              carCenterModel.address,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
-              style: Styles.title13
-                  .copyWith(fontWeight: FontWeight.w500),
+              style: Styles.title13.copyWith(fontWeight: FontWeight.w500),
               softWrap: true,
             ),
           ),
@@ -69,43 +70,45 @@ class CarCenterAddress extends StatelessWidget {
             children: [
               SizedBox(
                 height: 200,
-                width: (MediaQuery.of(context).size.width/4)*3.5,
+                width: (MediaQuery.of(context).size.width / 4) * 3.5,
                 child: ClipRRect(
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   borderRadius: BorderRadius.circular(10),
                   child: GoogleMap(
-
                     onTap: (argument) {
-                      GoRouter.of(context).push(CarCenterMap.rn,extra: carCenterModel);
+                      GoRouter.of(context)
+                          .push(CarCenterMap.rn, extra: carCenterModel);
                     },
                     zoomControlsEnabled: false,
                     zoomGesturesEnabled: false,
                     scrollGesturesEnabled: false,
                     rotateGesturesEnabled: false,
-
                     padding: const EdgeInsets.all(10),
                     mapType: MapType.normal,
-                    initialCameraPosition:  CameraPosition(
+                    initialCameraPosition: CameraPosition(
                       zoom: 9.4746,
-                      target: LatLng(carCenterModel.latitude, carCenterModel.longitude),
+                      target: LatLng(
+                          carCenterModel.latitude, carCenterModel.longitude),
                     ),
                     markers: {
                       Marker(
-                          markerId:  const MarkerId('1'),
-                          position: LatLng(carCenterModel.latitude, carCenterModel.longitude),
-                          infoWindow: InfoWindow(title: carCenterModel.name)
-                      ),
+                          markerId: const MarkerId('1'),
+                          position: LatLng(carCenterModel.latitude,
+                              carCenterModel.longitude),
+                          infoWindow: InfoWindow(title: carCenterModel.name)),
                     },
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
+              Positioned(
+                right: 10,
+                bottom: 10,
                 child: InkWell(
                   onTap: () async {
                     late final String url;
                     if (Platform.isAndroid) {
-                      url = 'google.navigation:q=${carCenterModel.latitude},${carCenterModel.longitude}';
+                      url =
+                          'google.navigation:q=${carCenterModel.latitude},${carCenterModel.longitude}';
                       // url = 'https://www.google.com/maps/dir/?api=1&destination=30.55032685986512,31.010894961655136&travelmode=driving&dir_action=navigate';
                       // url = 'geo:30.55032685986512,31.010894961655136';
                       // url = 'https://www.google.com/maps/search/?api=1&query=30.55032685986512,31.010894961655136';
@@ -113,7 +116,8 @@ class CarCenterAddress extends StatelessWidget {
                       // url = 'comgooglemaps://?q=30.55032685986512,31.010894961655136';
                       // url = 'https://www.google.com/maps?daddr=30.55032685986512,31.010894961655136&dir_action=navigate';
                     } else {
-                      url = 'comgooglemaps://?daddr=${carCenterModel.latitude},${carCenterModel.longitude}';
+                      url =
+                          'comgooglemaps://?daddr=${carCenterModel.latitude},${carCenterModel.longitude}';
                     }
                     if (await canLaunchUrl(Uri.parse(url))) {
                       await launchUrl(Uri.parse(url));
@@ -130,9 +134,13 @@ class CarCenterAddress extends StatelessWidget {
                     //     }
                   },
                   child: const CircleAvatar(
-                    radius: 25,
+                    radius: 22,
                     backgroundColor: mintGreen,
-                    child: Icon(FontAwesomeIcons.locationArrow,size: 20,color: whiteColor,),
+                    child: Icon(
+                      FontAwesomeIcons.locationArrow,
+                      size: 19,
+                      color: whiteColor,
+                    ),
                   ),
                 ),
               )
@@ -143,5 +151,14 @@ class CarCenterAddress extends StatelessWidget {
     );
   }
 }
+/*
+import 'package:map_launcher/map_launcher.dart' as launcher;
 
-
+void _mapLauncher(LocationModel locationModel) async {
+    final availableMaps = await launcher.MapLauncher.installedMaps;
+    await availableMaps.first.showMarker(
+      coords: launcher.Coords(locationModel.latitude, locationModel.longitude),
+      title: "Ocean Beach",
+    );
+}
+*/

@@ -1,6 +1,7 @@
 import 'package:car_club/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:map_launcher/map_launcher.dart' as launcher;
 
@@ -41,38 +42,32 @@ class OwnerAddress extends StatelessWidget {
                           state.locationModel.longitude,
                         ),
                       ),
+                      zoomControlsEnabled: false,
+                      markers: {
+                        Marker(
+                          markerId: const MarkerId('1'),
+                          position: LatLng(state.locationModel.latitude,
+                              state.locationModel.longitude),
+                        ),
+                      },
                     ),
-                  ),
-                ),
-                const Center(
-                    child: Icon(
-                  Icons.location_on_rounded,
-                  color: Colors.red,
-                  size: 25,
-                )),
-                Center(
-                  child: CircleAvatar(
-                    backgroundColor: Colors.red.withOpacity(0.2),
-                    radius: 45,
                   ),
                 ),
                 Positioned(
-                  right: 13,
-                  top: 13,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(2),
-                      color: whiteColor.withOpacity(0.4),
-                      border: Border.all(width: 1, color: greyColor),
-                    ),
-                    child: IconButton(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 5, vertical: 8),
-                      constraints: const BoxConstraints(),
-                      icon: const Icon(Icons.alt_route_rounded),
-                      onPressed: () {
-                        _mapLauncher(state.locationModel);
-                      },
+                  right: 10,
+                  bottom: 10,
+                  child: GestureDetector(
+                    onTap: () {
+                      _mapLauncher(state.locationModel);
+                    },
+                    child: const CircleAvatar(
+                      radius: 22,
+                      backgroundColor: mintGreen,
+                      child: Icon(
+                        FontAwesomeIcons.locationArrow,
+                        size: 19,
+                        color: whiteColor,
+                      ),
                     ),
                   ),
                 )

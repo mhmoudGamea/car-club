@@ -74,7 +74,7 @@ class SendMessageWidget extends StatelessWidget {
         BlocBuilder<ChatCubit, ChatState>(
           builder: (context, state) {
             return SizedBox(
-              height: data.getMoreStatus ? 190 : 50,
+              height: data.getMoreStatus ? 140 : 50,
               width: 50,
               child: Stack(
                 children: [
@@ -119,33 +119,6 @@ class SendMessageWidget extends StatelessWidget {
                       width: 40,
                       child: Column(
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              print('attach');
-                            },
-                            child: Container(
-                              height: 35,
-                              width: 35,
-                              padding: const EdgeInsets.all(6),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(35),
-                                color: whiteColor,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.3),
-                                    spreadRadius: 2,
-                                    blurRadius: 2,
-                                    offset: const Offset(1, 1),
-                                  )
-                                ],
-                              ),
-                              child: Image.asset(
-                                'assets/chat/link.png',
-                                color: mintGreen,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 10),
                           GestureDetector(
                             onTap: () {
                               data.pickImage();
