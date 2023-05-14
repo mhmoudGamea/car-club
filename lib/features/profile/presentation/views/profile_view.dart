@@ -11,10 +11,11 @@ import 'widgets/profile_view_body.dart';
 
 class ProfileView extends StatelessWidget {
   static const rn = '/profileView';
-  ProfileView({Key? key}) : super(key: key);
+  const ProfileView({Key? key}) : super(key: key);
 //  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
+    final data = BlocProvider.of<AppThemeCubit>(context);
     return DefaultTabController(
       length: 3,
       child: BlocProvider(
@@ -30,18 +31,16 @@ class ProfileView extends StatelessWidget {
                 color: blackColor,
                 size: 21,
               ),
-
               onPressed: () {
-                AppThemeCubit.get(context).changeAppMode();
+                data.changeAppMode();
                 //GoRouter.of(context).pop();
               },
             ),
-
             title: const Center(
                 child: Text(
               "MyProfile",
 
-             // style: Styles.title16.copyWith(color: blackColor),
+              // style: Styles.title16.copyWith(color: blackColor),
             )),
             actions: [
               IconButton(
