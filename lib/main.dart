@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/constants.dart';
+import 'core/globle/theme/app_theme/app_theme_cubit/app_theme_cubit.dart';
 import 'features/auth/data/auth_services/login/login_cubit/bloc_observe.dart';
 
 void main() async {
@@ -44,7 +45,8 @@ void main() async {
   uId = CacheHelper.getData('uId');
   email = CacheHelper.getData('email');
 
-  runApp(const CarClub());
+  runApp(MultiBlocProvider(providers: [BlocProvider(create: (context)=>AppThemeCubit())],
+  child: const CarClub()));
 
 }
 
@@ -58,7 +60,7 @@ class CarClub extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
       // darkTheme: darkTheme,
-      themeMode: ThemeMode.light,
+      themeMode: AppThemeCubit.get(context).isDark? ThemeMode.dark : ThemeMode.light,
     );
   }
 }

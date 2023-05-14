@@ -1,5 +1,5 @@
 
-import 'dart:io';
+
 
 import 'package:car_club/features/profile/presentation/views/widgets/tabs/sells_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -95,10 +95,11 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                   Container(
                     height: 135,
                     width: 135,
-                    decoration:   BoxDecoration(
+                    decoration:   const BoxDecoration(
                       image: DecorationImage(
-                          image: profileImage == null ? const AssetImage('assets/images/cover.jpg')
-                              : FileImage(profileImage as File  )as ImageProvider,
+                          image: AssetImage('assets/images/cover.jpg'),
+                          //    : FileImage(profileImage as File  )as ImageProvider,
+                          //profileImage == null ?
                           fit: BoxFit.cover),
                       shape: BoxShape.circle,
                       color: greyColor,
@@ -122,19 +123,19 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                 ],
               ),
             ),
-            Text(name!),
+            Text(name!,style: Theme.of(context).textTheme.bodyMedium,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
+                 Text(
                   "+2",
-                  style:
-                      TextStyle(color: greyColor, fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.bodyMedium,
+                //  style: TextStyle(color: greyColor, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   phone!,
-                  style: const TextStyle(
-                      color: greyColor, fontWeight: FontWeight.bold),
+
+                  style: const TextStyle(color: greyColor, fontWeight: FontWeight.bold),
                 ),
               ],
             )

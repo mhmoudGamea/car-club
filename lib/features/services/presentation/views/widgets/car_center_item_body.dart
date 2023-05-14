@@ -2,6 +2,8 @@
 import 'package:car_club/features/services/data/models/car_center_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
+import '../../../../../core/constants.dart';
 class ItemViewBody extends StatefulWidget {
   const ItemViewBody({Key? key, required this.carCenterModel})
       : super(key: key);
@@ -39,7 +41,7 @@ class _ItemViewBodyState extends State<ItemViewBody> {
             width: double.infinity,
             height: 160,
             decoration:  BoxDecoration(
-              color: const Color(0xffffffff),
+              color:  whiteColor,
               borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(12),
                   bottomRight: Radius.circular(12)),
@@ -52,10 +54,12 @@ class _ItemViewBodyState extends State<ItemViewBody> {
                 children: [
                   Row(
                     children: [
-                      const CircleAvatar(
-                        radius: 33.0,
-                        backgroundImage: NetworkImage(
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi4aXrkkEuxA30xGfyl1FNyCiRcw-CGKblhQ&usqp=CAU"),
+                      const Expanded(
+                        child: CircleAvatar(
+                          radius: 33.0,
+                          backgroundImage: NetworkImage(
+                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi4aXrkkEuxA30xGfyl1FNyCiRcw-CGKblhQ&usqp=CAU"),
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
@@ -71,7 +75,7 @@ class _ItemViewBodyState extends State<ItemViewBody> {
                                       fontSize: 19, fontWeight: FontWeight.bold),
                                 ),
 
-                                const SizedBox(width: 60,),
+                                const SizedBox(width: 50,),
                                 RatingBar.builder(
                                   itemSize: 15,
                                   initialRating: 4,
@@ -110,7 +114,7 @@ class _ItemViewBodyState extends State<ItemViewBody> {
                   const Divider(
                     height: 5,
                     thickness: 1,
-                    color: Colors.grey,
+                    color: greyColo3,
                     indent: 0,
 
                   ),
@@ -118,14 +122,14 @@ class _ItemViewBodyState extends State<ItemViewBody> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children:  const [
-                      Icon(Icons.schedule,color: Color(0xff53787c),),
+                      Icon(Icons.schedule,color: mintGreen),
                       SizedBox(width: 7,),
-                      Text("40 mins",style: TextStyle(color: Color(0xff308d46)),),
+                      Text("40 mins",style: TextStyle(color: blackColor),),
                       SizedBox(width: 75,),
 
-                      Icon(Icons.delivery_dining,color: Color(0xff53787c),),
+                      Icon(Icons.delivery_dining,color:mintGreen),
                       SizedBox(width: 7,),
-                      Text("20.0 EGP",style: TextStyle(color: Color(0xff308d46))),
+                      Text("20.0 EGP",style: TextStyle(color: blackColor)),
 
                     ],
                   )
