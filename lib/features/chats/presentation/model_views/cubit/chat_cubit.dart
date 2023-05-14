@@ -187,6 +187,7 @@ class ChatCubit extends Cubit<ChatState> {
       },
       (downloadedImageUrl) {
         // send method is used to send text or picked image or picked camera image
+        print(downloadedImageUrl);
         sendMessage(downloadedImageUrl!);
         emit(CameraImageStoredSuccess());
       },

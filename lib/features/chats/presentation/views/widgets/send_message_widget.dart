@@ -49,6 +49,7 @@ class SendMessageWidget extends StatelessWidget {
                       _controller.clear();
                       await data.sendMessage(message!);
                     }
+                    print(DateTime.now().microsecondsSinceEpoch);
                   },
                   child: Container(
                     width: 65,
@@ -185,43 +186,3 @@ class SendMessageWidget extends StatelessWidget {
     );
   }
 }
-/*
-Stack(
-              clipBehavior: Clip.none,
-              children: [
-                GestureDetector(
-                  child: Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Container(
-                      width: 40,
-                      height: 40,
-                      padding: EdgeInsets.all(data.getMoreStatus ? 10 : 6),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: mintGreen,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.3),
-                            spreadRadius: 1,
-                            blurRadius: 1,
-                            offset: const Offset(1, 1),
-                          )
-                        ],
-                      ),
-                      child: Image.asset(
-                          data.getMoreStatus
-                              ? 'assets/chat/cross.png'
-                              : 'assets/chat/plus.png',
-                          color: whiteColor),
-                    ),
-                  ),
-                  onTap: () {
-                    data.addMoreStates();
-                  },
-                ),
-                if (data.getMoreStatus)
-                  
-              ],
-            )
-
-*/

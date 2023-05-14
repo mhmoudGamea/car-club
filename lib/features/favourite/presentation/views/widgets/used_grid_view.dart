@@ -46,7 +46,7 @@ class _UsedGridViewState extends State<UsedGridView> {
             crossAxisCount: 2,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
-            childAspectRatio: 15 / 25,
+            childAspectRatio: 15 / 21,
           ),
           itemBuilder: (context, index) => GestureDetector(
               onTap: () {
