@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class CarModel {
   final String brand;
   final String model;
+  final String name;
   final int price;
   final String motor;
   final int speed;
@@ -29,6 +30,7 @@ class CarModel {
   const CarModel({
     required this.brand,
     required this.model,
+    required this.name,
     required this.price,
     required this.motor,
     required this.speed,
@@ -53,6 +55,7 @@ class CarModel {
   factory CarModel.fromMap(Map<String, dynamic> data) => CarModel(
         brand: data['brand'] as String,
         model: data['model'] as String,
+        name: '${data["brand"]} ${data["model"]}',
         price: data['price'] as int,
         motor: data['motor'] as String,
         speed: data['speed'] as int,
@@ -77,6 +80,7 @@ class CarModel {
   Map<String, dynamic> toMap() => {
         'brand': brand,
         'model': model,
+        'name': name,
         'price': price,
         'motor': motor,
         'speed': speed,
