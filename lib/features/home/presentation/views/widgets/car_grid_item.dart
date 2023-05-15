@@ -72,23 +72,23 @@ class _CarGridItemState extends State<CarGridItem> {
                       size: 20,
                     );
                   },
-                  likeCount: widget.car.favorites.length,
-                  countBuilder: (int? count, bool isLiked, String text) {
-                    var color = isLiked ? blackColor : greyColor;
-                    Widget result;
-                    if (count == 0) {
-                      result = Text(
-                        "0",
-                        style: TextStyle(color: color),
-                      );
-                    } else {
-                      result = Text(
-                        text,
-                        style: TextStyle(color: color),
-                      );
-                    }
-                    return result;
-                  },
+                  // likeCount: widget.car.favorites.length,
+                  // countBuilder: (int? count, bool isLiked, String text) {
+                  //   var color = isLiked ? blackColor : greyColor;
+                  //   Widget result;
+                  //   if (count == 0) {
+                  //     result = Text(
+                  //       "0",
+                  //       style: TextStyle(color: color),
+                  //     );
+                  //   } else {
+                  //     result = Text(
+                  //       text,
+                  //       style: TextStyle(color: color),
+                  //     );
+                  //   }
+                  //   return result;
+                  // },
                 ),
               );
             },

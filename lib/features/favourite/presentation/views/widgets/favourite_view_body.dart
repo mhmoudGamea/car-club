@@ -14,7 +14,7 @@ class FavouriteViewBody extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          elevation: 1,
+          elevation: 0,
           flexibleSpace: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [

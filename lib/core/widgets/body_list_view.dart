@@ -1,10 +1,11 @@
-import 'package:car_club/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_item_selector/simple_item_selector.dart';
 
-class TransmissionListView extends StatelessWidget {
-  final List transmission = ['Automatic', 'CVT', 'DSG'];
-  TransmissionListView({Key? key}) : super(key: key);
+import '../constants.dart';
+
+class BodyListView extends StatelessWidget {
+  final List body = ['Sedan', 'SUV', 'Hatchback'];
+  BodyListView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +18,8 @@ class TransmissionListView extends StatelessWidget {
         itemMargin: const EdgeInsets.symmetric(horizontal: 10),
         itemPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         itemBorderRadius: const BorderRadius.all(Radius.circular(5)),
-        itemsCount: transmission.length,
-        items: transmission
+        itemsCount: body.length,
+        items: body
             .map(
               (e) => Container(
                 alignment: Alignment.center,
@@ -30,25 +31,5 @@ class TransmissionListView extends StatelessWidget {
         onSelected: (index) {},
       ),
     );
-    // return Row(
-    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //   children: [
-    //     FilterButton(
-    //       text: "Automatic",
-    //       backgroundColor: mintGreen,
-    //       textColor: whiteColor,
-    //     ),
-    //     FilterButton(
-    //       text: "Tiptronic",
-    //       backgroundColor: whiteColor,
-    //       textColor: textButtonColor,
-    //     ),
-    //     FilterButton(
-    //       text: "Manual",
-    //       backgroundColor: whiteColor,
-    //       textColor: textButtonColor,
-    //     ),
-    //   ],
-    // );
   }
 }

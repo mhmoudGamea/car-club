@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 import '../utils/styles.dart';
 import 'brand_list_view.dart';
-import 'color_list_view.dart';
-import 'filter_app_bar.dart';
+import 'traction_list_view.dart';
 import 'filter_button.dart';
-import 'fuel_list_view.dart';
+import 'body_list_view.dart';
 import 'price_list_view.dart';
 import 'transmission_list_view.dart';
 
@@ -18,43 +17,51 @@ class FilterViewBody extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const FilterAppBar(),
+        Center(
+          child: Text(
+            "Filters",
+            style: Styles.title16.copyWith(
+              color: const Color(0xff171820),
+            ),
+          ),
+        ),
+        const SizedBox(height: 20),
         Text(
           "Brand",
           style: Styles.title16
               .copyWith(color: const Color(0xff171820), fontSize: 18),
         ),
-        const SizedBox(height: 15),
+        const SizedBox(height: 20),
         BrandListView(),
-        const SizedBox(height: 15),
+        const SizedBox(height: 20),
         Text(
           "Transmission",
           style: Styles.title16.copyWith(color: const Color(0xff171820)),
         ),
-        const SizedBox(height: 15),
-        const TransmissionListView(),
-        const SizedBox(height: 15),
+        const SizedBox(height: 20),
+        TransmissionListView(),
+        const SizedBox(height: 20),
         Text(
-          "Color",
+          "Traction",
           style: Styles.title16.copyWith(color: const Color(0xff171820)),
         ),
-        const SizedBox(height: 15),
-        ColorListView(),
-        const SizedBox(height: 15),
+        const SizedBox(height: 20),
+        TractionListView(),
+        const SizedBox(height: 20),
         Text(
-          "Fuel Type",
+          "Body Type",
           style: Styles.title16.copyWith(color: const Color(0xff171820)),
         ),
-        const SizedBox(height: 15),
-        const FuelListView(),
-        const SizedBox(height: 15),
+        const SizedBox(height: 20),
+        BodyListView(),
+        const SizedBox(height: 20),
         Text(
           "Price",
           style: Styles.title16.copyWith(color: const Color(0xff171820)),
         ),
-        const SizedBox(height: 15),
+        const SizedBox(height: 20),
         const PriceListView(),
-        const SizedBox(height: 15),
+        const SizedBox(height: 20),
         const SizedBox(
           width: double.infinity,
           height: 50,

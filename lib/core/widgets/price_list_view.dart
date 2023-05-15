@@ -9,15 +9,15 @@ class PriceListView extends StatefulWidget {
 }
 
 class _PriceListViewState extends State<PriceListView> {
-  RangeValues _value = const RangeValues(20000, 60000);
+  RangeValues _value = const RangeValues(100000, 1000000);
 
   @override
   Widget build(BuildContext context) {
     return RangeSlider(
       values: _value,
-      min: 0,
-      max: 100000,
-      divisions: 20,
+      min: 100000,
+      max: 4000000,
+      divisions: 40,
       activeColor: mintGreen,
       labels: RangeLabels(
         _value.start.round().toString(),

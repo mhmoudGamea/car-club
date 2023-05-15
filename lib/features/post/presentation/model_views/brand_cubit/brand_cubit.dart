@@ -28,7 +28,7 @@ class BrandCubit extends Cubit<BrandState> {
     'Mazda': mazda,
     'Mercedes': mercedes,
     'MG': mg,
-    'MiniCooper': miniCooper,
+    'MiniCooper': mini,
     'Mitsubishi': mitsubishi,
     'Nissan': nissan,
     'Opel': opel,
@@ -222,7 +222,7 @@ class BrandCubit extends Cubit<BrandState> {
     mg: ['HS', 'MG 5', 'RX5', 'ZS'],
   };
   Map<String, List<String>> miniCooperModels = {
-    miniCooper: ['Copper', 'Copper s', 'Countryman', 'Countryman S'],
+    mini: ['Copper', 'Copper s', 'Countryman', 'Countryman S'],
   };
   Map<String, List<String>> mitsubishiModels = {
     mitsubishi: [
