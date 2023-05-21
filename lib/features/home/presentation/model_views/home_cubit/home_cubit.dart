@@ -19,6 +19,18 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
+  Future<void> fetchSearchCars(
+    String search,
+    BuildContext context,
+  ) async {
+    emit(HomeLoading());
+    var result = await homeRepo.fetchSearchCars(search, context);
+    result.fold(
+      (failure) => emit(HomeFailure(failure.errMsg)),
+      (cars) => emit(HomeSuccess(cars)),
+    );
+  }
+
   Future<void> fetchFavCars() async {
     emit(FavLoading());
     var result = await homeRepo.fetchFavCars();
@@ -29,7 +41,10 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> updateFavourites(
-      CarModel car, bool isLiked, BuildContext context) async {
+    CarModel car,
+    bool isLiked,
+    BuildContext context,
+  ) async {
     var result = await homeRepo.updateFavourites(car, isLiked, context);
     result.fold(
       (failure) => emit(IsFavouriteFailure(failure.errMsg)),

@@ -73,7 +73,7 @@ dependencies:
   map_launcher: ^2.5.0+1
   url_launcher: ^6.1.10
   flutter_rating_bar: ^4.0.1
-
+  simple_item_selector: ^0.0.2
 
 dev_dependencies:
   flutter_test:
@@ -104,6 +104,7 @@ flutter:
     - assets/images/
     - assets/images/dummy_images/
     - assets/images/car_icons/
+    - assets/images/car_logos/
     - assets/chat/
     - assets/used/
 

@@ -14,7 +14,7 @@ class FavouriteViewBody extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          elevation: 1,
+          elevation: 0,
           flexibleSpace: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -25,11 +25,11 @@ class FavouriteViewBody extends StatelessWidget {
                   color: mintGreen,
                 ),
                 indicatorColor: mintGreen,
-                tabs: const [
+                tabs: [
                   Tab(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         Icon(
                           FontAwesomeIcons.car,
                           size: 20,
@@ -48,7 +48,7 @@ class FavouriteViewBody extends StatelessWidget {
                   Tab(
                       child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    children: const [
                       Icon(
                         FontAwesomeIcons.retweet,
                         size: 20,

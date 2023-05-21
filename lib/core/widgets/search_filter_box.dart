@@ -12,9 +12,9 @@ class SearchFilterBox extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
+        children: [
           SearchBox(),
-          FilterBox(),
+          const FilterBox(),
         ],
       ),
     );

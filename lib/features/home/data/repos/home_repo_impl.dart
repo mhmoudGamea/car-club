@@ -13,6 +13,7 @@ import '../models/car_model.dart';
 import 'home_repo.dart';
 
 class HomeRepoImpl implements HomeRepo {
+  List<CarModel> cars = [];
   final List brands = [
     'audi',
     'brilliance',
@@ -46,13 +47,13 @@ class HomeRepoImpl implements HomeRepo {
   @override
   Future<Either<Failure, List<CarModel>>> fetchNewCars() async {
     try {
+      cars = [];
       var rng = Random();
       var brandsIndex = List.generate(
         10,
         (index) => rng.nextInt(28),
       );
 
-      List<CarModel> cars = [];
       var data1 = await FirebaseFirestore.instance
           .collection('cars')
           .doc('brands')
@@ -77,6 +78,40 @@ class HomeRepoImpl implements HomeRepo {
       //     index: i,
       //   );
       // }
+      return right(cars);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<CarModel>>> fetchSearchCars(
+    String search,
+    BuildContext context,
+  ) async {
+    try {
+      List<CarModel> result = [];
+      if (search.isEmpty) {
+        Helper.showCustomToast(
+            context: context,
+            bgColor: babyBlue,
+            icon: FontAwesomeIcons.circleCheck,
+            msg: 'Please Enter Car Name');
+      } else {
+        result = cars
+            .where(
+                (car) => car.name.toLowerCase().contains(search.toLowerCase()))
+            .toList();
+        if (result.isEmpty) {
+          Helper.showCustomToast(
+              context: context,
+              bgColor: babyBlue,
+              icon: FontAwesomeIcons.circleCheck,
+              msg: 'Car Not Found');
+        } else {
+          cars = result;
+        }
+      }
       return right(cars);
     } catch (e) {
       return Left(ServerFailure(e.toString()));
@@ -123,7 +158,10 @@ class HomeRepoImpl implements HomeRepo {
 
   @override
   Future<Either<Failure, bool>> updateFavourites(
-      CarModel car, bool isLiked, BuildContext context) async {
+    CarModel car,
+    bool isLiked,
+    BuildContext context,
+  ) async {
     try {
       CollectionReference carsCollectionRF = FirebaseFirestore.instance
           .collection('cars')

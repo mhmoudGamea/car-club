@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class BrandItem extends StatelessWidget {
   final String logo;
@@ -13,8 +12,8 @@ class BrandItem extends StatelessWidget {
     return Container(
       width: 65,
       height: 50,
-      padding: const EdgeInsets.only(right: 15),
-      child: SvgPicture.asset(
+      padding: const EdgeInsets.all(3),
+      child: Image.asset(
         logo,
         fit: BoxFit.cover,
       ),

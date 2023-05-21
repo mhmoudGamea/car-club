@@ -4,6 +4,7 @@ class FilterButton extends StatelessWidget {
   final String text;
   final Color backgroundColor;
   final Color textColor;
+
   const FilterButton({
     Key? key,
     required this.text,
@@ -24,7 +25,7 @@ class FilterButton extends StatelessWidget {
         ),
       ),
       child: Text(
-        text, //Tiptronic
+        text,
         style: TextStyle(color: textColor),
       ),
     );
