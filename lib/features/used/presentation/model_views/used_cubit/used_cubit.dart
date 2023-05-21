@@ -16,7 +16,7 @@ class UsedCubit extends Cubit<UsedState> {
   CollectionReference postsCollectionRF =
       FirebaseFirestore.instance.collection(collectionName);
 
-  // this func executed to make favourites field in firestore by add or remove user uid
+  // this func executed to update favourites field in firestore by add or remove user uid
 
   void updateFavourites(
       PostModel model, bool isLiked, BuildContext context) async {

@@ -6,7 +6,7 @@ import '../../../constants.dart';
 ThemeData getThemeDataDark() => ThemeData(
     fontFamily: 'Lexend',
     scaffoldBackgroundColor: primaryDark,
-     appBarTheme: const AppBarTheme(
+     appBarTheme: const AppBarTheme( 
        iconTheme: IconThemeData(
            color: whiteColor,
        ),
