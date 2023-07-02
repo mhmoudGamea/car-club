@@ -39,8 +39,7 @@ class LoginCubit extends Cubit<LoginStates> {
     });
   }
 
-  void loginWithEmailAndPassword(
-      {required String email, required String password}) {
+  void loginWithEmailAndPassword({required String email, required String password}) {
     emit(LoadingEmailAndPasswordSigningState());
     signInWithEmailAndPassword(email: email, password: password).then((value) {
       debugPrint(value.user!.uid);
