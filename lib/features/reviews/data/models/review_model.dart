@@ -6,27 +6,28 @@ class ReviewModel {
   String uId;
   String carCenterDoc;
   bool like;
+  final String sentiment;
 
   ReviewModel(
       {required this.reviewText,
-        required this.carCenterDoc,
+      required this.carCenterDoc,
       this.reviewImage,
-        required this.uId,
-        required this.helpfulCount,
+      required this.uId,
+      required this.helpfulCount,
       required this.reviewRate,
-        required this.like
-      });
+      required this.like,
+      required this.sentiment});
 
   factory ReviewModel.fromJson(Map<String, dynamic> json) {
     return ReviewModel(
-        carCenterDoc:json['carCenterDoc'],
-        like:json['like'],
+        carCenterDoc: json['carCenterDoc'],
+        like: json['like'],
         uId: json['uId'],
         helpfulCount: json['helpfulCount'],
-      reviewImage: json['reviewImage'],
-      reviewRate: json['reviewRate'],
-      reviewText: json['reviewText']
-    );
+        reviewImage: json['reviewImage'],
+        reviewRate: json['reviewRate'],
+        reviewText: json['reviewText'],
+        sentiment: json['sentiment']);
   }
 
   Map<String, dynamic> toMap() {
@@ -34,11 +35,11 @@ class ReviewModel {
       'reviewText': reviewText,
       'like': like,
       'uId': uId,
-      'carCenterDoc':carCenterDoc,
+      'carCenterDoc': carCenterDoc,
       'reviewRate': reviewRate,
       'reviewImage': reviewImage,
-      'helpfulCount':helpfulCount
+      'helpfulCount': helpfulCount,
+      'sentiment': sentiment,
     };
   }
-
 }

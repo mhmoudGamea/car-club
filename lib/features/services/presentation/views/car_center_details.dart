@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'widgets/car_center_details_body.dart';
 
 class CarCenterDetails extends StatelessWidget {
-  const CarCenterDetails({Key? key, required this.carCenterModel, required this.doc,})
-      : super(key: key);
+  const CarCenterDetails({
+    Key? key,
+    required this.carCenterModel,
+    required this.doc,
+  }) : super(key: key);
   static const rn = '/CarCenterDetails';
   final CarCenterModel carCenterModel;
   final String doc;
@@ -13,8 +16,7 @@ class CarCenterDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CarCenterDetailsBody(
-      doc : doc,
-      // userModel:userModel,
+      doc: doc,
       carCenterModel: carCenterModel,
     );
   }

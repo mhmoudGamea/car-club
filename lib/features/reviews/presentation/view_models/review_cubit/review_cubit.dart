@@ -5,6 +5,7 @@ import 'package:car_club/features/reviews/data/models/review_model.dart';
 import 'package:car_club/features/reviews/presentation/view_models/review_cubit/review_state.dart';
 import 'package:car_club/features/services/data/models/car_center_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dart_sentiment/dart_sentiment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -37,6 +38,11 @@ class ReviewCubit extends Cubit<ReviewStates> {
 
   // pick reviewImage
   File? file;
+
+  File? get getPickedImage {
+    return file;
+  }
+
   Future<void> pickReviewImage({required context}) async {
     var result = await reviewRepo.pickReviewImage(context: context);
     emit(LoadingPickReviewImage());
@@ -60,7 +66,7 @@ class ReviewCubit extends Cubit<ReviewStates> {
     var result = await reviewRepo.uploadReviewImage(image: image!);
     emit(LoadingUploadReviewImage());
     result.fold((l) {
-      link = " ";
+      link = "";
       emit(FailureUploadReviewImage());
     }, (r) {
       link = r;
@@ -68,10 +74,28 @@ class ReviewCubit extends Cubit<ReviewStates> {
     });
   }
 
+  // this function 'll perform sentiment analysis on user review and return [positive, negative, natural]
+  // then if it return positive so it's helpful review, negative so it's nothelpful, or natural which can
+  // be concedered a nothelpful bec it's score is 0
+
+  Future<String> sentimentAnalysis() async {
+    final sentiment = Sentiment();
+    Map<String, dynamic> analysis =
+        sentiment.analysis(getReviewTextController().text);
+    if (analysis['score'] >= -5 && analysis['score'] < 0) {
+      return 'Not Helpful';
+    } else if (analysis['score'] <= 5 && analysis['score'] > 0) {
+      return 'Helpful';
+    } else {
+      return 'Natural';
+    }
+  }
+
   // add review
   Future<void> addReview(
       context, String centerDoc, CarCenterModel carCenterModel) async {
     emit(LoadingAddReview());
+    final sentiment = await sentimentAnalysis();
     reviewModel = ReviewModel(
       like: like,
       reviewText: getReviewTextController().text,
@@ -80,29 +104,9 @@ class ReviewCubit extends Cubit<ReviewStates> {
       uId: uId,
       helpfulCount: 0,
       reviewRate: getReviewRate(),
+      sentiment: sentiment,
     );
-    // TODO: delete this unnecessary comment
-    // CarCenterModel newCarCenter = CarCenterModel(
-    //   user: user,
-    //   isOpen: carCenterModel.isOpen,
-    //   reviewCount: (carCenterModel.reviewCount)+1,
-    //   credit: carCenterModel.credit,
-    //   offers: carCenterModel.offers,
-    //   delivery: carCenterModel.delivery,
-    //   uId: carCenterModel.uId,
-    //   latitude: carCenterModel.latitude,
-    //   longitude: carCenterModel.longitude,
-    //   date: carCenterModel.date,
-    //   name:carCenterModel. name,
-    //   description: carCenterModel.description,
-    //   address:carCenterModel. address,
-    //   phone: carCenterModel.phone,
-    //   phone2: carCenterModel.phone2,
-    //   openingTimes: carCenterModel.openingTimes,
-    //   images: carCenterModel.images,
-    //   distance: carCenterModel.distance,
-    //   time: carCenterModel.time,
-    // );//newCarCenter.toMap()
+
     await reviewRepo
         .addReview(
       review: reviewModel.toMap(),
@@ -142,7 +146,6 @@ class ReviewCubit extends Cubit<ReviewStates> {
         .listen((event) async {
       reviews = event.docs.map((e) => ReviewModel.fromJson(e.data())).toList();
       reviewsDocs = event.docs.map((e) {
-        //e.data()['carCenterDoc'] == carCenterDoc
         if (e.data()['carCenterDoc'] == carCenterDoc) {
           carCenterReviewsDocs.add(e.id);
         }
@@ -159,59 +162,30 @@ class ReviewCubit extends Cubit<ReviewStates> {
   Future<void> getCarCenterReviews({required String carCenterDoc}) async {
     carCenterReviews = [];
     emit(LoadingGetCarCenterReviews());
-    print(carCenterDoc.toString());
     for (int i = 0; i < reviews.length; i++) {
-      print(reviews[i].carCenterDoc.toString());
-      // reviews[i].carCenterDoc == carCenterDoc
       if (reviews[i].carCenterDoc == carCenterDoc) {
         carCenterReviews.add(reviews[i]);
       }
     }
-    print(reviews.length.toString());
-    print(carCenterReviews.length.toString());
     emit(SuccessGetCarCenterReviews());
   }
 
   bool like = false;
   Future<void> clickHelpful(
       {required ReviewModel model, required String doc}) async {
-    emit(LoadingLike());
+    // emit(LoadingLike());
     if (like == false) {
       like = !like;
-      ReviewModel newIncreaseModel = ReviewModel(
-        like: like,
-        reviewText: model.reviewText,
-        carCenterDoc: model.carCenterDoc,
-        reviewImage: model.reviewImage,
-        uId: model.uId,
-        helpfulCount: model.helpfulCount + 1,
-        reviewRate: model.reviewRate,
-      );
-      await FirebaseFirestore.instance
-          .collection("Reviews")
-          .doc(doc)
-          .update(newIncreaseModel.toMap())
-          .then((value) {
+      await FirebaseFirestore.instance.collection("Reviews").doc(doc).update(
+          {'helpfulCount': model.helpfulCount + 1, 'like': like}).then((value) {
         emit(SuccessLikeIncrease());
       }).catchError((error) {
         emit(FailureLike());
       });
     } else {
       like = !like;
-      ReviewModel newDecreaseModel = ReviewModel(
-        like: like,
-        reviewText: model.reviewText,
-        carCenterDoc: model.carCenterDoc,
-        reviewImage: model.reviewImage,
-        uId: model.uId,
-        helpfulCount: model.helpfulCount - 1,
-        reviewRate: model.reviewRate,
-      );
-      await FirebaseFirestore.instance
-          .collection("Reviews")
-          .doc(doc)
-          .update(newDecreaseModel.toMap())
-          .then((value) {
+      await FirebaseFirestore.instance.collection("Reviews").doc(doc).update(
+          {'helpfulCount': model.helpfulCount - 1, 'like': like}).then((value) {
         emit(SuccessLikeDecrease());
       }).catchError((error) {
         emit(FailureLike());

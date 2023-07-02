@@ -40,15 +40,8 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
             BlocListener<ReviewCubit, ReviewStates>(
               listener: (context, state) {
                 if (state is SuccessAddReview) {
-                  // context.go(
-                  //     '/CarCenterDetails/$doc',
-                  //     extra: {
-                  //       "doc":doc,
-                  //       "model":carCenterModel,
-                  //       "cubit1":context.read<CarCenterCubit>()
-                  //     }
-                  // );
-                  GoRouter.of(context).push(CarCenterDetails.rn, extra: {
+                  GoRouter.of(context)
+                      .pushReplacement(CarCenterDetails.rn, extra: {
                     "doc": widget.doc,
                     "model": widget.carCenterModel,
                     "cubit1": context.read<CarCenterCubit>()
@@ -76,14 +69,6 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                 ),
                 onPressed: () {
                   GoRouter.of(context).pop();
-                  // GoRouter.of(context).push(
-                  //     CarCenterDetails.rn,
-                  //     extra: {
-                  //       "doc":doc,
-                  //       "model":carCenterModel,
-                  //       "cubit1":context.read<CarCenterCubit>()
-                  //     }
-                  // );
                 },
               ),
               elevation: 1,
@@ -92,7 +77,9 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                 style: Styles.title16,
               ),
               actions: [
-                if (cubit.press == false || state is SuccessUploadReviewImage ||state is FailurePickReviewImage)
+                if (cubit.press == false ||
+                    state is SuccessUploadReviewImage ||
+                    state is FailurePickReviewImage)
                   TextButton(
                     onPressed: () async {
                       if (cubit.rate == 0.0) {
@@ -106,9 +93,12 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                             context: context,
                             bgColor: Colors.red,
                             icon: FontAwesomeIcons.x,
-                            msg: "please text your review");
+                            msg: "please write your review");
                       } else {
-                        await cubit.addReview(context, widget.doc.toString(),widget.carCenterModel).then((value) {
+                        await cubit
+                            .addReview(context, widget.doc.toString(),
+                                widget.carCenterModel)
+                            .then((value) {
                           cubit.getReviews(carCenterDoc: widget.doc);
                           cubit.getCarCenterReviews(carCenterDoc: widget.doc);
                         });
@@ -120,138 +110,153 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
             ),
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (state is LoadingAddReview ||
-
-                      state is LoadingPickReviewImage ||
-                      state is LoadingUploadReviewImage||
-                      (cubit.press == true && state is! SuccessUploadReviewImage && state is! FailurePickReviewImage )
-                  )
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 50.0),
-                      child: LinearProgressIndicator(),
-                    ),
-                  const SizedBox(height: 15),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: const Text(
-                      "Share your experience at   Car Center Name",
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
-                      softWrap: true,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    "help thousands of users benefits from your experience",
-                    style: Styles.title13.copyWith(color: greyColor),
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    "Rate Car Center Name",
-                    style: Styles.title15.copyWith(
-                        fontWeight: FontWeight.w500, color: blackColor),
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      RatingBar.builder(
-                        itemCount: 5,
-                        itemSize: 28,
-                        unratedColor: greyColor,
-                        itemPadding: const EdgeInsets.all(2.0),
-                        itemBuilder: (context, index) {
-                          return const Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                            fill: 1,
-                          );
-                        },
-                        onRatingUpdate: (value) {
-                          cubit.setReviewRate(value);
-                          // setState(() {});
-                        },
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (state is LoadingAddReview ||
+                        state is LoadingPickReviewImage ||
+                        state is LoadingUploadReviewImage ||
+                        (cubit.press == true &&
+                            state is! SuccessUploadReviewImage &&
+                            state is! FailurePickReviewImage))
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 50.0),
+                        child: LinearProgressIndicator(),
                       ),
-                      const Spacer(),
-                      Row(
-                        children: [
-                          Text(
-                            "${cubit.rate.toInt()}",
-                            style: Styles.title16.copyWith(
-                              fontSize: 45,
-                              fontWeight: FontWeight.w400,
+                    const SizedBox(height: 15),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: const Text(
+                        "Share your experience at   Car Center Name",
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.w900),
+                        softWrap: true,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      "help thousands of users benefits from your experience",
+                      style: Styles.title13.copyWith(color: greyColor),
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      "Rate Car Center Name",
+                      style: Styles.title15.copyWith(
+                          fontWeight: FontWeight.w500, color: blackColor),
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        RatingBar.builder(
+                          itemCount: 5,
+                          itemSize: 28,
+                          unratedColor: greyColor,
+                          itemPadding: const EdgeInsets.all(2.0),
+                          itemBuilder: (context, index) {
+                            return const Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                              fill: 1,
+                            );
+                          },
+                          onRatingUpdate: (value) {
+                            cubit.setReviewRate(value);
+                            // setState(() {});
+                          },
+                        ),
+                        const Spacer(),
+                        Row(
+                          children: [
+                            Text(
+                              "${cubit.rate.toInt()}",
+                              style: Styles.title16.copyWith(
+                                fontSize: 45,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
-                          ),
-                          const Text("/5"),
-                        ],
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  const Divider(
-                    color: greyColor,
-                    height: 2,
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    "Your review",
-                    style: Styles.title15.copyWith(
-                        fontWeight: FontWeight.w500, color: blackColor),
-                  ),
-                  TextFormField(
-                    onFieldSubmitted: (value) {},
-                    controller: cubit.controller,
-                    keyboardType: TextInputType.text,
-                    decoration: const InputDecoration(
-                      hintText:
-                          "Write your review here. The best reviews are very descriptive and comprehensive",
-                      hintMaxLines: 2,
-                      hintStyle: TextStyle(color: greyColor, fontSize: 13),
-                      border: InputBorder.none,
+                            const Text("/5"),
+                          ],
+                        )
+                      ],
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  const Divider(
-                    color: greyColor,
-                    height: 2,
-                  ),
-                  const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Text(
-                        "Add Photos (Optional)",
-                        style: Styles.title15.copyWith(
-                            fontWeight: FontWeight.w500, color: blackColor),
+                    const SizedBox(height: 10),
+                    const Divider(
+                      color: greyColor,
+                      height: 2,
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      "Your review",
+                      style: Styles.title15.copyWith(
+                          fontWeight: FontWeight.w500, color: blackColor),
+                    ),
+                    TextFormField(
+                      onFieldSubmitted: (value) {},
+                      controller: cubit.controller,
+                      keyboardType: TextInputType.text,
+                      decoration: const InputDecoration(
+                        hintText:
+                            "Write your review here. The best reviews are very descriptive and comprehensive",
+                        hintMaxLines: 2,
+                        hintStyle: TextStyle(color: greyColor, fontSize: 13),
+                        border: InputBorder.none,
                       ),
-                      const Spacer(),
-                      TextButton(
-                        onPressed: () async {
-                          setState(() async {
-                            cubit.press = true;
-                            await cubit
-                                .pickReviewImage(context: context)
-                                .then((value) async {
-                              await cubit.uploadReviewImage(image: cubit.file!);
-                            });
-                          });
-                        },
-                        child: Text(
-                          "+ Add",
+                    ),
+                    const SizedBox(height: 20),
+                    const Divider(
+                      color: greyColor,
+                      height: 2,
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      children: [
+                        Text(
+                          "Add Photos (Optional)",
                           style: Styles.title15.copyWith(
                               fontWeight: FontWeight.w500, color: blackColor),
                         ),
-                      ),
-                    ],
-                  ),
-                  Text(
-                    "Add photos to your review to be more descriptive",
-                    style: Styles.title13.copyWith(color: greyColor),
-                  ),
-                ],
+                        const Spacer(),
+                        TextButton(
+                          onPressed: () async {
+                            setState(() async {
+                              cubit.press = true;
+                              await cubit
+                                  .pickReviewImage(context: context)
+                                  .then((value) async {
+                                // TODO: what if i pick my image and return back i didn't want to share my review?
+                                await cubit.uploadReviewImage(
+                                    image: cubit.file!);
+                              });
+                            });
+                          },
+                          child: Text(
+                            "+ Add",
+                            style: Styles.title15.copyWith(
+                                fontWeight: FontWeight.w500, color: blackColor),
+                          ),
+                        ),
+                      ],
+                    ),
+                    // if (cubit.getPickedImage == null)
+                    Text(
+                      "Add photos to your review to be more descriptive",
+                      style: Styles.title13.copyWith(color: greyColor),
+                    ),
+                    // if (cubit.getPickedImage != null)
+                    //   Container(
+                    //     height: 250,
+                    //     width: double.infinity,
+                    //     decoration: BoxDecoration(
+                    //         borderRadius: BorderRadius.circular(10),
+                    //         image: DecorationImage(
+                    //             image: FileImage(cubit.getPickedImage!),
+                    //             fit: BoxFit.cover)),
+                    //   ),
+                  ],
+                ),
               ),
             ),
           ),

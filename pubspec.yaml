@@ -74,6 +74,7 @@ dependencies:
   url_launcher: ^6.1.10
   flutter_rating_bar: ^4.0.1
   simple_item_selector: ^0.0.2
+  dart_sentiment: ^0.0.9
 
 dev_dependencies:
   flutter_test:

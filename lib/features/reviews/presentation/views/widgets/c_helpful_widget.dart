@@ -10,17 +10,16 @@ import '../../../../../core/constants.dart';
 import '../../../../../core/utils/styles.dart';
 
 class CHelpfulWidget extends StatelessWidget {
-  const CHelpfulWidget({Key? key, required this.model, required this.doc}) : super(key: key);
+  const CHelpfulWidget({Key? key, required this.model, required this.doc})
+      : super(key: key);
   final ReviewModel model;
   final String doc;
   @override
   Widget build(BuildContext context) {
     ReviewCubit cubit = BlocProvider.of<ReviewCubit>(context);
-    return BlocConsumer<ReviewCubit,ReviewStates>(
-      listener: (context, state) {
-
-      },
-      builder:(context, state) =>  Row(
+    return BlocConsumer<ReviewCubit, ReviewStates>(
+      listener: (context, state) {},
+      builder: (context, state) => Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -32,8 +31,7 @@ class CHelpfulWidget extends StatelessWidget {
               dotThirdColor: greyColor,
             ),
             onTap: (isLiked) async {
-
-              await cubit.clickHelpful(model:model,doc: doc);
+              await cubit.clickHelpful(model: model, doc: doc);
               return model.like;
 
               // return _isLiked;
@@ -52,7 +50,7 @@ class CHelpfulWidget extends StatelessWidget {
             // likeCount: widget.model.favourites.length,
             likeCount: model.helpfulCount,
             likeCountPadding: EdgeInsets.zero,
-            countPostion: CountPostion.left,
+            countPostion: CountPostion.right,
             countBuilder: (int? count, bool isLiked, String text) {
               var color = isLiked ? blackColor : greyColor;
               Widget result;
@@ -78,7 +76,7 @@ class CHelpfulWidget extends StatelessWidget {
               letterSpacing: 0.8,
               fontWeight: FontWeight.w400,
             ),
-          )
+          ),
         ],
       ),
     );

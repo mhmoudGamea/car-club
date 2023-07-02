@@ -185,6 +185,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  dart_sentiment:
+    dependency: "direct main"
+    description:
+      name: dart_sentiment
+      sha256: "7c2a3478b92953df7721cf2720a74253377da4c56ca4c8380f78d82841064aa2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.9"
   dartz:
     dependency: "direct main"
     description:
@@ -904,6 +912,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.1"
+  remove_emoji:
+    dependency: transitive
+    description:
+      name: remove_emoji
+      sha256: d75024ae134328c38871c0fe73ada15ebeb635fca8903d039f5090a3e902c2b2
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.9"
   rxdart:
     dependency: transitive
     description:

@@ -4,7 +4,6 @@ import 'package:car_club/features/used/presentation/model_views/used_cubit/used_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
 import '../../../../core/constants.dart';
 import '../../../../core/globle/theme/app_theme/app_theme_cubit/app_theme_cubit.dart';
 import 'widgets/profile_view_body.dart';
