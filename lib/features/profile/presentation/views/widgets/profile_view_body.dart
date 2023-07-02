@@ -5,9 +5,11 @@ import 'package:car_club/features/profile/presentation/views/widgets/tabs/sells_
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../../core/constants.dart';
-//import '../../model_view/profile_cubit.dart';
+
 import 'tabs/feed_view.dart';
 import 'tabs/fav_view.dart';
 
@@ -123,19 +125,20 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                 ],
               ),
             ),
-            Text(name!,style: Theme.of(context).textTheme.bodyMedium,),
+            Text(name!, style: Theme.of(context).textTheme.titleMedium,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                 Text(
-                  "+2",
-                  style: Theme.of(context).textTheme.bodyMedium,
-                //  style: TextStyle(color: greyColor, fontWeight: FontWeight.bold),
-                ),
+                //  Text(
+                //   "+2",
+                //   style: Theme.of(context).textTheme.titleSmall,
+                //  // style: TextStyle(color: greyColor, fontWeight: FontWeight.bold),
+                // ),
                 Text(
                   phone!,
 
-                  style: const TextStyle(color: greyColor, fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: babyBlue, fontWeight: FontWeight.bold),
                 ),
               ],
             )

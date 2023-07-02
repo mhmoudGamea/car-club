@@ -3,6 +3,7 @@ import 'package:car_club/features/auth/presentation/views/widgets/or_sign_in_wit
 import 'package:car_club/features/auth/presentation/views/widgets/social_media_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import '../../../../../core/constants.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../data/auth_services/login/login_cubit/login_cubit.dart';
@@ -11,12 +12,12 @@ import 'auth_button.dart';
 import 'text_field_widget.dart';
 
 class RegisterViewBody extends StatelessWidget {
-  const RegisterViewBody({
+   RegisterViewBody({
     super.key,
     required this.cubit,
   });
   final RegisterCubit cubit;
-
+  FocusNode focusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
     LoginCubit loginCubit = context.read<LoginCubit>();
@@ -43,10 +44,10 @@ class RegisterViewBody extends StatelessWidget {
                 onChanged: (value) {},
                 controller: cubit.emailController,
               ),
-              const SizedBox(
-                height: 18,
-              ),
-              DefaultTextField(
+             // const SizedBox(
+             //   height: 18,
+             // ),
+             /* DefaultTextField(
                 hintText: 'phone',
                 type: TextInputType.phone,
                 onChanged: (value) {},
@@ -56,10 +57,47 @@ class RegisterViewBody extends StatelessWidget {
                   child: Icon(Icons.call_outlined),
 
                 ),
-              ),
+              ),*/
 
               const SizedBox(
                 height: 18,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: IntlPhoneField(
+
+                  cursorColor: mintGreen,
+                  focusNode: focusNode,
+                  controller: cubit.phoneController,
+                  decoration:  InputDecoration(
+
+                    hintText: 'Phone Number',
+                    contentPadding:
+                    const EdgeInsets.only(top: 16, bottom: 16, left: 23),
+                    hintStyle:TextStyle(color: Colors.black54,fontSize: 21),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: const BorderSide(color: mintGreen),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: const BorderSide(
+                        color: greyColor2,
+                      ),
+                    ),
+                    filled: true,
+                    fillColor: greyColor2,
+
+                  ),
+                  languageCode: "en",
+                  onChanged: (phone) {
+                  },
+                  onCountryChanged: (country) {
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 12,
               ),
               DefaultTextField(
                 hintText: 'password',

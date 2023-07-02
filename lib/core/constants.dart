@@ -56,3 +56,4 @@ const Color mintGreen = Color(0xff3EF1BD);
 const Color babyBlue = Color(0xff0abde3);
 const Color whiteColor = Color(0xffffffff);
 const Color blackColor = Color(0xff000000);
+const Color blue = Color(0xff193653);
