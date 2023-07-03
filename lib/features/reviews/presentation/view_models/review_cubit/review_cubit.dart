@@ -97,7 +97,7 @@ class ReviewCubit extends Cubit<ReviewStates> {
     emit(LoadingAddReview());
     final sentiment = await sentimentAnalysis();
     reviewModel = ReviewModel(
-      like: like,
+      like: false,
       reviewText: getReviewTextController().text,
       reviewImage: link ?? "",
       carCenterDoc: centerDoc,
@@ -170,26 +170,86 @@ class ReviewCubit extends Cubit<ReviewStates> {
     emit(SuccessGetCarCenterReviews());
   }
 
-  bool like = false;
-  Future<void> clickHelpful(
-      {required ReviewModel model, required String doc}) async {
-    // emit(LoadingLike());
-    if (like == false) {
-      like = !like;
-      await FirebaseFirestore.instance.collection("Reviews").doc(doc).update(
-          {'helpfulCount': model.helpfulCount + 1, 'like': like}).then((value) {
-        emit(SuccessLikeIncrease());
-      }).catchError((error) {
-        emit(FailureLike());
-      });
-    } else {
-      like = !like;
-      await FirebaseFirestore.instance.collection("Reviews").doc(doc).update(
-          {'helpfulCount': model.helpfulCount - 1, 'like': like}).then((value) {
-        emit(SuccessLikeDecrease());
-      }).catchError((error) {
-        emit(FailureLike());
-      });
-    }
+
+
+  List<ReviewModel> likedReviews = [];
+  List<String> likedReviewsId = [];
+  Future<void> getLikedReviews() async {
+    likedReviews = [];
+    likedReviewsId = [];
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uId)
+        .collection('likedReviews')
+        .get()
+        .then((value) {
+      likedReviewsId = value.docs.map((e) => e.id).toList();
+      likedReviews = value.docs.map((e) => ReviewModel.fromJson(e.data())).toList();
+      // emit(SuccessGetLikedReviews());
+    }).catchError((error) {
+      debugPrint(error.toString());
+      // emit(FailureAddLikedReview());
+    });
   }
+  bool isLikedBefore(String reviewId) {
+    return likedReviewsId.contains(reviewId);
+  }
+  Future<void> addLikedReview({required ReviewModel model, required String doc}) async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(uId)
+        .collection('likedReviews')
+        .doc(doc)
+        .set(model.toMap())
+        .then((value) {
+      // emit(SuccessAddLikedReview());
+    }).catchError((error) {
+      debugPrint(error.toString());
+      // emit(FailureAddLikedReview());
+    });
+  }
+  Future<void> clickHelpful({required ReviewModel model, required String doc}) async {
+    // emit(LoadingLike());
+    getLikedReviews().then((value) async {
+      bool liked = isLikedBefore(doc);
+      if (liked == false) {
+        // if(count==0){
+        // liked = !liked;
+        await FirebaseFirestore.instance.collection("Reviews").doc(doc).update({
+          'helpfulCount': model.helpfulCount + 1,
+          'like': liked
+        }).then((value) {
+          // count++;
+          addLikedReview(doc: doc, model: model);
+          // emit(SuccessLikeIncrease());
+        }).catchError((error) {
+          // emit(FailureLike());
+        });
+      } else {
+        // liked = !liked;
+        await FirebaseFirestore.instance
+            .collection("users")
+            .doc(uId)
+            .collection("likedReviews")
+            .doc(doc)
+            .delete()
+            .then((value) async {
+          await FirebaseFirestore.instance
+              .collection("Reviews")
+              .doc(doc)
+              .update({
+            'helpfulCount': model.helpfulCount - 1,
+            'like': liked
+          }).then((value) {
+            // count--;
+            getLikedReviews();
+            // emit(SuccessLikeDecrease());
+          }).catchError((error) {
+            // emit(FailureLike());
+          });
+        }).catchError((error) {});
+      }
+    });
+  }
+
 }
