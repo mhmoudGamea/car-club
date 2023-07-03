@@ -12,7 +12,7 @@ import 'auth_button.dart';
 import 'text_field_widget.dart';
 
 class RegisterViewBody extends StatelessWidget {
-   RegisterViewBody({
+  RegisterViewBody({
     super.key,
     required this.cubit,
   });
@@ -44,10 +44,10 @@ class RegisterViewBody extends StatelessWidget {
                 onChanged: (value) {},
                 controller: cubit.emailController,
               ),
-             // const SizedBox(
-             //   height: 18,
-             // ),
-             /* DefaultTextField(
+              // const SizedBox(
+              //   height: 18,
+              // ),
+              /* DefaultTextField(
                 hintText: 'phone',
                 type: TextInputType.phone,
                 onChanged: (value) {},
@@ -65,16 +65,15 @@ class RegisterViewBody extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: IntlPhoneField(
-
                   cursorColor: mintGreen,
                   focusNode: focusNode,
                   controller: cubit.phoneController,
-                  decoration:  InputDecoration(
-
+                  decoration: InputDecoration(
                     hintText: 'Phone Number',
                     contentPadding:
-                    const EdgeInsets.only(top: 16, bottom: 16, left: 23),
-                    hintStyle:TextStyle(color: Colors.black54,fontSize: 21),
+                        const EdgeInsets.only(top: 16, bottom: 16, left: 23),
+                    hintStyle:
+                        const TextStyle(color: Colors.black54, fontSize: 21),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                       borderSide: const BorderSide(color: mintGreen),
@@ -87,13 +86,10 @@ class RegisterViewBody extends StatelessWidget {
                     ),
                     filled: true,
                     fillColor: greyColor2,
-
                   ),
                   languageCode: "en",
-                  onChanged: (phone) {
-                  },
-                  onCountryChanged: (country) {
-                  },
+                  onChanged: (phone) {},
+                  onCountryChanged: (country) {},
                 ),
               ),
               const SizedBox(
@@ -116,19 +112,23 @@ class RegisterViewBody extends StatelessWidget {
                 height: 18,
               ),
               BlocBuilder<RegisterCubit, RegisterState>(
-                  builder: (context, state) => defaultButton(
-                    buttonName: state is LoadingEmailAndPasswordRegisterState ?  const SizedBox(
-                      height: 28,
-                      width: 28,
-                      child: CircularProgressIndicator(color: whiteColor,),
-                    ): const Text("Sign Up",style: textButtonStyle),
+                builder: (context, state) => defaultButton(
+                    buttonName: state is LoadingEmailAndPasswordRegisterState
+                        ? const SizedBox(
+                            height: 28,
+                            width: 28,
+                            child: CircularProgressIndicator(
+                              color: whiteColor,
+                            ),
+                          )
+                        : const Text("Sign Up", style: textButtonStyle),
                     onTap: () {
                       if (cubit.registerFormKey.currentState!.validate()) {
                         RegisterCubit.get(context).userRegister(
                           name: cubit.nameController.text,
                           email: cubit.emailController.text,
                           password: cubit.passwordController.text,
-                          phone:  cubit.phoneController.text,
+                          phone: cubit.phoneController.text,
                         );
                       }
                     }),
