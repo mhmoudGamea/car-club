@@ -17,9 +17,11 @@ class CHelpfulWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ReviewCubit cubit = BlocProvider.of<ReviewCubit>(context);
+
     return BlocConsumer<ReviewCubit, ReviewStates>(
       listener: (context, state) {},
-      builder: (context, state) => Row(
+      builder: (context, state) {
+        return Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -32,15 +34,16 @@ class CHelpfulWidget extends StatelessWidget {
             ),
             onTap: (isLiked) async {
               await cubit.clickHelpful(model: model, doc: doc);
-              return model.like;
+              // await cubit.getLikedReviews();
+              return cubit.isLikedBefore(doc);
 
               // return _isLiked;
             },
-            isLiked: model.like,
+            isLiked: cubit.isLikedBefore(doc),
             size: 22,
             likeBuilder: (bool isLiked) {
               return Icon(
-                model.like
+                cubit.isLikedBefore(doc)
                     ? FontAwesomeIcons.solidThumbsUp
                     : FontAwesomeIcons.thumbsUp,
                 color: mintGreen,
@@ -52,17 +55,17 @@ class CHelpfulWidget extends StatelessWidget {
             likeCountPadding: EdgeInsets.zero,
             countPostion: CountPostion.right,
             countBuilder: (int? count, bool isLiked, String text) {
-              var color = isLiked ? blackColor : greyColor;
+              // var color = isLiked ? blackColor : greyColor;
               Widget result;
-              if (count == 0) {
+              if (model.helpfulCount == 0) {
                 result = Text(
                   "${model.helpfulCount}",
-                  style: TextStyle(color: color),
+                  style: const TextStyle(color: greyColor),
                 );
               } else {
                 result = Text(
                   text,
-                  style: TextStyle(color: color),
+                  style: const TextStyle(color: blackColor),
                 );
               }
               return result;
@@ -78,7 +81,8 @@ class CHelpfulWidget extends StatelessWidget {
             ),
           ),
         ],
-      ),
+      );
+      },
     );
   }
 }

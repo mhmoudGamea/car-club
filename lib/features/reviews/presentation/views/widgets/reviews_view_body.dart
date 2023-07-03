@@ -21,7 +21,7 @@ class ReviewsViewBody extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        if(state is SuccessGetCarCenterReviews ||state is SuccessLikeIncrease ||state is SuccessLikeDecrease  ){
+        if(state is SuccessGetCarCenterReviews ||state is SuccessLikeIncrease ||state is SuccessLikeDecrease || state is SuccessGetLikedReviews|| state is IsLikedBefore){
           return Padding(
             padding: const EdgeInsets.all(5),
             child: Column(

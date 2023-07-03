@@ -97,7 +97,7 @@ class ReviewCubit extends Cubit<ReviewStates> {
     emit(LoadingAddReview());
     final sentiment = await sentimentAnalysis();
     reviewModel = ReviewModel(
-      like: false,
+      // like: false,
       reviewText: getReviewTextController().text,
       reviewImage: link ?? "",
       carCenterDoc: centerDoc,
@@ -157,7 +157,6 @@ class ReviewCubit extends Cubit<ReviewStates> {
       emit(FailureGetReviews());
     });
   }
-
   late List<ReviewModel> carCenterReviews;
   Future<void> getCarCenterReviews({required String carCenterDoc}) async {
     carCenterReviews = [];
@@ -170,10 +169,9 @@ class ReviewCubit extends Cubit<ReviewStates> {
     emit(SuccessGetCarCenterReviews());
   }
 
-
-
   List<ReviewModel> likedReviews = [];
   List<String> likedReviewsId = [];
+  // Map<String,dynamic> likedReviewsRealTimed = {};
   Future<void> getLikedReviews() async {
     likedReviews = [];
     likedReviewsId = [];
@@ -183,16 +181,18 @@ class ReviewCubit extends Cubit<ReviewStates> {
         .collection('likedReviews')
         .get()
         .then((value) {
-      likedReviewsId = value.docs.map((e) => e.id).toList();
-      likedReviews = value.docs.map((e) => ReviewModel.fromJson(e.data())).toList();
-      // emit(SuccessGetLikedReviews());
+          likedReviewsId = value.docs.map((e) => e.id).toList();
+          likedReviews = value.docs.map((e) => ReviewModel.fromJson(e.data())).toList();
+      emit(SuccessGetLikedReviews());
     }).catchError((error) {
       debugPrint(error.toString());
-      // emit(FailureAddLikedReview());
+      emit(FailureGetLikedReviews());
     });
   }
   bool isLikedBefore(String reviewId) {
-    return likedReviewsId.contains(reviewId);
+    bool flag = likedReviewsId.contains(reviewId);
+    // emit(IsLikedBefore());
+    return flag;
   }
   Future<void> addLikedReview({required ReviewModel model, required String doc}) async {
     await FirebaseFirestore.instance
@@ -201,11 +201,12 @@ class ReviewCubit extends Cubit<ReviewStates> {
         .collection('likedReviews')
         .doc(doc)
         .set(model.toMap())
-        .then((value) {
-      // emit(SuccessAddLikedReview());
+        .then((value) async {
+          await getLikedReviews();
+      // emit(SuccessAddLikedReviews());
     }).catchError((error) {
       debugPrint(error.toString());
-      // emit(FailureAddLikedReview());
+      emit(FailureAddLikedReviews());
     });
   }
   Future<void> clickHelpful({required ReviewModel model, required String doc}) async {
@@ -221,9 +222,9 @@ class ReviewCubit extends Cubit<ReviewStates> {
         }).then((value) {
           // count++;
           addLikedReview(doc: doc, model: model);
-          // emit(SuccessLikeIncrease());
+          emit(SuccessLikeIncrease());
         }).catchError((error) {
-          // emit(FailureLike());
+          emit(FailureLike());
         });
       } else {
         // liked = !liked;
@@ -240,12 +241,12 @@ class ReviewCubit extends Cubit<ReviewStates> {
               .update({
             'helpfulCount': model.helpfulCount - 1,
             'like': liked
-          }).then((value) {
+          }).then((value) async {
             // count--;
-            getLikedReviews();
-            // emit(SuccessLikeDecrease());
+            await getLikedReviews();
+            emit(SuccessLikeDecrease());
           }).catchError((error) {
-            // emit(FailureLike());
+            emit(FailureLike());
           });
         }).catchError((error) {});
       }

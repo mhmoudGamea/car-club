@@ -14,7 +14,7 @@ class ReviewsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ReviewCubit>(
-      create: (context) => ReviewCubit(reviewRepo: ReviewRepoImple())..getReviews(carCenterDoc: doc),
+      create: (context) => ReviewCubit(reviewRepo: ReviewRepoImple())..getReviews(carCenterDoc: doc)..getLikedReviews(),
       child:  Scaffold(
         body: SafeArea(
           child: ReviewsViewBody(carCenterModel: carCenterModel,doc:doc),
