@@ -19,6 +19,7 @@ void main() async {
   // var token = await FirebaseMessaging.instance.getToken();
   // print(token);
 
+
   await FirebaseMessaging.instance.getInitialMessage();
 
   // FirebaseMessaging messaging = FirebaseMessaging.instance;
