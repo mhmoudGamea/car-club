@@ -48,7 +48,8 @@ void main() async {
 
   runApp(MultiBlocProvider(
       providers: [BlocProvider(create: (context) => AppThemeCubit())],
-      child: const CarClub()));
+      child: const CarClub())
+  );
 }
 
 class CarClub extends StatelessWidget {

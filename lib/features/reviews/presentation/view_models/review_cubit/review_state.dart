@@ -18,6 +18,11 @@ class LoadingGetReviews extends ReviewStates{}
 class SuccessGetReviews extends ReviewStates{}
 class FailureGetReviews extends ReviewStates{}
 
+class SuccessGetOrderedReviews extends ReviewStates{}
+class FailureGetOrderedReviews extends ReviewStates{}
+class LoadingGetOrderedReviews extends ReviewStates{}
+
+
 class LoadingLike extends ReviewStates{}
 class SuccessLikeIncrease extends ReviewStates{}
 class SuccessLikeDecrease extends ReviewStates{}

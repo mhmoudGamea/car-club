@@ -78,16 +78,16 @@ class RegisterCubit extends Cubit<RegisterState> {
     });
   }
 
-  void loginWithFacebook() {
-    emit(LoadingFacebookRegisterState());
-    signInWithFacebook().then((value) {
-      debugPrint(value.user!.uid);
-      emit(SuccessFacebookRegisterState(value.user!.uid, value.user!.email));
-    }).catchError((error) {
-      debugPrint('error is :: ${error.toString()}');
-      emit(ErrorFacebookRegisterState());
-    });
-  }
+  // void loginWithFacebook() {
+  //   emit(LoadingFacebookRegisterState());
+  //   signInWithFacebook().then((value) {
+  //     debugPrint(value.user!.uid);
+  //     emit(SuccessFacebookRegisterState(value.user!.uid, value.user!.email));
+  //   }).catchError((error) {
+  //     debugPrint('error is :: ${error.toString()}');
+  //     emit(ErrorFacebookRegisterState());
+  //   });
+  // }
 
   void loginWithApple() {
     emit(LoadingAppleRegisterState());

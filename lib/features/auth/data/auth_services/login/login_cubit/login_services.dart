@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'dart:convert';
 import 'dart:math';
 import 'package:crypto/crypto.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
 
@@ -28,13 +28,15 @@ Future<UserCredential> signInWithEmailAndPassword({
 //   return await FirebaseAuth.instance.signInWithCredential(credential);
 // }
 
-Future<UserCredential> signInWithFacebook() async {
-  final LoginResult signInResult = await FacebookAuth.instance.login();
+FacebookLogin facebookLogin = FacebookLogin();
+Future<void> signInWithFacebook() async {
+  FacebookLoginResult result = await facebookLogin.logIn(customPermissions: ['email']);
+  final token = result.accessToken!.token;
+  if(result.status == FacebookLoginStatus.success){
+    final faceCredential = FacebookAuthProvider.credential(token);
+    await FirebaseAuth.instance.signInWithCredential(faceCredential);
+  }
 
-  final OAuthCredential facebookAuthCredential =
-      FacebookAuthProvider.credential(signInResult.accessToken!.token);
-
-  return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
 }
 
 Future<UserCredential> signInWithApple() async {

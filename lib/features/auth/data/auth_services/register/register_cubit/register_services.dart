@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 Future<UserCredential> createUserWithEmailAndPassword({
@@ -14,14 +13,14 @@ Future<UserCredential> createUserWithEmailAndPassword({
       .createUserWithEmailAndPassword(email: email, password: password);
 }
 
-Future<UserCredential> signInWithFacebook() async {
-  final LoginResult signInResult = await FacebookAuth.instance.login();
-
-  final OAuthCredential facebookAuthCredential =
-      FacebookAuthProvider.credential(signInResult.accessToken!.token);
-
-  return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
-}
+// Future<UserCredential> signInWithFacebook() async {
+//   final LoginResult signInResult = await FacebookAuth.instance.login();
+//
+//   final OAuthCredential facebookAuthCredential =
+//       FacebookAuthProvider.credential(signInResult.accessToken!.token);
+//
+//   return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+// }
 
 Future<UserCredential> signInWithApple() async {
   final rawNonce = generateNonce();
