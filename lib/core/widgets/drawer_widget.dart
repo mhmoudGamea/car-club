@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:car_club/core/constants.dart';
 import 'package:car_club/core/widgets/tabs_view.dart';
-import 'package:car_club/features/Ahp/presentation/views/ahp_view.dart';
+import 'package:car_club/features/auth/presentation/views/auth_view.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -29,21 +29,28 @@ class DrawerWidget extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-            accountName: const Text('Margot Robbie'),
-            accountEmail: const Text('email@gmail.com'),
+            accountName:  Text(user.name),
+            accountEmail: Text(user.email),
             currentAccountPicture: GestureDetector(
               onTap: () {
                 GoRouter.of(context).push(ProfileView.rn);
               },
-              child: CircleAvatar(
+              child:  CircleAvatar(
                 child: ClipOval(
-                  child: Image.asset(
+                  child:user.profileImage!.isNotEmpty ?
+                    Image(
+                    image: NetworkImage('${user.profileImage}' ),
+                    fit: BoxFit.cover,
+                    width: 90,
+                    height: 90,
+                  ) : Image.asset(
                     'assets/images/profile0.jpg',
                     fit: BoxFit.cover,
                     width: 90,
                     height: 90,
                   ),
                 ),
+
               ),
             ),
             decoration: const BoxDecoration(
@@ -99,10 +106,7 @@ class DrawerWidget extends StatelessWidget {
               color: blackColor,
             ),
             title: const Text('Car Suggestion'),
-            onTap: () {
-              GoRouter.of(context).push(AhpView.rn);
-              // Scaffold.of(context).closeDrawer();
-            },
+            onTap: () {},
           ),
           ListTile(
             leading: const Icon(
@@ -117,12 +121,26 @@ class DrawerWidget extends StatelessWidget {
           ListTile(
             title: const Text('Exit'),
             leading: const Icon(
-              FontAwesomeIcons.rightFromBracket,
+              FontAwesomeIcons.circleXmark,
               size: 20,
               color: blackColor,
             ),
             // leading: const Icon(Icons.exit_to_app),
             onTap: () => exit(0),
+          ),
+          ListTile(
+            title: const Text('Logout'),
+            leading: const Icon(
+              FontAwesomeIcons.rightFromBracket,
+              size: 20,
+              color: blackColor,
+            ),
+            // leading: const Icon(Icons.exit_to_app),
+            onTap: () {
+              GoRouter.of(context).pushReplacement(
+                AuthenticationView.rn
+              );
+            },
           ),
         ],
       ),

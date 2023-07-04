@@ -10,17 +10,15 @@ import 'core/globle/theme/app_theme/app_theme_cubit/app_theme_cubit.dart';
 import 'features/auth/data/auth_services/login/login_cubit/bloc_observe.dart';
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   CacheHelper.initialObject();
   await Firebase.initializeApp();
-  await FirebaseAppCheck.instance
-      .activate(webRecaptchaSiteKey: 'recaptcha-v3-site-key');
+  await FirebaseAppCheck.instance.activate(webRecaptchaSiteKey: 'recaptcha-v3-site-key');
+  await FirebaseMessaging.instance.getInitialMessage();
 
   // var token = await FirebaseMessaging.instance.getToken();
   // print(token);
-
-  await FirebaseMessaging.instance.getInitialMessage();
-
   // FirebaseMessaging messaging = FirebaseMessaging.instance;
   // NotificationSettings settings = await messaging.requestPermission(
   //   alert: true,
@@ -31,7 +29,6 @@ void main() async {
   //   provisional: false,
   //   sound: true,
   // );
-
   // FirebaseMessaging.onMessage.listen((event) {
   //   print(event.data.toString());
   // });
@@ -39,19 +36,24 @@ void main() async {
   // FirebaseMessaging.onMessageOpenedApp.listen((event) {
   //   print(event.data.toString());
   // });
+
   Bloc.observer = MyBlocObserver();
   uId = CacheHelper.getData('uId');
   email = CacheHelper.getData('email');
   runApp(MultiBlocProvider(
       providers: [BlocProvider(create: (context) => AppThemeCubit())],
-      child: const CarClub()));
+      child: const CarClub()
+  ));
+
+
 }
 
 class CarClub extends StatelessWidget {
+
   const CarClub({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     final data = BlocProvider.of<AppThemeCubit>(context);
     return MaterialApp.router(
       routerConfig: AppRoutes.getRouter,
