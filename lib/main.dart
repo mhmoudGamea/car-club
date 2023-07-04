@@ -19,7 +19,6 @@ void main() async {
   // var token = await FirebaseMessaging.instance.getToken();
   // print(token);
 
-
   await FirebaseMessaging.instance.getInitialMessage();
 
   // FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -45,8 +44,7 @@ void main() async {
   email = CacheHelper.getData('email');
   runApp(MultiBlocProvider(
       providers: [BlocProvider(create: (context) => AppThemeCubit())],
-      child: const CarClub())
-  );
+      child: const CarClub()));
 }
 
 class CarClub extends StatelessWidget {
