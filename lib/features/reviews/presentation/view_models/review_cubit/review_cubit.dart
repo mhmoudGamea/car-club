@@ -136,16 +136,17 @@ class ReviewCubit extends Cubit<ReviewStates> {
   late List<String> reviewsDocs;
   late List<String> reviewLikedUsers;
   late List<String> carCenterReviewsDocs;
-  // Map<String,List<String>> likedReviewsRealTimed = {};
+  late List<String> likedReviewsRealTimed ;
   Future<void> getReviews({required String carCenterDoc}) async {
     emit(LoadingGetReviews());
     reviews = [];
     reviewsDocs = [];
     carCenterReviewsDocs = [];
+    likedReviewsRealTimed = [];
 
     FirebaseFirestore.instance
         .collection("Reviews")
-        // .orderBy('helpfulCount', descending: true)
+    // .orderBy('helpfulCount', descending: true)
         .snapshots()
         .listen((event) async {
       reviews = event.docs.map((e) => ReviewModel.fromJson(e.data())).toList();
@@ -161,8 +162,23 @@ class ReviewCubit extends Cubit<ReviewStates> {
       print(error.toString());
       emit(FailureGetReviews());
     });
-  }
 
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(uId)
+        .collection("likedReviews")
+        .get().then((value) {
+      likedReviewsRealTimed = value.docs.map((e) {
+        print(e.id.toString());
+
+        return e.id;
+      }).toList();
+    }).catchError((error){
+      print('Error : ${error.toString()}');
+    });
+
+
+  }
   Future<void> getSortedReviews({required String carCenterDoc}) async {
     emit(LoadingGetOrderedReviews());
     reviews = [];
@@ -223,12 +239,16 @@ class ReviewCubit extends Cubit<ReviewStates> {
   }
 
   bool isLikedBefore(String reviewId) {
-    bool flag = likedReviewsId.contains(reviewId);
-    // emit(IsLikedBefore());
+    bool flag = likedReviewsRealTimed.contains(reviewId);
+    // bool flag = likedReviewsId.contains(reviewId);
+
+        // emit(IsLikedBefore());
     return flag;
   }
 
   Future<void> addLikedReview({required ReviewModel model, required String doc}) async {
+
+    likedReviewsRealTimed.add(doc);
     await FirebaseFirestore.instance
         .collection("users")
         .doc(uId)
@@ -251,6 +271,7 @@ class ReviewCubit extends Cubit<ReviewStates> {
       // emit(SuccessAddLikedReviews());
     }).catchError((error) {
       debugPrint(error.toString());
+      likedReviewsRealTimed.remove(doc);
       emit(FailureAddLikedReviews());
     });
   }
@@ -294,9 +315,11 @@ class ReviewCubit extends Cubit<ReviewStates> {
             'like': liked
           }).then((value) async {
             // count--;
+            likedReviewsRealTimed.remove(doc);
             await getLikedReviews();
             emit(SuccessLikeDecrease());
           }).catchError((error) {
+            likedReviewsRealTimed.add(doc);
             emit(FailureLike());
           });
         }).catchError((error) {});
