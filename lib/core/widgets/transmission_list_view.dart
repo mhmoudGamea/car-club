@@ -23,7 +23,9 @@ class TransmissionListView extends StatelessWidget {
               (e) => Container(
                 alignment: Alignment.center,
                 width: 60,
-                child: Text(e),
+                child: FittedBox(
+                  child: Text(e),
+                ),
               ),
             )
             .toList(),

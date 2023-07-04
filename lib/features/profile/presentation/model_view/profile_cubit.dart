@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:bloc_provider/bloc_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -15,13 +16,14 @@ part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit():super(ProfileInitial());
-
-  File?  profileImage ;
+  static ProfileCubit get(context) => BlocProvider.of(context);
   var picker = ImagePicker();
+  File?  profileImage ;
+
   Future <void> getProfileImage()async{
-    final  PickedFile = await picker.pickImage(source: ImageSource.gallery,);
-    if(PickedFile != null){
-      profileImage = File(PickedFile.path ) ;
+    final  pickedFile = await picker.pickImage(source: ImageSource.gallery,);
+    if(pickedFile != null){
+      profileImage = File(pickedFile.path ) ;
       emit(ProfileImagePickedSuccessState());
     }
     else {

@@ -45,7 +45,7 @@ class AppRoutes {
     if (remember == false || remember == null) {
       path = '/';
     } else {
-      path = TabsView.rn;
+      path = '/TabsView';
     }
     return _router;
   }

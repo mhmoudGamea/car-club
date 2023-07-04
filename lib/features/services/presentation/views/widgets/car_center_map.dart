@@ -21,9 +21,8 @@ class CarCenterMap extends StatelessWidget {
         ),
         actions: [
           PopupMenuButton(
-
-              icon: const Icon(FontAwesomeIcons.ellipsisVertical),
-              itemBuilder: (context) {
+            icon: const Icon(FontAwesomeIcons.ellipsisVertical),
+            itemBuilder: (context) {
                 return [
                   const PopupMenuItem<int>(
                     value: 0,
@@ -31,7 +30,7 @@ class CarCenterMap extends StatelessWidget {
                   ),
                 ];
               },
-              onSelected: (value) async {
+            onSelected: (value) async {
                 if (value == 0) {
                   late final String url;
                   if (Platform.isAndroid) {
@@ -62,7 +61,8 @@ class CarCenterMap extends StatelessWidget {
                   //     await launchUrl(uri);
                   //     }
                 }
-              })
+              },
+          )
         ],
       ),
       body: GoogleMap(

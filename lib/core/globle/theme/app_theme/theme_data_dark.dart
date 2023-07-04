@@ -17,10 +17,14 @@ ThemeData getThemeDataDark() => ThemeData(
         statusBarIconBrightness: Brightness.light,
       ),
       titleTextStyle: TextStyle(
+        fontWeight: FontWeight.bold,
         color: whiteColor,
       ),
     ),
+iconTheme: const IconThemeData(
+  color: whiteColor,
 
+),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
       selectedItemColor: mintGreen,
@@ -28,11 +32,17 @@ ThemeData getThemeDataDark() => ThemeData(
 
 
     ),
-textTheme: const TextTheme(
+
+textTheme:  const TextTheme(
 titleMedium:TextStyle(
-  fontSize: 14,
+  fontSize: 20,
 fontFamily: 'Lexend' ,
 color: whiteColor,
 ),
+    titleSmall: TextStyle(
+      fontSize: 15,
+      fontFamily: 'Lexend' ,
+      color: blue,
+    )
 ),
 );

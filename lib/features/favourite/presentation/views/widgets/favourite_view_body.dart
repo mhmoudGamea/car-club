@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../../../../../core/constants.dart';
 import 'new_grid_view.dart';
 import 'used_grid_view.dart';
@@ -14,7 +13,7 @@ class FavouriteViewBody extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          elevation: 0,
+          elevation: 1,
           flexibleSpace: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [

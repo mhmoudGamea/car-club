@@ -18,6 +18,7 @@ ThemeData getThemeDataLight() => ThemeData(
         statusBarIconBrightness: Brightness.dark,
       ),
       titleTextStyle: TextStyle(
+        fontWeight: FontWeight.bold,
         color: blackColor,
       ),
     ),
@@ -30,10 +31,15 @@ ThemeData getThemeDataLight() => ThemeData(
 ),
   textTheme: const TextTheme(
       titleMedium:TextStyle(
-        fontSize: 14,
+        fontSize: 23,
         fontFamily: 'Lexend',
         color: blackColor,
-      )
+      ),
+    titleSmall: TextStyle(
+    fontSize: 15,
+    fontFamily: 'Lexend' ,
+    color: blue,
+  )
   )
 
 );

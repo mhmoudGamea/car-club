@@ -19,6 +19,7 @@ void main() async {
   // var token = await FirebaseMessaging.instance.getToken();
   // print(token);
 
+
   await FirebaseMessaging.instance.getInitialMessage();
 
   // FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -39,15 +40,13 @@ void main() async {
   // FirebaseMessaging.onMessageOpenedApp.listen((event) {
   //   print(event.data.toString());
   // });
-
   Bloc.observer = MyBlocObserver();
-
   uId = CacheHelper.getData('uId');
   email = CacheHelper.getData('email');
-
   runApp(MultiBlocProvider(
       providers: [BlocProvider(create: (context) => AppThemeCubit())],
-      child: const CarClub()));
+      child: const CarClub())
+  );
 }
 
 class CarClub extends StatelessWidget {

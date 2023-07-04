@@ -43,7 +43,7 @@ dependencies:
   firebase_core: ^2.4.0
   firebase_auth: ^4.2.3
   google_sign_in: ^5.0.0-nullsafety
-  flutter_facebook_auth: ^3.5.0
+  flutter_login_facebook: ^1.8.0
   sign_in_with_apple: ^3.0.0
   crypto: ^3.0.1
   firebase_storage: ^11.0.15
@@ -74,6 +74,7 @@ dependencies:
   url_launcher: ^6.1.10
   flutter_rating_bar: ^4.0.1
   simple_item_selector: ^0.0.2
+  intl_phone_field: ^3.2.0
   dart_sentiment: ^0.0.9
 
 dev_dependencies:

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/utils/assets.dart';
+import '../../../../../core/utils/helper.dart';
 import '../../../data/auth_services/login/login_cubit/login_cubit.dart';
 import 'auth_icons_shape.dart';
 
@@ -20,19 +21,37 @@ class SocialMediaSignIn extends StatelessWidget {
           iconShape(
               image: facebook,
               onTap: () {
-                LoginCubit.get(context).loginWithFacebook();
+                Helper.showCustomToast(
+                    context: context,
+                    icon: Icons.timer,
+                    bgColor: Colors.redAccent,
+                    msg: 'Sorry,still working on it',
+                );
+                // LoginCubit.get(context).loginWithFacebook();
               }),
           const SizedBox(width: 23),
           iconShape(
               image: google,
               onTap: () {
+                Helper.showCustomToast(
+                  context: context,
+                  icon: Icons.timer,
+                  bgColor: Colors.redAccent,
+                  msg: 'Sorry,still working on it',
+                );
                 // LoginCubit.get(context).loginWithGoogle();
               }),
           const SizedBox(width: 23),
           iconShape(
               image: apple,
               onTap: () {
-                LoginCubit.get(context).loginWithApple();
+                Helper.showCustomToast(
+                  context: context,
+                  icon: Icons.timer,
+                  bgColor: Colors.redAccent,
+                  msg: 'Sorry,still working on it',
+                );
+                // LoginCubit.get(context).loginWithApple();
               }),
         ],
       ),

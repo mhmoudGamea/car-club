@@ -1,12 +1,19 @@
 
 
 
+import 'dart:io';
+
 import 'package:car_club/features/profile/presentation/views/widgets/tabs/sells_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../../../../core/constants.dart';
+
 //import '../../model_view/profile_cubit.dart';
 import 'tabs/feed_view.dart';
 import 'tabs/fav_view.dart';
@@ -21,7 +28,17 @@ class ProfileViewBody extends StatefulWidget {
 class _ProfileViewBodyState extends State<ProfileViewBody> {
   String? name = '';
   String? phone = '';
-  String? profileImage = ""  ;
+  File? profileImage  ;
+  Future pickImage()async{
+    try{
+      final profileImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (profileImage == null) return;
+      final ImageTemporary = File(profileImage.path);
+      setState(() => this.profileImage= ImageTemporary);
+    } on PlatformException catch (e){
+      print('failed to pick image : $e');
+    }
+  }
   Future _getDataFromDataBase() async {
     await FirebaseFirestore.instance
         .collection("users")
@@ -95,11 +112,12 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                   Container(
                     height: 135,
                     width: 135,
-                    decoration:   const BoxDecoration(
+                    decoration:       BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage('assets/images/cover.jpg'),
-                          //    : FileImage(profileImage as File  )as ImageProvider,
-                          //profileImage == null ?
+                          image:profileImage != null
+                              ? FileImage(profileImage!)
+                              : const NetworkImage('https://i.pinimg.com/originals/c0/27/be/c027bec07c2dc08b9df60921dfd539bd.webp')
+                          as ImageProvider,
                           fit: BoxFit.cover),
                       shape: BoxShape.circle,
                       color: greyColor,
@@ -115,7 +133,9 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                           borderRadius: BorderRadius.circular(30),
                           color: mintGreen.withOpacity(0.5)),
                       child: IconButton(  onPressed: () {
-                      //  ProfileCubit.get(context).getProfileImage();
+                        pickImage();
+                        _getDataFromDataBase();
+                       //ProfileCubit.get(context).getProfileImage();
                       },
                         icon:const Icon(FontAwesomeIcons.camera, size: 18), ),
                     ),
@@ -123,19 +143,20 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                 ],
               ),
             ),
-            Text(name!,style: Theme.of(context).textTheme.bodyMedium,),
+            Text(name!, style: Theme.of(context).textTheme.titleMedium,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                 Text(
-                  "+2",
-                  style: Theme.of(context).textTheme.bodyMedium,
-                //  style: TextStyle(color: greyColor, fontWeight: FontWeight.bold),
-                ),
+                //  Text(
+                //   "+2",
+                //   style: Theme.of(context).textTheme.titleSmall,
+                //  // style: TextStyle(color: greyColor, fontWeight: FontWeight.bold),
+                // ),
                 Text(
                   phone!,
 
-                  style: const TextStyle(color: greyColor, fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: babyBlue, fontWeight: FontWeight.bold),
                 ),
               ],
             )

@@ -21,6 +21,16 @@ class LoginViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     LoginCubit loginCubit = context.read<LoginCubit>();
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Login '),
+        elevation: 2,
+        titleTextStyle: const TextStyle(
+          color: mintGreen,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+        backgroundColor: whiteColor,
+      ),
       body: Center(
         child: SingleChildScrollView(
           child: Padding(

@@ -19,7 +19,7 @@ class Helper {
         icon: Icon(
           Icons.arrow_back_ios_rounded,
           size: iconSize ?? 22,
-          color: color ?? Colors.black,
+          //color: color ?? Colors.black,
         ),
         onPressed: () {
           Navigator.of(context).pop();
@@ -28,7 +28,7 @@ class Helper {
       centerTitle: true,
       title: Text(
         title,
-        style: Styles.title16.copyWith(color: color, fontSize: fontSize ?? 16),
+       // style: Styles.title16.copyWith(color: color, fontSize: fontSize ?? 16),
       ),
       backgroundColor: backgroundColor,
       elevation: elevation ?? 0,

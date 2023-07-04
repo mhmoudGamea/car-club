@@ -6,7 +6,6 @@ import '../../../../core/cache_helper.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/utils/helper.dart';
 import '../../../../core/widgets/tabs_view.dart';
-
 import '../../data/auth_services/login/login_cubit/login_cubit.dart';
 import '../../data/auth_services/login/login_cubit/login_states.dart';
 import 'widgets/auth_view_body.dart';
@@ -35,7 +34,8 @@ class AuthenticationView extends StatelessWidget {
                 icon: Icons.check_circle,
                 bgColor: Colors.greenAccent,
                 msg: 'login successful ,enjoy');
-          } else if (state is SuccessFacebookSigningState) {
+          }
+          else if (state is SuccessFacebookSigningState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
             debugPrint("uId : $uId");
@@ -48,7 +48,8 @@ class AuthenticationView extends StatelessWidget {
                 icon: Icons.check_circle,
                 bgColor: Colors.greenAccent,
                 msg: 'login successful ,enjoy');
-          } else if (state is SuccessAppleSigningState) {
+          }
+          else if (state is SuccessAppleSigningState) {
             CacheHelper.saveData('uId', state.uid);
             uId = CacheHelper.getData('uId');
             debugPrint("uId : $uId");
@@ -61,9 +62,8 @@ class AuthenticationView extends StatelessWidget {
                 icon: Icons.check_circle,
                 bgColor: Colors.greenAccent,
                 msg: 'login successful ,enjoy');
-          } else if (state is ErrorGoogleSigningState ||
-              state is ErrorFacebookSigningState ||
-              state is ErrorAppleSigningState) {
+          }
+          else if (state is ErrorGoogleSigningState || state is ErrorFacebookSigningState || state is ErrorAppleSigningState) {
             authErrorHandle(context: context, state: state);
           }
         },
