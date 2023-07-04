@@ -55,6 +55,17 @@ class ProfileCubit extends Cubit<ProfileState> {
         .update({'profileImage': url});
   }
 
+  // a function that will take snapshot of all users and return the current authenticated user[realtime]
+  UserModel getUserFromSnapshot(QuerySnapshot<Object?>? snapshot) {
+    late UserModel userModel;
+    snapshot!.docs.forEach((element) {
+      if (element.id == uId) {
+        userModel = UserModel.fromJson(element.data() as Map<String, dynamic>);
+      }
+    });
+    return userModel;
+  }
+
   Future<void> getUsers() async {
     emit(GetUsersLoading());
     users = [];

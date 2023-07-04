@@ -3,9 +3,10 @@ import 'package:car_club/features/used/presentation/model_views/used_cubit/used_
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/constants.dart';
+import '../../../../core/utils/styles.dart';
 import 'widgets/profile_view_body.dart';
 
 class ProfileView extends StatelessWidget {
@@ -37,26 +38,11 @@ class ProfileView extends StatelessWidget {
                 GoRouter.of(context).pop();
               },
             ),
-            title: const Center(
+            title: Center(
                 child: Text(
               "MyProfile",
-
-              // style: Styles.title16.copyWith(color: blackColor),
+              style: Styles.title16.copyWith(color: blackColor),
             )),
-            actions: [
-              IconButton(
-                constraints: const BoxConstraints(),
-                padding: const EdgeInsets.only(right: 10),
-                icon: const Icon(
-                  FontAwesomeIcons.arrowRightFromBracket,
-                  color: Colors.red,
-                  size: 21,
-                ),
-                onPressed: () {
-                  GoRouter.of(context).pop();
-                },
-              ),
-            ],
           ),
           body: ProfileViewBody(),
         ),
