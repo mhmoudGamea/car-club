@@ -104,9 +104,9 @@ class ProfileViewBody extends StatelessWidget {
               'name',
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text(
                   'phone',
                   style:
