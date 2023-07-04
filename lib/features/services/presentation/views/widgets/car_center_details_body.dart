@@ -64,10 +64,15 @@ class CarCenterDetailsBody extends StatelessWidget {
                       Row(
                         children: [
                           if(carCenterModel.user.profileImage!.isNotEmpty)
-                            CircleAvatar(
-                            backgroundImage: CachedNetworkImageProvider(carCenterModel.user.profileImage!),
-                            radius: 25,
+                            InkWell(
+                              child: CircleAvatar(
+                              backgroundImage: CachedNetworkImageProvider(carCenterModel.user.profileImage!),
+                              radius: 25,
                           ),
+                              onTap: () {
+
+                              },
+                            ),
                           if(carCenterModel.user.profileImage!.isEmpty)
                             const CircleAvatar(
                               backgroundColor: greyColor,
