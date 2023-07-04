@@ -10,6 +10,7 @@ import 'package:car_club/features/reviews/presentation/view_models/review_cubit/
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/Ahp/presentation/views/ahp_view.dart';
 import '../../features/auth/presentation/views/auth_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/register_view.dart';
@@ -111,6 +112,10 @@ class AppRoutes {
       GoRoute(
         path: ProfileView.rn,
         builder: (context, state) => const ProfileView(),
+      ),
+      GoRoute(
+        path: AhpView.rn,
+        builder: (context, state) => const AhpView(),
       ),
       GoRoute(
         path: DetailsView.rn,

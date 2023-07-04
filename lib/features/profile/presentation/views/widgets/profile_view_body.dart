@@ -1,51 +1,20 @@
+import 'dart:io';
 
-
-
+import 'package:car_club/features/profile/presentation/model_view/profile_cubit.dart';
 import 'package:car_club/features/profile/presentation/views/widgets/tabs/sells_view.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../../core/constants.dart';
 
+//import '../../model_view/profile_cubit.dart';
 import 'tabs/feed_view.dart';
 import 'tabs/fav_view.dart';
 
-class ProfileViewBody extends StatefulWidget {
-  const ProfileViewBody({Key? key}) : super(key: key);
-
-  @override
-  State<ProfileViewBody> createState() => _ProfileViewBodyState();
-}
-
-class _ProfileViewBodyState extends State<ProfileViewBody> {
-  String? name = '';
-  String? phone = '';
-  String? profileImage = ""  ;
-  Future _getDataFromDataBase() async {
-    await FirebaseFirestore.instance
-        .collection("users")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then((snapshot) async {
-      if (snapshot.exists) {
-        setState(() {
-          name = snapshot.data()!["name"];
-          phone = snapshot.data()!["phone"];
-          profileImage = snapshot.data()!["profileImage"];
-        });
-      }
-    });
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _getDataFromDataBase();
-  }
+class ProfileViewBody extends StatelessWidget {
+  ProfileViewBody({Key? key}) : super(key: key);
 
   // tabs
   final List<Widget> tabs = [
@@ -71,6 +40,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
       ),
     ),
   ];
+
   // tab bar views
   final List<Widget> tabsBarViews = [
     //feed view
@@ -83,6 +53,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
 
   @override
   Widget build(BuildContext context) {
+    final data = BlocProvider.of<ProfileCubit>(context);
     return ListView(
       children: [
         Column(
@@ -97,11 +68,10 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                   Container(
                     height: 135,
                     width: 135,
-                    decoration:   const BoxDecoration(
+                    decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage('assets/images/cover.jpg'),
-                          //    : FileImage(profileImage as File  )as ImageProvider,
-                          //profileImage == null ?
+                          // TODO: need to ....
+                          image: NetworkImage(user.profileImage!),
                           fit: BoxFit.cover),
                       shape: BoxShape.circle,
                       color: greyColor,
@@ -116,29 +86,31 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           color: mintGreen.withOpacity(0.5)),
-                      child: IconButton(  onPressed: () {
-                      //  ProfileCubit.get(context).getProfileImage();
-                      },
-                        icon:const Icon(FontAwesomeIcons.camera, size: 18), ),
+                      child: IconButton(
+                        onPressed: () async {
+                          File? pickedFileImage = await data.pickProfileImage();
+                          if (pickedFileImage != null) {
+                            await data.uploadPickedImage(pickedFileImage);
+                          }
+                        },
+                        icon: const Icon(FontAwesomeIcons.camera, size: 18),
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-            Text(name!, style: Theme.of(context).textTheme.titleMedium,
+            Text(
+              'name',
+              style: Theme.of(context).textTheme.titleMedium,
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                //  Text(
-                //   "+2",
-                //   style: Theme.of(context).textTheme.titleSmall,
-                //  // style: TextStyle(color: greyColor, fontWeight: FontWeight.bold),
-                // ),
                 Text(
-                  phone!,
-
-                  style: const TextStyle(color: babyBlue, fontWeight: FontWeight.bold),
+                  'phone',
+                  style:
+                      TextStyle(color: babyBlue, fontWeight: FontWeight.bold),
                 ),
               ],
             )
