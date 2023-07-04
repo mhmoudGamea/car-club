@@ -14,7 +14,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../../core/constants.dart';
 
-import '../../model_view/profile_cubit.dart';
+//import '../../model_view/profile_cubit.dart';
 import 'tabs/feed_view.dart';
 import 'tabs/fav_view.dart';
 
