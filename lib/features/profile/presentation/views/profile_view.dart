@@ -57,7 +57,7 @@ class ProfileView extends StatelessWidget {
               ),
             ],
           ),
-          body: const ProfileViewBody(),
+          body:  const ProfileViewBody(),
         ),
       ),
     );

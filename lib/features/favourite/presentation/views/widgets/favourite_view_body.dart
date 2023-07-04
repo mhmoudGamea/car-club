@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../../../../../core/constants.dart';
 import 'new_grid_view.dart';
 import 'used_grid_view.dart';
