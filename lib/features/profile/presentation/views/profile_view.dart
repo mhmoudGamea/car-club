@@ -1,11 +1,10 @@
-
+import 'package:car_club/features/profile/presentation/model_view/profile_cubit.dart';
 import 'package:car_club/features/used/presentation/model_views/used_cubit/used_cubit.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-
 
 import 'widgets/profile_view_body.dart';
 
@@ -15,11 +14,14 @@ class ProfileView extends StatelessWidget {
 //  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
-   // final data = BlocProvider.of<AppThemeCubit>(context);
+    // final data = BlocProvider.of<AppThemeCubit>(context);
     return DefaultTabController(
       length: 3,
-      child: BlocProvider(
-        create: (context) => UsedCubit(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => UsedCubit()),
+          BlocProvider(create: (context) => ProfileCubit()),
+        ],
         child: Scaffold(
           appBar: AppBar(
             elevation: 0,
@@ -28,7 +30,7 @@ class ProfileView extends StatelessWidget {
               padding: EdgeInsets.zero,
               icon: const Icon(
                 Icons.arrow_back_ios,
-              //  color: blackColor,
+                //  color: blackColor,
                 size: 21,
               ),
               onPressed: () {
@@ -51,13 +53,12 @@ class ProfileView extends StatelessWidget {
                   size: 21,
                 ),
                 onPressed: () {
-
                   GoRouter.of(context).pop();
                 },
               ),
             ],
           ),
-          body:  const ProfileViewBody(),
+          body: ProfileViewBody(),
         ),
       ),
     );
