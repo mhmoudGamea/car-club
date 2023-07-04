@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:car_club/core/constants.dart';
 import 'package:car_club/core/widgets/tabs_view.dart';
+import 'package:car_club/features/Ahp/presentation/views/ahp_view.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -98,7 +99,10 @@ class DrawerWidget extends StatelessWidget {
               color: blackColor,
             ),
             title: const Text('Car Suggestion'),
-            onTap: () {},
+            onTap: () {
+              GoRouter.of(context).push(AhpView.rn);
+              // Scaffold.of(context).closeDrawer();
+            },
           ),
           ListTile(
             leading: const Icon(
