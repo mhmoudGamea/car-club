@@ -14,8 +14,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController phoneController =
-      TextEditingController();
+  final TextEditingController phoneController =   TextEditingController();
 
   GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
 
@@ -40,7 +39,8 @@ class RegisterCubit extends Cubit<RegisterState> {
         phone: phone,
       );
     }).catchError((error) {
-      emit(RegisterFailure(errMessage: error.toString()));
+      print("Error :: ${error.toString()}");
+      emit(RegisterFailure(error));
     });
   }
 
