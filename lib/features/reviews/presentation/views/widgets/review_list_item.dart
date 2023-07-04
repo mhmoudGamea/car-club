@@ -114,16 +114,3 @@ class ReviewListItem extends StatelessWidget {
     );
   }
 }
-<<<<<<< HEAD
-=======
-/*
-model.sentiment == 'Helpful'
-                      ? babyBlue.withOpacity(0.2)
-                      : Colors.red.withOpacity(0.2)
-*/
-/*
-model.sentiment == 'Helpful'
-                      ? babyBlue.withOpacity(0.2)
-                      : Colors.red.withOpacity(0.2)
-*/
->>>>>>> b31ddd34daa2189be57414d1b73cfbb2ce7ca87f
