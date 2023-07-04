@@ -64,8 +64,9 @@ class ReviewRepoImple implements ReviewRepo{
   Future<void> addReview({required Map<String, dynamic> review}) async {
     await FirebaseFirestore.instance
         .collection("Reviews")
-        .add(review)
-    ;
+        .add(review).then((value)  {
+
+    });
   }
 
 }

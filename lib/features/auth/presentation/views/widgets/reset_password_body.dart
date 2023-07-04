@@ -13,7 +13,7 @@ class ResetPasswordBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: primaryDark,
+        // backgroundColor: primaryDark,
         title: const Text(
           'Reset Password',
           style: TextStyle(fontSize: 20, color: secondaryLoginColor),

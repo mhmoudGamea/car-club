@@ -21,7 +21,7 @@ class ReviewsViewBody extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        if(state is SuccessGetCarCenterReviews ||state is SuccessLikeIncrease ||state is SuccessLikeDecrease  ){
+        if(state is SuccessGetCarCenterReviews ||state is SuccessLikeIncrease ||state is SuccessLikeDecrease || state is SuccessGetLikedReviews|| state is IsLikedBefore||state is SuccessGetOrderedReviews){
           return Padding(
             padding: const EdgeInsets.all(5),
             child: Column(
@@ -31,6 +31,7 @@ class ReviewsViewBody extends StatelessWidget {
                 Expanded(
                   child: ListView.separated(
                     // physics: const NeverScrollableScrollPhysics(),
+                    // shrinkWrap: true,
                     padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                     itemCount: cubit.carCenterReviews.length,
                     itemBuilder: (context, index) =>  ReviewListItem(model: cubit.carCenterReviews[index],doc: cubit.carCenterReviewsDocs[index],carCenterModel: carCenterModel),

@@ -42,17 +42,16 @@ void authErrorHandle({required BuildContext context, required dynamic state}) {
   showDialog(
       context: context,
       builder: (context) => AlertDialog(
-            title: const Text('Error'),
-            titleTextStyle: const TextStyle(
-              color: secondaryLoginColor,
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-            ),
-            content: Text(getErrorMessage(state.error)),
-            contentTextStyle: const TextStyle(
-              fontSize: 18,
-              color: secondaryLoginColor,
-            ),
-            backgroundColor: whiteColor,
-          ));
+        title: const Text('Error'),
+        titleTextStyle: const TextStyle(
+            color: greyColor,
+            fontSize: 19,
+            fontWeight: FontWeight.bold),
+        content: Text(getErrorMessage(state.error)),
+        contentTextStyle: const TextStyle(
+          fontSize: 17,
+          color: secondaryLoginColor,
+        ),
+        backgroundColor: whiteColor,
+      ));
 }

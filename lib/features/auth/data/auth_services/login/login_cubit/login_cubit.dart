@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 
 import '../../../../../../core/utils/helper.dart';
 import 'login_services.dart';
@@ -63,17 +65,31 @@ class LoginCubit extends Cubit<LoginStates> {
   //     emit(ErrorGoogleSigningState(error));
   //   });
   // }
+  FacebookLogin facebookLogin = FacebookLogin();
 
-  void loginWithFacebook() {
+  Future<void> loginWithFacebook() async {
     emit(LoadingFacebookSigningState());
-    signInWithFacebook().then((value) {
-      debugPrint(value.user!.uid);
-      debugPrint(value.user!.email);
-      emit(SuccessFacebookSigningState(value.user!.uid, value.user!.email));
-    }).catchError((error) {
-      debugPrint('error is :: ${error.toString()}');
-      emit(ErrorFacebookSigningState(error));
-    });
+    FacebookLoginResult result = await facebookLogin.logIn(customPermissions: ['email']);
+    final token = result.accessToken!.token;
+    if(result.status == FacebookLoginStatus.success){
+      final faceCredential = FacebookAuthProvider.credential(token);
+      await FirebaseAuth.instance.signInWithCredential(faceCredential).then((value) {
+        emit(SuccessFacebookSigningState(value.user!.uid, value.user!.email));
+      }).catchError((error){
+          debugPrint('error is :: ${error.toString()}');
+          emit(ErrorFacebookSigningState(error));
+      });
+
+    }
+    //
+    // signInWithFacebook().then((value) {
+    //   debugPrint(value.user!.uid);
+    //   value.
+    //   debugPrint(value.user!.email);
+    // }).catchError((error) {
+    //   debugPrint('error is :: ${error.toString()}');
+    //   emit(ErrorFacebookSigningState(error));
+    // });
   }
 
   void loginWithApple() {

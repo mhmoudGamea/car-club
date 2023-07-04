@@ -19,8 +19,8 @@ class RegisterSuccess extends RegisterState {}
 class RegisterLoading extends RegisterState {}
 
 class RegisterFailure extends RegisterState {
-  String errMessage;
-  RegisterFailure({required this.errMessage});
+  late final dynamic error;
+  RegisterFailure(this.error);
 }
 
 class CreateUserSuccess extends RegisterState {

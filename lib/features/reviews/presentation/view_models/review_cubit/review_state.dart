@@ -18,6 +18,11 @@ class LoadingGetReviews extends ReviewStates{}
 class SuccessGetReviews extends ReviewStates{}
 class FailureGetReviews extends ReviewStates{}
 
+class SuccessGetOrderedReviews extends ReviewStates{}
+class FailureGetOrderedReviews extends ReviewStates{}
+class LoadingGetOrderedReviews extends ReviewStates{}
+
+
 class LoadingLike extends ReviewStates{}
 class SuccessLikeIncrease extends ReviewStates{}
 class SuccessLikeDecrease extends ReviewStates{}
@@ -28,5 +33,13 @@ class SuccessGetCarCenterReviews extends ReviewStates{}
 class FailureGetCarCenterReviews extends ReviewStates{}
 
 class ChangeRateValue extends ReviewStates{}
+class IsLikedBefore extends ReviewStates{}
 
 
+class LoadingGetLikedReviews extends ReviewStates{}
+class FailureGetLikedReviews extends ReviewStates{}
+class SuccessGetLikedReviews extends ReviewStates{}
+
+class LoadingAddLikedReviews extends ReviewStates{}
+class FailureAddLikedReviews extends ReviewStates{}
+class SuccessAddLikedReviews extends ReviewStates{}

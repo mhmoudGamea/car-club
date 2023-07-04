@@ -86,9 +86,13 @@ class RegisterScreen extends StatelessWidget {
                 bgColor: Colors.greenAccent,
                 msg: 'register successful ,enjoy');
           } else if (state is ErrorEmailAndPasswordRegisterState ||
-              state is ErrorGoogleRegisterState ||
-              state is ErrorFacebookRegisterState ||
-              state is ErrorAppleRegisterState) {
+              // state is ErrorGoogleRegisterState ||
+              // state is ErrorFacebookRegisterState ||
+              // state is ErrorAppleRegisterState ||
+              state is RegisterFailure
+          )
+          {
+            print("Error :: ${state.toString()}");
             authErrorHandle(context: context, state: state);
           }
         },

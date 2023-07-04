@@ -113,7 +113,7 @@ class RegisterViewBody extends StatelessWidget {
               ),
               BlocBuilder<RegisterCubit, RegisterState>(
                 builder: (context, state) => defaultButton(
-                    buttonName: state is LoadingEmailAndPasswordRegisterState
+                    buttonName: state is LoadingEmailAndPasswordRegisterState || state is SuccessEmailAndPasswordRegisterState|| state is RegisterLoading
                         ? const SizedBox(
                             height: 28,
                             width: 28,
