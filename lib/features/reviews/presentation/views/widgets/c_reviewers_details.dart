@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:car_club/features/reviews/data/models/review_model.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../core/constants.dart';
+import '../../../../../core/utils/assets.dart';
 import '../../../../../core/utils/styles.dart';
+import '../../../../profile/presentation/views/profile_view.dart';
 import '../../../../services/data/models/car_center_model.dart';
 
 class CReviewersDetails extends StatelessWidget {
@@ -16,15 +19,31 @@ class CReviewersDetails extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
       // image section
 
-    leading: carCenterModel.user.profileImage!.isNotEmpty ?CircleAvatar(
-        backgroundImage: CachedNetworkImageProvider(carCenterModel.user.profileImage!),
-        radius: 26,
-      ) : const CircleAvatar(
-        backgroundColor: greyColor, radius: 26),
+    leading: carCenterModel.user.profileImage!.isNotEmpty ?InkWell(
+      onTap: () {
+        // GoRouter.of(context).push(
+        //     ProfileView.rn
+        // );
+
+      },
+      child: CircleAvatar(
+          backgroundImage: CachedNetworkImageProvider(model.user.profileImage??whiteImage),
+          radius: 26,
+        ),
+    ) : InkWell(
+      onTap: () {
+        // GoRouter.of(context).push(
+        //     ProfileView.rn
+        // );
+
+      },
+      child: const CircleAvatar(
+          backgroundColor: greyColor, radius: 26),
+      ),
 
       // name section
       title: Text(
-        carCenterModel.user.name,
+        model.user.name,
         style: Styles.title15.copyWith(color: blackColor),
       ),
       // rating section and date

@@ -1,3 +1,4 @@
+import 'package:car_club/core/models/user_model.dart';
 import 'package:car_club/core/utils/helper.dart';
 import 'package:car_club/features/reviews/presentation/view_models/review_cubit/review_cubit.dart';
 import 'package:car_club/features/reviews/presentation/view_models/review_cubit/review_state.dart';
@@ -95,9 +96,10 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                             icon: FontAwesomeIcons.x,
                             msg: "please write your review");
                       } else {
+
                         await cubit
                             .addReview(context, widget.doc.toString(),
-                                widget.carCenterModel)
+                                widget.carCenterModel,user)
                             .then((value) {
                           cubit.getReviews(carCenterDoc: widget.doc);
                           cubit.getCarCenterReviews(carCenterDoc: widget.doc);

@@ -34,6 +34,7 @@ import '../../features/services/presentation/views/widgets/car_center_map.dart';
 import '../../features/services/presentation/views/widgets/showImage.dart';
 import '../../features/used/presentation/views/details_view.dart';
 import '../../features/used/presentation/views/used_view.dart';
+import '../../item_test.dart';
 import '../cache_helper.dart';
 import '../constants.dart';
 
@@ -45,6 +46,7 @@ class AppRoutes {
     if (remember == false || remember == null) {
       path = '/';
     } else {
+      // path = CarCenterItem.rn;
       path = '/TabsView';
     }
     return _router;
@@ -72,6 +74,10 @@ class AppRoutes {
         },
       ),
       GoRoute(
+        path: CarCenterItem.rn,
+        builder: (context, state) =>  CarCenterItem(),
+      ),
+      GoRoute(
         path: CarCenterMap.rn,
         builder: (context, state) => CarCenterMap(
           carCenterModel: state.extra as CarCenterModel,
@@ -85,11 +91,11 @@ class AppRoutes {
         path: HomeView.rn,
         builder: (context, state) => const HomeView(),
       ),
-      GoRoute(
-        path: ItemViewBody.rn,
-        builder: (context, state) =>
-            ItemViewBody(carCenterModel: state.extra as CarCenterModel),
-      ),
+      // GoRoute(
+      //   path: ItemViewBody.rn,
+      //   builder: (context, state) =>
+      //       ItemViewBody(carCenterModel: state.extra as CarCenterModel),
+      // ),
       GoRoute(
         path: UsedView.rn,
         builder: (context, state) => const UsedView(),

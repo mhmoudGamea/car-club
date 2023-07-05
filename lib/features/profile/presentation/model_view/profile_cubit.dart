@@ -58,21 +58,22 @@ class ProfileCubit extends Cubit<ProfileState> {
   // a function that will take snapshot of all users and return the current authenticated user[realtime]
   UserModel getUserFromSnapshot(QuerySnapshot<Object?>? snapshot) {
     late UserModel userModel;
-    snapshot!.docs.forEach((element) {
+    for (var element in snapshot!.docs) {
       if (element.id == uId) {
         userModel = UserModel.fromJson(element.data() as Map<String, dynamic>);
+        user = userModel;
       }
-    });
+    }
     return userModel;
   }
 
   Future<void> getUsers() async {
     emit(GetUsersLoading());
     users = [];
-    await FirebaseFirestore.instance.collection("users").get().then((value) {
+    FirebaseFirestore.instance.collection("users").snapshots().listen((value) {
       users = value.docs.map((e) => UserModel.fromJson(e.data())).toList();
       emit(GetUsersSuccess());
-    }).catchError((error) {
+    }).onError((error){
       emit(GetUsersFailure());
     });
   }
@@ -85,4 +86,5 @@ class ProfileCubit extends Cubit<ProfileState> {
       }
     }
   }
+
 }

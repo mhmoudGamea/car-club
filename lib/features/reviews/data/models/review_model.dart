@@ -1,3 +1,6 @@
+
+import '../../../profile/data/models/user_model.dart';
+
 class ReviewModel {
   String reviewText;
   String? reviewImage;
@@ -6,19 +9,23 @@ class ReviewModel {
   String uId;
   String carCenterDoc;
   final String sentiment;
+  UserModel user;
 
   ReviewModel(
       {required this.reviewText,
       required this.carCenterDoc,
       this.reviewImage,
       required this.uId,
-      required this.helpfulCount,
+        required this.user,
+        required this.helpfulCount,
       required this.reviewRate,
       required this.sentiment});
 
   factory ReviewModel.fromJson(Map<String, dynamic> json) {
     return ReviewModel(
+
         carCenterDoc: json['carCenterDoc'],
+        user: UserModel.fromJson(json['user']),
         uId: json['uId'],
         helpfulCount: json['helpfulCount'],
         reviewImage: json['reviewImage'],
@@ -35,6 +42,7 @@ class ReviewModel {
       'reviewRate': reviewRate,
       'reviewImage': reviewImage,
       'helpfulCount': helpfulCount,
+      'user':user.toMap(),
       'sentiment': sentiment,
     };
   }

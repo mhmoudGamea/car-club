@@ -27,7 +27,6 @@ class _ServicesViewBodyState extends State<ServicesViewBody> {
       create: (context) => CarCenterCubit()..getCarCenters(),
       child: BlocBuilder<CarCenterCubit, CarCentersStates>(
         builder: (context, state) {
-
           if (state is GetCarCentersLoading) {
             return const Center(child: CircularProgressIndicator());
           }
