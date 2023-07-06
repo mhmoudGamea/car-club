@@ -1,7 +1,9 @@
 import 'package:car_club/core/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_item_selector/simple_item_selector.dart';
 
+import '../../features/home/presentation/model_views/home_cubit/home_cubit.dart';
 import '../utils/assets.dart';
 import 'brand_item.dart';
 
@@ -54,7 +56,7 @@ class BrandListView extends StatelessWidget {
         itemsCount: brands.length,
         items: brands.map((e) => BrandItem(logo: e)).toList(),
         onSelected: (index) {
-          print(index);
+          BlocProvider.of<HomeCubit>(context).brand = brands[index!].t;
         },
       ),
     );

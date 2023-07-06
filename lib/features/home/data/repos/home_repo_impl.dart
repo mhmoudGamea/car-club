@@ -1,4 +1,4 @@
-import 'dart:ffi';
+// import 'dart:ffi';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -111,6 +111,42 @@ class HomeRepoImpl implements HomeRepo {
         } else {
           cars = result;
         }
+      }
+      return right(cars);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<CarModel>>> fetchFilterCars(
+    BuildContext context,
+    String brand,
+    String transmission,
+    String traction,
+    String type,
+    int minPrice,
+    int maxPrice,
+  ) async {
+    try {
+      List<CarModel> result = [];
+      result = cars
+          .where((car) =>
+              car.brand == brand &&
+              car.transmission == transmission &&
+              car.traction == traction &&
+              car.type == type &&
+              car.price >= minPrice &&
+              car.price <= maxPrice)
+          .toList();
+      if (result.isEmpty) {
+        Helper.showCustomToast(
+            context: context,
+            bgColor: babyBlue,
+            icon: FontAwesomeIcons.circleCheck,
+            msg: 'Car Not Found');
+      } else {
+        cars = result;
       }
       return right(cars);
     } catch (e) {

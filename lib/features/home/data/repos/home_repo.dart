@@ -11,6 +11,15 @@ abstract class HomeRepo {
     String search,
     BuildContext context,
   );
+  Future<Either<Failure, List<CarModel>>> fetchFilterCars(
+    BuildContext context,
+    String brand,
+    String transmission,
+    String traction,
+    String type,
+    int minPrice,
+    int maxPrice,
+  );
   Future<Either<Failure, bool>> updateFavourites(
     CarModel car,
     bool isLiked,

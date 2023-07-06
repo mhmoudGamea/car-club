@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_item_selector/simple_item_selector.dart';
 
+import '../../features/home/presentation/model_views/home_cubit/home_cubit.dart';
 import '../constants.dart';
 
 class BodyListView extends StatelessWidget {
-  final List body = ['Sedan', 'SUV', 'Hatchback'];
+  final List type = ['Sedan', 'SUV', 'Hatchback'];
   BodyListView({Key? key}) : super(key: key);
 
   @override
@@ -18,8 +20,8 @@ class BodyListView extends StatelessWidget {
         itemMargin: const EdgeInsets.symmetric(horizontal: 10),
         itemPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         itemBorderRadius: const BorderRadius.all(Radius.circular(5)),
-        itemsCount: body.length,
-        items: body
+        itemsCount: type.length,
+        items: type
             .map(
               (e) => Container(
                 alignment: Alignment.center,
@@ -30,7 +32,9 @@ class BodyListView extends StatelessWidget {
               ),
             )
             .toList(),
-        onSelected: (index) {},
+        onSelected: (index) {
+          BlocProvider.of<HomeCubit>(context).type = type[index!];
+        },
       ),
     );
   }

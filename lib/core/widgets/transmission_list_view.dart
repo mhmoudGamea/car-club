@@ -1,6 +1,9 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:car_club/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_item_selector/simple_item_selector.dart';
+
+import '../../features/home/presentation/model_views/home_cubit/home_cubit.dart';
 
 class TransmissionListView extends StatelessWidget {
   final List transmission = ['Automatic', 'CVT', 'DSG'];
@@ -29,7 +32,10 @@ class TransmissionListView extends StatelessWidget {
               ),
             )
             .toList(),
-        onSelected: (index) {},
+        onSelected: (index) {
+          BlocProvider.of<HomeCubit>(context).transmission =
+              transmission[index!];
+        },
       ),
     );
     // return Row(

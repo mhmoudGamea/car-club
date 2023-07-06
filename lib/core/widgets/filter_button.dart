@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../features/home/presentation/model_views/home_cubit/home_cubit.dart';
 
 class FilterButton extends StatelessWidget {
   final String text;
@@ -15,7 +19,10 @@ class FilterButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        BlocProvider.of<HomeCubit>(context).fetchFilterCars(context);
+        Navigator.of(context).pop();
+      },
       style: ButtonStyle(
         backgroundColor: MaterialStatePropertyAll(backgroundColor),
         shape: MaterialStatePropertyAll(

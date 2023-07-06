@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_item_selector/simple_item_selector.dart';
 
+import '../../features/home/presentation/model_views/home_cubit/home_cubit.dart';
 import '../constants.dart';
 
 class TractionListView extends StatelessWidget {
@@ -29,7 +31,9 @@ class TractionListView extends StatelessWidget {
               ),
             )
             .toList(),
-        onSelected: (index) {},
+        onSelected: (index) {
+          BlocProvider.of<HomeCubit>(context).traction = traction[index!];
+        },
       ),
     );
   }
