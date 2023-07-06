@@ -8,8 +8,9 @@ class GetCarCentersLoading extends CarCentersStates{}
 class GetCarCentersSuccess extends CarCentersStates{
   final List<CarCenterModel> carCenters;
   final List<String> carCenterDoc;
+  final List<double> rates;
 
-  GetCarCentersSuccess(this.carCenters, this.carCenterDoc);
+  GetCarCentersSuccess(this.carCenters, this.carCenterDoc,this.rates);
 }
 class GetCarCentersFailure extends CarCentersStates{
   final String error;

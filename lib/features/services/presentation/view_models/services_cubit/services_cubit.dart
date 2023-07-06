@@ -10,21 +10,46 @@ class CarCenterCubit extends Cubit<CarCentersStates> {
 
   late List<CarCenterModel> carCenters;
   late List<String> carCentersDocs;
+  late List<double> rates;
 
   Future<void> getCarCenters() async {
     emit(GetCarCentersLoading());
-    await FirebaseFirestore.instance.collection('Centers').get().then((value) {
+    FirebaseFirestore.instance.collection('Centers').snapshots().listen((value) async {
       carCenters = value.docs.map((e) => CarCenterModel.fromJson(e.data())).toList();
       carCentersDocs = value.docs.map((e) => e.id).toList();
-      emit(GetCarCentersSuccess(carCenters,carCentersDocs));
-    }).catchError((error) {
+      await getRates(carCentersDocs).then((value) {
+        emit(GetCarCentersSuccess(carCenters,carCentersDocs,rates));
+      });
+
+    }).onError((error) {
       print("error is doc ::::: ${error.toString()}");
       emit(GetCarCentersFailure(error.toString()));
     });
   }
 
-  late double rate  = 0;
-  Future<void> getRate(String carCenterDoc)   async {
+  // Future<void> getCarCenters() async {
+  //   emit(GetCarCentersLoading());
+  //   await FirebaseFirestore.instance.collection('Centers').get().then((value) async {
+  //     carCenters = value.docs.map((e) => CarCenterModel.fromJson(e.data())).toList();
+  //     carCentersDocs = value.docs.map((e) => e.id).toList();
+  //     print("carCentersDocs is done ...");
+  //
+  //   }).then((value) async {
+  //     print("GetRated is loading ...");
+  //     print("carCentersDocs = ${carCentersDocs.length}");
+  //
+  //     await getRates(carCentersDocs).then((value) {
+  //       print("GetRated is done ...");
+  //       emit(GetCarCentersSuccess(carCenters,carCentersDocs,rates));
+  //     });
+  //   }).catchError((error) {
+  //     print("error is doc ::::: ${error.toString()}");
+  //     emit(GetCarCentersFailure(error.toString()));
+  //   });
+  // }
+
+  Future<double> getRate(String carCenterDoc)   async {
+    double rate = 0.0;
     double sumRate = 0.0;
     List<ReviewModel?>? carCenterReviews = [];
     List<ReviewModel?>? reviews = [];
@@ -44,18 +69,25 @@ class CarCenterCubit extends Cubit<CarCentersStates> {
       }
 
         print(carCenterReviews.length);
-
+      if(carCenterReviews.isNotEmpty){
         for (var element in carCenterReviews) {
           sumRate = sumRate + element!.reviewRate;
-
         }
         rate = sumRate / carCenterReviews.length;
-
-
+      }else{
+        rate = 0;
+      }
     });
+    return rate;
+  }
 
-
-    // return rate;
+  Future<void> getRates(List<String> carCenterDocs)async {
+    rates = [];
+    for (var element in carCenterDocs) {
+      await getRate(element).then((value) {
+        rates.add(value);
+      });
+    }
   }
 
   // Future<void> getCarCentersDocs() async {

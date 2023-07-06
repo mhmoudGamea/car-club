@@ -47,7 +47,7 @@ class CarCentersViewBody extends StatelessWidget {
                         child: ItemViewBody(
                             carCenterModel: state.carCenters[index],
                           carCenterDoc: state.carCenterDoc[index],
-                          rating:  BlocProvider.of<CarCenterCubit>(context).rate,
+                          rating:  state.rates[index],
                         ),
                       )
               ),
