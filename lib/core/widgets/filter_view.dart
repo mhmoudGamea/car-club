@@ -13,6 +13,7 @@ class FilterView extends StatelessWidget {
     return Container(
       height: 635,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      // child: const FilterViewBody(),
       child: BlocProvider(
         create: (context) => HomeCubit(HomeRepoImpl()),
         child: const FilterViewBody(),

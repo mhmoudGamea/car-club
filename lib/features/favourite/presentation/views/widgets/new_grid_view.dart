@@ -20,13 +20,13 @@ class NewGridView extends StatelessWidget {
               physics: const BouncingScrollPhysics(
                 parent: AlwaysScrollableScrollPhysics(),
               ),
-              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+              padding: const EdgeInsets.only(left: 15, right: 15, bottom: 10),
               itemCount: state.cars.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
-                childAspectRatio: 15 / 19,
+                childAspectRatio: 15 / 20,
               ),
               itemBuilder: (context, index) => GestureDetector(
                   onTap: () {
