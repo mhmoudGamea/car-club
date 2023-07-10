@@ -1,145 +1,238 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:car_club/features/services/data/models/car_center_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_rating_native/flutter_rating_native.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../../core/constants.dart';
-class ItemViewBody extends StatefulWidget {
-  const ItemViewBody({Key? key, required this.carCenterModel})
+
+class ItemViewBody extends StatelessWidget {
+
+    ItemViewBody({Key? key, required this.carCenterModel, required this.carCenterDoc, required this.rating})
       : super(key: key);
+   final PageController pageController = PageController();
+   // final List<String> images = [
+   //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi4aXrkkEuxA30xGfyl1FNyCiRcw-CGKblhQ&usqp=CAU",
+   //   'https://oflutter.com/wp-content/uploads/2021/02/profile-bg3.jpg',
+   //   'https://oflutter.com/wp-content/uploads/2021/02/profile-bg3.jpg'
+   // ];
+  final double rating ;
   static const rn = '/ItemViewBody';
   final CarCenterModel carCenterModel;
-
-  @override
-  State<ItemViewBody> createState() => _ItemViewBodyState();
-}
-
-class _ItemViewBodyState extends State<ItemViewBody> {
-  double rating = 0;
+  final String carCenterDoc;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: Column(
-        children: [
-          Container(
-            height: 250,
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(12),
-                topLeft: Radius.circular(12),
-              ),
-              image: DecorationImage(
-                image: NetworkImage(
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi4aXrkkEuxA30xGfyl1FNyCiRcw-CGKblhQ&usqp=CAU"),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            height: 160,
-            decoration:  BoxDecoration(
-              color:  whiteColor,
-              borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(12),
-                  bottomRight: Radius.circular(12)),
-              border: Border.all(width: 2, color: Colors.grey.shade100),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(
-                  right: 12.0, left: 12.0),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      const Expanded(
-                        child: CircleAvatar(
-                          radius: 33.0,
-                          backgroundImage: NetworkImage(
-                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi4aXrkkEuxA30xGfyl1FNyCiRcw-CGKblhQ&usqp=CAU"),
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(30),
+        child: Card(
+          color: whiteColor,
+          shadowColor: Colors.black,
+          elevation: 50,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 200,
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    PageView.builder(
+                      itemBuilder: (context, index) => CachedNetworkImage(
+                        fit: BoxFit.fill,
+                        imageUrl: carCenterModel.images[index],
+                      ),
+                      itemCount: carCenterModel.images.length,
+                      controller: pageController,
+                      physics: const BouncingScrollPhysics(),
+                      onPageChanged: (value) {},
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 10
+                      ),
+                      child: SmoothPageIndicator(
+                        controller: pageController,
+                        count: carCenterModel.images.length,
+                        effect: const ExpandingDotsEffect(
+                          dotColor: greyColor,
+                          activeDotColor: whiteColor,
+                          dotHeight: 10,
+                          dotWidth: 10,
+                          expansionFactor: 2,
+                          spacing: 10,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 22),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children:  [
-                            Row(
-                              children:  [
-                                const Text(
-                                  "Choco Jail",
-                                  style: TextStyle(
-                                      fontSize: 19, fontWeight: FontWeight.bold),
-                                ),
-
-                                const SizedBox(width: 50,),
-                                RatingBar.builder(
-                                  itemSize: 15,
-                                  initialRating: 4,
-                                  minRating: 1,
-                                  direction: Axis.horizontal,
-                                  allowHalfRating: true,
-                                  itemCount: 5,
-                                  itemPadding: const EdgeInsets.symmetric(horizontal: 2.0),
-                                  itemBuilder: (context, _) => const Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 25,
+                          backgroundImage: CachedNetworkImageProvider(
+                            carCenterModel.images[carCenterModel.images.length-1] ?? 'https://oflutter.com/wp-content/uploads/2021/02/profile-bg3.jpg',
+                          ),
+                          backgroundColor: Colors.grey,
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children:  [
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width/3,
+                                    child:  Text(
+                                      carCenterModel.name,
+                                      // softWrap: false,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        color: blackColor,
+                                      ),
+                                    ),
                                   ),
-                                  onRatingUpdate: (rating) => setState(() {
-                                    this.rating = rating;
-                                  }),
-                                ),
-                                Text('($rating)')
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            const Text(
-                              "Tarts and chocolates, Desserts",
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey,
+                                  const Spacer(),
+                                  Row(
+                                    children:  [
+                                       FlutterRating(
+                                        rating: rating ,
+                                        starCount: 5,
+                                        borderColor: Colors.grey,
+                                        color: Colors.amberAccent,
+                                        allowHalfRating: true,
+                                        size: 20,
+
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                      ),
+                                      const SizedBox(width: 3,),
+                                      Text("(${carCenterModel.reviewCount})")
+                                    ],
+                                  )
+                                ],
                               ),
-                            ),
-                          ],
+                              Row(
+
+                                children:  [
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width/2,
+                                    child:  Text(
+                                      carCenterModel.description,
+                                      // softWrap: false,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                        color: greyColor,
+                                      ),
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  if(carCenterModel.credit)
+                                    CircleAvatar(
+                                    radius: 13,
+                                    backgroundColor: Colors.lightGreenAccent.withOpacity(0.3),
+                                    child: const Icon(
+                                      FontAwesomeIcons.creditCard,
+                                      color: Colors.green,
+                                      size: 15,
+                                    ),
+                                  ),
+                                  if(carCenterModel.delivery)
+                                    const SizedBox(width: 5,),
+                                  if(carCenterModel.delivery)
+                                    CircleAvatar(
+                                    radius: 13,
+                                    backgroundColor: Colors.lightGreenAccent.withOpacity(0.3),
+                                    child: const Icon(
+                                      Icons.delivery_dining,
+                                      color: Colors.green,
+                                      size: 20,
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    Container(height: 1,color: Colors.grey.withOpacity(0.2),),
+                    const SizedBox(height: 5),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children:    [
+                              const Icon(
+                                Icons.timer_outlined,
+                                size: 16,
+                                color: Colors.grey,
 
-                    ],
-                  ),
-                  const Divider(
-                    height: 5,
-                    thickness: 1,
-                    color: greyColo3,
-                    indent: 0,
+                              ),
+                              const SizedBox(width: 5,),
+                              Text("${carCenterModel.time} min",style: const TextStyle(fontSize: 13,color:Colors.grey,fontWeight: FontWeight.bold ),)
+                            ],
+                          ),
+                        ),
+                        if(carCenterModel.openingTimes.isOpenMethod(open: carCenterModel.openingTimes.openHour, close: carCenterModel.openingTimes.closeHour)==true)
+                          Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children:  const [
+                              Icon(
+                                Icons.lock_open_outlined,
+                                size: 16,
+                                color: Colors.green,
 
-                  ),
-                  const SizedBox(height: 15,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children:  const [
-                      Icon(Icons.schedule,color: mintGreen),
-                      SizedBox(width: 7,),
-                      Text("40 mins",style: TextStyle(color: blackColor),),
-                      SizedBox(width: 75,),
+                              ),
+                              SizedBox(width: 5,),
+                              Text("open",style: TextStyle(fontSize: 13,color:Colors.green,fontWeight: FontWeight.bold ),)
 
-                      Icon(Icons.delivery_dining,color:mintGreen),
-                      SizedBox(width: 7,),
-                      Text("20.0 EGP",style: TextStyle(color: blackColor)),
+                            ],
+                          ),
+                        ),
+                        if(carCenterModel.openingTimes.isOpenMethod(open: carCenterModel.openingTimes.openHour, close: carCenterModel.openingTimes.closeHour)==false)
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children:  const [
+                              Icon(
+                                Icons.lock,
+                                size: 16,
+                                color: Colors.red,
 
-                    ],
-                  )
-                ],
-              ),
+                              ),
+                              SizedBox(width: 5,),
+                              Text("closed",style: TextStyle(fontSize: 13,color:Colors.red,fontWeight: FontWeight.bold ),)
 
-            ),
-
-          )
-        ],
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -9,6 +9,12 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.homeRepo) : super(HomeInitial());
   final HomeRepo homeRepo;
+  String brand = 'Kia';
+  String transmission = 'Automatic';
+  String traction = 'Front';
+  String type = 'Sedan';
+  int minPrice = 100000;
+  int maxPrice = 1000000;
 
   Future<void> fetchNewCars() async {
     emit(HomeLoading());
@@ -25,6 +31,23 @@ class HomeCubit extends Cubit<HomeState> {
   ) async {
     emit(HomeLoading());
     var result = await homeRepo.fetchSearchCars(search, context);
+    result.fold(
+      (failure) => emit(HomeFailure(failure.errMsg)),
+      (cars) => emit(HomeSuccess(cars)),
+    );
+  }
+
+  Future<void> fetchFilterCars(BuildContext context) async {
+    emit(HomeLoading());
+    var result = await homeRepo.fetchFilterCars(
+      context,
+      brand,
+      transmission,
+      traction,
+      type,
+      minPrice,
+      maxPrice,
+    );
     result.fold(
       (failure) => emit(HomeFailure(failure.errMsg)),
       (cars) => emit(HomeSuccess(cars)),

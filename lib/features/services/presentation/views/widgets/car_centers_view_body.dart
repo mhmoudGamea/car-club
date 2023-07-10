@@ -42,10 +42,13 @@ class CarCentersViewBody extends StatelessWidget {
                     // );
 
                   },
-                  child:
-                      BlocProvider.value(
+                  child: BlocProvider.value(
                         value: context.read<CarCenterCubit>(),
-                        child: ItemViewBody(carCenterModel: state.carCenters[index]),
+                        child: ItemViewBody(
+                            carCenterModel: state.carCenters[index],
+                          carCenterDoc: state.carCenterDoc[index],
+                          rating:  state.rates[index],
+                        ),
                       )
               ),
               separatorBuilder: (context, index) =>

@@ -13,24 +13,45 @@ class FavouriteViewBody extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          elevation: 1,
-          flexibleSpace: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              TabBar(
-                enableFeedback: true,
-                indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50), // Creates border
-                  color: mintGreen,
-                ),
-                indicatorColor: mintGreen,
-                tabs: [
-                  Tab(
-                    child: Row(
+          elevation: 0,
+          flexibleSpace: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TabBar(
+                  enableFeedback: true,
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: mintGreen.withOpacity(0.7),
+                  ),
+                  indicatorColor: mintGreen,
+                  tabs: [
+                    Tab(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(
+                            FontAwesomeIcons.car,
+                            size: 20,
+                            color: blackColor,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'New Cars',
+                            style: TextStyle(color: blackColor),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Tab(
+                        child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
                         Icon(
-                          FontAwesomeIcons.car,
+                          FontAwesomeIcons.retweet,
                           size: 20,
                           color: blackColor,
                         ),
@@ -38,33 +59,15 @@ class FavouriteViewBody extends StatelessWidget {
                           width: 10,
                         ),
                         Text(
-                          'New Cars',
+                          'Used Cars',
                           style: TextStyle(color: blackColor),
                         ),
                       ],
-                    ),
-                  ),
-                  Tab(
-                      child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Icon(
-                        FontAwesomeIcons.retweet,
-                        size: 20,
-                        color: blackColor,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Used Cars',
-                        style: TextStyle(color: blackColor),
-                      ),
-                    ],
-                  )),
-                ],
-              ),
-            ],
+                    )),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
         body: const Padding(

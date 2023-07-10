@@ -59,6 +59,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     for (var element in snapshot!.docs) {
       if (element.id == uId) {
         userModel = UserModel.fromJson(element.data() as Map<String, dynamic>);
+        user = userModel;
       }
     }
     return userModel;
@@ -67,10 +68,10 @@ class ProfileCubit extends Cubit<ProfileState> {
   Future<void> getUsers() async {
     emit(GetUsersLoading());
     users = [];
-    await FirebaseFirestore.instance.collection("users").get().then((value) {
+    FirebaseFirestore.instance.collection("users").snapshots().listen((value) {
       users = value.docs.map((e) => UserModel.fromJson(e.data())).toList();
       emit(GetUsersSuccess());
-    }).catchError((error) {
+    }).onError((error) {
       emit(GetUsersFailure());
     });
   }

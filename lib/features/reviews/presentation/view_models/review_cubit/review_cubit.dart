@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../../core/utils/helper.dart';
+import '../../../../profile/data/models/user_model.dart';
 import '../../../data/repos/review_repo.dart';
 
 class ReviewCubit extends Cubit<ReviewStates> {
@@ -93,11 +94,12 @@ class ReviewCubit extends Cubit<ReviewStates> {
 
   // add review
   Future<void> addReview(
-      context, String centerDoc, CarCenterModel carCenterModel) async {
+      context, String centerDoc, CarCenterModel carCenterModel,UserModel user) async {
     emit(LoadingAddReview());
     final sentiment = await sentimentAnalysis();
     reviewModel = ReviewModel(
       // like: false,
+      user: user,
       reviewText: getReviewTextController().text,
       reviewImage: link ?? "",
       carCenterDoc: centerDoc,

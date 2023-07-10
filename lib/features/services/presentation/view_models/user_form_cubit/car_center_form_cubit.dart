@@ -20,26 +20,29 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
   final PostRepo postRepo;
   CarCenterFormCubit(this.postRepo) : super(UserFormInitial());
 
-  late final TimeOfDay openHour ;
+  late final TimeOfDay openHour;
   void setOpenHour(TimeOfDay openHour) {
-    this.openHour=openHour;
+    this.openHour = openHour;
   }
-  late final TimeOfDay closeHour ;
+
+  late final TimeOfDay closeHour;
   void setCloseHour(TimeOfDay closeHour) {
-    this.closeHour=closeHour;
+    this.closeHour = closeHour;
   }
+
   TimeOfDay getOpenHour() {
     return openHour;
   }
+
   TimeOfDay getCloseHour() {
     return closeHour;
   }
-
 
   final TextEditingController closeHourController = TextEditingController();
   TextEditingController get getCloseHourController {
     return closeHourController;
   }
+
   final TextEditingController openHourController = TextEditingController();
   TextEditingController get getOpenHourController {
     return openHourController;
@@ -77,15 +80,6 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
     return _phoneController;
   }
 
-
-
-
-
-
-
-
-
-
   bool delivery = false;
   Future<void> deliveryIsAvailable(bool value) async {
     delivery = value;
@@ -103,7 +97,6 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
     offers = value;
     emit(SuccessFridayState());
   }
-
 
   bool friday = false;
   Future<void> openFriday(bool value) async {
@@ -168,11 +161,11 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
       thursday: thursday,
     );
     _carCenterModel = CarCenterModel(
-      reviewCount: 0,
-      user: user,
-      delivery: delivery,
-      isOpen: true,
-      credit: credit,
+        reviewCount: 0,
+        user: user,
+        delivery: delivery,
+        isOpen: true,
+        credit: credit,
         offers: offers,
         uId: uId,
         date: DateTime.now().toIso8601String(),
@@ -200,12 +193,9 @@ class CarCenterFormCubit extends Cubit<CarCenterFormState> {
         icon: FontAwesomeIcons.circleCheck,
         msg: 'Car Center added successfully.',
       );
-      GoRouter.of(context).push(
-          CarCentersView.rn,
-          extra: context.read<CarCenterCubit>()
-      );
+      GoRouter.of(context)
+          .push(CarCentersView.rn, extra: context.read<CarCenterCubit>());
       // GoRouter.of(context).push(CarCentersView.rn);
-
     } catch (error) {
       print(error.toString());
       emit(PostAddedFailure());

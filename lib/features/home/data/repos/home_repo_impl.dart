@@ -1,4 +1,4 @@
-import 'dart:ffi';
+// import 'dart:ffi';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,10 +15,11 @@ import 'home_repo.dart';
 class HomeRepoImpl implements HomeRepo {
   List<CarModel> cars = [];
   final List brands = [
+    'kia',
+    'chevrolet',
     'audi',
     'brilliance',
     'byd',
-    'chevrolet',
     'fiat',
     'ford',
     'geely',
@@ -28,7 +29,6 @@ class HomeRepoImpl implements HomeRepo {
     'jaguar',
     'jeep',
     'jetour',
-    'kia',
     'mazda',
     'mg',
     'mini',
@@ -48,39 +48,55 @@ class HomeRepoImpl implements HomeRepo {
   Future<Either<Failure, List<CarModel>>> fetchNewCars() async {
     try {
       cars = [];
-      var rng = Random();
-      var brandsIndex = List.generate(
-        10,
-        (index) => rng.nextInt(28),
-      );
+      // var rng = Random();
+      // var brandsIndex = List.generate(
+      //   10,
+      //   (index) => rng.nextInt(28),
+      // );
 
-      var data1 = await FirebaseFirestore.instance
-          .collection('cars')
-          .doc('brands')
-          .collection(brands[13])
-          .get();
-      for (var element in data1.docs) {
-        cars.add(CarModel.fromMap(element.data()));
-      }
-      var data2 = await FirebaseFirestore.instance
-          .collection('cars')
-          .doc('brands')
-          .collection(brands[3])
-          .get();
-      for (var element in data2.docs) {
-        cars.add(CarModel.fromMap(element.data()));
-      }
-      // for (var i = 0; i < 10; i++) {
-      //   await dataGeneration(
-      //     brands: brands,
-      //     brandsIndex: brandsIndex,
-      //     cars: cars,
-      //     index: i,
-      //   );
+      // var data1 = await FirebaseFirestore.instance
+      //     .collection('cars')
+      //     .doc('brands')
+      //     .collection(brands[13])
+      //     .get();
+      // for (var element in data1.docs) {
+      //   cars.add(CarModel.fromMap(element.data()));
       // }
+      // var data2 = await FirebaseFirestore.instance
+      //     .collection('cars')
+      //     .doc('brands')
+      //     .collection(brands[3])
+      //     .get();
+      // for (var element in data2.docs) {
+      //   cars.add(CarModel.fromMap(element.data()));
+      // }
+      for (var i = 0; i < 28; i++) {
+        await dataGeneration(
+          brands: brands,
+          // brandsIndex: brandsIndex,
+          cars: cars,
+          index: i,
+        );
+      }
       return right(cars);
     } catch (e) {
       return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  Future<void> dataGeneration({
+    required List<dynamic> brands,
+    // required List<int> brandsIndex,
+    required List<CarModel> cars,
+    required int index,
+  }) async {
+    var data = await FirebaseFirestore.instance
+        .collection('cars')
+        .doc('brands')
+        .collection(brands[index])
+        .get();
+    for (var element in data.docs) {
+      cars.add(CarModel.fromMap(element.data()));
     }
   }
 
@@ -118,19 +134,39 @@ class HomeRepoImpl implements HomeRepo {
     }
   }
 
-  Future<void> dataGeneration({
-    required List<dynamic> brands,
-    required List<int> brandsIndex,
-    required List<CarModel> cars,
-    required int index,
-  }) async {
-    var data = await FirebaseFirestore.instance
-        .collection('cars')
-        .doc('brands')
-        .collection(brands[brandsIndex[index]])
-        .get();
-    for (var element in data.docs) {
-      cars.add(CarModel.fromMap(element.data()));
+  @override
+  Future<Either<Failure, List<CarModel>>> fetchFilterCars(
+    BuildContext context,
+    String brand,
+    String transmission,
+    String traction,
+    String type,
+    int minPrice,
+    int maxPrice,
+  ) async {
+    try {
+      List<CarModel> result = [];
+      result = cars
+          .where((car) =>
+              car.brand.toLowerCase() == brand.toLowerCase() &&
+              car.transmission == transmission &&
+              car.traction == traction &&
+              car.type == type &&
+              car.price >= minPrice &&
+              car.price <= maxPrice)
+          .toList();
+      if (result.isEmpty) {
+        Helper.showCustomToast(
+            context: context,
+            bgColor: babyBlue,
+            icon: FontAwesomeIcons.circleCheck,
+            msg: 'Car Not Found');
+      } else {
+        cars = result;
+      }
+      return right(cars);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 
