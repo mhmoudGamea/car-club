@@ -29,28 +29,28 @@ class DrawerWidget extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-            accountName:  Text(user.name),
+            accountName: Text(user.name),
             accountEmail: Text(user.email),
             currentAccountPicture: GestureDetector(
               onTap: () {
                 GoRouter.of(context).push(ProfileView.rn);
               },
-              child:  CircleAvatar(
+              child: CircleAvatar(
                 child: ClipOval(
-                  child:user.profileImage!.isNotEmpty ?
-                    Image(
-                    image: NetworkImage('${user.profileImage}' ),
-                    fit: BoxFit.cover,
-                    width: 90,
-                    height: 90,
-                  ) : Image.asset(
-                    'assets/images/profile0.jpg',
-                    fit: BoxFit.cover,
-                    width: 90,
-                    height: 90,
-                  ),
+                  child: user.profileImage!.isNotEmpty
+                      ? Image(
+                          image: NetworkImage('${user.profileImage}'),
+                          fit: BoxFit.cover,
+                          width: 90,
+                          height: 90,
+                        )
+                      : Image.asset(
+                          'assets/images/profile0.jpg',
+                          fit: BoxFit.cover,
+                          width: 90,
+                          height: 90,
+                        ),
                 ),
-
               ),
             ),
             decoration: const BoxDecoration(
@@ -137,9 +137,7 @@ class DrawerWidget extends StatelessWidget {
             ),
             // leading: const Icon(Icons.exit_to_app),
             onTap: () {
-              GoRouter.of(context).pushReplacement(
-                AuthenticationView.rn
-              );
+              GoRouter.of(context).pushReplacement(AuthenticationView.rn);
             },
           ),
         ],

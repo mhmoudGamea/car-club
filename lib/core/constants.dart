@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../features/profile/data/models/user_model.dart';
 
-
 dynamic uId;
 dynamic email;
 dynamic remember;

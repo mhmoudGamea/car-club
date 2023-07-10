@@ -106,7 +106,10 @@ class AppRoutes {
       ),
       GoRoute(
         path: FavouriteView.rn,
-        builder: (context, state) => const FavouriteView(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => HomeCubit(HomeRepoImpl()),
+          child: const FavouriteView(),
+        ),
       ),
       GoRoute(
         path: TabsView.rn,

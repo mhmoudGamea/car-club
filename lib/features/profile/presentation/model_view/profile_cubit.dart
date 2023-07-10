@@ -73,7 +73,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     FirebaseFirestore.instance.collection("users").snapshots().listen((value) {
       users = value.docs.map((e) => UserModel.fromJson(e.data())).toList();
       emit(GetUsersSuccess());
-    }).onError((error){
+    }).onError((error) {
       emit(GetUsersFailure());
     });
   }
@@ -86,5 +86,4 @@ class ProfileCubit extends Cubit<ProfileState> {
       }
     }
   }
-
 }

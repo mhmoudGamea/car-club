@@ -21,6 +21,12 @@ class FilterButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         BlocProvider.of<HomeCubit>(context).fetchFilterCars(context);
+        BlocProvider.of<HomeCubit>(context).brand = 'Kia';
+        BlocProvider.of<HomeCubit>(context).transmission = 'Automatic';
+        BlocProvider.of<HomeCubit>(context).traction = 'Front';
+        BlocProvider.of<HomeCubit>(context).type = 'Sedan';
+        BlocProvider.of<HomeCubit>(context).minPrice = 100000;
+        BlocProvider.of<HomeCubit>(context).maxPrice = 1000000;
         Navigator.of(context).pop();
       },
       style: ButtonStyle(

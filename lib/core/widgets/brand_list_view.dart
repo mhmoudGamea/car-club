@@ -11,11 +11,12 @@ class BrandListView extends StatelessWidget {
   BrandListView({Key? key}) : super(key: key);
   // ignore: todo
   // TODO: remove brand and add cont to class
-  final List brands = [
+  final List brandPath = [
+    kia,
+    chevrolet,
     audi,
     brilliance,
     byd,
-    chevrolet,
     fiat,
     ford,
     geely,
@@ -25,7 +26,6 @@ class BrandListView extends StatelessWidget {
     jaguar,
     jeep,
     jetour,
-    kia,
     mazda,
     mg,
     mini,
@@ -41,6 +41,36 @@ class BrandListView extends StatelessWidget {
     toyota,
     volvo,
   ];
+  final List brands = [
+    "kia",
+    "chevrolet",
+    "audi",
+    "brilliance",
+    "byd",
+    "fiat",
+    "ford",
+    "geely",
+    "haval",
+    "honda",
+    "hyundai",
+    "jaguar",
+    "jeep",
+    "jetour",
+    "mazda",
+    "mg",
+    "mini",
+    "mitsubishi",
+    "nissan",
+    "opel",
+    "peugeot",
+    "proton",
+    "renault",
+    "seat",
+    "skoda",
+    "subaru",
+    "toyota",
+    "volvo",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +84,9 @@ class BrandListView extends StatelessWidget {
         itemPadding: EdgeInsets.zero,
         itemBorderRadius: const BorderRadius.all(Radius.circular(5)),
         itemsCount: brands.length,
-        items: brands.map((e) => BrandItem(logo: e)).toList(),
+        items: brandPath.map((e) => BrandItem(logo: e)).toList(),
         onSelected: (index) {
-          BlocProvider.of<HomeCubit>(context).brand = brands[index!].t;
+          BlocProvider.of<HomeCubit>(context).brand = brands[index!];
         },
       ),
     );
@@ -73,3 +103,34 @@ class BrandListView extends StatelessWidget {
     // );
   }
 }
+
+// final Map<String, String> brands = {
+//     "audi": audi,
+//     "brilliance": brilliance,
+//     "byd": byd,
+//     "chevrolet": chevrolet,
+//     "fiat": fiat,
+//     "ford": ford,
+//     "geely": geely,
+//     "haval": haval,
+//     "honda": honda,
+//     "hyundai": hyundai,
+//     "jaguar": jaguar,
+//     "jeep": jeep,
+//     "jetour": jetour,
+//     "kia": kia,
+//     "mazda": mazda,
+//     "mg": mg,
+//     "mini": mini,
+//     "mitsubishi": mitsubishi,
+//     "nissan": nissan,
+//     "opel": opel,
+//     "peugeot": peugeot,
+//     "proton": proton,
+//     "renault": renault,
+//     "seat": seat,
+//     "skoda": skoda,
+//     "subaru": subaru,
+//     "toyota": toyota,
+//     "volvo": volvo,
+//   };

@@ -96,10 +96,9 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                             icon: FontAwesomeIcons.x,
                             msg: "please write your review");
                       } else {
-
                         await cubit
                             .addReview(context, widget.doc.toString(),
-                                widget.carCenterModel,user)
+                                widget.carCenterModel, user)
                             .then((value) {
                           cubit.getReviews(carCenterDoc: widget.doc);
                           cubit.getCarCenterReviews(carCenterDoc: widget.doc);

@@ -145,12 +145,10 @@ class HomeRepoImpl implements HomeRepo {
     int maxPrice,
   ) async {
     try {
-      // await fetchNewCars();
       List<CarModel> result = [];
-      print(cars.length);
       result = cars
           .where((car) =>
-              car.brand == brand &&
+              car.brand.toLowerCase() == brand.toLowerCase() &&
               car.transmission == transmission &&
               car.traction == traction &&
               car.type == type &&
