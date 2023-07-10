@@ -24,7 +24,6 @@ class ReviewListItem extends StatelessWidget {
   final CarCenterModel carCenterModel;
   @override
   Widget build(BuildContext context) {
-    // final cubit = BlocProvider.of<ReviewCubit>(context);
     return BlocConsumer<ReviewCubit, ReviewStates>(
       listener: (context, state) {},
       builder: (context, state) {

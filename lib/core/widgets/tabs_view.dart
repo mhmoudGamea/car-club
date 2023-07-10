@@ -48,7 +48,6 @@ class _TabsViewState extends State<TabsView> {
         listener: (context, state) async {
           if (state is GetUsersSuccess) {
             await BlocProvider.of<ProfileCubit>(context).getUser(uId: uId);
-            print(user.name.toString());
           }
         },
         child: Scaffold(

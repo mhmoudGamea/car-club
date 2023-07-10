@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:car_club/core/utils/styles.dart';
 import 'package:car_club/features/profile/presentation/views/profile_view.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +32,7 @@ class CustomAppBar extends StatelessWidget {
           ),
           const Spacer(),
           Text(
-            'Margot Robbie',
+            user.name,
             style: Styles.title16.copyWith(color: Colors.black),
           ),
           const SizedBox(width: 10),
@@ -69,10 +68,15 @@ class CustomAppBar extends StatelessWidget {
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
-                child: Image.asset(
-                  'assets/images/profile0.jpg',
-                  fit: BoxFit.cover,
-                ),
+                child: user.profileImage == null
+                    ? Image.asset(
+                        'assets/images/profile0.jpg',
+                        fit: BoxFit.cover,
+                      )
+                    : Image.network(
+                        user.profileImage!,
+                        fit: BoxFit.cover,
+                      ),
               ),
             ),
           ),
