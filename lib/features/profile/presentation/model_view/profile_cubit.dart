@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:bloc_provider/bloc_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,6 @@ part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit() : super(ProfileInitial());
-  static ProfileCubit get(context) => BlocProvider.of(context);
   final ImagePicker _picker = ImagePicker();
   File? profileImage;
 
@@ -58,11 +56,11 @@ class ProfileCubit extends Cubit<ProfileState> {
   // a function that will take snapshot of all users and return the current authenticated user[realtime]
   UserModel getUserFromSnapshot(QuerySnapshot<Object?>? snapshot) {
     late UserModel userModel;
-    snapshot!.docs.forEach((element) {
+    for (var element in snapshot!.docs) {
       if (element.id == uId) {
         userModel = UserModel.fromJson(element.data() as Map<String, dynamic>);
       }
-    });
+    }
     return userModel;
   }
 
