@@ -142,10 +142,8 @@ class LoginViewBody extends StatelessWidget {
                         ) : const Text("Sign In",style: textButtonStyle),
 
                         onTap: () {
-                          if (LoginCubit.get(context)
-                              .loginFormKey
-                              .currentState!
-                              .validate()) {
+                          if (
+                          LoginCubit.get(context).loginFormKey.currentState!.validate()) {
                             LoginCubit.get(context).loginWithEmailAndPassword(
                                 email:
                                     LoginCubit.get(context).emailController.text,

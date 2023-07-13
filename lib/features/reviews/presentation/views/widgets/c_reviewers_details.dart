@@ -1,12 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:car_club/features/reviews/data/models/review_model.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../../core/constants.dart';
 import '../../../../../core/utils/assets.dart';
 import '../../../../../core/utils/styles.dart';
-import '../../../../profile/presentation/views/profile_view.dart';
 import '../../../../services/data/models/car_center_model.dart';
 
 class CReviewersDetails extends StatelessWidget {

@@ -210,10 +210,10 @@ class ItemViewBody extends StatelessWidget {
                               open: carCenterModel.openingTimes.openHour,
                               close: carCenterModel.openingTimes.closeHour) ==
                           true)
-                        const Expanded(
+                         Expanded(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: const [
                               Icon(
                                 Icons.lock_open_outlined,
                                 size: 16,
@@ -236,10 +236,10 @@ class ItemViewBody extends StatelessWidget {
                               open: carCenterModel.openingTimes.openHour,
                               close: carCenterModel.openingTimes.closeHour) ==
                           false)
-                        const Expanded(
+                         Expanded(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: const [
                               Icon(
                                 Icons.lock,
                                 size: 16,

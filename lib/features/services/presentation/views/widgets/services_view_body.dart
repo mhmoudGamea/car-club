@@ -37,7 +37,7 @@ class _ServicesViewBodyState extends State<ServicesViewBody> {
               children: [
                 GoogleMap(
                   initialCameraPosition: const CameraPosition(
-                      target: LatLng(30.5476041, 31.0084369), zoom: 10),
+                      target: LatLng(30.550428494217968, 31.01065892726183), zoom: 17),
                   markers: markers,
                   onMapCreated: (controller) {
                     setState(() {

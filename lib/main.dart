@@ -45,14 +45,15 @@ void main() async {
       child: const CarClub()
   ));
 
-
 }
 
 class CarClub extends StatelessWidget {
 
   const CarClub({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context){
+
     final data = BlocProvider.of<AppThemeCubit>(context);
     return MaterialApp.router(
       routerConfig: AppRoutes.getRouter,
@@ -62,4 +63,5 @@ class CarClub extends StatelessWidget {
       themeMode: data.getDark ? ThemeMode.dark : ThemeMode.light,
     );
   }
+
 }

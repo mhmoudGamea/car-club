@@ -79,7 +79,7 @@ class UserProfileInformation extends StatelessWidget {
             ),
             const SizedBox(height: 5),
             Text(
-              userModel.phone,
+              "0${userModel.phone}",
               style: Styles.title14.copyWith(color: Colors.grey),
             ),
           ],

@@ -1,4 +1,3 @@
-import 'package:car_club/core/models/user_model.dart';
 import 'package:car_club/core/utils/helper.dart';
 import 'package:car_club/features/reviews/presentation/view_models/review_cubit/review_cubit.dart';
 import 'package:car_club/features/reviews/presentation/view_models/review_cubit/review_state.dart';
