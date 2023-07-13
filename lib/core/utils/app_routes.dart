@@ -29,12 +29,10 @@ import '../../features/services/presentation/views/car_center_details.dart';
 import '../../features/services/presentation/views/car_centers_view.dart';
 import '../../features/services/presentation/views/services_view.dart';
 import '../../features/reviews/presentation/views/widgets/add_review_screen.dart';
-import '../../features/services/presentation/views/widgets/car_center_item_body.dart';
 import '../../features/services/presentation/views/widgets/car_center_map.dart';
 import '../../features/services/presentation/views/widgets/showImage.dart';
 import '../../features/used/presentation/views/details_view.dart';
 import '../../features/used/presentation/views/used_view.dart';
-// import '../../item_test.dart';
 import '../cache_helper.dart';
 import '../constants.dart';
 

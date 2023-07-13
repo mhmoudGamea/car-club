@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/globle/theme/app_theme/app_theme_cubit/app_theme_cubit.dart';
 
 class MyBlocObserver extends BlocObserver {
   @override

@@ -61,7 +61,7 @@ class CGoReviewButton extends StatelessWidget {
             padding: const EdgeInsets.only(left: 15.0),
             child: Row(
               children: [
-                const Text('360 Reviews',style: TextStyle(fontSize: 20,color: blackColor)),
+                const Text('Reviews',style: TextStyle(fontSize: 20,color: blackColor)),
                 const Spacer(),
                 PopupMenuButton(
                   icon: const Icon(FontAwesomeIcons.ellipsisVertical),

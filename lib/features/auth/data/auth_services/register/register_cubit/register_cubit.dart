@@ -17,8 +17,8 @@ class RegisterCubit extends Cubit<RegisterState> {
   final TextEditingController phoneController =   TextEditingController();
 
   GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
-
   static RegisterCubit get(context) => BlocProvider.of(context);
+
   void userRegister({
     required String name,
     required String email,
@@ -64,8 +64,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     });
   }
 
-  void loginWithEmailAndPassword(
-      {required String email, required String password}) {
+  void loginWithEmailAndPassword({required String email, required String password}) {
     emit(LoadingGoogleRegisterState());
     createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
@@ -75,6 +74,16 @@ class RegisterCubit extends Cubit<RegisterState> {
     }).catchError((error) {
       debugPrint('error is :: ${error.toString()}');
       emit(ErrorEmailAndPasswordRegisterState());
+    });
+  }
+  void loginWithApple() {
+    emit(LoadingAppleRegisterState());
+    signInWithApple().then((value) {
+      debugPrint(value.user!.uid);
+      emit(SuccessAppleRegisterState(value.user!.uid, value.user!.email));
+    }).catchError((error) {
+      debugPrint('error is :: ${error.toString()}');
+      emit(ErrorAppleRegisterState());
     });
   }
 
@@ -88,17 +97,6 @@ class RegisterCubit extends Cubit<RegisterState> {
   //     emit(ErrorFacebookRegisterState());
   //   });
   // }
-
-  void loginWithApple() {
-    emit(LoadingAppleRegisterState());
-    signInWithApple().then((value) {
-      debugPrint(value.user!.uid);
-      emit(SuccessAppleRegisterState(value.user!.uid, value.user!.email));
-    }).catchError((error) {
-      debugPrint('error is :: ${error.toString()}');
-      emit(ErrorAppleRegisterState());
-    });
-  }
 
   bool visibility = true;
   void changePasswordVisibility() {
