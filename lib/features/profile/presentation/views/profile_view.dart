@@ -17,7 +17,7 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     // final data = BlocProvider.of<AppThemeCubit>(context);
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => UsedCubit()),
