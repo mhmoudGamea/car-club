@@ -1,6 +1,3 @@
-// import 'dart:ffi';
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
@@ -53,23 +50,6 @@ class HomeRepoImpl implements HomeRepo {
       //   10,
       //   (index) => rng.nextInt(28),
       // );
-
-      // var data1 = await FirebaseFirestore.instance
-      //     .collection('cars')
-      //     .doc('brands')
-      //     .collection(brands[13])
-      //     .get();
-      // for (var element in data1.docs) {
-      //   cars.add(CarModel.fromMap(element.data()));
-      // }
-      // var data2 = await FirebaseFirestore.instance
-      //     .collection('cars')
-      //     .doc('brands')
-      //     .collection(brands[3])
-      //     .get();
-      // for (var element in data2.docs) {
-      //   cars.add(CarModel.fromMap(element.data()));
-      // }
       for (var i = 0; i < 28; i++) {
         await dataGeneration(
           brands: brands,
@@ -106,8 +86,10 @@ class HomeRepoImpl implements HomeRepo {
     BuildContext context,
   ) async {
     try {
+      await fetchNewCars();
       List<CarModel> result = [];
       if (search.isEmpty) {
+        // ignore: use_build_context_synchronously
         Helper.showCustomToast(
             context: context,
             bgColor: babyBlue,
@@ -119,6 +101,7 @@ class HomeRepoImpl implements HomeRepo {
                 (car) => car.name.toLowerCase().contains(search.toLowerCase()))
             .toList();
         if (result.isEmpty) {
+          // ignore: use_build_context_synchronously
           Helper.showCustomToast(
               context: context,
               bgColor: babyBlue,
@@ -145,6 +128,7 @@ class HomeRepoImpl implements HomeRepo {
     int maxPrice,
   ) async {
     try {
+      await fetchNewCars();
       List<CarModel> result = [];
       result = cars
           .where((car) =>
@@ -156,6 +140,7 @@ class HomeRepoImpl implements HomeRepo {
               car.price <= maxPrice)
           .toList();
       if (result.isEmpty) {
+        // ignore: use_build_context_synchronously
         Helper.showCustomToast(
             context: context,
             bgColor: babyBlue,
